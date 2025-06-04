@@ -21,13 +21,13 @@ model Abbreviation {
 }
 
 model Restriction {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String         @id @default(auto()) @map("_id") @db.ObjectId
   character String
   isActive  Boolean
-  ruleType  RuleType
+  ruleType  RULE_TYPE_ENUM
 }
 
-enum RuleType {
+enum RULE_TYPE_ENUM {
   RESTRICTION
   NOT_RESTRICTION
 }
