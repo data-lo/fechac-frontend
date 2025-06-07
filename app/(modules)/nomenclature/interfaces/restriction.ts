@@ -4,5 +4,4 @@ export interface Restriction {
   id: string;
   character: string;
   isActive: boolean;
-  ruleType: RULE_TYPE_ENUM;
 }
