@@ -13,6 +13,8 @@ import { CREATE_NOMENCLATURE_SCHEMA } from "./create_nomenclature-schema";
 
 import Button from "@/components/button";
 
+import { createNomenclatureAction } from "@/actions/create-nomenclature-action";
+
 
 const CreateNomenclatureForm = () => {
 
@@ -26,6 +28,7 @@ const CreateNomenclatureForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
+        const result = await createNomenclatureAction(values);
 
     };
 
@@ -35,7 +38,7 @@ const CreateNomenclatureForm = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="flex flex-col gap-6"
             >
-                
+
                 {CREATE_NOMENCLATURE_FIELDS.map(({ component: Component, props }, index) => (
                     <Component
                         key={index}
