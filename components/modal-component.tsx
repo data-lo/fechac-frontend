@@ -10,7 +10,7 @@ import { LucideIcon } from "lucide-react";
 
 
 import { ReactNode } from "react"
-import Button from "./button";
+import Button from "./button-component";
 
 type variant = "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
 
@@ -27,7 +27,7 @@ interface Props {
   buttonDisable?: boolean;
 }
 
-const Modal = ({
+const ModalComponent = ({
   dialogTitle,
   dialogTrigger,
   dialogDescription,
@@ -66,4 +66,4 @@ const Modal = ({
   )
 }
 
-export default Modal;
+export default ModalComponent;

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import RestrictionTable from "./components/view-nomenclauture-table";
 import EmptyMessage from "@/components/empty-message";
-import Modal from "@/components/modal";
+import Modal from "@/components/modal-component";
 import { Plus } from "lucide-react";
 import CreateNomenclatureForm from "./components/create-nomenclature/create_nomenclature-form";
 import { getRestrictions } from "@/actions/nomenclature-action";

@@ -7,6 +7,10 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Restriction } from "../interfaces/restriction";
+import ButtonComponent from "@/components/button-component";
+import ModalComponent from "@/components/modal-component";
+import { Trash } from "lucide-react";
+import DropdownMenuComponent from "@/components/dropdown-menu-component";
 
 
 interface Props {
@@ -21,7 +25,7 @@ const RestrictionTable = ({ restrictions }: Props) => {
                     <TableHead>#</TableHead>
                     <TableHead>CARÁCTER</TableHead>
                     <TableHead>ESTATUS</TableHead>
-                    <TableHead>ESTATUS</TableHead>
+                    <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -39,15 +43,41 @@ const RestrictionTable = ({ restrictions }: Props) => {
                         {/* Círculo verde si está activo */}
                         <TableCell>
                             <span
-                                className={`h-3 w-3 rounded-full inline-block ${
-                                    restriction.isActive ? "bg-green-500" : "bg-red-500"
-                                }`}
+                                className={`h-3 w-3 rounded-full inline-block ${restriction.isActive ? "bg-green-500" : "bg-red-500"
+                                    }`}
                             ></span>
+                        </TableCell>
+
+                        <TableCell>
+                            <DropdownMenuComponent>
+                                <ModalComponent
+                                    dialogTitle={"Editar"}
+                                    dialogDescription={""}
+                                    dialogTrigger={"Editar"}
+                                    variant={'ghost'}
+                                    sizeButton={'w-auto'}
+                                    children={
+                                        <div className="flex justify-end">
+                                            <ButtonComponent
+                                                title="Guardar"
+                                                icon={Trash}
+                                            />
+                                        </div>
+                                    }
+                                />
+
+                                <ButtonComponent
+                                    title="Desactivar"
+                                    sizeButton="w-full"
+                                    variant={"ghost"}
+                                />
+
+                            </DropdownMenuComponent>
                         </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
-        </Table>
+        </Table >
     );
 };
 

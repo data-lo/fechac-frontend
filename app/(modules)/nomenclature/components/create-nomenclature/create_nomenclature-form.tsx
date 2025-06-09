@@ -11,12 +11,13 @@ import { CREATE_NOMENCLATURE_FIELDS } from "./create-nomenclature-fields";
 
 import { CREATE_NOMENCLATURE_SCHEMA } from "./create_nomenclature-schema";
 
-import Button from "@/components/button";
+import Button from "@/components/button-component";
 
 import { createRestriction } from "@/actions/nomenclature-action";
 import { InsertResponse } from "@/interfaces/insert-response";
 import { isInsertResponse } from "@/guard/is-insert-response";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 const CreateNomenclatureForm = () => {
@@ -33,14 +34,23 @@ const CreateNomenclatureForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
-        const response: InsertResponse = await createRestriction(values);
+        try {
+            setPending(true);
+            const response: InsertResponse = await createRestriction(values);
 
-        if (!isInsertResponse){
-            // toast
+            if (!isInsertResponse(response)) {
+                toast.error("Ocurrió un error al crear la regla de restricción.");
+                return;
+            }
 
-            return
+            toast.success("La regla de restricción ha sido creada con éxito.");
+            form.reset();
+        } catch (error) {
+            toast.error("Ocurrió un error inesperado. Intenta nuevamente.");
+            console.error(error);
+        } finally {
+            setPending(false);
         }
-
     };
 
     return (
@@ -62,6 +72,7 @@ const CreateNomenclatureForm = () => {
                     <Button
                         icon={Save}
                         title="Guardar"
+                        isPending={isPending}
                     />
                 </div>
             </form>
