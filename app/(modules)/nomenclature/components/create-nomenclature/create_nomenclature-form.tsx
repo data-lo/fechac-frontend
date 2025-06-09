@@ -13,10 +13,15 @@ import { CREATE_NOMENCLATURE_SCHEMA } from "./create_nomenclature-schema";
 
 import Button from "@/components/button";
 
-import { createNomenclatureAction } from "@/actions/create-nomenclature-action";
+import { createRestriction } from "@/actions/nomenclature-action";
+import { InsertResponse } from "@/interfaces/insert-response";
+import { isInsertResponse } from "@/guard/is-insert-response";
+import { useState } from "react";
 
 
 const CreateNomenclatureForm = () => {
+
+    const [isPending, setPending] = useState(false);
 
     const schema = CREATE_NOMENCLATURE_SCHEMA;
 
@@ -28,7 +33,13 @@ const CreateNomenclatureForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
-        const result = await createNomenclatureAction(values);
+        const response: InsertResponse = await createRestriction(values);
+
+        if (!isInsertResponse){
+            // toast
+
+            return
+        }
 
     };
 

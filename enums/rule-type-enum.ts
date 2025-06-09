@@ -1,4 +1,0 @@
-export enum RULE_TYPE_ENUM {
-  RESTRICTION,
-  NOT_RESTRICTION
-}

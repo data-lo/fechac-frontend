@@ -4,10 +4,11 @@ import EmptyMessage from "@/components/empty-message";
 import Modal from "@/components/modal";
 import { Plus } from "lucide-react";
 import CreateNomenclatureForm from "./components/create-nomenclature/create_nomenclature-form";
+import { getRestrictions } from "@/actions/nomenclature-action";
 
-const ViewNomenclatureSection = () => {
+const ViewNomenclatureSection = async () => {
 
-    let restrictions = [];
+    const restrictions = await getRestrictions();
 
     return (
         <Fragment>
@@ -23,7 +24,7 @@ const ViewNomenclatureSection = () => {
                 />
             </div>
             {restrictions.length > 0 ? (
-                <RestrictionTable restrictions={[]} />
+                <RestrictionTable restrictions={restrictions} />
             ) : (
                 <EmptyMessage text="Aún no se han creado restricciones." />
             )}
