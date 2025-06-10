@@ -1,7 +1,9 @@
 'use server';
 
 import { Restriction } from "@/app/(modules)/nomenclature/interfaces/restriction";
+import { UpdateResponse } from "@/interfaces/update-response";
 import { getConnection } from "@/lib/mongodb";
+import { ObjectId } from "mongodb";
 
 import { revalidatePath } from "next/cache";
 
@@ -47,6 +49,30 @@ export async function getRestrictions() {
     return formatted
   } catch (error) {
     console.error("Error al Obtener las Restricciones:", error);
+    throw error;
+  }
+}
+
+
+export async function changeStatusRestriction(values: { id: string, isActive: boolean }) {
+  try {
+    const db = await getConnection();
+
+    const filter = { _id: new ObjectId(values.id) };
+
+    const update = {
+      $set: {
+        isActive: !values.isActive,
+      },
+    };
+
+    const response = await db.collection("nomenclature").updateOne(filter, update);
+
+    revalidatePath("/nomenclature");
+
+    return response
+  } catch (error) {
+    console.error("Error al Actualizar las Restricción:", error);
     throw error;
   }
 }

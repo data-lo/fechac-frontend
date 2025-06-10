@@ -68,7 +68,7 @@ const CreateNomenclatureForm = () => {
                     />
                 ))}
 
-                <div className="flex justify-end">
+                <div className="flex justify-end mt-8">
                     <Button
                         icon={Save}
                         title="Guardar"
