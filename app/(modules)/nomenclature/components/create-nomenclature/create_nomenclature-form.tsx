@@ -44,9 +44,11 @@ const CreateNomenclatureForm = () => {
             }
 
             toast.success("La regla de restricción ha sido creada con éxito.");
+            
             form.reset();
         } catch (error) {
-            toast.error("Ocurrió un error inesperado. Intenta nuevamente.");
+            const message = error instanceof Error ? error.message : "Ocurrió un error inesperado al crear la regla.";
+            toast.error(message);
             console.error(error);
         } finally {
             setPending(false);

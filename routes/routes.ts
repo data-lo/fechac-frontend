@@ -1,4 +1,4 @@
-import { FileLock2, Layers2 } from "lucide-react";
+import { FileLock2, KeyRound, Layers2, LogIn } from "lucide-react";
 
 export const routes = [
     {
@@ -10,5 +10,10 @@ export const routes = [
         icon: Layers2,
         label: "Inicio",
         href: "/abbreviation"
+    },
+    {
+        icon: KeyRound,
+        label: "One Drive",
+        href: "/login"
     },
 ]

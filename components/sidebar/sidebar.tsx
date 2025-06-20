@@ -5,7 +5,6 @@ import SidebarItem from "./sidebar-item";
 
 const Sidebar = () => {
 
-
     return (
         <aside className={`flex w-20 min-w-[5rem] transition-all duration-300 ease-in-out overflow-hidden`}>
             <div className="h-full border-r-2 flex flex-col border-gray-200 bg-white w-full">

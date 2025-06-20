@@ -11,6 +11,12 @@ export async function createRestriction(data: { character: string }) {
   try {
     const db = await getConnection();
 
+    const isExist = await existRestriction(data.character);
+
+    if (isExist) {
+      throw new Error(`El carácter "${data.character}" ya existe en la nomenclatura.`);
+    }
+
     const result = await db.collection("nomenclature").insertOne({
       character: data.character,
       isActive: true,
@@ -67,6 +73,23 @@ export async function changeStatusRestriction(values: { id: string, isActive: bo
     };
 
     const response = await db.collection("nomenclature").updateOne(filter, update);
+
+    revalidatePath("/nomenclature");
+
+    return response
+  } catch (error) {
+    console.error("Error al Actualizar las Restricción:", error);
+    throw error;
+  }
+}
+
+export async function existRestriction(character: string) {
+  try {
+    const db = await getConnection();
+
+    const response = await db.collection("nomenclature").findOne({
+      character: character
+    });
 
     revalidatePath("/nomenclature");
 
