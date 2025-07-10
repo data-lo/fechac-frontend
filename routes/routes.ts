@@ -14,6 +14,6 @@ export const routes = [
     {
         icon: KeyRound,
         label: "One Drive",
-        href: "/login"
+        href: "/session"
     },
 ]
