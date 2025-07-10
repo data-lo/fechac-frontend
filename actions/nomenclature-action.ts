@@ -1,8 +1,9 @@
 'use server';
 
 import { Restriction } from "@/app/(modules)/nomenclature/interfaces/restriction";
-import { UpdateResponse } from "@/interfaces/update-response";
+
 import { getConnection } from "@/lib/mongodb";
+
 import { ObjectId } from "mongodb";
 
 import { revalidatePath } from "next/cache";

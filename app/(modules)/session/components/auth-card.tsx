@@ -10,7 +10,13 @@ interface Props {
 
 const AuthCard = ({ title, description }: Props) => {
   const handleRedirect = () => {
-    const url = `https://login.microsoftonline.com/a513d65b-6e93-4b9d-9a53-00f2decda084/oauth2/v2.0/authorize`
+    const CLIENT_ID = '0416a1fc-d18a-4f93-a8b8-fd5ae59778ae';
+    const TENANT_ID = 'a513d65b-6e93-4b9d-9a53-00f2decda084';
+    const REDIRECT_URI = encodeURIComponent('http://localhost:3000/session/authentication');
+    const SCOPES = encodeURIComponent('User.Read offline_access');
+    const STATE = encodeURIComponent('user123-sessiontoken');
+
+    const url = `https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&response_mode=query&scope=${SCOPES}`;
     window.location.href = url
   }
 
