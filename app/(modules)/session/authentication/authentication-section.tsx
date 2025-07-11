@@ -5,6 +5,7 @@ import ButtonComponent from '@/components/button-component';
 import { ArrowBigLeftDash } from 'lucide-react';
 import { handleMicrosoftAuthCallback } from '@/actions/authentication-handler-action';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 interface Props {
     title?: string;
@@ -25,10 +26,14 @@ const AuthenticationSection = ({
 
     useEffect(() => {
         const code = searchParams.get('code');
+
         const sessionState = searchParams.get('session_state');
 
         if (code && sessionState) {
             handleMicrosoftAuthCallback({ code, sessionState })
+                // .then((response) => {
+                //     if (response) toast.success(response.message);
+                // })
                 .catch((err) => {
                     console.error('Error autenticando:', err);
                 });

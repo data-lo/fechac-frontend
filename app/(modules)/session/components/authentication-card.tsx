@@ -8,7 +8,7 @@ interface Props {
   title: string;
 }
 
-const AuthCard = ({ title, description }: Props) => {
+const AuthorizationCard = ({ title, description }: Props) => {
   const handleRedirect = () => {
     const CLIENT_ID = '0416a1fc-d18a-4f93-a8b8-fd5ae59778ae';
     const TENANT_ID = 'a513d65b-6e93-4b9d-9a53-00f2decda084';
@@ -37,4 +37,4 @@ const AuthCard = ({ title, description }: Props) => {
   );
 };
 
-export default AuthCard;
+export default AuthorizationCard;
