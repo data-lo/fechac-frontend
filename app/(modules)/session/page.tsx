@@ -6,6 +6,8 @@ const SessionPage = async () => {
 
     const user = await getUserInformation();
 
+    console.log(user)
+
     return (
         <section className="py-6 px-8 w-full h-full overflow-y-auto flex flex-col">
             <div className="w-full flex flex-col h-auto gap-6">
