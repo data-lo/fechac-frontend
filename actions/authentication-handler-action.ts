@@ -10,12 +10,12 @@ import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";
 import { Collection, ObjectId, Db, Document } from "mongodb";
 import { revalidatePath } from "next/cache";
 
-export async function handleMicrosoftAuthCallback(data: { code: string; sessionState: string }): Promise<GeneralResponse> {
+export async function handleMicrosoftAuthCallback(data: { code: string }): Promise<GeneralResponse> {
   try {
 
     await desactivateAccessRecords({ isLastAccess: true }, { isLastAccess: false });
 
-    const newAccessObject = await createAccessRecord({ code: data.code, sessionState: data.sessionState });
+    const newAccessObject = await createAccessRecord({ code: data.code });
 
     const newMicrosoftObject = await exchangeCodeForToken(data.code, new ObjectId(newAccessObject._id));
 
@@ -50,7 +50,7 @@ export async function desactivateAccessRecords<T extends Document>(
 }
 
 
-export async function createAccessRecord(data: { code: string; sessionState: string }): Promise<{ _id: string }> {
+export async function createAccessRecord(data: { code: string }): Promise<{ _id: string }> {
   try {
     const collection = await getCollection<AccessRecord>("access");
 
@@ -58,7 +58,6 @@ export async function createAccessRecord(data: { code: string; sessionState: str
 
     const newDocument = await collection.insertOne({
       code: data.code,
-      sessionState: data.sessionState,
       createdAt: currentDate,
       isLastAccess: true,
     });
@@ -92,9 +91,11 @@ export async function exchangeCodeForToken(code: string, access_id: ObjectId): P
     code,
     redirect_uri: process.env.REDIRECT_URI!,
     grant_type: 'authorization_code',
+    scope: 'https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.Read offline_access'
+
   });
 
-  const response = await fetch(`https://login.microsoftonline.com/${process.env.TENANT_ID}/oauth2/v2.0/token`, {
+  const response = await fetch(`https://login.microsoftonline.com/common/oauth2/v2.0/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -102,13 +103,17 @@ export async function exchangeCodeForToken(code: string, access_id: ObjectId): P
     body: params.toString(),
   });
 
+
   if (!response.ok) {
     const errorBody = await response.text();
     console.error("❌ Falló el intercambio de código por token en Microsoft OAuth:", errorBody);
     throw new Error('No se pudo obtener el token de Microsoft');
   }
+  
 
   const responseInJSON: MicrosoftTokenResponse = await response.json();
+
+  console.log(responseInJSON)
 
   return { access_id, ...responseInJSON, };
 }
@@ -168,8 +173,6 @@ export async function getSession(): Promise<MicrosoftSessionObject | null> {
       await storeMicrosoftToken(newMicrosoftObject);
 
       session = await sessionCollection.findOne({ access_id: access._id, isLastTokenObtenaided: true });
-
-      console.log('Perfecto');
     }
 
     return session;

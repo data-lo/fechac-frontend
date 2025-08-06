@@ -25,20 +25,17 @@ const AuthenticationSection = ({
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        const code = searchParams.get('code');
+        const urlParams = new URLSearchParams(window.location.search);
 
-        const sessionState = searchParams.get('session_state');
-
-        if (code && sessionState) {
-            handleMicrosoftAuthCallback({ code, sessionState })
-                // .then((response) => {
-                //     if (response) toast.success(response.message);
-                // })
-                .catch((err) => {
-                    console.error('Error autenticando:', err);
-                });
+        const code = urlParams.get('code');
+        if (code) {
+            handleMicrosoftAuthCallback({ code }).catch((err) => {
+                console.error('Error autenticando:', err);
+                toast.error('Error al vincular la cuenta de Microsoft.');
+            });
         }
-    }, [searchParams, router]);
+    }, []);
+
 
     return (
         <section className="w-full h-full flex flex-col items-center justify-center gap-6 text-center">

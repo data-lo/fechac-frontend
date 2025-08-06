@@ -3,7 +3,6 @@
 import { MicrosoftUserInfo } from '@/interfaces/microsoft-user-info';
 import { FaUserCircle } from 'react-icons/fa';
 import ButtonComponent from '@/components/button-component';
-import { useEffect } from 'react';
 import { handleLogout } from '@/actions/authentication-handler-action';
 import toast from 'react-hot-toast';
 
@@ -12,8 +11,6 @@ interface Props {
 }
 
 const AuthenticatedUserCard = ({ user }: Props) => {
-
-
     const handleClickLogout = () => {
         handleLogout()
             .then((response) => {
