@@ -10,7 +10,7 @@ interface Props {
 
 const AuthorizationCard = ({ title, description }: Props) => {
   const handleRedirect = () => {
-    const CLIENT_ID = '5244cd55-d3a5-405a-8201-ccffb461e8a4';
+    const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
     const TENANT_ID = 'common';
     const REDIRECT_URI = encodeURIComponent('http://localhost:3000/session/authentication');
     const SCOPES = encodeURIComponent('https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.Read offline_access');
