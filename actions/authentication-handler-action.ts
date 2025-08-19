@@ -1,14 +1,19 @@
 'use server';
 
+import { Collection, ObjectId, Db, Document } from "mongodb";
+
+import { revalidatePath } from "next/cache";
+
+import { getConnection } from "@/lib/mongodb";
 import { getExpirationDate } from "@/functions/get-expiration-date";
+
 import { AccessRecord } from "@/interfaces/access-record";
 import { MicrosoftSessionObject } from "@/interfaces/microsoft-token-object";
 import { MicrosoftTokenResponse } from "@/interfaces/microsoft-token-response";
 import { MicrosoftUserInfo } from "@/interfaces/microsoft-user-info";
-import { getConnection } from "@/lib/mongodb";
+
 import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";
-import { Collection, ObjectId, Db, Document } from "mongodb";
-import { revalidatePath } from "next/cache";
+
 
 export async function handleMicrosoftAuthCallback(data: { code: string }): Promise<GeneralResponse> {
   try {
@@ -109,7 +114,7 @@ export async function exchangeCodeForToken(code: string, access_id: ObjectId): P
     console.error("❌ Falló el intercambio de código por token en Microsoft OAuth:", errorBody);
     throw new Error('No se pudo obtener el token de Microsoft');
   }
-  
+
 
   const responseInJSON: MicrosoftTokenResponse = await response.json();
 

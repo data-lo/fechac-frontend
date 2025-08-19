@@ -4,20 +4,16 @@ import ButtonComponent from "@/components/button-component";
 import { FaMicrosoft } from "react-icons/fa";
 
 interface Props {
-  description: string;
   title: string;
+  description: string;
+  microsoftAuthUrl: string;
 }
 
-const AuthorizationCard = ({ title, description }: Props) => {
-  const handleRedirect = () => {
-    const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-    const TENANT_ID = 'common';
-    const REDIRECT_URI = encodeURIComponent('http://localhost:3000/session/authentication');
-    const SCOPES = encodeURIComponent('https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.Read offline_access');
-
-    const url = `https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${REDIRECT_URI}&response_mode=query&scope=${SCOPES}&prompt=consent`;
-    window.location.href = url
-  }
+const AuthorizationCard = ({
+  title,
+  description,
+  microsoftAuthUrl
+}: Props) => {
 
   return (
     <div className="flex w-full items-center justify-between gap-4 rounded-md border p-4 shadow-sm">
@@ -29,7 +25,7 @@ const AuthorizationCard = ({ title, description }: Props) => {
         </div>
       </div>
       <ButtonComponent
-        onClick={handleRedirect}
+        onClick={() => (window.location.href = microsoftAuthUrl)}
         title="Iniciar Sesión"
       />
     </div>
