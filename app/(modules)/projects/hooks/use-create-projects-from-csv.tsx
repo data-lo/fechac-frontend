@@ -2,12 +2,12 @@
 
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import { uploadProjectAction } from "../actions/projects-action";
+import { createProjectsFromCSVAction } from "../actions/create-projects-from-csv-action";
 
-export function useProject() {
-    const useUploadProjectFile = useMutation({
+export function useCreateProjectsFromCSV() {
+    return useMutation({
         mutationFn: async (files: File[]) => {
-            return await uploadProjectAction(files);
+            return await createProjectsFromCSVAction(files);
         },
         onSuccess: (response) => {
             if (response.success) toast.success("¡El Archivo se ha subido con éxito!");
@@ -16,8 +16,4 @@ export function useProject() {
             toast.error(`Error: ${error.message}`);
         },
     });
-
-    return {
-        useUploadProjectFile
-    }
 }

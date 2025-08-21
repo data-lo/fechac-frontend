@@ -1,4 +1,4 @@
-import { Project } from "@/interfaces/project";
+import { Project } from "@/app/(modules)/projects/models/project";
 import { parse } from "csv-parse/sync";
 
 export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {

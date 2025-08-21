@@ -7,15 +7,13 @@ import "filepond/dist/filepond.min.css";
 import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "./schema/file-project";
 import ButtonComponent from "@/components/button-component";
 import { RefreshCcw } from "lucide-react";
-import { uploadProjectAction } from "@/app/(modules)/project/actions/projects-action";
-import toast from "react-hot-toast";
-import { useProject } from "./hooks/useProject";
+import { useCreateProjectsFromCSV } from "./hooks/use-create-projects-from-csv";
 
 
 
 const UploadFileSection = () => {
 
-    const { useUploadProjectFile } = useProject();
+    const mutation = useCreateProjectsFromCSV();
 
     const {
         control,
@@ -30,13 +28,11 @@ const UploadFileSection = () => {
     });
 
     const onSubmit = async (data: FILE_PROJECT_FORM) => {
-        await useUploadProjectFile.mutate(data.file, {
+        await mutation.mutate(data.file, {
             onSuccess: () => {
                 reset()
             }
         })
-
-
     };
 
     return (
@@ -46,7 +42,7 @@ const UploadFileSection = () => {
                     type="submit"
                     title="Sincronizar Projectos"
                     icon={RefreshCcw}
-                    isPending={useUploadProjectFile.isPending}
+                    isPending={mutation.isPending}
                 />
             </div>
 
