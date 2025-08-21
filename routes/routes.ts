@@ -1,6 +1,16 @@
-import { FileLock2, KeyRound, Layers2, LogIn } from "lucide-react";
+import { FileLock2, FolderKanban, KeyRound, Layers2, SlidersHorizontal,  } from "lucide-react";
 
 export const routes = [
+    {
+        icon: SlidersHorizontal,
+        label: "Prompts",
+        href: "/prompts"
+    },
+    {
+        icon: FolderKanban,
+        label: "Proyectos",
+        href: "/project"
+    },
     {
         icon: FileLock2,
         label: "Inicio",

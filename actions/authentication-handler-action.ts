@@ -115,10 +115,7 @@ export async function exchangeCodeForToken(code: string, access_id: ObjectId): P
     throw new Error('No se pudo obtener el token de Microsoft');
   }
 
-
   const responseInJSON: MicrosoftTokenResponse = await response.json();
-
-  console.log(responseInJSON)
 
   return { access_id, ...responseInJSON, };
 }
