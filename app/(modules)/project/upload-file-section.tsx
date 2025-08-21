@@ -1,0 +1,81 @@
+'use client';
+
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FilePond } from "react-filepond";
+import "filepond/dist/filepond.min.css";
+import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "./schema/file-project";
+import ButtonComponent from "@/components/button-component";
+import { RefreshCcw } from "lucide-react";
+import { uploadProjectAction } from "@/app/(modules)/project/actions/projects-action";
+import toast from "react-hot-toast";
+import { useProject } from "./hooks/useProject";
+
+
+
+const UploadFileSection = () => {
+
+    const { useUploadProjectFile } = useProject();
+
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+        reset
+    } = useForm<FILE_PROJECT_FORM>({
+        resolver: zodResolver(FILE_PROJECT_SCHEMA),
+        defaultValues: {
+            file: []
+        },
+    });
+
+    const onSubmit = async (data: FILE_PROJECT_FORM) => {
+        await useUploadProjectFile.mutate(data.file, {
+            onSuccess: () => {
+                reset()
+            }
+        })
+
+
+    };
+
+    return (
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="flex justify-end">
+                <ButtonComponent
+                    type="submit"
+                    title="Sincronizar Projectos"
+                    icon={RefreshCcw}
+                    isPending={useUploadProjectFile.isPending}
+                />
+            </div>
+
+            <Controller
+                control={control}
+                name="file"
+                render={({ field }) => (
+                    <div>
+                        <FilePond
+                            files={field.value}
+                            allowMultiple={false}
+                            maxFiles={1}
+                            acceptedFileTypes={["text/csv"]}
+                            credits={false}
+                            labelIdle='Arrastra o Selecciona tu Archivo CSV'
+                            onupdatefiles={(fileItems) =>
+                                field.onChange(fileItems.map((f) => f.file as File))
+                            }
+                        />
+                        {errors.file && (
+                            <p className="text-red-500 text-sm">
+                                {errors.file.message}
+                            </p>
+                        )}
+                    </div>
+                )}
+            />
+        </form>
+    );
+}
+
+export default UploadFileSection;

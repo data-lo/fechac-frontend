@@ -1,4 +1,4 @@
-name: CI/CD for Next.js
+name: FECHAC FRONTEND CI 
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v3

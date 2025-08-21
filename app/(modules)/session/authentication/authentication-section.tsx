@@ -41,7 +41,6 @@ const AuthenticationSection = ({
         <section className="w-full h-full flex flex-col items-center justify-center gap-6 text-center">
             <div className="space-y-6 max-w-md flex items-center flex-col">
                 <h1 className="flex items-center justify-center gap-2 text-2xl font-semibold text-gray-800">
-
                     🎉 ¡Inicio de sesión en Microsoft exitoso!
                 </h1>
                 <p className="text-sm text-gray-600">

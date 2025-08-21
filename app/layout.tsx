@@ -4,6 +4,7 @@ import "./globals.css";
 import Sidebar from "@/components/sidebar/sidebar";
 import ToasterProvider from "@/providers/toast-provider"
 import { SignedOut, SignInButton, SignUpButton, SignedIn, UserButton, ClerkProvider } from "@clerk/nextjs";
+import ReactQueryProvider from "@/providers/query-client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,17 +29,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ClerkProvider>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <div className="h-screen flex flex-col">
-            <div className="flex flex-1 overflow-hidden">
-              <ToasterProvider />
-              <Sidebar />
-              <main className="flex-1 overflow-y-auto">
-                {children}
-              </main>
+        <ReactQueryProvider>
+          <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <div className="h-screen flex flex-col">
+              <div className="flex flex-1 overflow-hidden">
+                <ToasterProvider />
+                <Sidebar />
+                <main className="flex-1 overflow-y-auto">
+                  {children}
+                </main>
+              </div>
             </div>
-          </div>
-        </body>
+          </body>
+        </ReactQueryProvider>
       </ClerkProvider>
     </html>
 
