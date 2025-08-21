@@ -7,19 +7,19 @@ import "filepond/dist/filepond.min.css";
 import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "./schema/file-project";
 import ButtonComponent from "@/components/button-component";
 import { RefreshCcw } from "lucide-react";
-import { useCreateProjectsFromCSV } from "./hooks/use-create-projects-from-csv";
+import { useSynchronizeProjects } from "./hooks/use-synchronize-projects";
 
 
 
 const UploadFileSection = () => {
 
-    const mutation = useCreateProjectsFromCSV();
+    const mutation = useSynchronizeProjects();
 
     const {
         control,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
     } = useForm<FILE_PROJECT_FORM>({
         resolver: zodResolver(FILE_PROJECT_SCHEMA),
         defaultValues: {
@@ -28,11 +28,11 @@ const UploadFileSection = () => {
     });
 
     const onSubmit = async (data: FILE_PROJECT_FORM) => {
-        await mutation.mutate(data.file, {
+        mutation.mutate(data.file, {
             onSuccess: () => {
                 reset()
             }
-        })
+        });
     };
 
     return (

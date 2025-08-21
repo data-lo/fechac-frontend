@@ -7,14 +7,20 @@ import Pagination from "./components/pagination";
 import LimitSelector from "./components/limit-selector";
 
 interface Props {
-  searchParams?: { page?: string; limit?: string };
+  searchParams?: Promise<{ page?: string; limit?: string }>; // ← Ahora es una Promise
 }
 
+
 const ProjectSection = async ({ searchParams }: Props) => {
-  const page = Math.max(1, Number(searchParams?.page) || 1);
-  const limit = Math.max(1, Math.min(100, Number(searchParams?.limit) || 10));
+  const params = await searchParams;
+
+
+  const page = Math.max(1, Number(params?.page) || 1);
+  const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
 
   const response = await getPendingProjects(page, limit);
+
+
 
   if (!response.success || !response.data) {
     return (
@@ -29,6 +35,8 @@ const ProjectSection = async ({ searchParams }: Props) => {
       </Fragment>
     );
   }
+
+
 
   const { projects, total } = response.data;
   const totalPages = Math.ceil(total / limit);
@@ -51,17 +59,16 @@ const ProjectSection = async ({ searchParams }: Props) => {
     <Fragment>
       <h1 className="font-bold text-xl">Proyectos</h1>
       <UploadFileSection />
-      
-      <div className="flex items-center gap-2">
-          <LimitSelector currentLimit={limit} />
-        </div>
 
-      {/* Lista de proyectos */}
+      <div className="flex items-center gap-2">
+        <LimitSelector currentLimit={limit} />
+      </div>
+
       {projects.length > 0 ? (
         <div className="bg-white border rounded-lg overflow-hidden">
           <ul className="divide-y divide-gray-200">
             {projects.map((project, index) => (
-              <li key={project._id.toString()} className="px-4 py-3 hover:bg-gray-50">
+              <li key={index} className="px-4 py-3 hover:bg-gray-50">
                 <div className="flex justify-between items-center">
                   <span className="font-medium">{project.project_name}</span>
                   <span className="text-sm text-gray-500">
@@ -78,7 +85,7 @@ const ProjectSection = async ({ searchParams }: Props) => {
         </div>
       )}
 
-      {/* Componente de paginación */}
+
       <Pagination
         currentPage={page}
         totalPages={totalPages}

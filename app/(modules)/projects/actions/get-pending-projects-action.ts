@@ -2,8 +2,8 @@
 
 import { getCollection } from "@/actions/authentication-handler-action";
 import { ProjectDocument } from "../models/project-document";
+import { Project } from "../models/project";
 import { ActionResponse } from "@/interfaces/action-response";
-import { revalidatePath } from "next/cache";
 
 interface PaginationParams {
   page?: number;
@@ -17,7 +17,7 @@ export async function getPendingProjects(
   limit: number = 10,
   options: Omit<PaginationParams, 'page' | 'limit'> = {}
 ): Promise<ActionResponse<{ 
-  projects: ProjectDocument[]; 
+  projects: Project[];
   total: number;
   currentPage: number;
   totalPages: number;
@@ -44,11 +44,10 @@ export async function getPendingProjects(
     const collection = await getCollection<ProjectDocument>("projects");
     const skip = (page - 1) * limit;
 
-    const { sortBy = 'createdAt', sortOrder = 'desc' } = options;
+    const { sortBy = 'approval_date', sortOrder = 'desc' } = options;
+    const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
-    const sort = { [sortBy]: sortOrder === 'asc' ? 1 as const : -1 as const };
-
-    const [projects, total] = await Promise.all([
+    const [projectsFromDB, total] = await Promise.all([
       collection
         .find()
         .sort(sort)
@@ -64,7 +63,7 @@ export async function getPendingProjects(
       success: true,
       error: null,
       data: {
-        projects,
+        projects: projectsFromDB,
         total,
         currentPage: page,
         totalPages,
@@ -74,6 +73,8 @@ export async function getPendingProjects(
     };
 
   } catch (error) {
+    console.error('Error en getPendingProjects:', error);
+    
     return {
       success: false,
       error: error instanceof Error ? error.message : "Error desconocido al obtener proyectos",

@@ -1,12 +1,13 @@
 'use server';
 
-import { extractProjectsFromCSV } from "@/app/(modules)/projects/functions/extract-projects-from-csv";
+
 import { getCollection } from "../../../../actions/authentication-handler-action";
+import { extractProjectsFromCSV } from "../functions/extract-projects-from-csv";
 import { Project } from "../models/project";
 import { revalidatePath } from "next/cache";
 
 
-export async function createProjectsFromCSVAction(values: File[]) {
+export async function synchronizeProjectsAction(values: File[]) {
     try {
         const records = await extractProjectsFromCSV(values);
 
@@ -19,7 +20,11 @@ export async function createProjectsFromCSVAction(values: File[]) {
         return {
             success: true,
             error: null,
-            data: data
+            data: {
+                insertedCount: data.insertedCount,
+                insertedIds: Object.values(data.insertedIds).map(id => id.toString()),
+                acknowledged: data.acknowledged
+            }
         };
     } catch (error) {
         return {
