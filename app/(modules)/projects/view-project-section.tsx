@@ -5,13 +5,14 @@ import UploadFileSection from "./upload-file-section";
 import { getPendingProjects } from "./actions/get-pending-projects-action";
 import Pagination from "./components/pagination";
 import LimitSelector from "./components/limit-selector";
+import ProjectTable from "./components/project-table";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string }>; // ← Ahora es una Promise
 }
 
 
-const ProjectSection = async ({ searchParams }: Props) => {
+const ViewProjectSection = async ({ searchParams }: Props) => {
   const params = await searchParams;
 
 
@@ -19,8 +20,6 @@ const ProjectSection = async ({ searchParams }: Props) => {
   const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
 
   const response = await getPendingProjects(page, limit);
-
-
 
   if (!response.success || !response.data) {
     return (
@@ -65,20 +64,9 @@ const ProjectSection = async ({ searchParams }: Props) => {
       </div>
 
       {projects.length > 0 ? (
-        <div className="bg-white border rounded-lg overflow-hidden">
-          <ul className="divide-y divide-gray-200">
-            {projects.map((project, index) => (
-              <li key={index} className="px-4 py-3 hover:bg-gray-50">
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">{project.project_name}</span>
-                  <span className="text-sm text-gray-500">
-                    #{(page - 1) * limit + index + 1}
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ProjectTable
+          data={projects}
+        />
       ) : (
         <div className="text-center py-8 text-gray-500">
           No hay proyectos disponibles
@@ -95,4 +83,4 @@ const ProjectSection = async ({ searchParams }: Props) => {
   );
 };
 
-export default ProjectSection;
+export default ViewProjectSection;
