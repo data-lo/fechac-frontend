@@ -5,14 +5,14 @@ export const FILE_PROJECT_SCHEMA = z
     file: z
       .instanceof(File)
       .array()
-      .min(1, { message: "Debes subir al menos un archivo" }),
+      .min(1, { message: "Es necesario subir un archivo" }),
   })
   .superRefine((data, ctx) => {
     if (data.file.some((item) => !item.name.endsWith(".csv"))) {
       ctx.addIssue({
         code: "custom",
         path: ["file"],
-        message: "Solo se permiten archivos CSV",
+        message: "Sólo se permiten archivos CSV",
       });
     }
   });

@@ -5,23 +5,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "./schema/file-project";
-import ButtonComponent from "@/components/button-component";
+import ButtonComponent from "@/components/action-button";
 import { RefreshCcw } from "lucide-react";
-import { uploadProjectAction } from "@/app/(modules)/project/actions/projects-action";
-import toast from "react-hot-toast";
-import { useProject } from "./hooks/useProject";
+import { useSynchronizeProjects } from "./hooks/use-synchronize-projects";
 
 
 
 const UploadFileSection = () => {
 
-    const { useUploadProjectFile } = useProject();
+    const mutation = useSynchronizeProjects();
 
     const {
         control,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
     } = useForm<FILE_PROJECT_FORM>({
         resolver: zodResolver(FILE_PROJECT_SCHEMA),
         defaultValues: {
@@ -30,13 +28,11 @@ const UploadFileSection = () => {
     });
 
     const onSubmit = async (data: FILE_PROJECT_FORM) => {
-        await useUploadProjectFile.mutate(data.file, {
+        mutation.mutate(data.file, {
             onSuccess: () => {
                 reset()
             }
-        })
-
-
+        });
     };
 
     return (
@@ -46,7 +42,7 @@ const UploadFileSection = () => {
                     type="submit"
                     title="Sincronizar Projectos"
                     icon={RefreshCcw}
-                    isPending={useUploadProjectFile.isPending}
+                    isPending={mutation.isPending}
                 />
             </div>
 

@@ -1,4 +1,4 @@
-import { Project } from "@/interfaces/project";
+import { Project } from "@/app/(modules)/projects/models/project";
 import { parse } from "csv-parse/sync";
 
 export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
@@ -25,7 +25,7 @@ export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
             applicant_institution: row["Institución solicitante"],
             authorized_donor: row["Donataria aut."],
             regulatory_institution: row["Institución normativa"],
-            project_name: row["Nombre del proyecto"],
+            project_name: row["Nombre del proyecto"].toUpperCase(),
             address: row.Domicilio,
             authorized_amount: row["Monto Autorizado"],
             authorized_contract_amount: row["Monto Aut-Conv"],

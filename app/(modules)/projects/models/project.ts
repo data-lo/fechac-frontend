@@ -1,5 +1,3 @@
-import { ObjectId } from "mongodb";
-
 export interface Project {
     sadap_id: string;
     project_status: string;
@@ -22,6 +20,3 @@ export interface Project {
     transfer_status: "NOT_TRANSFERRED" | "TRANSFERRED" | 'IN_PROGRESS';
 }
 
-export interface ProjectRecord extends Project {
-    _id?: ObjectId;
-}

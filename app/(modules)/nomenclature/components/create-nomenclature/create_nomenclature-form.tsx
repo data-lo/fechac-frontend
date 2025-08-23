@@ -11,7 +11,7 @@ import { CREATE_NOMENCLATURE_FIELDS } from "./create-nomenclature-fields";
 
 import { CREATE_NOMENCLATURE_SCHEMA } from "./create_nomenclature-schema";
 
-import Button from "@/components/button-component";
+import Button from "@/components/action-button";
 
 import { createRestriction } from "@/actions/nomenclature-action";
 import { InsertResponse } from "@/interfaces/insert-response";

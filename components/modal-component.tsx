@@ -10,7 +10,7 @@ import { LucideIcon } from "lucide-react";
 
 
 import { ReactNode } from "react"
-import Button from "./button-component";
+import Button from "./action-button";
 
 type variant = "link" | "default" | "destructive" | "outline" | "secondary" | "ghost" | null | undefined;
 
@@ -41,7 +41,7 @@ const ModalComponent = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
+        {/* <Button
           sizeButton={sizeButton}
           variant={variant}
           icon={Icon}
@@ -49,7 +49,7 @@ const ModalComponent = ({
           disabled={buttonDisable}
           type="button"
           title={dialogTrigger}
-        />
+        /> */}
       </DialogTrigger>
       <DialogContent className={`max-w-lg ${dialogContent}`}>
         <DialogHeader>

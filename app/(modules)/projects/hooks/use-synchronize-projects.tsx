@@ -2,13 +2,11 @@
 
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import { uploadProjectAction } from "../actions/projects-action";
+import { synchronizeProjectsAction } from "../actions/synchronize-projects-action";
 
-export function useProject() {
-    const useUploadProjectFile = useMutation({
-        mutationFn: async (files: File[]) => {
-            return await uploadProjectAction(files);
-        },
+export function useSynchronizeProjects() {
+    return useMutation({
+        mutationFn: synchronizeProjectsAction,
         onSuccess: (response) => {
             if (response.success) toast.success("¡El Archivo se ha subido con éxito!");
         },
@@ -16,8 +14,4 @@ export function useProject() {
             toast.error(`Error: ${error.message}`);
         },
     });
-
-    return {
-        useUploadProjectFile
-    }
 }

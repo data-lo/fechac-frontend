@@ -3,7 +3,7 @@
 import { changeStatusRestriction } from "@/actions/nomenclature-action";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import ButtonComponent from "@/components/button-component";
+import ButtonComponent from "@/components/action-button";
 import { isUpdateResponse } from "@/guard/is-update-response";
 import { Pencil } from "lucide-react";
 

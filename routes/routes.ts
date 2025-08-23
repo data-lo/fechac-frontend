@@ -9,7 +9,7 @@ export const routes = [
     {
         icon: FolderKanban,
         label: "Proyectos",
-        href: "/project"
+        href: "/projects"
     },
     {
         icon: FileLock2,
