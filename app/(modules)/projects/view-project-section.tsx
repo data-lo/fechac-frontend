@@ -1,14 +1,13 @@
-// app/projects/ProjectSection.tsx
 import { Fragment } from "react";
 import UploadFileSection from "./upload-file-section";
 
 import { getPendingProjects } from "./actions/get-pending-projects-action";
-import Pagination from "./components/pagination";
 import LimitSelector from "./components/limit-selector";
 import ProjectTable from "./components/project-table";
+import PaginationSSR from "./components/pagination-ssr";
 
 interface Props {
-  searchParams?: Promise<{ page?: string; limit?: string }>; // ← Ahora es una Promise
+  searchParams?: Promise<{ page?: string; limit?: string }>;
 }
 
 
@@ -35,9 +34,8 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
     );
   }
 
-
-
   const { projects, total } = response.data;
+
   const totalPages = Math.ceil(total / limit);
 
   if (page > totalPages && totalPages > 0) {
@@ -63,18 +61,13 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         <LimitSelector currentLimit={limit} />
       </div>
 
-      {projects.length > 0 ? (
-        <ProjectTable
-          data={projects}
-        />
-      ) : (
+      {projects.length > 0 ? (<ProjectTable data={projects} />) : (
         <div className="text-center py-8 text-gray-500">
           No hay proyectos disponibles
         </div>
       )}
-
-
-      <Pagination
+      
+      <PaginationSSR
         currentPage={page}
         totalPages={totalPages}
         limit={limit}
