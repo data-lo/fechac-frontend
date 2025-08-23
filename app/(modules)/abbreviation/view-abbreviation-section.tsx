@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 
-import EmptyMessage from "@/components/empty-message";
+import EmptyMessage from "@/components/empty-state";
 import Modal from "@/components/modal-component";
 import { Plus } from "lucide-react";
 import AbbreviationTable from "./components/view-abbreviation-table";

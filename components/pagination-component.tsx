@@ -8,8 +8,6 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination"
 
-import Link from "next/link"
-
 interface Props {
   currentPage: number;
   totalPages: number;
@@ -17,7 +15,7 @@ interface Props {
   baseUrl?: string;
 }
 
-const PaginationSSR = ({
+const PaginationComponent = ({
   currentPage,
   totalPages,
   limit,
@@ -107,4 +105,4 @@ const PaginationSSR = ({
   );
 };
 
-export default PaginationSSR;
+export default PaginationComponent;

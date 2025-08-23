@@ -1,6 +1,6 @@
 'use client'
 
-import ButtonComponent from "@/components/button-component";
+import ButtonComponent from "@/components/action-button";
 import { FaMicrosoft } from "react-icons/fa";
 
 interface Props {

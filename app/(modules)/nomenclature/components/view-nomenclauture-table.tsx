@@ -7,7 +7,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Restriction } from "../interfaces/restriction";
-import ButtonComponent from "@/components/button-component";
+import ButtonComponent from "@/components/action-button";
 import ModalComponent from "@/components/modal-component";
 import { Trash } from "lucide-react";
 import DropdownMenuComponent from "@/components/dropdown-menu-component";

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import ButtonComponent from '@/components/button-component';
+import ButtonComponent from '@/components/action-button';
 import { ArrowBigLeftDash } from 'lucide-react';
 import { handleMicrosoftAuthCallback } from '@/actions/authentication-handler-action';
 import { useEffect } from 'react';
