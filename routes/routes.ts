@@ -3,8 +3,8 @@ import { FileLock2, FolderKanban, KeyRound, Layers2, SlidersHorizontal,  } from 
 export const routes = [
     {
         icon: SlidersHorizontal,
-        label: "Prompts",
-        href: "/prompts"
+        label: "Criterios",
+        href: "/criteria"
     },
     {
         icon: FolderKanban,

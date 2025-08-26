@@ -1,19 +1,18 @@
 import { Fragment } from "react";
-import UploadFileSection from "./upload-file-section";
 
-import { getPendingProjects } from "./actions/get-pending-projects-action";
 import LimitSelector from "../../../components/limit-selector-component";
-import ProjectTable from "./components/project-table";
+
 import PaginationComponent from "../../../components/pagination-component";
 
 import EmptySate from "@/components/empty-state";
 import AlertMessage from "@/components/alert-message";
+import { getPendingProjects } from "../projects/actions/get-pending-projects-action";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
 }
 
-const ViewProjectSection = async ({ searchParams }: Props) => {
+const ViewCriteriaSection = async ({ searchParams }: Props) => {
   const params = await searchParams;
 
   const page = Math.max(1, Number(params?.page) || 1);
@@ -51,9 +50,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   return (
     <Fragment>
-      <h1 className="font-bold text-xl">Proyectos</h1>
-
-      <UploadFileSection />
+      <h1 className="font-bold text-xl">Criterios</h1>
 
       {projects.length > 0 ? (
         <Fragment>
@@ -61,7 +58,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
             <LimitSelector currentLimit={limit} />
           </div>
 
-          <ProjectTable data={projects} />
+          {/* <ProjectTable data={projects} /> */}
         </ Fragment>
       ) : (
         <EmptySate text={"No hay proyectos disponibles"} />
@@ -74,8 +71,6 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       />
     </Fragment>
   );
-
-
 };
 
-export default ViewProjectSection;
+export default ViewCriteriaSection;

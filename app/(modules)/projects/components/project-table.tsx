@@ -14,7 +14,6 @@ interface Props {
 }
 
 const ProjectTable = ({ data }: Props) => {
-
     return (
         <Table>
             <TableHeader>
@@ -32,7 +31,7 @@ const ProjectTable = ({ data }: Props) => {
                     const IconComponent = statusInfo.icon;
                     
                     return (
-                        <TableRow key={project.sadap_id}>
+                        <TableRow key={index}>
                             <TableCell className="text-center text-gray-500">
                                 {index + 1}
                             </TableCell>
