@@ -1,3 +1,4 @@
+// 1. Componentes UI
 import {
     Table,
     TableBody,
@@ -6,7 +7,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+
+// 2. Tipos/Modelos
 import { Project } from "../models/project";
+
+// 3. Utilidades/Funciones
 import { getStatusInfo, PROJECT_STATUS_ENUM } from "../functions/get-status-translation";
 
 interface Props {
@@ -14,7 +19,6 @@ interface Props {
 }
 
 const ProjectTable = ({ data }: Props) => {
-
     return (
         <Table>
             <TableHeader>
@@ -32,7 +36,7 @@ const ProjectTable = ({ data }: Props) => {
                     const IconComponent = statusInfo.icon;
                     
                     return (
-                        <TableRow key={project.sadap_id}>
+                        <TableRow key={index}>
                             <TableCell className="text-center text-gray-500">
                                 {index + 1}
                             </TableCell>
@@ -41,7 +45,7 @@ const ProjectTable = ({ data }: Props) => {
                                     {project.project_name}
                                 </div>
                             </TableCell>
-                            <TableCell className="font-mono text-sm">
+                            <TableCell className="text-sm">
                                 {project.sadap_id}
                             </TableCell>
                             <TableCell>

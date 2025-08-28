@@ -1,19 +1,25 @@
+// 1. React
 import { Fragment } from "react";
-import UploadFileSection from "./upload-file-section";
 
-import { getPendingProjects } from "./actions/get-pending-projects-action";
+// 2. Componentes globales
+import AlertMessage from "@/components/alert-message";
+import EmptySate from "@/components/empty-state";
+
+// 3. Componentes compartidos
 import LimitSelector from "../../../components/limit-selector";
-import ProjectTable from "./components/project-table";
 import PaginationComponent from "../../../components/pagination";
 
-import EmptySate from "@/components/empty-state";
-import AlertMessage from "@/components/alert-message";
+// 4. Componentes locales del módulo
+import CriterionTable from "./components/criterion-table";
+
+// 5. Actions/Servicios
+import { getCriteria } from "./actions/get-criteria";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
 }
 
-const ViewProjectSection = async ({ searchParams }: Props) => {
+const ViewCriterionSection = async ({ searchParams }: Props) => {
   const params = await searchParams;
 
   const page = Math.max(1, Number(params?.page) || 1);
@@ -22,7 +28,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   const query = params?.query;
 
-  const response = await getPendingProjects(page, limit);
+  const response = await getCriteria(page, limit);
 
   if (response.error || !response.data) {
     return (
@@ -34,7 +40,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       </Fragment>
     );
   }
-  const { projects, total } = response.data;
+  const { criteria, total } = response.data;
 
   const totalPages = Math.ceil(total / limit);
 
@@ -51,17 +57,15 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   return (
     <Fragment>
-      <h1 className="font-bold text-xl">Proyectos</h1>
+      <h1 className="font-bold text-xl">Criterios</h1>
 
-      <UploadFileSection />
-
-      {projects.length > 0 ? (
+      {criteria.length > 0 ? (
         <Fragment>
           <div className="flex items-center gap-2">
-            <LimitSelector currentLimit={limit} route="/projects"/>
+            <LimitSelector currentLimit={limit} route="/criteria"/>
           </div>
 
-          <ProjectTable data={projects} />
+          <CriterionTable data={criteria} />
         </ Fragment>
       ) : (
         <EmptySate text={"No hay proyectos disponibles"} />
@@ -71,11 +75,10 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         currentPage={page}
         totalPages={totalPages}
         limit={limit}
+        baseUrl="/criteria"
       />
     </Fragment>
   );
-
-
 };
 
-export default ViewProjectSection;
+export default ViewCriterionSection;

@@ -1,10 +1,21 @@
+// 1. Tipos de Next.js
 import type { Metadata } from "next";
+
+// 2. Fuentes de Next.js
 import { Geist, Geist_Mono } from "next/font/google";
+
+// 3. Librerías externas
+import { ClerkProvider } from "@clerk/nextjs";
+
+// 4. Estilos globales
 import "./globals.css";
+
+// 5. Componentes globales
 import Sidebar from "@/components/sidebar/sidebar";
-import ToasterProvider from "@/providers/toast-provider"
-import { SignedOut, SignInButton, SignUpButton, SignedIn, UserButton, ClerkProvider } from "@clerk/nextjs";
+
+// 6. Providers
 import ReactQueryProvider from "@/providers/query-client";
+import ToasterProvider from "@/providers/toast-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
