@@ -8,6 +8,7 @@ import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "./schema/file-project";
 import ButtonComponent from "@/components/action-button";
 import { RefreshCcw } from "lucide-react";
 import { useSynchronizeProjects } from "./hooks/use-synchronize-projects";
+import ActionButton from "@/components/action-button";
 
 
 
@@ -38,10 +39,10 @@ const UploadFileSection = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="flex justify-end">
-                <ButtonComponent
+                <ActionButton
                     type="submit"
                     title="Sincronizar Projectos"
-                    icon={RefreshCcw}
+                    iconName="RefreshCcw"
                     isPending={mutation.isPending}
                 />
             </div>

@@ -1,18 +1,25 @@
+// 1. React
 import { Fragment } from "react";
 
-import LimitSelector from "../../../components/limit-selector-component";
-
-import PaginationComponent from "../../../components/pagination-component";
-
-import EmptySate from "@/components/empty-state";
+// 2. Componentes globales
 import AlertMessage from "@/components/alert-message";
-import { getPendingProjects } from "../projects/actions/get-pending-projects-action";
+import EmptySate from "@/components/empty-state";
+
+// 3. Componentes compartidos
+import LimitSelector from "../../../components/limit-selector";
+import PaginationComponent from "../../../components/pagination";
+
+// 4. Componentes locales del módulo
+import CriterionTable from "./components/criterion-table";
+
+// 5. Actions/Servicios
+import { getCriteria } from "./actions/get-criteria";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
 }
 
-const ViewCriteriaSection = async ({ searchParams }: Props) => {
+const ViewCriterionSection = async ({ searchParams }: Props) => {
   const params = await searchParams;
 
   const page = Math.max(1, Number(params?.page) || 1);
@@ -21,7 +28,7 @@ const ViewCriteriaSection = async ({ searchParams }: Props) => {
 
   const query = params?.query;
 
-  const response = await getPendingProjects(page, limit);
+  const response = await getCriteria(page, limit);
 
   if (response.error || !response.data) {
     return (
@@ -33,7 +40,7 @@ const ViewCriteriaSection = async ({ searchParams }: Props) => {
       </Fragment>
     );
   }
-  const { projects, total } = response.data;
+  const { criteria, total } = response.data;
 
   const totalPages = Math.ceil(total / limit);
 
@@ -52,13 +59,13 @@ const ViewCriteriaSection = async ({ searchParams }: Props) => {
     <Fragment>
       <h1 className="font-bold text-xl">Criterios</h1>
 
-      {projects.length > 0 ? (
+      {criteria.length > 0 ? (
         <Fragment>
           <div className="flex items-center gap-2">
-            <LimitSelector currentLimit={limit} />
+            <LimitSelector currentLimit={limit} route="/criteria"/>
           </div>
 
-          {/* <ProjectTable data={projects} /> */}
+          <CriterionTable data={criteria} />
         </ Fragment>
       ) : (
         <EmptySate text={"No hay proyectos disponibles"} />
@@ -68,9 +75,10 @@ const ViewCriteriaSection = async ({ searchParams }: Props) => {
         currentPage={page}
         totalPages={totalPages}
         limit={limit}
+        baseUrl="/criteria"
       />
     </Fragment>
   );
 };
 
-export default ViewCriteriaSection;
+export default ViewCriterionSection;

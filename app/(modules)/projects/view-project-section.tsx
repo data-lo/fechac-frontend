@@ -2,9 +2,9 @@ import { Fragment } from "react";
 import UploadFileSection from "./upload-file-section";
 
 import { getPendingProjects } from "./actions/get-pending-projects-action";
-import LimitSelector from "../../../components/limit-selector-component";
+import LimitSelector from "../../../components/limit-selector";
 import ProjectTable from "./components/project-table";
-import PaginationComponent from "../../../components/pagination-component";
+import PaginationComponent from "../../../components/pagination";
 
 import EmptySate from "@/components/empty-state";
 import AlertMessage from "@/components/alert-message";
@@ -58,7 +58,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       {projects.length > 0 ? (
         <Fragment>
           <div className="flex items-center gap-2">
-            <LimitSelector currentLimit={limit} />
+            <LimitSelector currentLimit={limit} route="/projects"/>
           </div>
 
           <ProjectTable data={projects} />

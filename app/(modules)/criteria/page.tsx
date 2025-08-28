@@ -1,4 +1,4 @@
-import ViewCriteriaSection from "./view-criteria-section";
+import ViewCriteriaSection from "./view-criterion-section";
 
 interface Props {
     searchParams: Promise<{ page?: string; limit?: string, query?: string }>;

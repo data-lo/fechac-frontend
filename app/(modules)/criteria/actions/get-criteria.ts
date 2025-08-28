@@ -1,10 +1,9 @@
 'use server';
 
 import { getCollection } from "@/actions/authentication-handler-action";
-import { ProjectDocument } from "../models/project-document";
-import { Project } from "../models/project";
 import { ActionResponse } from "@/interfaces/action-response";
-import { Criteria } from "../models/criteria";
+import { Criterion } from "../models/criterion";
+import { CriterionDocument } from "../models/criterion-document";
 
 interface PaginationParams {
   page?: number;
@@ -17,8 +16,8 @@ export async function getCriteria(
   page: number = 1,
   limit: number = 10,
   options: Omit<PaginationParams, 'page' | 'limit'> = {}
-): Promise<ActionResponse<{ 
-  criteria: Project[];
+): Promise<ActionResponse<{
+  criteria: CriterionDocument[];
   total: number;
   currentPage: number;
   totalPages: number;
@@ -42,13 +41,13 @@ export async function getCriteria(
       };
     }
 
-    const collection = await getCollection<Criteria>("document_prompts");
+    const collection = await getCollection<CriterionDocument>("document_prompts");
     const skip = (page - 1) * limit;
 
     const { sortBy = 'approval_date', sortOrder = 'desc' } = options;
     const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
-    const [projectsFromDB, total] = await Promise.all([
+    const [criteriaFromDB, total] = await Promise.all([
       collection
         .find()
         .sort(sort)
@@ -60,11 +59,16 @@ export async function getCriteria(
 
     const totalPages = Math.ceil(total / limit);
 
+    const newStructure = criteriaFromDB.map(criterion => ({
+      ...criterion,
+      _id: criterion._id.toString()
+    }));
+
     return {
       success: true,
       error: null,
       data: {
-        projects: projectsFromDB,
+        criteria: newStructure,
         total,
         currentPage: page,
         totalPages,
@@ -75,7 +79,7 @@ export async function getCriteria(
 
   } catch (error) {
     console.error('Error en getPendingProjects:', error);
-    
+
     return {
       success: false,
       error: error instanceof Error ? error.message : "Error desconocido al obtener proyectos",

@@ -8,10 +8,11 @@ import {
 } from "@/components/ui/table"
 import { Restriction } from "../interfaces/restriction";
 import ButtonComponent from "@/components/action-button";
-import ModalComponent from "@/components/modal-component";
+import ModalComponent from "@/components/modal";
 import { Trash } from "lucide-react";
-import DropdownMenuComponent from "@/components/dropdown-menu-component";
+import DropdownMenuComponent from "@/components/context-menu";
 import StatusNomenclatureForm from "./status-nomenclature/status-nomenclature-form";
+import ActionButton from "@/components/action-button";
 
 
 interface Props {
@@ -54,12 +55,11 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     dialogDescription={""}
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
-                                    sizeButton={'w-auto'}
                                     children={
                                         <div className="flex justify-end">
-                                            <ButtonComponent
+                                            <ActionButton
                                                 title="Guardar"
-                                                icon={Trash}
+                                                iconName={'Trash'}
                                             />
                                         </div>
                                     }
@@ -70,7 +70,6 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     dialogDescription={"Aquí puedes activar la regla para que se aplique, o desactivarla si no deseas que tenga efecto."}
                                     dialogTrigger={restriction.isActive ? 'Desactivar' : 'Activar'}
                                     variant={'ghost'}
-                                    sizeButton={'w-auto'}
                                     children={
                                         <StatusNomenclatureForm
                                             id={restriction._id}

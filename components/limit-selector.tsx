@@ -4,9 +4,13 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 interface LimitSelectorProps {
   currentLimit: number;
+  route: string;
 }
 
-const LimitSelector = ({ currentLimit }: LimitSelectorProps) => {
+const LimitSelector = ({ 
+  currentLimit,
+  route
+}: LimitSelectorProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -15,7 +19,7 @@ const LimitSelector = ({ currentLimit }: LimitSelectorProps) => {
     params.set('limit', newLimit);
     params.set('page', '1');
     
-    router.push(`/projects?${params.toString()}`);
+    router.push(`${route}?${params.toString()}`);
   };
 
   return (

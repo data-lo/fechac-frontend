@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { icons, IconName } from "./icon";
 
 type ButtonType = "submit" | "button" | "reset";
 type ButtonVariant =
@@ -28,7 +29,7 @@ interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onC
     // Contenido
     children?: React.ReactNode;
     title?: string; // Deprecated
-    icon?: LucideIcon;
+    iconName?: IconName;
     iconPosition?: ButtonIconPosition;
     loadingText?: string;
     
@@ -77,7 +78,7 @@ const ActionButton = React.forwardRef<HTMLButtonElement, Props>(
             disabled = false,
             children,
             title,
-            icon: Icon,
+            iconName,
             iconPosition = "left",
             loadingText,
             onClick,
@@ -95,6 +96,10 @@ const ActionButton = React.forwardRef<HTMLButtonElement, Props>(
         },
         ref
     ) => {
+
+
+        const Icon = iconName ? icons[iconName] : undefined;
+
         const loading = isLoading || isPending;
         const buttonContent = children || title;
         const isIconOnly = iconPosition === "only" || (!buttonContent && Icon);

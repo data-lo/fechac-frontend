@@ -1,4 +1,4 @@
-export interface Criteria {
+export interface Criterion {
   file_name: string;
   form_code: string;
   form_title: string;

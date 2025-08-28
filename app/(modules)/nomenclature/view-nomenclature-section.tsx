@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import RestrictionTable from "./components/view-nomenclauture-table";
 import EmptyMessage from "@/components/empty-state";
-import Modal from "@/components/modal-component";
+import Modal from "@/components/modal";
 import { Plus } from "lucide-react";
 import CreateNomenclatureForm from "./components/create-nomenclature/create_nomenclature-form";
 import { getRestrictions } from "@/actions/nomenclature-action";
@@ -17,10 +17,9 @@ const ViewNomenclatureSection = async () => {
                 <Modal
                     dialogTitle={"Restricción"}
                     dialogDescription={"Aquí puedes establecer restricciones que determinan cómo deben nombrarse los archivos."}
-                    icon={Plus}
+                    iconName={"Plus"}
                     dialogTrigger={"Crear Restricción"}
                     children={<CreateNomenclatureForm />}
-                    sizeButton="sm:w-[338px] w-full"
                 />
             </div>
             {restrictions.length > 0 ? (
