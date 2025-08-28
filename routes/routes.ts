@@ -13,8 +13,8 @@ export const routes = [
     },
     {
         icon: FileLock2,
-        label: "Inicio",
-        href: "/nomenclature"
+        label: "Restricciones",
+        href: "/restrictions"
     },
     {
         icon: Layers2,

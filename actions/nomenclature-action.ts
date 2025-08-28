@@ -1,6 +1,6 @@
 'use server';
 
-import { Restriction } from "@/app/(modules)/nomenclature/interfaces/restriction";
+import { Restriction } from "@/app/(modules)/restrictions/interfaces/restriction";
 
 import { getConnection } from "@/lib/mongodb";
 
