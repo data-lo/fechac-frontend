@@ -1,4 +1,4 @@
-import { InputForm } from "@/components/form/input";
+import { InputForm } from "@/components/form/form-input-field";
 
 export const CREATE_NOMENCLATURE_FIELDS = [
     {

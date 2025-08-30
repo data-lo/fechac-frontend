@@ -8,47 +8,48 @@ import {
 import { Input } from "@/components/ui/input";
 
 interface Props {
-    nameField: string;
-    formControl: any;
-    title: string;
+    name: string;
+    control: any;
+    label: string;
     placeholder?: string;
     disabled?: boolean;
-    isTitleRequired?: boolean;
-
+    showLabel?: boolean;
 }
 
-const InputForm = ({
-    nameField,
-    formControl,
-    title,
+const FormInputField = ({
+    name,
+    control,
+    label,
     placeholder,
     disabled = false,
-    isTitleRequired = true
+    showLabel = true
 }: Props) => {
-
-
     return (
         <div className="p-1 rounded-md flex flex-col gap-4">
-            {isTitleRequired && (<p className="font-normal text-sm">{title}</p>)}
+            {showLabel && (
+                <label className="font-normal text-sm" htmlFor={name}>
+                    {label}
+                </label>
+            )}
             <FormField
-                control={formControl}
-                name={nameField}
+                control={control}
+                name={name}
                 render={({ field }) => (
                     <FormItem>
                         <FormControl>
                             <Input
+                                id={name}
                                 placeholder={placeholder}
                                 disabled={disabled}
                                 {...field}
                             />
                         </FormControl>
-                        {isTitleRequired && (<FormMessage />)}
+                        <FormMessage />
                     </FormItem>
                 )}
             />
         </div>
     );
+};
 
-}
-
-export { InputForm };
+export default FormInputField ;

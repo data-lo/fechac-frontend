@@ -11,7 +11,7 @@ export interface Criterion {
   visual_layout: VisualLayout;
   domain_tags: string[];
   additional_keywords: string[];
-  destiny_drive: string[];
+  destiny_drive: string;
   destiny_path: string;
   organization_department: string;
   mimetype: string;
