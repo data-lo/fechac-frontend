@@ -88,7 +88,7 @@ const ActionButton = React.forwardRef<HTMLButtonElement, Props>(
             justify = "center",
             rounded = "rounded-md",
             fullWidth = false,
-            className = "",
+            className = "w-[338px]",
             iconClassName = "",
             ariaLabel,
             ariaDescribedBy,

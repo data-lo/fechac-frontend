@@ -1,6 +1,6 @@
 'use client'
 
-import ButtonComponent from "@/components/action-button";
+import ActionButton from "@/components/action-button";
 import { FaMicrosoft } from "react-icons/fa";
 
 interface Props {
@@ -24,8 +24,8 @@ const AuthorizationCard = ({
           <p className="text-sm text-muted-foreground">{description}</p>
         </div>
       </div>
-      <ButtonComponent
-        onClick={() => (window.location.href = microsoftAuthUrl)}
+      <ActionButton
+        onClick={() => { window.location.href = microsoftAuthUrl }}
         title="Iniciar Sesión"
       />
     </div>

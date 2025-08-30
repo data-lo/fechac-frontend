@@ -5,6 +5,7 @@ import {
     BreadcrumbList,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+
 import { Fragment } from "react/jsx-runtime";
 
 interface BreadcrumbRoutes {
@@ -14,44 +15,48 @@ interface BreadcrumbRoutes {
 
 interface Props {
     breadcrumbRoutes: BreadcrumbRoutes[]
+    showBorder?: boolean
 }
 
-export function BreadcrumbComponent({
+const NavigationBreadcrumb = ({
     breadcrumbRoutes
-}: Props) {
-
-    const color = useColorStore((state) => state.color);
-
-
-    const navigate = useNavigate()
-
-    const onClick = (route: string) => {
-        navigate(route)
-    }
+}: Props) => {
 
     return (
         <Breadcrumb>
-            <BreadcrumbList>
-                {breadcrumbRoutes.map((breadcrumbRoute, index) =>
-                    <Fragment key={index}>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink>
-                                {index === breadcrumbRoutes.length - 1 ? (
-                                    <span
-                                        style={{ color: color }}
-                                        className="font-bold"
-                                    >{breadcrumbRoute.title}</span>
-                                ) : (
-                                    <button onClick={() => onClick(breadcrumbRoute.href)}>
-                                        {breadcrumbRoute.title}
-                                    </button>
-                                )}
-                            </BreadcrumbLink>
-                        </BreadcrumbItem>
-                        {index === breadcrumbRoutes.length - 1 ? (<></>) : (<BreadcrumbSeparator />)}
-                    </ Fragment>
-                )}
-            </BreadcrumbList>
+            <Breadcrumb>
+                <BreadcrumbList>
+                    {breadcrumbRoutes.map((breadcrumbRoute, index) => {
+                        const isLast = index === breadcrumbRoutes.length - 1
+                        return (
+                            <Fragment key={index}>
+                                <BreadcrumbItem>
+                                    {isLast ? (
+                                        <span
+                                            className="font-bold text-base text-black"
+                                        >
+                                            {breadcrumbRoute.title}
+                                        </span>
+                                    ) : (
+
+                                        <BreadcrumbLink
+                                            href={breadcrumbRoute.href}
+                                            className="font-bold text-base text-gray-600 hover:text-black"
+                                        >
+                                            {breadcrumbRoute.title}
+                                        </BreadcrumbLink>
+                                    )}
+                                </BreadcrumbItem>
+
+                                {!isLast && <BreadcrumbSeparator />}
+                            </Fragment>
+                        )
+                    })}
+                </BreadcrumbList>
+            </Breadcrumb>
+
         </Breadcrumb>
     )
 }
+
+export default NavigationBreadcrumb

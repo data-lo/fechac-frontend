@@ -16,10 +16,9 @@ const ViewAbbreviationSection = () => {
                 <Modal
                     dialogTitle={"Abreviación"}
                     dialogDescription={"Aquí puedes crear nuevas abreviaciones para los consejos del estado."}
-                    icon={Plus}
+                    iconName={"Plus"}
                     dialogTrigger={"Crear Abreviación"}
                     children={undefined}
-                    sizeButton="sm:w-[338px] w-full"
                 />
             </div>
             {abbreviations.length > 0 ? (

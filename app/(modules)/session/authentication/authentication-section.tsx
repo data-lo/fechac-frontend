@@ -6,6 +6,7 @@ import { ArrowBigLeftDash } from 'lucide-react';
 import { handleMicrosoftAuthCallback } from '@/actions/authentication-handler-action';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
+import ActionButton from '@/components/action-button';
 
 interface Props {
     title?: string;
@@ -46,9 +47,9 @@ const AuthenticationSection = ({
                 <p className="text-sm text-gray-600">
                     Tu cuenta se ha vinculado correctamente. Ya puedes acceder a tus archivos y herramientas desde el panel.
                 </p>
-                <ButtonComponent
+                <ActionButton
                     title='Regresar'
-                    icon={ArrowBigLeftDash}
+                    iconName={"RefreshCcw"}
                     onClick={() => router.push(redirectPath)}
                 />
             </div>

@@ -18,6 +18,7 @@ import { InsertResponse } from "@/interfaces/insert-response";
 import { isInsertResponse } from "@/guard/is-insert-response";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import ActionButton from "@/components/action-button";
 
 
 const CreateNomenclatureForm = () => {
@@ -62,17 +63,16 @@ const CreateNomenclatureForm = () => {
                 className="flex flex-col gap-6"
             >
 
-                {CREATE_NOMENCLATURE_FIELDS.map(({ component: Component, props }, index) => (
-                    <Component
-                        key={index}
-                        {...props}
-                        formControl={form.control}
-                    />
-                ))}
+
+
+{CREATE_NOMENCLATURE_FIELDS.map
+                        (({ component: Component, props }, index) => (
+                            <Component key={index} {...props} control={form.control} />
+                        ))}
 
                 <div className="flex justify-end mt-8">
-                    <Button
-                        icon={Save}
+                    <ActionButton
+                        iconName={"Save"}
                         title="Guardar"
                         isPending={isPending}
                     />

@@ -8,12 +8,14 @@ import EmptySate from "@/components/empty-state";
 // 3. Componentes compartidos
 import LimitSelector from "../../../components/limit-selector";
 import PaginationComponent from "../../../components/pagination";
+import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 4. Componentes locales del módulo
 import CriterionTable from "./components/criterion-table";
 
 // 5. Actions/Servicios
 import { getCriteria } from "./actions/get-criteria";
+
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -55,18 +57,29 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
     );
   }
 
+  const breadcrumbRoutes = [
+    {
+      href: '',
+      title: 'CRITERIOS'
+    },
+  ];
+
   return (
-    <Fragment>
-      <h1 className="font-bold text-xl">Criterios</h1>
+    <div className="flex flex-col h-full">
+      <nav className="h-12 flex justify-between items-center px-6 bg-white sticky top-0 z-10">
+        <NavigationBreadcrumb
+          breadcrumbRoutes={breadcrumbRoutes}
+        />
+      </nav>
 
       {criteria.length > 0 ? (
-        <Fragment>
+        <div className="px-6 py-4 flex flex-col gap-6">
           <div className="flex items-center gap-2">
-            <LimitSelector currentLimit={limit} route="/criteria"/>
+            <LimitSelector currentLimit={limit} route="/criteria" />
           </div>
 
           <CriterionTable data={criteria} />
-        </ Fragment>
+        </ div>
       ) : (
         <EmptySate text={"No hay proyectos disponibles"} />
       )}
@@ -77,7 +90,7 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
         limit={limit}
         baseUrl="/criteria"
       />
-    </Fragment>
+    </div>
   );
 };
 

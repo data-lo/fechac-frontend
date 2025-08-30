@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import ButtonComponent from "@/components/action-button";
 import { isUpdateResponse } from "@/guard/is-update-response";
 import { Pencil } from "lucide-react";
+import ActionButton from "@/components/action-button";
 
 interface Props {
     id: string;
@@ -43,11 +44,11 @@ const StatusNomenclatureForm = ({
 
     return (
         <div className="flex justify-end mt-8">
-            <ButtonComponent
+            <ActionButton
                 onClick={onSubmit}
                 isPending={isPending}
                 title={text}
-                icon={Pencil}
+                iconName={"Pencil"}
             />
         </div>
     );

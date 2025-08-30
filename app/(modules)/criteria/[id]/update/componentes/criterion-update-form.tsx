@@ -8,6 +8,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import CRITERION_FORM_FIELDS from "../fields/cirterion-update-fields";
+import ActionButton from "@/components/action-button";
 
 interface Props {
     data: {
@@ -48,6 +49,13 @@ const CriterionUpdateForm = ({ data }: Props) => {
                             <Component key={index} {...props} control={form.control} />
                         ))}
                 </div>
+                <footer className="flex justify-end">
+                    <ActionButton
+                        type="submit"
+                        title="Guardar Información"
+                        iconName="Save"
+                    />
+                </footer>
             </form>
         </Form>
     );
