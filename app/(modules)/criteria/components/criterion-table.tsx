@@ -65,9 +65,10 @@ const CriterionTable = ({ data }: Props) => {
                             <ContextMenu>
                                 <ActionButton
                                     title="Editar"
+                                    className="w-auto"
                                     iconName={'Pencil'}
                                     variant={"ghost"}
-                                    onClick={handleEdit(criterion._id)}
+                                    onClick={handleEdit(String(criterion._id))}
                                 />
                             </ContextMenu>
                         </TableCell>

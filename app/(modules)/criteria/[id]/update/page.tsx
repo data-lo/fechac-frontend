@@ -1,11 +1,21 @@
-const CriterionPage = ({ params }: { params: { id: string } }) => {
+import { getCriterion } from "../actions/get-criterion";
+import UpdateCriterionSection from "./update-criterion-section";
+
+const UpdateCriterionPage = async ({ params }: { params: Promise<{ id: string }> })=> {
+    const { id } = await params;
+    const response = await getCriterion(id);
+
+    if (!response.success || !response.data) {
+        return <div className="p-8 text-center">Criterio no encontrado</div>;
+    }
+
     return (
-        <section className="py-6 px-8 w-full h-full overflow-y-auto flex flex-col">
-            <div className="w-full flex flex-col h-auto gap-6">
-                ID: {params.id}
-            </div>
-        </section>
-    )
+        <div className="h-screen">
+            <UpdateCriterionSection data={{
+                criterion: response.data.criterion
+            }} />
+        </div>
+    );
 }
 
-export default CriterionPage;
+export default UpdateCriterionPage;

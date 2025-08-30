@@ -6,7 +6,7 @@ import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "./schema/file-project";
 import ButtonComponent from "@/components/action-button";
-import { RefreshCcw } from "lucide-react";
+import { AlertTriangle, RefreshCcw } from "lucide-react";
 import { useSynchronizeProjects } from "./hooks/use-synchronize-projects";
 import ActionButton from "@/components/action-button";
 
@@ -64,9 +64,12 @@ const UploadFileSection = () => {
                             }
                         />
                         {errors.file && (
-                            <p className="text-red-500 text-sm">
-                                {errors.file.message}
-                            </p>
+                            <div className="flex items-start space-x-2 mt-2 p-3 bg-red-50 border border-red-200 rounded-md">
+                                <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+                                <p className="text-red-700 text-sm font-medium">
+                                    {errors.file.message}
+                                </p>
+                            </div>
                         )}
                     </div>
                 )}
