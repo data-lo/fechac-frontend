@@ -1,14 +1,14 @@
 'use client'
 
-import { Fragment } from "react";
 import { CriterionDocument } from "../../../models/criterion-document";
 import { useForm } from "react-hook-form";
 import { UPDATE_CRITERIA_SCHEMA } from "../schemas/update-criterion-schema";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
-import CRITERION_FORM_FIELDS from "../fields/cirterion-update-fields";
+
 import ActionButton from "@/components/action-button";
+import CRITERION_FORM_FIELDS from "../../../fields/base-criteria-fields";
 
 interface Props {
     data: {
@@ -32,7 +32,8 @@ const CriterionUpdateForm = ({ data }: Props) => {
             destiny_drive: criterion.destiny_drive,
             destiny_path: criterion.destiny_path,
             organization_department: criterion.organization_department,
-            mimetype: criterion.mimetype
+            mimetype: criterion.mimetype,
+            main_sections: criterion.main_sections
         },
     });
 

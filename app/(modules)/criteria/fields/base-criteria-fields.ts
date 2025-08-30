@@ -1,8 +1,9 @@
-import FormInputField from "@/components/form/form-input-field";
+import DynamicArrayField from "@/components/form/dynamic-array-field";
+import InputField from "@/components/form/form-input-field";
 
 const CRITERION_FORM_FIELDS = [
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "file_name",
             label: "Nombre del Archivo",
@@ -11,7 +12,7 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "form_code",
             label: "Código de Identificación",
@@ -20,7 +21,7 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "form_title",
             label: "Titulo",
@@ -29,7 +30,7 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "issuer",
             label: "Entidad Emisora",
@@ -38,7 +39,7 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "url_patter",
             label: "URL",
@@ -47,7 +48,7 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "destiny_drive",
             label: "Repositorio de Destino",
@@ -56,7 +57,7 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "organization_department",
             label: "Área",
@@ -65,7 +66,7 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "destiny_path",
             label: "Ruta de Destino",
@@ -74,9 +75,18 @@ const CRITERION_FORM_FIELDS = [
         },
     },
     {
-        component: FormInputField,
+        component: InputField,
         props: {
             name: "mimetype",
+            label: "Tipo de Archivo",
+            placeholder: "Introduce el nombre del archivo",
+            items: []
+        },
+    },
+     {
+        component: DynamicArrayField,
+        props: {
+            name: "main_sections",
             label: "Tipo de Archivo",
             placeholder: "Introduce el nombre del archivo",
             items: []

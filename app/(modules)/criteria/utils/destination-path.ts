@@ -1,0 +1,4 @@
+export enum DESTINATION_PATH {
+    FECHAC = "FECHAC",
+    FOSECH = "FOSECH"
+}

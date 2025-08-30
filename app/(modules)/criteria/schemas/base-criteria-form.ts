@@ -12,6 +12,7 @@ const BASE_CRITERIA_SCHEMA = z.object({
     destiny_path: z.string({ required_error: REQUIRED_FIELD }),
     organization_department: z.string({ required_error: REQUIRED_FIELD }),
     mimetype: z.string({ required_error: REQUIRED_FIELD }),
+    main_sections: z.array(z.string()).optional(),
 
 });
 
