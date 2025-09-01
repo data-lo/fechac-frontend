@@ -15,6 +15,7 @@ import CriterionTable from "./components/criterion-table";
 
 // 5. Actions/Servicios
 import { getCriteria } from "./actions/get-criteria";
+import CreateCriterionButtonSection from "./create/components/client-redirect-section";
 
 
 interface Props {
@@ -65,31 +66,30 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
   ];
 
   return (
-    <div className="flex flex-col h-full">
-      <nav className="h-12 flex justify-between items-center px-6 bg-white sticky top-0 z-10">
-        <NavigationBreadcrumb
-          breadcrumbRoutes={breadcrumbRoutes}
-        />
+    <div className="px-6 py-4 flex flex-col h-full gap-6 relative overflow-auto">
+      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
+        <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
       </nav>
+      <div className="mt-10"></div>
+
+      <CreateCriterionButtonSection />
 
       {criteria.length > 0 ? (
-        <div className="px-6 py-4 flex flex-col gap-6">
-          <div className="flex items-center gap-2">
-            <LimitSelector currentLimit={limit} route="/criteria" />
-          </div>
+        <Fragment>
+          <LimitSelector currentLimit={limit} route="/criteria" />
 
           <CriterionTable data={criteria} />
-        </ div>
+
+          <PaginationComponent
+            currentPage={page}
+            totalPages={totalPages}
+            limit={limit}
+            baseUrl="/criteria"
+          />
+        </Fragment>
       ) : (
         <EmptySate text={"No hay proyectos disponibles"} />
       )}
-
-      <PaginationComponent
-        currentPage={page}
-        totalPages={totalPages}
-        limit={limit}
-        baseUrl="/criteria"
-      />
     </div>
   );
 };

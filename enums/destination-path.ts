@@ -1,4 +1,4 @@
-export enum DESTINATION_PATH {
+export enum DestinationPathEnum {
     FECHAC = "FECHAC",
     FOSECH = "FOSECH"
 }
