@@ -16,7 +16,7 @@ interface Props {
     showLabel?: boolean;
 }
 
-const FormInputField = ({
+const InputField = ({
     name,
     control,
     label,
@@ -52,4 +52,4 @@ const FormInputField = ({
     );
 };
 
-export default FormInputField ;
+export default InputField ;

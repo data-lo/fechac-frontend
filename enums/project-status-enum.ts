@@ -1,4 +1,4 @@
-export enum PROJECT_STATUS_ENUM {
+export enum ProjectStatusEnum {
     NOT_TRANSFERRED = 'NOT_TRANSFERRED',
     IN_PROCESS = 'IN_PROGRESS',
     TRANSFERRED = 'NOT_TRANSFERRED'

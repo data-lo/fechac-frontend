@@ -10,10 +10,10 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // 3. Modelos
-import { CriterionDocument } from "../../../models/criterion-document";
+import { CriterionDocument } from "../../models/criterion-document";
 
 // 4. Esquemas de validación
-import { UPDATE_CRITERIA_SCHEMA } from "../schemas/update-criterion-schema";
+import { BASE_CRITERIA_SCHEMA } from "../../schemas/base-criteria-form";
 
 // 5. Definiciones locales de campos
 import { 
@@ -23,40 +23,33 @@ import {
   CONTENT_FIELDS, 
   CLASSIFICATION_FIELDS, 
   STORAGE_FIELDS 
-} from "../../../fields/base-criteria-fields";
+} from "../../fields/base-criteria-fields";
 
+const CreateCriterionForm = () => {
 
-interface Props {
-    data: {
-        criterion: CriterionDocument
-    }
-}
-
-const CriterionUpdateForm = ({ data }: Props) => {
-
-    const criterion = data.criterion;
-
-    const form = useForm<z.infer<typeof UPDATE_CRITERIA_SCHEMA>>({
-        resolver: zodResolver(UPDATE_CRITERIA_SCHEMA),
+    const form = useForm<z.infer<typeof BASE_CRITERIA_SCHEMA>>({
+        resolver: zodResolver(BASE_CRITERIA_SCHEMA),
         defaultValues: {
-            id: String(criterion._id),
-            file_name: criterion.file_name,
-            form_code: criterion.form_code,
-            form_title: criterion.form_title,
-            issuing_organization: criterion.issuer,
-            access_url: criterion.url_pattern,
-            destination_drive: criterion.destiny_drive,
-            destination_path: criterion.destiny_path,
-            department: criterion.organization_department,
-            file_type: criterion.mimetype,
-            main_sections: criterion.main_sections,
-            additional_keywords: criterion.additional_keywords,
-            domain_tags: criterion.domain_tags,
-            revision_date: new Date(criterion.revision_date),
+            file_name: "",
+            form_code: "",
+            form_title: "",
+            issuing_organization: "",
+            access_url: "",
+            destination_drive: "",
+            destination_path: "",
+            department: "",
+            file_type: "",
+            main_sections: [],
+            additional_keywords: [],
+            domain_tags: [],
+            revision_date: new Date(),
+            revision_number: 0,
+            standard_fields: [],
+            visual_layout: []
         },
     });
 
-    const onSubmit = (data: z.infer<typeof UPDATE_CRITERIA_SCHEMA>) => {
+    const onSubmit = (data: z.infer<typeof BASE_CRITERIA_SCHEMA>) => {
         console.log(data)
     };
 
@@ -129,4 +122,4 @@ const CriterionUpdateForm = ({ data }: Props) => {
     );
 };
 
-export default CriterionUpdateForm;
+export default CreateCriterionForm;
