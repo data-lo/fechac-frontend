@@ -3,11 +3,11 @@ import * as z from "zod";
 import { REQUIRED_FIELD } from "@/messages/form-messages";
 
 const BASE_CRITERIA_SCHEMA = z.object({
-    file_name: z.string({ required_error: REQUIRED_FIELD }),
-    form_code: z.string({ required_error: REQUIRED_FIELD }),
-    form_title: z.string({ required_error: REQUIRED_FIELD }),
-    issuing_organization: z.string({ required_error: REQUIRED_FIELD }),
-    revision_number: z.number({ required_error: REQUIRED_FIELD }),
+    file_name: z.string().min(1, REQUIRED_FIELD),
+    form_code: z.string().min(1, REQUIRED_FIELD),
+    form_title: z.string().min(1, REQUIRED_FIELD),
+    issuing_organization: z.string().min(1, REQUIRED_FIELD),
+    revision_number: z.number().min(1, REQUIRED_FIELD),
     revision_date: z.date({ required_error: REQUIRED_FIELD }),
     access_url: z.string({ required_error: REQUIRED_FIELD }),
     file_type: z.string({ required_error: REQUIRED_FIELD }),

@@ -15,35 +15,38 @@ import {
 
 
 interface Props {
-    nameField: string
-    formControl: any
-    title: string
+    name: string
+    control: any
+    label: string
     placeholder: string
     disabled?: boolean;
     isTitleRequired?: boolean;
     items: {
         label: string;
         value: string
-    }[]
+    }[],
+    showLabel?: boolean;
 }
-const SelectComponent = ({
-    nameField,
-    formControl,
-    title,
+const SelectField = ({
+    name,
+    control,
+    label,
     placeholder,
     items,
     disabled = false,
-    isTitleRequired = true
+    showLabel = true
 }: Props) => {
     return (
-        <div className="rounded-md flex p-1 flex-col space-y-4">
-            {isTitleRequired && (
-                <p className="font-normal text-sm">{title}</p>
+        <div className="p-1 rounded-md flex flex-col gap-4">
+            {showLabel && (
+                <label className="font-normal text-sm" htmlFor={name}>
+                    {label}
+                </label>
             )}
 
             <FormField
-                control={formControl}
-                name={nameField}
+                control={control}
+                name={name}
                 render={({ field }) => {
                     const selectedLabel = items.find(item => item.value === field.value)?.label || placeholder;
                     return (
@@ -68,9 +71,8 @@ const SelectComponent = ({
                                     </SelectContent>
                                 </Select>
                             </FormControl>
-                            {isTitleRequired && (
-                                <FormMessage />
-                            )}
+                            <FormMessage />
+
                         </FormItem>
                     );
                 }}
@@ -79,4 +81,4 @@ const SelectComponent = ({
     );
 };
 
-export default SelectComponent;
+export default SelectField;
