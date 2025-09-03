@@ -2,19 +2,19 @@ export interface Criterion {
   file_name: string;
   form_code: string;
   form_title: string;
-  issuer: string;
+  issuing_organization: string;
   revision_number: string;
-  revision_date: string;
-  url_pattern: string;
-  main_sections: string[];
-  canonical_fields: string[];
-  visual_layout: VisualLayout;
-  domain_tags: string[];
-  additional_keywords: string[];
-  destiny_drive: string;
-  destiny_path: string;
-  organization_department: string;
-  mimetype: string;
+  revision_date: Date;
+  access_url: string;
+  main_sections?: string[] | undefined;
+  standard_fields?: string[] | undefined;
+  visual_layout?: VisualLayout | undefined;
+  domain_tags?: string[] | undefined;
+  additional_keywords?: string[] | undefined;
+  destination_drive: string;
+  destination_path: string;
+  department: string;
+  file_type: string;
 }
 
 export interface VisualLayout {

@@ -1,7 +1,7 @@
 'use server';
 
 import { getCollection } from "@/actions/authentication-handler-action";
-import { ActionResponse } from "@/interfaces/action-response";
+import { ActionResponse } from "@/interfaces/action/action-response";
 import { Criterion } from "../models/criterion";
 import { CriterionDocument } from "../models/criterion-document";
 

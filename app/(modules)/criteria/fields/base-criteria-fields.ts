@@ -108,15 +108,15 @@ export const CONTENT_FIELDS = [
             items: []
         },
     },
-    {
-        component: InputField,
-        props: {
-            name: "visual_layout",
-            label: "Layout",
-            placeholder: "Agrega secciones",
-            items: []
-        },
-    },
+    // {
+    //     component: InputField,
+    //     props: {
+    //         name: "visual_layout",
+    //         label: "Layout",
+    //         placeholder: "Agrega secciones",
+    //         items: []
+    //     },
+    // },
 ];
 
 // 5. Classification & Search

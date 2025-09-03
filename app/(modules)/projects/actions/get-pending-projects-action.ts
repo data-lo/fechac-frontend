@@ -3,7 +3,7 @@
 import { getCollection } from "@/actions/authentication-handler-action";
 import { ProjectDocument } from "../models/project-document";
 import { Project } from "../models/project";
-import { ActionResponse } from "@/interfaces/action-response";
+import { ActionResponse } from "@/interfaces/action/action-response";
 
 interface PaginationParams {
   page?: number;

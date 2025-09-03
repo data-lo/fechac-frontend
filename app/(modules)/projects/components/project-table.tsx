@@ -12,7 +12,7 @@ import {
 import { Project } from "../models/project";
 
 // 3. Utilidades/Funciones
-import { getStatusInfo, PROJECT_STATUS_ENUM } from "../functions/get-status-translation";
+import { getStatusInfo, ProjectStatusEnum } from "../functions/get-status-translation";
 
 interface Props {
     data: Project[]
@@ -32,7 +32,7 @@ const ProjectTable = ({ data }: Props) => {
 
             <TableBody>
                 {data.map((project, index) => {
-                    const statusInfo = getStatusInfo(project.transfer_status as PROJECT_STATUS_ENUM);
+                    const statusInfo = getStatusInfo(project.transfer_status as ProjectStatusEnum);
                     const IconComponent = statusInfo.icon;
                     
                     return (

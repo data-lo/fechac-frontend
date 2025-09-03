@@ -1,47 +1,47 @@
 // utils/statusHelper.ts
-import { PROJECT_STATUS_ENUM } from "@/enums/project-status-enum";
+import { ProjectStatusEnum } from "@/enums/project-status-enum";
 import { XCircle, Clock, CheckCircle, HelpCircle } from "lucide-react";
 
-const getStatusTranslation = (status: PROJECT_STATUS_ENUM): string => {
+const getStatusTranslation = (status: ProjectStatusEnum): string => {
     switch (status) {
-        case PROJECT_STATUS_ENUM.NOT_TRANSFERRED:
+        case ProjectStatusEnum.NOT_TRANSFERRED:
             return 'NO TRANSFERIDO';
-        case PROJECT_STATUS_ENUM.IN_PROCESS:
+        case ProjectStatusEnum.IN_PROCESS:
             return 'EN PROCESO';
-        case PROJECT_STATUS_ENUM.TRANSFERRED:
+        case ProjectStatusEnum.TRANSFERRED:
             return 'TRANSFERIDO';
         default:
             return 'ESTADO DESCONOCIDO';
     }
 };
 
-const getStatusStyle = (status: PROJECT_STATUS_ENUM): string => {
+const getStatusStyle = (status: ProjectStatusEnum): string => {
     switch (status) {
-        case PROJECT_STATUS_ENUM.NOT_TRANSFERRED:
+        case ProjectStatusEnum.NOT_TRANSFERRED:
             return 'bg-red-100 text-red-800';
-        case PROJECT_STATUS_ENUM.IN_PROCESS:
+        case ProjectStatusEnum.IN_PROCESS:
             return 'bg-yellow-100 text-yellow-800';
-        case PROJECT_STATUS_ENUM.TRANSFERRED:
+        case ProjectStatusEnum.TRANSFERRED:
             return 'bg-green-100 text-green-800';
         default:
             return 'bg-gray-100 text-gray-800';
     }
 };
 
-const getStatusIcon = (status: PROJECT_STATUS_ENUM) => {
+const getStatusIcon = (status: ProjectStatusEnum) => {
     switch (status) {
-        case PROJECT_STATUS_ENUM.NOT_TRANSFERRED:
+        case ProjectStatusEnum.NOT_TRANSFERRED:
             return XCircle;
-        case PROJECT_STATUS_ENUM.IN_PROCESS:
+        case ProjectStatusEnum.IN_PROCESS:
             return Clock;
-        case PROJECT_STATUS_ENUM.TRANSFERRED:
+        case ProjectStatusEnum.TRANSFERRED:
             return CheckCircle;
         default:
             return HelpCircle;
     }
 };
 
-const getStatusInfo = (status: PROJECT_STATUS_ENUM) => {
+const getStatusInfo = (status: ProjectStatusEnum) => {
     const Icon = getStatusIcon(status);
     return {
         text: getStatusTranslation(status),
@@ -51,7 +51,7 @@ const getStatusInfo = (status: PROJECT_STATUS_ENUM) => {
 };
 
 export {
-    PROJECT_STATUS_ENUM,
+    ProjectStatusEnum,
     getStatusTranslation,
     getStatusStyle,
     getStatusIcon,

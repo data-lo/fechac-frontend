@@ -1,21 +1,18 @@
 'use client'
 
 // 1. React
-import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // 2. Componentes globales
 import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
-// 3. Modelos
-import { CriterionDocument } from "../../models/criterion-document";
-
-// 4. Esquemas de validación
+// 3. Esquemas de validación
 import { BASE_CRITERIA_SCHEMA } from "../../schemas/base-criteria-form";
 
-// 5. Definiciones locales de campos
+// 4. Definiciones locales de campos
 import { 
   FORM_IDENTIFICATION_FIELDS, 
   VERSION_CONTROL_FIELDS, 
@@ -24,8 +21,14 @@ import {
   CLASSIFICATION_FIELDS, 
   STORAGE_FIELDS 
 } from "../../fields/base-criteria-fields";
+import { useCreateCriterion } from "../hooks/use-create-criterion";
+import { useRouter } from "next/navigation";
 
 const CreateCriterionForm = () => {
+
+    const router = useRouter()
+
+    const mutation = useCreateCriterion();
 
     const form = useForm<z.infer<typeof BASE_CRITERIA_SCHEMA>>({
         resolver: zodResolver(BASE_CRITERIA_SCHEMA),
@@ -43,14 +46,19 @@ const CreateCriterionForm = () => {
             additional_keywords: [],
             domain_tags: [],
             revision_date: new Date(),
-            revision_number: 0,
+            revision_number: "",
             standard_fields: [],
-            visual_layout: []
         },
     });
 
-    const onSubmit = (data: z.infer<typeof BASE_CRITERIA_SCHEMA>) => {
-        console.log(data)
+    const onSubmit = async (data: z.infer<typeof BASE_CRITERIA_SCHEMA>) => {
+        mutation.mutate(data, {
+            onSuccess: (data) => {
+                if(data.success && data.data){
+                    router.push(`/criteria/${data.data.insertedId}/update`)
+                }
+            }
+        });
     };
 
     return (
