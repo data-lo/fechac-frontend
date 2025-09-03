@@ -1,9 +1,10 @@
 'use server';
 
 import { getCollection } from "@/actions/authentication-handler-action";
-import { ActionResponse } from "@/interfaces/action-response";
-import { CriterionDocument } from "../../models/criterion-document";
+import { ActionResponse } from "@/interfaces/action/action-response";
+
 import { ObjectId } from "mongodb";
+import { CriterionDocument } from "../../../models/criterion-document";
 
 export async function getCriterion(_id: string): Promise<ActionResponse<{ criterion: CriterionDocument; }>> {
     try {

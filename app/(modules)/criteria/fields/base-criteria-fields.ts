@@ -1,9 +1,20 @@
+import DatePickerField from "@/components/form/date-picker-field";
 import DynamicArrayField from "@/components/form/dynamic-array-field";
 import InputField from "@/components/form/form-input-field";
-import { TypeOfFileList } from "@/functions/transform-enums";
+import SelectField from "@/components/form/select-field";
+import { DepartmentList, TypeOfFileList } from "@/functions/transform-enums";
 
 // 1. Form Identification
 export const FORM_IDENTIFICATION_FIELDS = [
+     {
+        component: InputField,
+        props: {
+            name: "form_title",
+            label: "Título",
+            placeholder: "Ingresa el título",
+            items: []
+        },
+    },
     {
         component: InputField,
         props: {
@@ -25,16 +36,7 @@ export const FORM_IDENTIFICATION_FIELDS = [
     {
         component: InputField,
         props: {
-            name: "form_title",
-            label: "Título",
-            placeholder: "Ingresa el título",
-            items: []
-        },
-    },
-    {
-        component: InputField,
-        props: {
-            name: "issuer",
+            name: "issuing_organization",
             label: "Organización",
             placeholder: "Ingresa la organización",
             items: []
@@ -54,7 +56,7 @@ export const VERSION_CONTROL_FIELDS = [
         },
     },
     {
-        component: InputField,
+        component: DatePickerField,
         props: {
             name: "revision_date",
             label: "Última Fecha de Revisión",
@@ -69,16 +71,16 @@ export const ACCESS_FIELDS = [
     {
         component: InputField,
         props: {
-            name: "url_pattern",
+            name: "access_url",
             label: "URL de Accesso",
             placeholder: "Enter the access URL",
             items: []
         },
     },
     {
-        component: InputField,
+        component: SelectField,
         props: {
-            name: "mimetype",
+            name: "file_type",
             label: "Tipo de Archivo",
             placeholder: "Selecciona una opción",
             items: TypeOfFileList
@@ -93,28 +95,28 @@ export const CONTENT_FIELDS = [
         props: {
             name: "main_sections",
             label: "Secciones del Documento",
-            placeholder: "Add a section",
+            placeholder: "Agregar Sección",
             items: []
         },
     },
     {
         component: DynamicArrayField,
         props: {
-            name: "canonical_fields",
-            label: "Canonical Fields",
-            placeholder: "Add a field",
+            name: "standard_fields",
+            label: "Campos Estándar",
+            placeholder: "Agregar Campos",
             items: []
         },
     },
-    {
-        component: InputField,
-        props: {
-            name: "visual_layout",
-            label: "Visual Layout",
-            placeholder: "Define the visual layout",
-            items: []
-        },
-    },
+    // {
+    //     component: InputField,
+    //     props: {
+    //         name: "visual_layout",
+    //         label: "Layout",
+    //         placeholder: "Agrega secciones",
+    //         items: []
+    //     },
+    // },
 ];
 
 // 5. Classification & Search
@@ -124,8 +126,8 @@ export const CLASSIFICATION_FIELDS = [
         component: DynamicArrayField,
         props: {
             name: "domain_tags",
-            label: "Domain Tags",
-            placeholder: "Add a tag",
+            label: "Etiquetas Principales",
+            placeholder: "Agregar Etiqueta",
             items: []
         },
     },
@@ -133,8 +135,8 @@ export const CLASSIFICATION_FIELDS = [
         component: DynamicArrayField,
         props: {
             name: "additional_keywords",
-            label: "Additional Keywords",
-            placeholder: "Add a keyword",
+            label: "Palabras Clave Adicionales",
+            placeholder: "Agregar Palabras Clave",
             items: []
         },
     },
@@ -145,28 +147,28 @@ export const STORAGE_FIELDS = [
     {
         component: InputField,
         props: {
-            name: "destiny_drive",
-            label: "Destination Drive",
-            placeholder: "Enter the destination drive",
+            name: "destination_drive",
+            label: "Destino Del Drive",
+            placeholder: "Ingrese el destino",
             items: []
         },
     },
     {
         component: InputField,
         props: {
-            name: "destiny_path",
-            label: "Destination Path",
-            placeholder: "Enter the destination path",
+            name: "destination_path",
+            label: "Destino del Path",
+            placeholder: "Ingrese el path",
             items: []
         },
     },
     {
-        component: InputField,
+        component: SelectField,
         props: {
-            name: "organization_department",
-            label: "Responsible Department",
-            placeholder: "Enter the responsible department",
-            items: []
+            name: "department",
+            label: "Departamento de FECHAC",
+            placeholder: "Seleccione un departamento",
+            items: DepartmentList
         },
     },
 ];

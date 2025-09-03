@@ -1,8 +1,7 @@
 'use server';
 
 import { getCollection } from "@/actions/authentication-handler-action";
-import { ActionResponse } from "@/interfaces/action-response";
-import { Criterion } from "../models/criterion";
+import { ActionResponse } from "@/interfaces/action/action-response";
 import { CriterionDocument } from "../models/criterion-document";
 
 interface PaginationParams {

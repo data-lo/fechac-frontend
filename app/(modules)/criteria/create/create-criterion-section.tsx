@@ -1,7 +1,11 @@
 'use client'
 
+// 1. Componentes globales
 import NavigationBreadcrumb from "@/components/breadcrumb";
-import CriterionCreateForm from "./components/create-criterion-form";
+
+// 2. Componentes locales de la ruta
+import CreateCriterionForm from "./components/create-criterion-form";
+
 
 const CreateCriterionSection = () => {
 
@@ -26,7 +30,7 @@ const CreateCriterionSection = () => {
 
             <div className="mt-10"></div>
 
-            <CriterionCreateForm />
+            <CreateCriterionForm />
         </div>
     );
 };

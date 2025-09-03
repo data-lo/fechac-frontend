@@ -1,5 +1,5 @@
 
-import { UpdateResponse } from "@/interfaces/update-response";
+import { UpdateResponse } from "@/interfaces/mongo/update-response";
 
 export function isUpdateResponse(obj: any): obj is UpdateResponse {
   return (

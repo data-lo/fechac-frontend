@@ -1,7 +1,7 @@
 'use server';
 
 import { getCollection } from "@/actions/authentication-handler-action";
-import { ActionResponse } from "@/interfaces/action-response";
+import { ActionResponse } from "@/interfaces/action/action-response";
 import { CriterionDocument } from "../../models/criterion-document";
 import { ObjectId } from "mongodb";
 
