@@ -1,34 +1,37 @@
 'use client'
 
-// 1. React
+// 1. Librerías externas
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 // 2. Componentes globales
 import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
-// 3. Esquemas de validación
+// 3. Hooks internos
+import { useCreateCriterion } from "../hooks/use-create-criterion";
+
+// 4. Esquemas de validación
 import { BASE_CRITERIA_SCHEMA } from "../../schemas/base-criteria-form";
 
-// 4. Definiciones locales de campos
-import { 
-  FORM_IDENTIFICATION_FIELDS, 
-  VERSION_CONTROL_FIELDS, 
-  ACCESS_FIELDS, 
-  CONTENT_FIELDS, 
-  CLASSIFICATION_FIELDS, 
-  STORAGE_FIELDS 
+// 5. Definiciones locales de campos
+import {
+    FORM_IDENTIFICATION_FIELDS,
+    VERSION_CONTROL_FIELDS,
+    ACCESS_FIELDS,
+    CONTENT_FIELDS,
+    CLASSIFICATION_FIELDS,
+    STORAGE_FIELDS
 } from "../../fields/base-criteria-fields";
-import { useCreateCriterion } from "../hooks/use-create-criterion";
-import { useRouter } from "next/navigation";
+
 
 const CreateCriterionForm = () => {
 
     const router = useRouter()
 
-    const mutation = useCreateCriterion();
+    const createMutation = useCreateCriterion();
 
     const form = useForm<z.infer<typeof BASE_CRITERIA_SCHEMA>>({
         resolver: zodResolver(BASE_CRITERIA_SCHEMA),
@@ -51,13 +54,13 @@ const CreateCriterionForm = () => {
         },
     });
 
-    const onSubmit = async (data: z.infer<typeof BASE_CRITERIA_SCHEMA>) => {
-        mutation.mutate(data, {
-            onSuccess: (data) => {
-                if(data.success && data.data){
-                    router.push(`/criteria/${data.data.insertedId}/update`)
+    const onSubmit = async (formData: z.infer<typeof BASE_CRITERIA_SCHEMA>) => {
+        createMutation.mutate(formData, {
+            onSuccess: (response) => {
+                if (response.success && response.data) {
+                    router.push(`/criteria/${response.data.insertedId}/update`);
                 }
-            }
+            },
         });
     };
 

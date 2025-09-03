@@ -14,7 +14,7 @@ import { CREATE_NOMENCLATURE_SCHEMA } from "./create_nomenclature-schema";
 import Button from "@/components/action-button";
 
 import { createRestriction } from "@/actions/nomenclature-action";
-import { InsertResponse } from "@/interfaces/mongo/insert-response";
+import { InsertResponse } from "@/interfaces/mongo/mongo-response";
 import { isInsertResponse } from "@/guard/is-insert-response";
 import { useState } from "react";
 import toast from "react-hot-toast";

@@ -1,10 +1,14 @@
 'use server';
 
+// 1. Acciones internas / helpers
 import { getCollection } from "@/actions/authentication-handler-action";
+
+// 2. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { Criterion } from "../../models/criterion";
-import { InsertResponse } from "@/interfaces/mongo/insert-response";
 import { InsertOneResponse } from "@/interfaces/mongo/insert-one-response";
+
+// 3. Modelos
+import { Criterion } from "../../models/criterion";
 
 export async function createCriterion(criterion: Criterion): Promise<ActionResponse<InsertOneResponse>> {
     try {

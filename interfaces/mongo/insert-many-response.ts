@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb";
-import { InsertResponse } from "./insert-response";
+import { MongoResponse } from "./mongo-response";
 
-export interface InsertManyResponse extends InsertResponse {
+export interface InsertManyResponse extends MongoResponse {
     insertedCount: number;
     insertedIds: { [key: number]: ObjectId }
 }

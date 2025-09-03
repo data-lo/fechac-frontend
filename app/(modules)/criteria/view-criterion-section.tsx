@@ -15,7 +15,7 @@ import CriterionTable from "./components/criterion-table";
 
 // 5. Actions/Servicios
 import { getCriteria } from "./actions/get-criteria";
-import CreateCriterionButtonSection from "./create/components/client-redirect-section";
+import CreateCriterionButtonSection from "./create/components/create-criterion-button-section";
 
 
 interface Props {

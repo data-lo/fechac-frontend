@@ -19,6 +19,7 @@ import ContextMenu from "@/components/context-menu";
 
 // 4. Tipos/Modelos
 import { CriterionDocument } from "../models/criterion-document";
+import DeleteCriterionButton from "../delete/components/delete-criterion-button";
 
 interface Props {
     data: CriterionDocument[];
@@ -56,7 +57,7 @@ const CriterionTable = ({ data }: Props) => {
                             </div>
                         </TableCell>
                         <TableCell className="text-sm whitespace-nowrap">
-                            {criterion.organization_department}
+                            {criterion.department}
                         </TableCell>
                         <TableCell className="text-sm whitespace-nowrap overflow-hidden">
                             {String(criterion.form_code).toUpperCase()}
@@ -69,6 +70,9 @@ const CriterionTable = ({ data }: Props) => {
                                     iconName={'Pencil'}
                                     variant={"ghost"}
                                     onClick={handleEdit(String(criterion._id))}
+                                />
+                                <DeleteCriterionButton
+                                    criterionId={criterion._id}
                                 />
                             </ContextMenu>
                         </TableCell>

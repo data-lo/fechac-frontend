@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
-import { InsertResponse } from "./insert-response";
+import { MongoResponse } from "./mongo-response";
 
-export interface InsertOneResponse extends InsertResponse {
+export interface InsertOneResponse extends MongoResponse {
     insertedId: string | ObjectId;
 }

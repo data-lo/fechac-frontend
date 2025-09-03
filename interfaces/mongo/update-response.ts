@@ -1,7 +1,6 @@
-import { ObjectId } from "mongodb";
+import { MongoResponse } from "./mongo-response";
 
-export interface UpdateResponse {
-  acknowledged: boolean;
+export interface UpdateManyResponse extends MongoResponse {
   modifiedCount: number;
   upsertedId: string | null;
   upsertedCount: number;
