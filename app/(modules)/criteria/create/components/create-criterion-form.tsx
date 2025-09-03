@@ -54,8 +54,8 @@ const CreateCriterionForm = () => {
         },
     });
 
-    const onSubmit = async (formData: z.infer<typeof BASE_CRITERIA_SCHEMA>) => {
-        createMutation.mutate(formData, {
+    const onSubmit = async (values: z.infer<typeof BASE_CRITERIA_SCHEMA>) => {
+        createMutation.mutate(values, {
             onSuccess: (response) => {
                 if (response.success && response.data) {
                     router.push(`/criteria/${response.data.insertedId}/update`);

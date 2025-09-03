@@ -12,10 +12,10 @@ import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 4. Componentes locales del módulo
 import CriterionTable from "./components/criterion-table";
+import CreateCriterionButtonSection from "./create/components/create-criterion-button-section";
 
 // 5. Actions/Servicios
 import { getCriteria } from "./actions/get-criteria";
-import CreateCriterionButtonSection from "./create/components/create-criterion-button-section";
 
 
 interface Props {
