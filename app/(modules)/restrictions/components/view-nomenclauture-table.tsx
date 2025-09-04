@@ -1,22 +1,29 @@
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import { Restriction } from "../interfaces/restriction";
-import ButtonComponent from "@/components/action-button";
-import ModalComponent from "@/components/modal";
+// 1. Librerías externas
 import { Trash } from "lucide-react";
-import DropdownMenuComponent from "@/components/context-menu";
-import StatusNomenclatureForm from "./status-nomenclature/status-nomenclature-form";
+
+// 2. Componentes globales
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import ActionButton from "@/components/action-button";
+import ModalComponent from "@/components/modal";
+import ContextMenu from "@/components/context-menu";
+
+// 3. Componentes locales del módulo
+import StatusNomenclatureForm from "./status-nomenclature/status-nomenclature-form";
+
+// 4. Modelos locales
+import { RestrictionDocument } from "../models/restriction-document";
+
 
 
 interface Props {
-    restrictions: Restriction[]
+    restrictions: RestrictionDocument[]
 }
 
 const RestrictionTable = ({ restrictions }: Props) => {
@@ -32,7 +39,7 @@ const RestrictionTable = ({ restrictions }: Props) => {
             </TableHeader>
             <TableBody>
                 {restrictions.map((restriction, index) => (
-                    <TableRow key={restriction._id}>
+                    <TableRow key={restriction._id.toString()}>
                         <TableCell>{index + 1}</TableCell>
 
                         <TableCell>
@@ -49,7 +56,7 @@ const RestrictionTable = ({ restrictions }: Props) => {
                         </TableCell>
 
                         <TableCell>
-                            <DropdownMenuComponent>
+                            <ContextMenu>
                                 <ModalComponent
                                     dialogTitle={"Editar"}
                                     dialogDescription={""}
@@ -72,12 +79,12 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     variant={'ghost'}
                                     children={
                                         <StatusNomenclatureForm
-                                            id={restriction._id}
+                                            id={restriction._id.toString()}
                                             isActive={restriction.isActive}
                                         />
                                     }
                                 />
-                            </DropdownMenuComponent>
+                            </ContextMenu>
                         </TableCell>
                     </TableRow>
                 ))}

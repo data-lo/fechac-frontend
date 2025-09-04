@@ -1,6 +1,6 @@
 "use client"
 
-import { changeStatusRestriction } from "@/actions/nomenclature-action";
+import { changeStatusRestriction } from "@/app/(modules)/restrictions/create/actions/nomenclature-action";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import ButtonComponent from "@/components/action-button";

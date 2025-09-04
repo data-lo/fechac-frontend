@@ -1,7 +1,7 @@
 import FormInputField from "@/components/form/form-input-field";
 
 
-export const CREATE_NOMENCLATURE_FIELDS = [
+export const BASE_NOMENCLATURE_FIELDS = [
     {
         component: FormInputField,
         props: {

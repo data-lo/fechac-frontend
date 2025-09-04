@@ -1,13 +1,21 @@
+// 1. React
 import { Fragment } from "react";
-import UploadFileSection from "./upload-file-section";
 
-import { getPendingProjects } from "./actions/get-pending-projects-action";
+// 2. Componentes globales
+import AlertMessage from "@/components/alert-message";
+import EmptyState from "@/components/empty-state";
+import NavigationBreadcrumb from "@/components/breadcrumb";
+
+// 3. Componentes compartidos
 import LimitSelector from "../../../components/limit-selector";
-import ProjectTable from "./components/project-table";
 import PaginationComponent from "../../../components/pagination";
 
-import EmptySate from "@/components/empty-state";
-import AlertMessage from "@/components/alert-message";
+// 4. Componentes locales del módulo
+import UploadFileSection from "./upload-file-section";
+import ProjectTable from "./components/project-table";
+
+// 5. Actions/Servicios
+import { getPendingProjects } from "./actions/get-pending-projects-action";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -26,12 +34,12 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   if (response.error || !response.data) {
     return (
-      <Fragment>
+      <div className="px-6 py-4">
         <AlertMessage
           buttonText="Recargar Página"
           message={response.error}
         />
-      </Fragment>
+      </div>
     );
   }
   const { projects, total } = response.data;
@@ -49,22 +57,31 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
     );
   }
 
+  const breadcrumbRoutes = [
+    {
+      href: '',
+      title: 'PROYECTOS'
+    },
+  ];
+
   return (
-    <Fragment>
-      <h1 className="font-bold text-xl">Proyectos</h1>
+    <div className="px-6 py-4 flex flex-col h-full gap-6 relative overflow-auto pt-16">
+      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
+        <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
+      </nav>
 
       <UploadFileSection />
 
       {projects.length > 0 ? (
         <Fragment>
           <div className="flex items-center gap-2">
-            <LimitSelector currentLimit={limit} route="/projects"/>
+            <LimitSelector currentLimit={limit} route="/projects" />
           </div>
 
           <ProjectTable data={projects} />
         </ Fragment>
       ) : (
-        <EmptySate text={"No hay proyectos disponibles"} />
+        <EmptyState text={"No hay proyectos disponibles"} />
       )}
 
       <PaginationComponent
@@ -72,7 +89,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         totalPages={totalPages}
         limit={limit}
       />
-    </Fragment>
+    </div>
   );
 
 
