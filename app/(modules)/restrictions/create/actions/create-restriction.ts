@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 // 2. Librerías internas (acciones/helpers locales del módulo)
 
-import { getCollection } from "@/actions/moongo/get-collection";
+import { getCollection } from "@/actions/mongo/get-collection";
 
 // 3. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
@@ -30,17 +30,22 @@ export async function createRestriction(values: { character: string }): Promise<
 
         const collection = await getCollection<Restriction>("restrictions");
 
-        const response = await collection.insertOne({
+        const response: InsertOneResponse = await collection.insertOne({
             character: values.character.trim(),
-            isActive: true,
+            status: true,
             createdAt: new Date(),
             updatedAt: new Date()
         });
 
+        const serialized = {
+            ...response,
+            insertedId: response.insertedId.toString(),
+        }
+
         return {
             success: true,
             error: null,
-            data: response
+            data: serialized
         };
 
     } catch (error) {

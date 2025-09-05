@@ -1,18 +1,17 @@
 // 1. Componentes globales
 import EmptyState from "@/components/empty-state";
-import Modal from "@/components/modal";
 import NavigationBreadcrumb from "@/components/breadcrumb";
+import ModalComponent from "@/components/modal";
 
 // 2. Componentes compartidos
 // (ninguno en este caso)
 
 // 3. Componentes locales del módulo
-import RestrictionTable from "./components/view-nomenclauture-table";
+import RestrictionTable from "./components/restriction-table";
 import CreateNomenclatureForm from "./create/create-restriction-form";
 
 // 4. Actions/Servicios
-import getRestrictions from "./create/actions/nomenclature-action";
-
+import getRestrictions from "./create/actions/get-restrictions";
 
 const ViewNomenclatureSection = async () => {
 
@@ -32,19 +31,24 @@ const ViewNomenclatureSection = async () => {
             </nav>
 
             <div className="flex flex-col sm:flex-row justify-start sm:justify-end gap-4">
-                <Modal
+                <ModalComponent
                     dialogTitle={"Restricción"}
                     dialogDescription={"Aquí puedes establecer restricciones que determinan cómo deben nombrarse los archivos."}
                     iconName={"Plus"}
+                    buttonSize="w-[338px]"
                     dialogTrigger={"Crear Restricción"}
                     children={<CreateNomenclatureForm />}
                 />
             </div>
 
             {restrictions.length > 0 ? (
-                <RestrictionTable restrictions={restrictions} />
+                <RestrictionTable
+                    restrictions={restrictions}
+                />
             ) : (
-                <EmptyState text={"No hay restricciones disponibles"} />
+                <EmptyState
+                    text={"No hay restricciones disponibles"}
+                />
             )}
 
         </div>

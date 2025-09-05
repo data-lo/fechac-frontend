@@ -56,6 +56,7 @@ const CreateNomenclatureForm = () => {
                 <div className="flex justify-end">
                     <ActionButton
                         type="submit"
+                        className="w-full"
                         iconName={"Save"}
                         title="Guardar Información"
                         isPending={createMutation.isPending}

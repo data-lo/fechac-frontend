@@ -20,7 +20,7 @@ type DialogSize = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full"
 interface Props {
   // Props requeridas
   dialogTitle: string
-  dialogDescription: string
+  dialogDescription?: string
   children: ReactNode
 
   // Props del trigger/botón
@@ -29,6 +29,7 @@ interface Props {
   iconName?: IconName
   buttonDisabled?: boolean // Nombre más consistente
   customTrigger?: ReactNode // Permite trigger personalizado
+  buttonSize?: string
 
   // Props del modal
   dialogSize?: DialogSize // Más semántico que dialogContent
@@ -64,6 +65,7 @@ const ModalComponent = ({
   buttonDisabled = false,
   customTrigger,
   dialogSize = "lg",
+  buttonSize,
   className,
   open,
   onOpenChange,
@@ -84,6 +86,7 @@ const ModalComponent = ({
         variant={variant}
         iconName={iconName}
         isPending={false}
+        className={buttonSize}
         disabled={buttonDisabled}
         type="button"
         title={dialogTrigger}

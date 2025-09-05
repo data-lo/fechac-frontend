@@ -1,6 +1,6 @@
 export interface Restriction {
   character: string;
-  isActive: boolean;
+  status: boolean;
   createdAt: Date,
   updatedAt: Date
 }

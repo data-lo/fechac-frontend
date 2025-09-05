@@ -3,22 +3,23 @@ import { Trash } from "lucide-react";
 
 // 2. Componentes globales
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/ui/table";
 import ActionButton from "@/components/action-button";
 import ModalComponent from "@/components/modal";
 import ContextMenu from "@/components/context-menu";
 
 // 3. Componentes locales del módulo
-import StatusNomenclatureForm from "./status-nomenclature/status-nomenclature-form";
+import StatusNomenclatureForm from "./toggle-restriction-status";
 
 // 4. Modelos locales
 import { RestrictionDocument } from "../models/restriction-document";
+import ToggleRestrictionStatus from "./toggle-restriction-status";
 
 
 
@@ -26,15 +27,18 @@ interface Props {
     restrictions: RestrictionDocument[]
 }
 
+
 const RestrictionTable = ({ restrictions }: Props) => {
+
+    console.log(restrictions)
     return (
-        <Table>
+                <Table className="table-fixed">
             <TableHeader>
                 <TableRow>
-                    <TableHead>#</TableHead>
-                    <TableHead>CARÁCTER</TableHead>
-                    <TableHead>ESTATUS</TableHead>
-                    <TableHead></TableHead>
+                    <TableHead className="w-12 text-center">#</TableHead>
+                    <TableHead className="min-w-0 w-full" >CARÁCTER</TableHead>
+                    <TableHead className="w-24">ESTATUS</TableHead>
+                    <TableHead className="w-24"></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -50,7 +54,7 @@ const RestrictionTable = ({ restrictions }: Props) => {
 
                         <TableCell>
                             <span
-                                className={`h-3 w-3 rounded-full inline-block ${restriction.isActive ? "bg-green-500" : "bg-red-500"
+                                className={`h-3 w-3 rounded-full inline-block ${restriction.status ? "bg-green-500" : "bg-red-500"
                                     }`}
                             ></span>
                         </TableCell>
@@ -58,31 +62,21 @@ const RestrictionTable = ({ restrictions }: Props) => {
                         <TableCell>
                             <ContextMenu>
                                 <ModalComponent
-                                    dialogTitle={"Editar"}
-                                    dialogDescription={""}
+                                    dialogTitle="Actualizar carácter"
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
                                     children={
-                                        <div className="flex justify-end">
-                                            <ActionButton
-                                                title="Guardar"
-                                                iconName={'Trash'}
-                                            />
-                                        </div>
+                                        <ActionButton
+                                            title="Actualizar Información"
+                                            className="w-full"
+                                            iconName={'Save'}
+                                        />
                                     }
                                 />
 
-                                <ModalComponent
-                                    dialogTitle={"Activar / Desactivar"}
-                                    dialogDescription={"Aquí puedes activar la regla para que se aplique, o desactivarla si no deseas que tenga efecto."}
-                                    dialogTrigger={restriction.isActive ? 'Desactivar' : 'Activar'}
-                                    variant={'ghost'}
-                                    children={
-                                        <StatusNomenclatureForm
-                                            id={restriction._id.toString()}
-                                            isActive={restriction.isActive}
-                                        />
-                                    }
+                                <ToggleRestrictionStatus
+                                    _id={restriction._id.toString()}
+                                    status={restriction.status}
                                 />
                             </ContextMenu>
                         </TableCell>

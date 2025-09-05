@@ -67,10 +67,10 @@ const CriterionTable = ({ data }: Props) => {
                                 <ActionButton
                                     title="Editar"
                                     className="w-auto"
-                                    iconName={'Pencil'}
                                     variant={"ghost"}
                                     onClick={handleEdit(String(criterion._id))}
                                 />
+
                                 <DeleteCriterionButton
                                     criterionId={criterion._id}
                                 />
