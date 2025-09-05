@@ -17,7 +17,7 @@ const textSizeMap: Record<NonNullable<EmptyMessageProps["textSize"]>, string> = 
   "2xl": "text-2xl",
 };
 
-const EmptyMessage: React.FC<EmptyMessageProps> = ({
+const EmptyState: React.FC<EmptyMessageProps> = ({
   text,
   Icon = PackageOpen,
   textSize = "base",
@@ -44,4 +44,4 @@ const EmptyMessage: React.FC<EmptyMessageProps> = ({
   );
 };
 
-export default EmptyMessage;
+export default EmptyState;

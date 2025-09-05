@@ -1,15 +1,14 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
+import { LucideProps } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 
 interface SidebarItemProps {
-    icon: LucideIcon;
+    icon: React.ComponentType<LucideProps>;
     label: string;
     href: string;
-
 }
 
 const SidebarItem: React.FC<SidebarItemProps> = ({

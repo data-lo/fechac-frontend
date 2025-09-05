@@ -22,7 +22,6 @@ const DeleteCriterionButton = ({ criterionId }: DeleteCriterionProps) => {
     <ActionButton
       title="Eliminar"
       className="w-auto"
-      iconName={'Trash'}
       variant={"ghost"}
       isLoading={deleteMutation.isPending}
       onClick={handleDelete}

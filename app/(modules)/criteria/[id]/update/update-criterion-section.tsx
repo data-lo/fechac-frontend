@@ -1,7 +1,7 @@
 'use client'
 import { CriterionDocument } from "../../models/criterion-document";
 import UpdateCriterionForm from "./componentes/criterion-update-form";
-import NavigationBreadcrumb  from "@/components/breadcrumb";
+import NavigationBreadcrumb from "@/components/breadcrumb";
 
 interface Props {
     data: {
@@ -23,18 +23,14 @@ const UpdateCriterionSection = ({ data }: Props) => {
     ];
 
     return (
-        <div className="flex flex-col h-full">
-            <nav className="h-12 flex justify-between items-center px-6 bg-white sticky top-0 z-10">
-                <NavigationBreadcrumb
-                    breadcrumbRoutes={breadcrumbRoutes}
-                />
+        <div className="px-6 py-4 flex flex-col h-full gap-6 relative overflow-auto pt-16">
+            <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
+                <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
             </nav>
 
-            <div className="flex-1 overflow-auto p-4">
-                <UpdateCriterionForm
-                    data={{ criterion: data.criterion }}
-                />
-            </div>
+            <UpdateCriterionForm
+                data={{ criterion: data.criterion }}
+            />
         </div>
     );
 };

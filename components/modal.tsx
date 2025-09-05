@@ -20,24 +20,25 @@ type DialogSize = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full"
 interface Props {
   // Props requeridas
   dialogTitle: string
-  dialogDescription: string
+  dialogDescription?: string
   children: ReactNode
-  
+
   // Props del trigger/botón
   dialogTrigger?: string
   variant?: ButtonVariant
   iconName?: IconName
   buttonDisabled?: boolean // Nombre más consistente
   customTrigger?: ReactNode // Permite trigger personalizado
-  
+  buttonSize?: string
+
   // Props del modal
   dialogSize?: DialogSize // Más semántico que dialogContent
   className?: string // Para el DialogContent
-  
+
   // Props de control
   open?: boolean // Control externo del estado
   onOpenChange?: (open: boolean) => void // Callback para cambios de estado
-  
+
   // Accesibilidad
   closeOnEscapeKey?: boolean
   closeOnOverlayClick?: boolean
@@ -46,7 +47,7 @@ interface Props {
 // Mapeo de tamaños más semántico
 const sizeClassMap: Record<DialogSize, string> = {
   sm: "sm:max-w-sm",
-  md: "sm:max-w-md", 
+  md: "sm:max-w-md",
   lg: "sm:max-w-lg",
   xl: "sm:max-w-xl",
   "2xl": "sm:max-w-2xl",
@@ -64,6 +65,7 @@ const ModalComponent = ({
   buttonDisabled = false,
   customTrigger,
   dialogSize = "lg",
+  buttonSize,
   className,
   open,
   onOpenChange,
@@ -75,15 +77,16 @@ const ModalComponent = ({
     if (customTrigger) {
       return customTrigger
     }
-    
+
     // Solo renderizar ActionButton si hay texto para el trigger
     if (!dialogTrigger) return null
-    
+
     return (
       <ActionButton
         variant={variant}
         iconName={iconName}
         isPending={false}
+        className={buttonSize}
         disabled={buttonDisabled}
         type="button"
         title={dialogTrigger}
@@ -92,7 +95,7 @@ const ModalComponent = ({
   }
 
   const trigger = renderTrigger()
-  
+
   // Si no hay trigger, no renderizar el modal
   if (!trigger) {
     console.warn("ModalComponent: No se proporcionó dialogTrigger ni customTrigger")
@@ -100,14 +103,14 @@ const ModalComponent = ({
   }
 
   return (
-    <Dialog 
-      open={open} 
+    <Dialog
+      open={open}
       onOpenChange={onOpenChange}
     >
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>
-      <DialogContent 
+      <DialogContent
         className={cn(
           "max-w-lg",
           sizeClassMap[dialogSize],
@@ -121,14 +124,12 @@ const ModalComponent = ({
             {dialogTitle}
           </DialogTitle>
           {dialogDescription && (
-            <DialogDescription>
+            <DialogDescription className="leading-6">
               {dialogDescription}
             </DialogDescription>
           )}
         </DialogHeader>
-        <div className="mt-4">
           {children}
-        </div>
       </DialogContent>
     </Dialog>
   )

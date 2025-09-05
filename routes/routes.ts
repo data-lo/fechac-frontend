@@ -1,4 +1,4 @@
-import { FileLock2, FolderKanban, KeyRound, Layers2, SlidersHorizontal,  } from "lucide-react";
+import { Cloud, FolderKanban, Layers2, Lock, SlidersHorizontal,  } from "lucide-react";
 
 export const routes = [
     {
@@ -12,7 +12,7 @@ export const routes = [
         href: "/projects"
     },
     {
-        icon: FileLock2,
+        icon: Lock,
         label: "Restricciones",
         href: "/restrictions"
     },
@@ -22,7 +22,7 @@ export const routes = [
         href: "/abbreviation"
     },
     {
-        icon: KeyRound,
+        icon: Cloud,
         label: "One Drive",
         href: "/session"
     },
