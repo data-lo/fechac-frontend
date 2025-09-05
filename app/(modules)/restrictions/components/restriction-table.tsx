@@ -62,7 +62,7 @@ const RestrictionTable = ({ restrictions }: Props) => {
                         <TableCell>
                             <ContextMenu>
                                 <ModalComponent
-                                    dialogTitle="Actualizar carácter"
+                                    dialogTitle="Actualizar Carácter"
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
                                     children={

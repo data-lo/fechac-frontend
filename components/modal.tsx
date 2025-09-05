@@ -124,14 +124,12 @@ const ModalComponent = ({
             {dialogTitle}
           </DialogTitle>
           {dialogDescription && (
-            <DialogDescription>
+            <DialogDescription className="leading-6">
               {dialogDescription}
             </DialogDescription>
           )}
         </DialogHeader>
-        <div className="mt-4">
           {children}
-        </div>
       </DialogContent>
     </Dialog>
   )

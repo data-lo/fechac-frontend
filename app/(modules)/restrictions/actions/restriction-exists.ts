@@ -7,7 +7,7 @@ import { getCollection } from "@/actions/mongo/get-collection";
 import { ActionResponse } from "@/interfaces/action/action-response";
 
 // 3. Modelos locales
-import { RestrictionDocument } from "../../models/restriction-document";
+import { RestrictionDocument } from "../models/restriction-document";
 
 export default async function restrictionExists(character: string): Promise<ActionResponse<RestrictionDocument | null>> {
     try {

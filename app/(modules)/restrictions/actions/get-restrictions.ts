@@ -2,9 +2,10 @@
 
 // 1. Acciones / Servicios
 import { getCollection } from "@/actions/mongo/get-collection";
+import { RestrictionDocument } from "../models/restriction-document";
 
 // 2. Modelos
-import { RestrictionDocument } from "../../models/restriction-document";
+
 
 export default async function getRestrictions() {
   try {
@@ -17,11 +18,8 @@ export default async function getRestrictions() {
     cursor.close()
 
     const formatted: RestrictionDocument[] = response.map((item) => ({
+      ...item,
       _id: item._id.toString(),
-      character: item.character,
-      status: item.status,
-      createdAt: item.createdAt,
-      updatedAt: item.updatedAt
     }));
 
     return formatted

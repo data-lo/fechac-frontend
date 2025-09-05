@@ -9,9 +9,10 @@ import ModalComponent from "@/components/modal";
 // 3. Componentes locales del módulo
 import RestrictionTable from "./components/restriction-table";
 import CreateNomenclatureForm from "./create/create-restriction-form";
+import getRestrictions from "./actions/get-restrictions";
 
 // 4. Actions/Servicios
-import getRestrictions from "./create/actions/get-restrictions";
+
 
 const ViewNomenclatureSection = async () => {
 
@@ -32,8 +33,10 @@ const ViewNomenclatureSection = async () => {
 
             <div className="flex flex-col sm:flex-row justify-start sm:justify-end gap-4">
                 <ModalComponent
-                    dialogTitle={"Restricción"}
-                    dialogDescription={"Aquí puedes establecer restricciones que determinan cómo deben nombrarse los archivos."}
+                    dialogTitle={"Crear Restricción"}
+                    dialogDescription={
+                        "Aquí puedes crear los caracteres restrictivos. Al nombrar los archivos finales, se excluirán todos los caracteres que hayas creado y que estén activos."
+                    }
                     iconName={"Plus"}
                     buttonSize="w-[338px]"
                     dialogTrigger={"Crear Restricción"}
