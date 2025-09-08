@@ -14,7 +14,7 @@ import ActionButton from "@/components/action-button";
 import { useCreateCriterion } from "../hooks/use-create-criterion";
 
 // 4. Esquemas de validación
-import { BASE_CRITERIA_SCHEMA } from "../../schemas/base-criteria-form";
+import { BASE_CRITERIA_SCHEMA } from "../../schema/base-criteria-form";
 
 // 5. Definiciones locales de campos
 import {

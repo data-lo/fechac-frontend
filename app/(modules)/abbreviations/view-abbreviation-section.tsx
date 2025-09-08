@@ -11,7 +11,9 @@ import PaginationComponent from "../../../components/pagination";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 4. Componentes locales del módulo
+import ModalComponent from "@/components/modal";
 import AbbreviationTable from "./components/view-abbreviation-table";
+import CreateAbbreviationForm from "./create/create-abbreviaton-form";
 
 // 5. Actions/Servicios
 import { getAbbreviations } from "./actions/get-abbreviations";
@@ -21,7 +23,7 @@ interface Props {
     searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
 }
 
-const ViewAbbrevaitionSection = async ({ searchParams }: Props) => {
+const ViewAbbreviationSection = async ({ searchParams }: Props) => {
     const params = await searchParams;
 
     const page = Math.max(1, Number(params?.page) || 1);
@@ -60,7 +62,7 @@ const ViewAbbrevaitionSection = async ({ searchParams }: Props) => {
     const breadcrumbRoutes = [
         {
             href: '',
-            title: 'Abreviaciones'
+            title: 'ABREVIACIONES'
         },
     ];
 
@@ -70,18 +72,35 @@ const ViewAbbrevaitionSection = async ({ searchParams }: Props) => {
                 <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
             </nav>
 
+            <div className="flex flex-col sm:flex-row justify-start sm:justify-end gap-4">
+                <ModalComponent
+                    dialogTitle={"Crear Abreviatura"}
+                    dialogDescription={
+                        "Aquí puedes crear los caracteres restrictivos. Al nombrar los archivos finales, se excluirán todos los caracteres que hayas creado y que estén activos."
+                    }
+                    iconName={"Plus"}
+                    buttonSize="w-[338px]"
+                    dialogTrigger={"Crear Abreviatura"}
+                    children={<CreateAbbreviationForm />}
+                />
+            </div>
 
             {abbreviations.length > 0 ? (
                 <Fragment>
-                    <LimitSelector currentLimit={limit} route="/abbreviations" />
+                    <LimitSelector
+                        currentLimit={limit}
+                        route="/abbreviations"
+                    />
 
-                    <AbbreviationTable data={abbreviations} />
+                    <AbbreviationTable
+                        data={abbreviations}
+                    />
 
                     <PaginationComponent
                         currentPage={page}
                         totalPages={totalPages}
                         limit={limit}
-                        baseUrl="/criteria"
+                        baseUrl="/abbreviations"
                     />
                 </Fragment>
             ) : (
@@ -91,4 +110,4 @@ const ViewAbbrevaitionSection = async ({ searchParams }: Props) => {
     );
 };
 
-export default ViewAbbrevaitionSection;
+export default ViewAbbreviationSection;

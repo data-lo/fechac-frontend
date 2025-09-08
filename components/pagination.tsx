@@ -19,7 +19,7 @@ const PaginationComponent = ({
   currentPage,
   totalPages,
   limit,
-  baseUrl = "/projects"
+  baseUrl = "/"
 }: Props) => {
   const getPageRange = () => {
     const delta = 2;

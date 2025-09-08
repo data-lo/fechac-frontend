@@ -23,8 +23,8 @@ const AbbreviationTable = ({
             <TableHeader>
                 <TableRow>
                     <TableHead >#</TableHead>
-                    <TableHead >Nombre</TableHead>
-                    <TableHead >Abreviación</TableHead>
+                    <TableHead >NOMBRE</TableHead>
+                    <TableHead >ABREVIACIÓN</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody className="w-full">

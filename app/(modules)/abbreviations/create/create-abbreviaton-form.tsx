@@ -10,24 +10,26 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // 3. Hooks locales
-import { useCreateRestriction } from "./hooks/use-create-restriction";
+import { useCreateAbbreviation } from "./hooks/use-create-abbreviations";
 
 // 4. Campos y esquemas locales
-import { BASE_NOMENCLATURE_FIELDS } from "../fields/base-nomenclature-fields";
-import { BASE_NOMENCLATURE_SCHEMA } from "../schema/base-restriction-schema";
+import { BASE_ABBREVIATION_SCHEMA } from "../schema/base- abbreviation-schema";
+import { BASE_ABBREVIATION_FIELDS } from "../fields/base-abbreviation-fields";
 
-const CreateNomenclatureForm = () => {
+const CreateAbbreviationForm = () => {
 
     const router = useRouter();
 
-    const createMutation = useCreateRestriction();
+    const createMutation = useCreateAbbreviation();
 
-    const schema = BASE_NOMENCLATURE_SCHEMA;
+    const schema = BASE_ABBREVIATION_SCHEMA;
 
     const form = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
         defaultValues: {
-            character: "",
+            name: "",
+            abbreviation: "",
+            type: ""
         },
     });
 
@@ -48,7 +50,7 @@ const CreateNomenclatureForm = () => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="flex flex-col gap-6"
             >
-                {BASE_NOMENCLATURE_FIELDS.map
+                {BASE_ABBREVIATION_FIELDS.map
                     (({ component: Component, props }, index) => (
                         <Component key={index} {...props} control={form.control} />
                     ))}
@@ -67,4 +69,4 @@ const CreateNomenclatureForm = () => {
     );
 };
 
-export default CreateNomenclatureForm;
+export default CreateAbbreviationForm;

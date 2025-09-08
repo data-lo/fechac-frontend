@@ -4,7 +4,6 @@ import { getCollection } from "@/actions/authentication-handler-action";
 import { ActionResponse } from "@/interfaces/action/action-response";
 import { AbbreviationDocument } from "../models/abbreviation-document";
 
-
 interface PaginationParams {
   page?: number;
   limit?: number;
@@ -78,7 +77,7 @@ export async function getAbbreviations(
     };
 
   } catch (error) {
-    console.error('Error en getPendingProjects:', error);
+    console.error('Error en action: get-abbrevaition:', error);
 
     return {
       success: false,

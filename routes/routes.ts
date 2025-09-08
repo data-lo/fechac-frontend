@@ -20,7 +20,7 @@ export const routes = [
     {
         icon: Layers2,
         label: "Inicio",
-        href: "/abbreviation"
+        href: "/abbreviations"
     },
     {
         icon: Cloud,
