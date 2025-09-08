@@ -126,6 +126,7 @@ const CreateCriterionForm = () => {
                         type="submit"
                         title="Guardar Información"
                         iconName="Save"
+                        isPending={createMutation.isPending}
                     />
                 </footer>
             </form>

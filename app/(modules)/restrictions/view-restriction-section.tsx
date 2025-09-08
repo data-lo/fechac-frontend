@@ -1,22 +1,62 @@
 // 1. Componentes globales
-import EmptyState from "@/components/empty-state";
+import { Fragment } from "react";
 import NavigationBreadcrumb from "@/components/breadcrumb";
+import EmptyState from "@/components/empty-state";
 import ModalComponent from "@/components/modal";
 
 // 2. Componentes compartidos
-// (ninguno en este caso)
+import AlertMessage from "@/components/alert-message";
 
 // 3. Componentes locales del módulo
 import RestrictionTable from "./components/restriction-table";
-import CreateNomenclatureForm from "./create/create-restriction-form";
-import getRestrictions from "./actions/get-restrictions";
+import CreateRestrictionForm from "./create/create-restriction-form";
 
 // 4. Actions/Servicios
+import getRestrictions from "./actions/get-restrictions";
+import PaginationComponent from "@/components/pagination";
+import LimitSelector from "@/components/limit-selector";
+
+interface Props {
+    searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
+}
+
+const ViewNomenclatureSection = async ({ searchParams }: Props) => {
+
+    const params = await searchParams;
+
+    const page = Math.max(1, Number(params?.page) || 1);
+
+    const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
+
+    const query = params?.query;
+
+    const response = await getRestrictions(page, limit);
 
 
-const ViewNomenclatureSection = async () => {
+    if (response.error || !response.data) {
+        return (
+            <div className="px-6 py-4">
+                <AlertMessage
+                    buttonText="Recargar Página"
+                    message={response.error}
+                />
+            </div>
+        );
+    }
+    const { restrictions, total } = response.data;
 
-    const restrictions = await getRestrictions();
+    const totalPages = Math.ceil(total / limit);
+
+    if (page > totalPages && totalPages > 0) {
+        return (
+            <Fragment>
+                <AlertMessage
+                    buttonText="Regresar"
+                    message={`La página ${page} no existe. Hay ${totalPages} páginas disponibles.`}
+                />
+            </Fragment>
+        );
+    }
 
     const breadcrumbRoutes = [
         {
@@ -40,19 +80,33 @@ const ViewNomenclatureSection = async () => {
                     iconName={"Plus"}
                     buttonSize="w-[338px]"
                     dialogTrigger={"Crear Restricción"}
-                    children={<CreateNomenclatureForm />}
+                    children={<CreateRestrictionForm />}
                 />
             </div>
 
             {restrictions.length > 0 ? (
-                <RestrictionTable
-                    restrictions={restrictions}
-                />
+                <Fragment>
+                    <div className="flex items-center gap-2">
+                        <LimitSelector
+                            currentLimit={limit}
+                            route="/restrictions"
+                        />
+                    </div>
+
+                    <RestrictionTable
+                        restrictions={restrictions}
+                    />
+                </ Fragment>
             ) : (
-                <EmptyState
-                    text={"No hay restricciones disponibles"}
-                />
+                <EmptyState text={"No hay proyectos disponibles"} />
             )}
+
+            <PaginationComponent
+                currentPage={page}
+                totalPages={totalPages}
+                limit={limit}
+                baseUrl="/restrictions"
+            />
 
         </div>
     )

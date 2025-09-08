@@ -1,7 +1,7 @@
 import FormInputField from "@/components/form/form-input-field";
 
 
-export const BASE_NOMENCLATURE_FIELDS = [
+const BASE_RESTRICTION_FIELDS = [
     {
         component: FormInputField,
         props: {
@@ -12,3 +12,5 @@ export const BASE_NOMENCLATURE_FIELDS = [
         },
     },
 ];
+
+export default BASE_RESTRICTION_FIELDS;

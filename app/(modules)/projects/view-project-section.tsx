@@ -75,7 +75,10 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       {projects.length > 0 ? (
         <Fragment>
           <div className="flex items-center gap-2">
-            <LimitSelector currentLimit={limit} route="/projects" />
+            <LimitSelector
+              currentLimit={limit}
+              route="/projects"
+            />
           </div>
 
           <ProjectTable data={projects} />
@@ -88,6 +91,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         currentPage={page}
         totalPages={totalPages}
         limit={limit}
+        baseUrl="/projects"
       />
     </div>
   );
