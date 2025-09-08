@@ -1,27 +1,29 @@
-// 1. Componentes globales
+// 1. React
 import { Fragment } from "react";
-import NavigationBreadcrumb from "@/components/breadcrumb";
-import EmptyState from "@/components/empty-state";
-import ModalComponent from "@/components/modal";
 
-// 2. Componentes compartidos
+// 2. Componentes globales
 import AlertMessage from "@/components/alert-message";
+import EmptySate from "@/components/empty-state";
 
-// 3. Componentes locales del módulo
-import RestrictionTable from "./components/restriction-table";
-import CreateRestrictionForm from "./create/create-restriction-form";
+// 3. Componentes compartidos
+import LimitSelector from "../../../components/limit-selector";
+import PaginationComponent from "../../../components/pagination";
+import NavigationBreadcrumb from "@/components/breadcrumb";
 
-// 4. Actions/Servicios
-import getRestrictions from "./actions/get-restrictions";
-import PaginationComponent from "@/components/pagination";
-import LimitSelector from "@/components/limit-selector";
+// 4. Componentes locales del módulo
+import ModalComponent from "@/components/modal";
+import AbbreviationTable from "./components/view-abbreviation-table";
+import CreateAbbreviationForm from "./create/create-abbreviaton-form";
+
+// 5. Actions/Servicios
+import { getAbbreviations } from "./actions/get-abbreviations";
+
 
 interface Props {
     searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
 }
 
-const ViewNomenclatureSection = async ({ searchParams }: Props) => {
-
+const ViewAbbreviationSection = async ({ searchParams }: Props) => {
     const params = await searchParams;
 
     const page = Math.max(1, Number(params?.page) || 1);
@@ -30,8 +32,7 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
 
     const query = params?.query;
 
-    const response = await getRestrictions(page, limit);
-
+    const response = await getAbbreviations(page, limit);
 
     if (response.error || !response.data) {
         return (
@@ -43,7 +44,7 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
             </div>
         );
     }
-    const { restrictions, total } = response.data;
+    const { abbreviations, total } = response.data;
 
     const totalPages = Math.ceil(total / limit);
 
@@ -61,7 +62,7 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
     const breadcrumbRoutes = [
         {
             href: '',
-            title: 'RESTRICIONES'
+            title: 'ABREVIACIONES'
         },
     ];
 
@@ -73,43 +74,40 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
 
             <div className="flex flex-col sm:flex-row justify-start sm:justify-end gap-4">
                 <ModalComponent
-                    dialogTitle={"Crear Restricción"}
+                    dialogTitle={"Crear Abreviatura"}
                     dialogDescription={
                         "Aquí puedes crear los caracteres restrictivos. Al nombrar los archivos finales, se excluirán todos los caracteres que hayas creado y que estén activos."
                     }
                     iconName={"Plus"}
                     buttonSize="w-[338px]"
-                    dialogTrigger={"Crear Restricción"}
-                    children={<CreateRestrictionForm />}
+                    dialogTrigger={"Crear Abreviatura"}
+                    children={<CreateAbbreviationForm />}
                 />
             </div>
 
-            {restrictions.length > 0 ? (
+            {abbreviations.length > 0 ? (
                 <Fragment>
-                    <div className="flex items-center gap-2">
-                        <LimitSelector
-                            currentLimit={limit}
-                            route="/restrictions"
-                        />
-                    </div>
-
-                    <RestrictionTable
-                        restrictions={restrictions}
+                    <LimitSelector
+                        currentLimit={limit}
+                        route="/abbreviations"
                     />
-                </ Fragment>
+
+                    <AbbreviationTable
+                        data={abbreviations}
+                    />
+
+                    <PaginationComponent
+                        currentPage={page}
+                        totalPages={totalPages}
+                        limit={limit}
+                        baseUrl="/abbreviations"
+                    />
+                </Fragment>
             ) : (
-                <EmptyState text={"No hay proyectos disponibles"} />
+                <EmptySate text={"No hay abreviaciones disponibles"} />
             )}
-
-            <PaginationComponent
-                currentPage={page}
-                totalPages={totalPages}
-                limit={limit}
-                baseUrl="/restrictions"
-            />
-
         </div>
-    )
-}
+    );
+};
 
-export default ViewNomenclatureSection;
+export default ViewAbbreviationSection;

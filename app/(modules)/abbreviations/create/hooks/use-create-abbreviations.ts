@@ -5,11 +5,11 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { createRestriction } from "../actions/create-restriction";
+import { createAbbreviation } from "../actions/create-abbreviation";
 
-function useCreateRestriction() {
+export function useCreateAbbreviation() {
     return useMutation({
-        mutationFn: createRestriction,
+        mutationFn: createAbbreviation,
         onSuccess: (response) => {
             if (response.success) {
                 toast.success("¡La restricción se ha creado con éxito!");
@@ -22,5 +22,3 @@ function useCreateRestriction() {
         },
     });
 }
-
-export default useCreateRestriction

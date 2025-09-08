@@ -1,16 +1,17 @@
-import { Cloud, FolderKanban, Layers2, Lock, SlidersHorizontal,  } from "lucide-react";
+import { Cloud, FolderKanban, Layers2, Lock, SlidersHorizontal, } from "lucide-react";
 
 export const routes = [
-    {
-        icon: SlidersHorizontal,
-        label: "Criterios",
-        href: "/criteria"
-    },
     {
         icon: FolderKanban,
         label: "Proyectos",
         href: "/projects"
     },
+    {
+        icon: SlidersHorizontal,
+        label: "Criterios",
+        href: "/criteria"
+    },
+
     {
         icon: Lock,
         label: "Restricciones",
@@ -19,7 +20,7 @@ export const routes = [
     {
         icon: Layers2,
         label: "Inicio",
-        href: "/abbreviation"
+        href: "/abbreviations"
     },
     {
         icon: Cloud,

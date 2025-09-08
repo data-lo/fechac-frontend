@@ -15,22 +15,20 @@ import ModalComponent from "@/components/modal";
 import ContextMenu from "@/components/context-menu";
 
 // 3. Componentes locales del módulo
-import StatusNomenclatureForm from "./toggle-restriction-status";
+
 
 // 4. Modelos locales
 import { RestrictionDocument } from "../models/restriction-document";
 import ToggleRestrictionStatus from "./toggle-restriction-status";
-
+import UpdateRestrictionForm from "../update/update-restriction-form";
 
 
 interface Props {
     restrictions: RestrictionDocument[]
 }
 
-
 const RestrictionTable = ({ restrictions }: Props) => {
 
-    console.log(restrictions)
     return (
                 <Table className="table-fixed">
             <TableHeader>
@@ -66,11 +64,7 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
                                     children={
-                                        <ActionButton
-                                            title="Actualizar Información"
-                                            className="w-full"
-                                            iconName={'Save'}
-                                        />
+                                       <UpdateRestrictionForm data={restriction}/>
                                     }
                                 />
 

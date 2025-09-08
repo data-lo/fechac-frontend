@@ -7,15 +7,15 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
-import { Abbreviation } from "../interfaces/abbreviation";
+import { AbbreviationDocument } from "../models/abbreviation-document";
 
 
 interface Props {
-    abbreviations: Abbreviation[];
+    data: AbbreviationDocument[]
 }
 
 const AbbreviationTable = ({
-    abbreviations
+    data
 }: Props) => {
 
     return (
@@ -23,13 +23,13 @@ const AbbreviationTable = ({
             <TableHeader>
                 <TableRow>
                     <TableHead >#</TableHead>
-                    <TableHead >Nombre</TableHead>
-                    <TableHead >Abreviación</TableHead>
+                    <TableHead >NOMBRE</TableHead>
+                    <TableHead >ABREVIACIÓN</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody className="w-full">
-                {abbreviations.map((abbreviation, index) => (
-                    <TableRow key={abbreviation.id}>
+                {data.map((abbreviation, index) => (
+                    <TableRow key={abbreviation._id.toString()}>
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{abbreviation.name}</TableCell>
                         <TableCell>{abbreviation.abbreviation}</TableCell>

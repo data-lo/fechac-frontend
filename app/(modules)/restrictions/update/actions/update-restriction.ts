@@ -1,45 +1,35 @@
-'use server'
-
-// 1. Acciones / Servicios
-import { getCollection } from "@/actions/mongo/get-collection";
-
-// 2. Modelos
-import { RestrictionDocument } from "../models/restriction-document";
-
-// 3. Librerías externas
-import { ObjectId } from "mongodb";
-
-// 4. Utilidades de framework
-import { revalidatePath } from "next/cache";
-
-// 5. Interfaces
+"use server"
 import { ActionResponse } from "@/interfaces/action/action-response";
 import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
+import { RestrictionDocument } from "../../models/restriction-document";
+import { getCollection } from "@/actions/mongo/get-collection";
+import { ObjectId } from "mongodb";
 
-export async function toggleRestrictionStatus(values: { _id: string, status: boolean }): Promise<ActionResponse<UpdateOneResponse>> {
+export default async function updateRestriction(values: { _id: string, character: string }): Promise<ActionResponse<UpdateOneResponse>> {
     try {
-
         const collection = await getCollection<RestrictionDocument>("restrictions");
+
+        
 
         const filter = { _id: new ObjectId(values._id) };
 
         const update = {
             $set: {
-                status: !values.status,
+                character: values.character,
             },
         };
 
         const response: UpdateOneResponse = await collection.updateOne(filter, update);
 
+        console.log(response)
+
         if (response.modifiedCount === 0) {
             return {
                 success: false,
-                error: "¡No se pudo cambiar el estatus de la restricción!",
+                error: "¡No se pudo modificar la restricción!",
                 data: null
             };
         }
-
-        revalidatePath("/restrictions");
 
         return {
             success: true,
@@ -47,12 +37,13 @@ export async function toggleRestrictionStatus(values: { _id: string, status: boo
             data: response
         };
 
+
     } catch (error) {
-       console.error('Error en action: toggle-restriction-status:', error);
+        console.error('Error en action: update-restriction:', error);
 
         return {
             success: false,
-            error: error instanceof Error ? error.message : "Error desconocido al modificar el estatus",
+            error: error instanceof Error ? error.message : "Error desconocido al actualizar la restricción",
             data: null
         };
     }

@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { BASE_CRITERIA_SCHEMA } from "../../../schemas/base-criteria-form";
+import { BASE_CRITERIA_SCHEMA } from "../../../schema/base-criteria-form";
 
 const UPDATE_CRITERIA_SCHEMA = BASE_CRITERIA_SCHEMA.extend({
     id: z.string(),

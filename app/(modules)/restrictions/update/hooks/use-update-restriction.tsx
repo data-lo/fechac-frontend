@@ -5,14 +5,14 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { createRestriction } from "../actions/create-restriction";
+import updateRestriction from "../actions/update-restriction";
 
-function useCreateRestriction() {
+const useUpdateRestriction = () => {
     return useMutation({
-        mutationFn: createRestriction,
+        mutationFn: updateRestriction,
         onSuccess: (response) => {
             if (response.success) {
-                toast.success("¡La restricción se ha creado con éxito!");
+                toast.success("¡La restricción se ha modificado con éxito!");
             } else {
                 toast.error(response.error);
             }
@@ -23,4 +23,4 @@ function useCreateRestriction() {
     });
 }
 
-export default useCreateRestriction
+export default useUpdateRestriction

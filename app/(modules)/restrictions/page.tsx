@@ -1,10 +1,14 @@
 import ViewNomenclatureSection from "./view-restriction-section";
 
-const ViewNomenclaturePage = () => {
+interface Props {
+    searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
+}
+
+const ViewNomenclaturePage = ({ searchParams }: Props) => {
 
     return (
         <div className="h-screen">
-            <ViewNomenclatureSection />
+            <ViewNomenclatureSection searchParams={searchParams}/>
         </div>
     )
 }

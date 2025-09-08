@@ -10,31 +10,39 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // 3. Hooks locales
-import useCreateRestriction from "./hooks/use-create-restriction";
+import useCreateRestriction from "../create/hooks/use-create-restriction";
 
 // 4. Campos y esquemas locales
 import BASE_RESTRICTION_FIELDS from "../fields/base-restrictions-fields";
-import BASE_RESTRICTION_SCHEMA  from "../schema/base-restriction-schema";
+import UPDATE_RESTRICTION_SCHEMA from "./schema/update-restriction-schema";
+import { RestrictionDocument } from "../models/restriction-document";
+import useUpdateRestriction from "./hooks/use-update-restriction";
 
-const UpdateNomenclatureForm = () => {
+interface Props {
+    data: RestrictionDocument
+}
+
+const UpdateRestrictionForm = ({
+    data
+}: Props) => {
     const router = useRouter();
 
-    const createMutation = useCreateRestriction();
+    const udpateMutation = useUpdateRestriction();
 
-    const schema = BASE_RESTRICTION_SCHEMA;
+    const schema = UPDATE_RESTRICTION_SCHEMA;
 
     const form = useForm<z.infer<typeof schema>>({
         resolver: zodResolver(schema),
         defaultValues: {
-            character: "",
+            character: data.character,
+            _id: data._id.toString()
         },
     });
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
-        createMutation.mutate(values, {
+        udpateMutation.mutate({ _id: values._id.toString(), character: values.character }, {
             onSuccess: (data) => {
                 if (data.success) {
-                    form.reset()
                     router.refresh()
                 }
             }
@@ -57,8 +65,8 @@ const UpdateNomenclatureForm = () => {
                         type="submit"
                         className="w-full"
                         iconName={"Save"}
-                        title="Guardar Información"
-                        isPending={createMutation.isPending}
+                        title="Actualizar Información"
+                        isPending={udpateMutation.isPending}
                     />
                 </div>
             </form>
@@ -66,4 +74,4 @@ const UpdateNomenclatureForm = () => {
     );
 };
 
-export default UpdateNomenclatureForm;
+export default UpdateRestrictionForm;

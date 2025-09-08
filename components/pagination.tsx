@@ -12,14 +12,14 @@ interface Props {
   currentPage: number;
   totalPages: number;
   limit: number;
-  baseUrl?: string;
+  baseUrl: string;
 }
 
 const PaginationComponent = ({
   currentPage,
   totalPages,
   limit,
-  baseUrl = "/projects"
+  baseUrl
 }: Props) => {
   const getPageRange = () => {
     const delta = 2;

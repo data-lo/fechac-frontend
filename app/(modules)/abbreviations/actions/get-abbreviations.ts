@@ -1,11 +1,8 @@
 'use server';
 
-// 1. Acciones / Servicios
-import { getCollection } from "@/actions/mongo/get-collection";
-
-// 2. Modelos
-import { RestrictionDocument } from "../models/restriction-document";
+import { getCollection } from "@/actions/authentication-handler-action";
 import { ActionResponse } from "@/interfaces/action/action-response";
+import { AbbreviationDocument } from "../models/abbreviation-document";
 
 interface PaginationParams {
   page?: number;
@@ -14,12 +11,12 @@ interface PaginationParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-export default async function getRestrictions(
+export async function getAbbreviations(
   page: number = 1,
   limit: number = 10,
   options: Omit<PaginationParams, 'page' | 'limit'> = {}
-): Promise<ActionResponse<{ 
-  restrictions: RestrictionDocument[];
+): Promise<ActionResponse<{
+  abbreviations: AbbreviationDocument[];
   total: number;
   currentPage: number;
   totalPages: number;
@@ -43,13 +40,13 @@ export default async function getRestrictions(
       };
     }
 
-    const collection = await getCollection<RestrictionDocument>("restrictions");
+    const collection = await getCollection<AbbreviationDocument>("abbreviations");
     const skip = (page - 1) * limit;
 
     const { sortBy = 'approval_date', sortOrder = 'desc' } = options;
     const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
-    const [data, total] = await Promise.all([
+    const [criteriaFromDB, total] = await Promise.all([
       collection
         .find()
         .sort(sort)
@@ -61,7 +58,7 @@ export default async function getRestrictions(
 
     const totalPages = Math.ceil(total / limit);
 
-    const serialized = data.map(criterion => ({
+    const newStructure = criteriaFromDB.map(criterion => ({
       ...criterion,
       _id: criterion._id.toString()
     }));
@@ -70,7 +67,7 @@ export default async function getRestrictions(
       success: true,
       error: null,
       data: {
-        restrictions: serialized,
+        abbreviations: newStructure,
         total,
         currentPage: page,
         totalPages,
@@ -80,13 +77,12 @@ export default async function getRestrictions(
     };
 
   } catch (error) {
-    console.error('Error en getPendingProjects:', error);
-    
+    console.error('Error en action: get-abbrevaition:', error);
+
     return {
       success: false,
-      error: error instanceof Error ? error.message : "Error desconocido al obtener proyectos",
+      error: error instanceof Error ? error.message : "Error desconocido al obtener las abreviaciones",
       data: null
     };
   }
 }
-

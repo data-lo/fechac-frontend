@@ -58,7 +58,7 @@ export async function getCriteria(
 
     const totalPages = Math.ceil(total / limit);
 
-    const newStructure = criteriaFromDB.map(criterion => ({
+    const serialized = criteriaFromDB.map(criterion => ({
       ...criterion,
       _id: criterion._id.toString()
     }));
@@ -67,7 +67,7 @@ export async function getCriteria(
       success: true,
       error: null,
       data: {
-        criteria: newStructure,
+        criteria: serialized,
         total,
         currentPage: page,
         totalPages,

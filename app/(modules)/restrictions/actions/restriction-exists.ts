@@ -25,7 +25,7 @@ export default async function restrictionExists(character: string): Promise<Acti
             data: response,
         };
     } catch (error) {
-        console.error('Error en action: get-pending-projects:', error);
+        console.error('Error en action: restriction-exists:', error);
         return {
             success: false,
             error: error instanceof Error ? error.message : "Error desconocido al obtener restricciones",
