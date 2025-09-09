@@ -1,15 +1,31 @@
 "use server"
+// 1.- Librerías externas
+import { ObjectId } from "mongodb";
+
+// 2.- Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
 import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
-import { RestrictionDocument } from "../../models/restriction-document";
+
+// 3.- Acciones / Servicios
 import { getCollection } from "@/actions/mongo/get-collection";
-import { ObjectId } from "mongodb";
+import { restrictionExists } from "../../actions/restriction-exists";
+
+// 4.- Modelos
+import { RestrictionDocument } from "../../models/restriction-document";
 
 export default async function updateRestriction(values: { _id: string, character: string }): Promise<ActionResponse<UpdateOneResponse>> {
     try {
         const collection = await getCollection<RestrictionDocument>("restrictions");
 
-        
+        const restrictionExist = await restrictionExists(values.character);
+
+        if (restrictionExist.success && restrictionExist.data) {
+            return {
+                success: false,
+                error: "¡Ya existe una restricción con este carácter!",
+                data: null
+            };
+        }
 
         const filter = { _id: new ObjectId(values._id) };
 
@@ -48,3 +64,4 @@ export default async function updateRestriction(values: { _id: string, character
         };
     }
 }
+

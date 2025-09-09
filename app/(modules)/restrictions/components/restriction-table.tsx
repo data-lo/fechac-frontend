@@ -21,6 +21,7 @@ import ContextMenu from "@/components/context-menu";
 import { RestrictionDocument } from "../models/restriction-document";
 import ToggleRestrictionStatus from "./toggle-restriction-status";
 import UpdateRestrictionForm from "../update/update-restriction-form";
+import DeleteRestrictionButton from "../delete/delete-restriction-button";
 
 
 interface Props {
@@ -30,7 +31,7 @@ interface Props {
 const RestrictionTable = ({ restrictions }: Props) => {
 
     return (
-                <Table className="table-fixed">
+        <Table className="table-fixed">
             <TableHeader>
                 <TableRow>
                     <TableHead className="w-12 text-center">#</TableHead>
@@ -64,13 +65,17 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
                                     children={
-                                       <UpdateRestrictionForm data={restriction}/>
+                                        <UpdateRestrictionForm data={restriction} />
                                     }
                                 />
 
                                 <ToggleRestrictionStatus
                                     _id={restriction._id.toString()}
                                     status={restriction.status}
+                                />
+
+                                <DeleteRestrictionButton
+                                    _id={restriction._id.toString()}
                                 />
                             </ContextMenu>
                         </TableCell>

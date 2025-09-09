@@ -9,7 +9,7 @@ import { ActionResponse } from "@/interfaces/action/action-response";
 // 3. Modelos locales
 import { RestrictionDocument } from "../models/restriction-document";
 
-export default async function restrictionExists(character: string): Promise<ActionResponse<RestrictionDocument | null>> {
+export async function restrictionExists(character: string): Promise<ActionResponse<RestrictionDocument>> {
     try {
         if (!character || typeof character !== 'string' || character.trim() === '') {
             throw new Error('El parámetro character es requerido y debe ser un string válido');
