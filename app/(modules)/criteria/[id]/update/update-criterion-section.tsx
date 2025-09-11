@@ -17,7 +17,7 @@ const UpdateCriterionSection = ({ data }: Props) => {
             title: 'CRITERIOS'
         },
         {
-            href: '',
+            href: `/criteria/${data.criterion._id.toString()}/update}`,
             title: `ACTUALIZAR CRITERIO: ${data.criterion.form_title}`
         }
     ];
