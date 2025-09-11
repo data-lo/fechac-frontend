@@ -17,7 +17,7 @@ export const useDeleteRestriction = () => {
                 toast.error(response.error);
             }
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });

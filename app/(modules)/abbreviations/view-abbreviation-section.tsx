@@ -79,8 +79,9 @@ const ViewAbbreviationSection = async ({ searchParams }: Props) => {
                     iconName={"Plus"}
                     buttonSize="w-[338px]"
                     dialogTrigger={"Crear Abreviatura"}
-                    children={<CreateAbbreviationForm />}
-                />
+                >
+                    <CreateAbbreviationForm />
+                </ModalComponent>
             </div>
 
             {abbreviations.length > 0 ? (

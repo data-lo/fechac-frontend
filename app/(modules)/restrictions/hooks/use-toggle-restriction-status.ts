@@ -17,7 +17,7 @@ export function useToggleRestrictionStatus() {
                 toast.error(response.error);
             }
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });

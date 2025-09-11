@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
     FormControl,
     FormField,
@@ -12,11 +14,12 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
+import { Control } from "react-hook-form"
 
 
 interface Props {
     name: string
-    control: any
+    control: Control<any>
     label: string
     placeholder: string
     disabled?: boolean;

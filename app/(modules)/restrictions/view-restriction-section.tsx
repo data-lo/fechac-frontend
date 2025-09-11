@@ -78,8 +78,10 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
                     iconName={"Plus"}
                     buttonSize="w-[338px]"
                     dialogTrigger={"Crear Restricción"}
-                    children={<CreateRestrictionForm />}
-                />
+                    
+                >
+                    <CreateRestrictionForm />
+                </ModalComponent>
             </div>
 
             {restrictions.length > 0 ? (

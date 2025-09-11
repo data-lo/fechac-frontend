@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // 3. Hooks locales
-import useCreateRestriction from "../create/hooks/use-create-restriction";
+
 
 // 4. Campos y esquemas locales
 import BASE_RESTRICTION_FIELDS from "../fields/base-restrictions-fields";

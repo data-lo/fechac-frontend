@@ -93,8 +93,6 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       />
     </div>
   );
-
-
 };
 
 export default ViewProjectSection;

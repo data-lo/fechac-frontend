@@ -1,5 +1,4 @@
 // 1. Librerías externas
-import { Trash } from "lucide-react";
 
 // 2. Componentes globales
 import {
@@ -10,7 +9,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import ActionButton from "@/components/action-button";
 import ModalComponent from "@/components/modal";
 import ContextMenu from "@/components/context-menu";
 
@@ -64,10 +62,10 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     dialogTitle="Actualizar Carácter"
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
-                                    children={
-                                        <UpdateRestrictionForm data={restriction} />
-                                    }
-                                />
+                                    
+                                >
+                                    <UpdateRestrictionForm data={restriction} />
+                                </ModalComponent>
 
                                 <ToggleRestrictionStatus
                                     _id={restriction._id.toString()}

@@ -1,6 +1,6 @@
 import DatePickerField from "@/components/form/date-picker-field";
 import DynamicArrayField from "@/components/form/dynamic-array-field";
-import InputField from "@/components/form/form-input-field";
+import InputField from "@/components/form/input-field";
 import SelectField from "@/components/form/select-field";
 import { DepartmentList, TypeOfFileList } from "@/functions/transform-enums";
 

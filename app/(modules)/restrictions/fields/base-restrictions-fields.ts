@@ -1,4 +1,4 @@
-import FormInputField from "@/components/form/form-input-field";
+import FormInputField from "@/components/form/input-field";
 
 
 const BASE_RESTRICTION_FIELDS = [

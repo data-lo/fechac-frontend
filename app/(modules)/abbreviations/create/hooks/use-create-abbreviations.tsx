@@ -17,7 +17,7 @@ export function useCreateAbbreviation() {
                 toast.error(response.error);
             }
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });
