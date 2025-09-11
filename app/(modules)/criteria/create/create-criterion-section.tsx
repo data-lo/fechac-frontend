@@ -15,7 +15,7 @@ const CreateCriterionSection = () => {
             title: 'CRITERIOS'
         },
         {
-            href: '',
+            href: '#',
             title: `CREAR CRITERIO`
         }
     ];

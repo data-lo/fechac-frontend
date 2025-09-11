@@ -59,7 +59,7 @@ const ViewAbbreviationSection = async ({ searchParams }: Props) => {
 
     const breadcrumbRoutes = [
         {
-            href: '',
+            href: '#',
             title: 'ABREVIACIONES'
         },
     ];

@@ -58,7 +58,7 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
 
     const breadcrumbRoutes = [
         {
-            href: '',
+            href: '#',
             title: 'RESTRICIONES'
         },
     ];

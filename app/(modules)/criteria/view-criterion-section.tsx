@@ -57,7 +57,7 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
 
   const breadcrumbRoutes = [
     {
-      href: '',
+      href: '#',
       title: 'CRITERIOS'
     },
   ];

@@ -57,7 +57,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   const breadcrumbRoutes = [
     {
-      href: '',
+      href: '#',
       title: 'PROYECTOS'
     },
   ];
