@@ -7,7 +7,9 @@ export default async function UpdateCriterionPage({
   params: Promise<{ id: string }>
 }) {
     const { id } = await params;
-    
+
+    if (!id) return;
+
     const response = await getCriterion(id);
 
     if (!response.success || !response.data) {
