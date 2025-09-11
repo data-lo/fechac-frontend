@@ -8,11 +8,10 @@ import { Button } from '@/components/ui/button';
 import { Plus, X } from 'lucide-react';
 
 interface DynamicArrayFieldProps {
-  control: Control<any>;
+  control: Control;
   name: string;
   label: string;
   placeholder?: string;
-  disabled?: boolean;
   showLabel?: boolean;
 }
 
@@ -21,7 +20,6 @@ const DynamicArrayField = ({
   name,
   label,
   placeholder = "Agregar elemento",
-  disabled = false,
   showLabel = true
 }: DynamicArrayFieldProps) => {
 

@@ -10,7 +10,7 @@ export function useSynchronizeProjects() {
         onSuccess: (response) => {
             if (response.success) toast.success("¡El Archivo se ha subido con éxito!");
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });

@@ -11,7 +11,7 @@ export function useGetPendingProjects() {
         onSuccess: (response) => {
             if (response.success) toast.success("¡Se ha obtenido los proyectos pendientes!");
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });

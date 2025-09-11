@@ -1,9 +1,13 @@
 'use client'
+// 1. Importaciones externas
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { Loader2, LucideIcon } from "lucide-react";
+import { Loader2 } from "lucide-react";
+
+// 2. Importaciones internas
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import { icons, IconName } from "./icon";
+
 
 type ButtonType = "submit" | "button" | "reset";
 type ButtonVariant =
@@ -25,31 +29,31 @@ interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onC
     isLoading?: boolean;
     isPending?: boolean; // Deprecated
     disabled?: boolean;
-    
+
     // Contenido
     children?: React.ReactNode;
     title?: string; // Deprecated
     iconName?: IconName;
     iconPosition?: ButtonIconPosition;
     loadingText?: string;
-    
+
     // Eventos
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
-    
+
     // Tipos
     type?: ButtonType;
     variant?: ButtonVariant;
-    
+
     // Estilos
     size?: ButtonSize;
     justify?: ButtonJustify;
     rounded?: string;
     fullWidth?: boolean;
-    
+
     // Clases personalizadas
     className?: string;
     iconClassName?: string;
-    
+
     // Accesibilidad
     ariaLabel?: string;
     ariaDescribedBy?: string;
@@ -179,3 +183,5 @@ const ActionButton = React.forwardRef<HTMLButtonElement, Props>(
 ActionButton.displayName = "NewButton";
 
 export default ActionButton;
+
+

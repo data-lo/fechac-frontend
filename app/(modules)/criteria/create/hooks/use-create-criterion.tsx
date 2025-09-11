@@ -13,7 +13,7 @@ export function useCreateCriterion() {
         onSuccess: (response) => {
             if (response.success) toast.success("¡El criterio se ha creado con éxito!");
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });
