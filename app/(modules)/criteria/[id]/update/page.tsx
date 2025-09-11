@@ -2,14 +2,16 @@ import { getCriterion } from "../actions/get-criterion";
 import UpdateCriterionSection from "./update-criterion-section";
 
 export default async function UpdateCriterionPage({
-  params,
+    params,
 }: {
-  params: Promise<{ id: string }>
+    params: Promise<{ id: string }>
 }) {
     const { id } = await params;
 
-    if (!id) return;
-
+    if (!id || typeof id !== 'string') {
+        console.error('[ERROR] Invalid or missing id parameter:', { params, id });
+        return <div>Invalid criteria ID</div>;
+    }
     const response = await getCriterion(id);
 
     if (!response.success || !response.data) {
