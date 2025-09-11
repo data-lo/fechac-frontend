@@ -1,8 +1,12 @@
 import { getCriterion } from "../actions/get-criterion";
 import UpdateCriterionSection from "./update-criterion-section";
 
-const UpdateCriterionPage = async ({ params }: { params: { id: string } }) => {
-    const { id } = params;
+export default async function UpdateCriterionPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}) {
+    const { id } = await params;
     const response = await getCriterion(id);
 
     if (!response.success || !response.data) {
@@ -18,4 +22,3 @@ const UpdateCriterionPage = async ({ params }: { params: { id: string } }) => {
     );
 }
 
-export default UpdateCriterionPage;
