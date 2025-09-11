@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
     FormControl,
     FormField,
@@ -6,10 +8,11 @@ import {
 } from "@/components/ui/form"
 
 import { Input } from "@/components/ui/input";
+import { Control } from "react-hook-form";
 
 interface Props {
     name: string;
-    control: any;
+    control: Control<any>;
     label: string;
     placeholder?: string;
     disabled?: boolean;

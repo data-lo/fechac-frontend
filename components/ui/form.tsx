@@ -15,7 +15,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
-import { AlertTriangle, CircleAlert } from "lucide-react"
+import { CircleAlert } from "lucide-react"
 
 const Form = FormProvider
 

@@ -1,5 +1,4 @@
 // 1. Librerías externas
-import { Trash } from "lucide-react";
 
 // 2. Componentes globales
 import {
@@ -10,7 +9,6 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import ActionButton from "@/components/action-button";
 import ModalComponent from "@/components/modal";
 import ContextMenu from "@/components/context-menu";
 
@@ -21,6 +19,7 @@ import ContextMenu from "@/components/context-menu";
 import { RestrictionDocument } from "../models/restriction-document";
 import ToggleRestrictionStatus from "./toggle-restriction-status";
 import UpdateRestrictionForm from "../update/update-restriction-form";
+import DeleteRestrictionButton from "../delete/delete-restriction-button";
 
 
 interface Props {
@@ -30,7 +29,7 @@ interface Props {
 const RestrictionTable = ({ restrictions }: Props) => {
 
     return (
-                <Table className="table-fixed">
+        <Table className="table-fixed">
             <TableHeader>
                 <TableRow>
                     <TableHead className="w-12 text-center">#</TableHead>
@@ -63,14 +62,18 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     dialogTitle="Actualizar Carácter"
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
-                                    children={
-                                       <UpdateRestrictionForm data={restriction}/>
-                                    }
-                                />
+                                    
+                                >
+                                    <UpdateRestrictionForm data={restriction} />
+                                </ModalComponent>
 
                                 <ToggleRestrictionStatus
                                     _id={restriction._id.toString()}
                                     status={restriction.status}
+                                />
+
+                                <DeleteRestrictionButton
+                                    _id={restriction._id.toString()}
                                 />
                             </ContextMenu>
                         </TableCell>

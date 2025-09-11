@@ -28,8 +28,6 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
 
     const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
 
-    const query = params?.query;
-
     const response = await getRestrictions(page, limit);
 
 
@@ -60,7 +58,7 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
 
     const breadcrumbRoutes = [
         {
-            href: '',
+            href: '#',
             title: 'RESTRICIONES'
         },
     ];
@@ -80,8 +78,10 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
                     iconName={"Plus"}
                     buttonSize="w-[338px]"
                     dialogTrigger={"Crear Restricción"}
-                    children={<CreateRestrictionForm />}
-                />
+                    
+                >
+                    <CreateRestrictionForm />
+                </ModalComponent>
             </div>
 
             {restrictions.length > 0 ? (

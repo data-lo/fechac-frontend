@@ -28,8 +28,6 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
 
   const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
 
-  const query = params?.query;
-
   const response = await getCriteria(page, limit);
 
   if (response.error || !response.data) {
@@ -59,7 +57,7 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
 
   const breadcrumbRoutes = [
     {
-      href: '',
+      href: '#',
       title: 'CRITERIOS'
     },
   ];

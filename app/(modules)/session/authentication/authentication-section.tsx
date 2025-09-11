@@ -1,8 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
-import ButtonComponent from '@/components/action-button';
-import { ArrowBigLeftDash } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { handleMicrosoftAuthCallback } from '@/actions/authentication-handler-action';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
@@ -16,14 +14,9 @@ interface Props {
 }
 
 const AuthenticationSection = ({
-    title = 'Inicio de sesión en Microsoft exitoso',
-    subtitle = 'Tu cuenta ha sido vinculada correctamente. Ya puedes acceder a los recursos disponibles en la plataforma.',
     redirectPath = '/session',
-    buttonText = 'Ir al panel',
 }: Props) => {
     const router = useRouter();
-
-    const searchParams = useSearchParams();
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);

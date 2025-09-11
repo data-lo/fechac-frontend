@@ -48,7 +48,7 @@ const CreateCriterionForm = () => {
             main_sections: [],
             additional_keywords: [],
             domain_tags: [],
-            revision_date: new Date(),
+            revision_date: "",
             revision_number: "",
             standard_fields: [],
         },

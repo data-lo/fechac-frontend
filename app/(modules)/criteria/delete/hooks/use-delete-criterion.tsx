@@ -14,7 +14,7 @@ export function useDeleteCriterion() {
         onSuccess: (response) => {
             if (response.success) toast.success("¡El criterio ha sido eliminado con éxito!");
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });

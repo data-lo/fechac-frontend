@@ -4,7 +4,7 @@ export interface Criterion {
   form_title: string;
   issuing_organization: string;
   revision_number: string;
-  revision_date: Date;
+  revision_date: string;
   access_url: string;
   main_sections?: string[] | undefined;
   standard_fields?: string[] | undefined;

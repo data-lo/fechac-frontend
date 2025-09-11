@@ -5,20 +5,22 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { createAbbreviation } from "../actions/create-abbreviation";
+import { updateCriterion } from "../actions/update-criterion";
 
-export function useCreateAbbreviation() {
+const useUpdateCriterion = () => {
     return useMutation({
-        mutationFn: createAbbreviation,
+        mutationFn: updateCriterion,
         onSuccess: (response) => {
             if (response.success) {
-                toast.success("¡La restricción se ha creado con éxito!");
+                toast.success("¡El criterio se ha modificado con éxito!");
             } else {
                 toast.error(response.error);
             }
         },
-        onError: (error: any) => {
+        onError: (error) => {
             toast.error(`Error: ${error.message}`);
         },
     });
 }
+
+export default useUpdateCriterion

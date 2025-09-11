@@ -1,6 +1,6 @@
 'use client'
 import { CriterionDocument } from "../../models/criterion-document";
-import UpdateCriterionForm from "./componentes/criterion-update-form";
+import UpdateCriterionForm from "./components/criterion-update-form";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
 interface Props {
@@ -17,7 +17,7 @@ const UpdateCriterionSection = ({ data }: Props) => {
             title: 'CRITERIOS'
         },
         {
-            href: '',
+            href: `#`,
             title: `ACTUALIZAR CRITERIO: ${data.criterion.form_title}`
         }
     ];

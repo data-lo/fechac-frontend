@@ -1,8 +1,8 @@
-'use client'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import React from 'react';
 import { Control, useFieldArray } from 'react-hook-form';
-import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
+import { FormField, FormItem, FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Plus, X } from 'lucide-react';
@@ -12,7 +12,6 @@ interface DynamicArrayFieldProps {
   name: string;
   label: string;
   placeholder?: string;
-  disabled?: boolean;
   showLabel?: boolean;
 }
 
@@ -21,7 +20,6 @@ const DynamicArrayField = ({
   name,
   label,
   placeholder = "Agregar elemento",
-  disabled = false,
   showLabel = true
 }: DynamicArrayFieldProps) => {
 

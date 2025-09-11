@@ -30,8 +30,6 @@ const ViewAbbreviationSection = async ({ searchParams }: Props) => {
 
     const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
 
-    const query = params?.query;
-
     const response = await getAbbreviations(page, limit);
 
     if (response.error || !response.data) {
@@ -61,7 +59,7 @@ const ViewAbbreviationSection = async ({ searchParams }: Props) => {
 
     const breadcrumbRoutes = [
         {
-            href: '',
+            href: '#',
             title: 'ABREVIACIONES'
         },
     ];
@@ -81,8 +79,9 @@ const ViewAbbreviationSection = async ({ searchParams }: Props) => {
                     iconName={"Plus"}
                     buttonSize="w-[338px]"
                     dialogTrigger={"Crear Abreviatura"}
-                    children={<CreateAbbreviationForm />}
-                />
+                >
+                    <CreateAbbreviationForm />
+                </ModalComponent>
             </div>
 
             {abbreviations.length > 0 ? (

@@ -1,7 +1,6 @@
 'use server'
 
 // 1. Librerías externas
-import { revalidatePath } from "next/cache";
 
 // 2. Librerías internas (acciones/helpers locales del módulo)
 import { getCollection } from "@/actions/mongo/get-collection";
@@ -13,7 +12,10 @@ import { InsertOneResponse } from "@/interfaces/mongo/insert-one-response";
 // 4. Modelos locales
 import { Restriction } from "../../models/restriction";
 
-import restrictionExists from "../../actions/restriction-exists";
+// 5. Acciones / Servicios
+import { restrictionExists } from "../../actions/restriction-exists";
+
+
 
 export async function createRestriction(values: { character: string }): Promise<ActionResponse<InsertOneResponse>> {
     try {

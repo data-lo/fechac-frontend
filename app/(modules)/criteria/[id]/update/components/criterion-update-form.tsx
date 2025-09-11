@@ -1,8 +1,8 @@
 'use client'
 
 // 1. React
-import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 // 2. Componentes globales
@@ -25,6 +25,9 @@ import {
   STORAGE_FIELDS 
 } from "../../../fields/base-criteria-fields";
 
+// 6. Hooks
+import useUpdateCriterion from "../hooks/use-update-criterion";
+
 
 interface Props {
     data: {
@@ -34,12 +37,14 @@ interface Props {
 
 const CriterionUpdateForm = ({ data }: Props) => {
 
+    const updateMutation = useUpdateCriterion();
+
     const criterion = data.criterion;
 
     const form = useForm<z.infer<typeof UPDATE_CRITERIA_SCHEMA>>({
         resolver: zodResolver(UPDATE_CRITERIA_SCHEMA),
         defaultValues: {
-            id: String(criterion._id),
+            _id: String(criterion._id),
             file_name: criterion.file_name,
             form_code: criterion.form_code,
             form_title: criterion.form_title,
@@ -52,12 +57,15 @@ const CriterionUpdateForm = ({ data }: Props) => {
             main_sections: criterion.main_sections,
             additional_keywords: criterion.additional_keywords,
             domain_tags: criterion.domain_tags,
-            revision_date: new Date(criterion.revision_date),
+            revision_date: criterion.revision_date,
+            revision_number: criterion.revision_number,
+            standard_fields: criterion.standard_fields
         },
     });
 
-    const onSubmit = (data: z.infer<typeof UPDATE_CRITERIA_SCHEMA>) => {
-        console.log(data)
+    const onSubmit = (values: z.infer<typeof UPDATE_CRITERIA_SCHEMA>) => {
+        console.log(values)
+        updateMutation.mutate(values);
     };
 
     return (
@@ -122,6 +130,7 @@ const CriterionUpdateForm = ({ data }: Props) => {
                         type="submit"
                         title="Guardar Información"
                         iconName="Save"
+                        isPending={updateMutation.isPending}
                     />
                 </footer>
             </form>

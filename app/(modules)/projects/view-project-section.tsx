@@ -28,8 +28,6 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
 
-  const query = params?.query;
-
   const response = await getPendingProjects(page, limit);
 
   if (response.error || !response.data) {
@@ -59,7 +57,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   const breadcrumbRoutes = [
     {
-      href: '',
+      href: '#',
       title: 'PROYECTOS'
     },
   ];
@@ -95,8 +93,6 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       />
     </div>
   );
-
-
 };
 
 export default ViewProjectSection;
