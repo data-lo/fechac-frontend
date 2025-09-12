@@ -1,8 +1,9 @@
 'use server';
 
-import { getCollection } from "@/actions/authentication-handler-action";
+
 import { ActionResponse } from "@/interfaces/action/action-response";
 import { AbbreviationDocument } from "../models/abbreviation-document";
+import getCollection from "@/actions/mongo/get-collection";
 
 interface PaginationParams {
   page?: number;

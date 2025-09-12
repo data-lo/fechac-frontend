@@ -4,7 +4,7 @@
 import abbreviationExist from "../../actions/abbreviation-exist";
 
 // 2. Librerías internas (acciones/helpers locales del módulo)
-import { getCollection } from "@/actions/mongo/get-collection";
+import getCollection from "@/actions/mongo/get-collection";
 
 // 3. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";

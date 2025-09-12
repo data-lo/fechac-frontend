@@ -1,4 +1,4 @@
-import { Cloud, FolderKanban, Layers2, Lock, SlidersHorizontal, } from "lucide-react";
+import { Cloud, FolderKanban, Lock, SlidersHorizontal, WholeWord, } from "lucide-react";
 
 export const routes = [
     {
@@ -18,8 +18,8 @@ export const routes = [
         href: "/restrictions"
     },
     {
-        icon: Layers2,
-        label: "Inicio",
+        icon: WholeWord,
+        label: "Abreviaciones",
         href: "/abbreviations"
     },
     {

@@ -1,10 +1,9 @@
 'use server';
 
-import { Collection, ObjectId, Db, Document } from "mongodb";
+import { ObjectId, Document } from "mongodb";
 
 import { revalidatePath } from "next/cache";
 
-import { getConnection } from "@/lib/mongodb";
 import { getExpirationDate } from "@/functions/get-expiration-date";
 
 import { AccessRecord } from "@/interfaces/access-record";
@@ -13,6 +12,7 @@ import { MicrosoftTokenResponse } from "@/interfaces/microsoft-token-response";
 import { MicrosoftUserInfo } from "@/interfaces/microsoft-user-info";
 
 import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";
+import getCollection from "./mongo/get-collection";
 
 
 export async function handleMicrosoftAuthCallback(data: { code: string }): Promise<GeneralResponse> {
@@ -79,15 +79,6 @@ export async function createAccessRecord(data: { code: string }): Promise<{ _id:
   }
 }
 
-export async function getCollection<T extends Document>(name: string): Promise<Collection<T>> {
-  try {
-    const db: Db = await getConnection();
-    return db.collection<T>(name);
-  } catch (error) {
-    console.error("Error al obtener la colección:", error);
-    throw error;
-  }
-}
 
 export async function exchangeCodeForToken(code: string, access_id: ObjectId): Promise<MicrosoftSessionObject> {
   const params = new URLSearchParams({

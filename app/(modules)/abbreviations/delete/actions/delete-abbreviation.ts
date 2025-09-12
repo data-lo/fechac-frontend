@@ -8,42 +8,40 @@ import { ActionResponse } from "@/interfaces/action/action-response";
 import { DeleteOneResponse } from "@/interfaces/mongo/delete-one-response";
 
 // 3. Modelos
-import { CriterionDocument } from "../../models/criterion-document";
+import { AbbreviationDocument } from "../../models/abbreviation-document";
 import { ObjectId } from "mongodb";
 
 // 4. Librerías
 import { revalidatePath } from "next/cache";
 
-export async function deleteCriterion(_id: string | ObjectId): Promise<ActionResponse<DeleteOneResponse>> {
+export async function deleteAbbreviation(_id: string | ObjectId): Promise<ActionResponse<DeleteOneResponse>> {
     try {
 
-        const collection = await getCollection<CriterionDocument>("document_prompts");
+        const collection = await getCollection<AbbreviationDocument>("abbreviations");
 
         const response: DeleteOneResponse = await collection.deleteOne({ _id: new ObjectId(_id) });
 
         if (!response.acknowledged || response.deletedCount === 0) {
             return {
                 success: false,
-                error: "No se pudo eliminar el criterio.",
+                error: "No se pudo eliminar el la abreviación",
                 data: null,
             };
         }
 
-        revalidatePath("/criteria");
+        revalidatePath("/abbreviations");
 
         return {
             success: true,
             error: null,
             data: response,
         };
-
-
     } catch (error) {
-        console.error('Error en createCriterion:', error);
+        console.error('Error en action: delete-abbreviation:', error);
 
         return {
             success: false,
-            error: error instanceof Error ? error.message : "Error desconocido al crear un criterio",
+            error: error instanceof Error ? error.message : "Error desconocido al elimianr la abreviación",
             data: null
         };
     }

@@ -72,7 +72,7 @@ const CriterionTable = ({ data }: Props) => {
                                 />
 
                                 <DeleteCriterionButton
-                                    criterionId={criterion._id}
+                                    _id={criterion._id}
                                 />
                             </ContextMenu>
                         </TableCell>

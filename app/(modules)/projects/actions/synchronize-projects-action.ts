@@ -1,7 +1,8 @@
 'use server';
 
 
-import { getCollection } from "../../../../actions/authentication-handler-action";
+
+import getCollection from "@/actions/mongo/get-collection";
 import { extractProjectsFromCSV } from "../functions/extract-projects-from-csv";
 import { Project } from "../models/project";
 import { revalidatePath } from "next/cache";

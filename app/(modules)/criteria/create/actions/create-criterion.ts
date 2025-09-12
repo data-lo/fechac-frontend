@@ -1,7 +1,8 @@
 'use server';
 
 // 1. Acciones internas / helpers
-import { getCollection } from "@/actions/authentication-handler-action";
+import getCollection from "@/actions/mongo/get-collection";
+
 
 // 2. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";

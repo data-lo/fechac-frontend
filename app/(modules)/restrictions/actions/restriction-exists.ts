@@ -1,7 +1,7 @@
 'use server'
 
 // 1. Librerías internas (acciones, helpers, etc.)
-import { getCollection } from "@/actions/mongo/get-collection";
+import getCollection from "@/actions/mongo/get-collection";
 
 // 2. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
