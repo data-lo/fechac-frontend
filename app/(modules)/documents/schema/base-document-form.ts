@@ -4,16 +4,13 @@ import { REQUIRED_FIELD } from "@/messages/form-messages";
 
 const BASE_DOCUMENT_SCHEMA = z.object({
     uuid: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
+        .string({ required_error: REQUIRED_FIELD }),
     
     path: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
+        .string({ required_error: REQUIRED_FIELD }),
     
     download_url: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
+        .string({ required_error: REQUIRED_FIELD }),
     
     area: z
         .string({ required_error: REQUIRED_FIELD })
@@ -34,7 +31,7 @@ const BASE_DOCUMENT_SCHEMA = z.object({
     
     metadata: z.record(z.any()),
 
-    status: z.enum(["NOT_TRANSFERRED", "TRANSFERRED", "IN_PROGRESS"], {
+    status: z.enum(["NO_TRANSFERED", "TRANSFERED", "IN_PROCESS"], {
         required_error: REQUIRED_FIELD,
     }),
 
