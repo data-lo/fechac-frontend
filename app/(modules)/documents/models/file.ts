@@ -6,6 +6,6 @@ export interface File {
     is_multimedia: boolean;
     project_id: string;
     metadata: Object;
-    status: string;
+    status: "NOT_TRANSFERRED" | "TRANSFERRED" | "IN_PROGRESS";
     item_id: string;
 }
