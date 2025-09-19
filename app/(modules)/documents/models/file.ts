@@ -5,7 +5,7 @@ export interface File {
     area: string;
     is_multimedia: boolean;
     project_id: string;
-    metadata: Object;
-    status: "NOT_TRANSFERRED" | "TRANSFERRED" | "IN_PROGRESS";
+    metadata: Object ;
+    status: "NO_TRANSFERED" | "TRANSFERED" | "IN_PROCESS";
     item_id: string;
 }

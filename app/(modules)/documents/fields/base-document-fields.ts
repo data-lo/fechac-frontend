@@ -98,9 +98,9 @@ export const FORM_STATUS_FIELDS = [
             label: "Estatus de transferencia",
             placeholder: "Selecciona el estatus",
             items: [
-                { label: "No transferido", value: "NOT_TRANSFERRED" },
-                { label: "transferido", value: "TRANSFERRED" },
-                { label: "En progreso", value: "IN_PROGRESS"},
+                { label: "No transferido", value: "NO_TRANSFERED" },
+                { label: "transferido", value: "TRANSFERED" },
+                { label: "En progreso", value: "IN_PROCESS"},
             ],
         },
     },
