@@ -1,5 +1,5 @@
 'use client'
-import { title } from "process";
+
 import { FileDocument } from "../../models/file-document";
 import DocumentUpdateForm from "./components/document-update-form";
 import NavigationBreadcrumb from "@/components/breadcrumb";
@@ -9,6 +9,7 @@ interface Props {
         document: FileDocument
     }
 }
+const getFileName = (p: string) => p.split("/").pop() ?? p;
 
 const UpdateDocumentSection = ({ data }: Props) => {
     const breadcrumbRoutes = [
@@ -18,7 +19,7 @@ const UpdateDocumentSection = ({ data }: Props) => {
         },
         {
             href: `#`,
-            title: `ACTUALIZAR DOCUMENTO: ${data.document.uuid}`
+            title: `ACTUALIZAR DOCUMENTO: ${getFileName(data.document.path)}`
         }
     ];
     return (
