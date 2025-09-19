@@ -1,6 +1,6 @@
 'use client';
 
-
+import { useEffect } from "react";
 import * as z from "zod";
 import { useForm, type DefaultValues, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,6 +50,8 @@ const DocumentUpdateForm = ({ data }: Props) => {
 
     const form = useForm<InputValues>({
         resolver: zodResolver(UPDATE_DOCUMENT_SCHEMA),
+        mode: "onChange",
+        reValidateMode: "onChange",
         shouldUnregister: true,
         defaultValues: {
             _id: String(document._id),
@@ -65,7 +67,14 @@ const DocumentUpdateForm = ({ data }: Props) => {
         } as DefaultValues<InputValues>,
     });
 
+   useEffect(() => {
+        form.register("metadata");
+        form.setValue("metadata", document.metadata ?? {});
+    }, [document.metadata, form])
 
+    const onSubmitError = (errs: any) => {
+        console.warn("Form errors:", errs);
+    };
 
     const onSubmit: SubmitHandler<InputValues> = (values) => {
         console.log(values);
@@ -75,7 +84,11 @@ const DocumentUpdateForm = ({ data }: Props) => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-6">
+            <form onSubmit={form.handleSubmit(onSubmit, onSubmitError)} className="flex flex-col gap-6">
+
+                <input type="hidden" {...form.register("_id")} />
+                <input type="hidden" {...form.register("uuid")} />
+
                 <h1 className="text-base font-semibold">Identificación</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {FORM_IDENTIFICATION_FIELDS.map
@@ -128,7 +141,7 @@ const DocumentUpdateForm = ({ data }: Props) => {
                     />
                 </footer>
             </form>
-        </Form>
+        </Form>  
     );
 };
 
