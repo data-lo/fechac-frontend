@@ -7,6 +7,11 @@ export const routes = [
         href: "/projects"
     },
     {
+        icon: FolderKanban,
+        label: "Documentos",
+        href: "/documents"
+    },
+    {
         icon: SlidersHorizontal,
         label: "Criterios",
         href: "/criteria"
