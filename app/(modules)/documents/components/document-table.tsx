@@ -19,6 +19,8 @@ import ActionButton from "@/components/action-button"
 import { getStatusInfo, DocumentStatusEnum } from "../functions/get-status-translation"
 import { FileDocument } from "../models/file-document"
 
+import { toPlain } from "../functions/toPlain"
+
 interface Props {
     data: FileDocument[]
 }
@@ -27,6 +29,7 @@ const DocumentsTable = ({ data }: Props) => {
     const router = useRouter();
 
     const getExt = (p: string) => p.split('.').pop()?.toLowerCase() ?? '-';
+    const getFileName = (p: string) => p.split("/").pop() ?? p;
 
     const handleEdit = (documentId: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -56,7 +59,7 @@ const DocumentsTable = ({ data }: Props) => {
                             </TableCell>
                             <TableCell>
                                 <div className="line-clamp-2 leading-tight" title={document.uuid}>
-                                    {document.uuid}
+                                    {getFileName(document.path)}
                                 </div>
                             </TableCell>
                             <TableCell className="text-sm">
