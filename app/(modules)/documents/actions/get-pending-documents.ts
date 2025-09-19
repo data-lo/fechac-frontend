@@ -1,7 +1,6 @@
 'use server';
 
 import { FileDocument } from "../models/file-document";
-import { File } from "../models/file";
 import { ActionResponse } from "@/interfaces/action/action-response";
 import getCollection from "@/actions/mongo/get-collection";
 
@@ -18,7 +17,7 @@ export async function getPendingDocuments(
     limit: number = 10,
     options: Omit<PaginationParams, 'page' | 'limit'> = {}
 ): Promise<ActionResponse<{
-    files: File[];
+    files: FileDocument[];
     total: number;
     currentPage: number;
     totalPages: number;
