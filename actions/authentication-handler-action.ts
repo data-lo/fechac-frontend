@@ -7,12 +7,12 @@ import { revalidatePath } from "next/cache";
 import { getExpirationDate } from "@/functions/get-expiration-date";
 
 import { AccessRecord } from "@/interfaces/access-record";
+import { MicrosoftUserInfo } from "@/interfaces/microsoft-user-info";
 import { MicrosoftSessionObject } from "@/interfaces/microsoft-token-object";
 import { MicrosoftTokenResponse } from "@/interfaces/microsoft-token-response";
-import { MicrosoftUserInfo } from "@/interfaces/microsoft-user-info";
 
-import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";
 import getCollection from "./mongo/get-collection";
+import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";
 
 
 export async function handleMicrosoftAuthCallback(data: { code: string }): Promise<GeneralResponse> {
