@@ -1,21 +1,18 @@
-import { ProjectLifecycleStatusCodeEnum } from "@/enums/project-lifecycle-status-code-enum";
+import { FechacStatusEnum } from "@/enums/project-lifecycle-status-code-enum";
 
-export function normalizeProjectLifecycleStatus(raw: unknown): { code?: number; closed?: boolean} {
-    // Normaliza un string "7 cerrado", "07 cerrado", etc.
-    if (raw == null) return {};
+export function normalizeProjectStatus(status: string | null): string {
+  if (status == null) return "";
 
-    const s = String(raw). trim().toLowerCase();
+  const s = String(status).trim().toUpperCase();
 
-    const numMatch = s.match(/\d+/)?.[0];
-    const code = numMatch ? Number(numMatch) : undefined;
+  const numMatch = s.match(/\d+/)?.[0];
+  const code = numMatch ? Number(numMatch) : undefined;
 
-    const closed = s.includes("cerrado");
+  if (!code) return s;
 
-    return { code, closed }
+  return `${code} CERRADO`;
 }
 
-export function isClosedProjectLifecycleStatus(raw: unknown): boolean {
-    // True si el estado equivale a "7 cerrado"
-    const { code, closed } = normalizeProjectLifecycleStatus(raw);
-    return code === ProjectLifecycleStatusCodeEnum.CLOSED && closed === true;
+export function isClosedProject(status: string | null): boolean {
+  return normalizeProjectStatus(status) === FechacStatusEnum.CLOSED;
 }

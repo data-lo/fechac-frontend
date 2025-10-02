@@ -1,3 +1,3 @@
-export enum ProjectLifecycleStatusCodeEnum {
-    CLOSED = 7,
+export enum FechacStatusEnum {
+    CLOSED = "7 CERRADO",
 }

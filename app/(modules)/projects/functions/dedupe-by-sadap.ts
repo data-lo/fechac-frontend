@@ -1,18 +1,17 @@
 import type { Project } from "../models/project";
 
-export function dedupeBySadapID<T extends Pick<Project, "sadap_id">>(records: T[]): T[] {
-    const seen = new Set<String>();
-    const out: T[] = [];
+export function uniqueProjectsBySadapId(projects: Project[]): Project[] {
+    const seen = new Set<string>();
+    const out: Project[] = [];
 
-    for (const r of records) {
-        const key = String(r.sadap_id ?? "").trim();
-
+    for (const project of projects) {
+        const key = String(project.sadap_id ?? "").trim();
         if (!key) continue;
 
         if (seen.has(key)) continue;
 
         seen.add(key);
-        out.push({...r, sadap_id: key});
+        out.push({ ...project, sadap_id: key });
     }
 
     return out;
