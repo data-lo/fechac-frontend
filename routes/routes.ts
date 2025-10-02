@@ -1,13 +1,13 @@
-import { Cloud, FolderKanban, Lock, SlidersHorizontal, WholeWord, } from "lucide-react";
+import { Cloud, FileStack, Folder, Lock, SlidersHorizontal, WholeWord, } from "lucide-react";
 
 export const routes = [
     {
-        icon: FolderKanban,
+        icon: Folder,
         label: "Proyectos",
         href: "/projects"
     },
     {
-        icon: FolderKanban,
+        icon: FileStack,
         label: "Documentos",
         href: "/documents"
     },

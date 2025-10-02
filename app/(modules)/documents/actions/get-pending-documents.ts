@@ -72,7 +72,7 @@ export async function getPendingDocuments(
             },
         };
     } catch (error) {
-        console.error('Error en getPendingDocuments:', error);
+        console.error('[Error] en getPendingDocuments:', error);
 
         return {
             success: false,

@@ -13,23 +13,17 @@ import {
 import ContextMenu from "@/components/context-menu"
 import ActionButton from "@/components/action-button"
 
-
-
-
 import { getStatusInfo, DocumentStatusEnum } from "../functions/get-status-translation"
 import { FileDocument } from "../models/file-document"
 
-import { toPlain } from "../functions/toPlain"
 
 interface Props {
-    data: FileDocument[]
+    data: FileDocument[];
 }
 
 const DocumentsTable = ({ data }: Props) => {
     const router = useRouter();
 
-    const getExt = (p: string) => p.split('.').pop()?.toLowerCase() ?? '-';
-    const getFileName = (p: string) => p.split("/").pop() ?? p;
 
     const handleEdit = (documentId: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
@@ -50,6 +44,7 @@ const DocumentsTable = ({ data }: Props) => {
             <TableBody>
                 {data.map((document, index) => {
                     const statusInfo = getStatusInfo(document.status as DocumentStatusEnum);
+                    
                     const IconComponent = statusInfo.icon;
                     
                     return (
@@ -59,11 +54,12 @@ const DocumentsTable = ({ data }: Props) => {
                             </TableCell>
                             <TableCell>
                                 <div className="line-clamp-2 leading-tight" title={document.uuid}>
-                                    {getFileName(document.path)}
+                                    {String(document.file_name).replace(/\.[^/.]+$/, "").toUpperCase()}
+
                                 </div>
                             </TableCell>
                             <TableCell className="text-sm">
-                                {getExt(document.path)}
+                                {document.metadata.mime_type}
                             </TableCell>
                             <TableCell>
                                 <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm text-xs font-medium ${statusInfo.className}`}>

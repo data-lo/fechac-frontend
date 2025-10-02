@@ -61,7 +61,7 @@ const ViewDocumentSection = async ({ searchParams }: Props) => {
   ];
 
   return (
-    <div className="px-6 py-4 flex flex-col h-full gap-6 relative overflow-auto pt-16">
+    <div className="px-6 py-4 flex flex-col h-screen gap-6 relative overflow-auto pt-16">
       <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
         <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
       </nav>
@@ -71,14 +71,14 @@ const ViewDocumentSection = async ({ searchParams }: Props) => {
           <div className="flex items-center gap-2">
             <LimitSelector
               currentLimit={limit}
-              route="/projects"
+              route="/documents"
             />
           </div>
 
           <DocumentsTable data={filesPlain} />
         </ Fragment>
       ) : (
-        <EmptyState text={"No hay proyectos disponibles"} />
+        <EmptyState text={"No hay documentos disponibles"} />
       )}
 
       <PaginationComponent
