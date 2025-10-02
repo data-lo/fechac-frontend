@@ -1,0 +1,5 @@
+export enum DocumentStatusEnum {
+    NOT_TRANSFERRED = 'NOT_TRANSFERRED',
+    IN_PROCESS = 'IN_PROCESS',
+    TRANSFERRED = 'TRANSFERED'
+}
