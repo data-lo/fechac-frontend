@@ -13,7 +13,7 @@ export async function getDocument(_id: string): Promise<ActionResponse<{ documen
         if (!ObjectId.isValid(_id)) {
             return {
                 success: false,
-                error: "ID invalido",
+                error: "¡ID inválido!",
                 data: null
             }
         }

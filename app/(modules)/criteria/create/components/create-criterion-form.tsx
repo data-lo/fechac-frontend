@@ -110,7 +110,7 @@ const CreateCriterionForm = () => {
                         (({ component: Component, props }, index) => (
                             <Component key={index} {...props} control={form.control} />
                         ))}
-                </div>
+                </ div>
 
                 <h1 className="text-base font-semibold">Almacenamiento</h1>
 

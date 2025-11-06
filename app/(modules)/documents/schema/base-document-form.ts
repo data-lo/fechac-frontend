@@ -1,21 +1,28 @@
 import * as z from "zod";
 
 import { REQUIRED_FIELD } from "@/messages/form-messages";
+import { ProjectStatusEnum } from "@/enums/project-status-enum";
 
 const BASE_DOCUMENT_SCHEMA = z.object({
+
+    file_name: z
+        .string()
+        .min(1, REQUIRED_FIELD)
+        .transform((val) => val.toUpperCase()),
+
     uuid: z
         .string({ required_error: REQUIRED_FIELD }),
-    
+
     path: z
         .string({ required_error: REQUIRED_FIELD }),
-    
+
     download_url: z
         .string({ required_error: REQUIRED_FIELD }),
-    
+
     area: z
         .string({ required_error: REQUIRED_FIELD })
         .transform((val) => val.toUpperCase()),
-    
+
     is_multimedia: z.preprocess((v) => {
         if (v === "true") return true;
         if (v === "false") return false;
@@ -26,19 +33,18 @@ const BASE_DOCUMENT_SCHEMA = z.object({
     })),
 
     project_id: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
-    
-    metadata: z.record(z.any()),
+        .string({ required_error: REQUIRED_FIELD }),
 
-    status: z.enum(["NO_TRANSFERED", "TRANSFERED", "IN_PROCESS"], {
+    web_url: z
+        .string({ required_error: REQUIRED_FIELD }),
+
+    status: z.nativeEnum(ProjectStatusEnum, {
         required_error: REQUIRED_FIELD,
     }),
 
-    item_id: z
+    one_drive_item_id: z
         .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
-          
+
 });
 
 export { BASE_DOCUMENT_SCHEMA };

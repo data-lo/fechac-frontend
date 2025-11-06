@@ -61,25 +61,22 @@ const DocumentUpdateForm = ({ data }: Props) => {
             area: document.area,
             is_multimedia: document.is_multimedia ? "true" : "false",
             project_id: document.project_id,
-            metadata_readonly: JSON.stringify(document.metadata ?? {}, null, 2),
+            file_name: document.file_name,
             status: document.status,
-            item_id: document.item_id
+            one_drive_item_id: document.one_drive_item_id
         } as DefaultValues<InputValues>,
     });
 
-   useEffect(() => {
-        form.register("metadata");
-        form.setValue("metadata", document.metadata ?? {});
-    }, [document.metadata, form])
 
     const onSubmitError = (errs: any) => {
         console.warn("Form errors:", errs);
     };
 
     const onSubmit: SubmitHandler<InputValues> = (values) => {
-        console.log(values);
-        const parsed: OutputValues = UPDATE_DOCUMENT_SCHEMA.parse(values);
-        updateMutation.mutate(parsed);
+
+
+
+        // updateMutation.mutate(parsed);
     };
 
     return (

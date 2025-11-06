@@ -5,5 +5,4 @@ export interface AccessRecord {
     code: string;
     createdAt: string | Date;
     isLastAccess: boolean;
-
 }

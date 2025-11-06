@@ -1,9 +1,6 @@
-import DatePickerField from "@/components/form/date-picker-field";
-import DynamicArrayField from "@/components/form/dynamic-array-field";
 import InputField from "@/components/form/input-field";
 import SelectField from "@/components/form/select-field";
-import { DepartmentList, TypeOfFileList } from "@/functions/transform-enums";
-import { Component } from "lucide-react";
+import { DepartmentList} from "@/functions/transform-enums";
 
 
 // 1. Identification
@@ -22,7 +19,7 @@ export const FORM_IDENTIFICATION_FIELDS = [
         component: InputField,
         props: {
             name: "project_id",
-            label: "ID del proyecto",
+            label: "Proyecto Asociado",
             placeholder: "Ingresa el ID del proyecto",
             items: []
         },
@@ -36,6 +33,7 @@ export const FORM_ACCESS_FIELDS = [
         props: {
             name: "path",
             label: "Ruta (path)",
+            disabled: true,
             placeholder: "/RUTA/DEL/PROYECTO",
             items: [],
         },
@@ -46,6 +44,7 @@ export const FORM_ACCESS_FIELDS = [
             name: "download_url",
             label: "URL de descarga",
             placeholder: "https://...",
+            disabled: true,
             items: []
         }
     }
@@ -95,7 +94,7 @@ export const FORM_STATUS_FIELDS = [
     {component: SelectField,
         props: {
             name: "status",
-            label: "Estatus de transferencia",
+            label: "Estatus de Transferencia",
             placeholder: "Selecciona el estatus",
             items: [
                 { label: "No transferido", value: "NO_TRANSFERED" },

@@ -5,8 +5,8 @@ import { extractProjectsFromCSV } from "../functions/extract-projects-from-csv";
 import { Project } from "../models/project";
 import { revalidatePath } from "next/cache";
 
-import { uniqueProjectsBySadapId } from "../functions/dedupe-by-sadap";
-import { isClosedProject } from "../functions/normalize-project-lifecycle-status";
+import { uniqueProjectsBySadapId } from "../functions/unique-projects-by-sadap-id";
+import { isClosedProject } from "../functions/is-closed-project";
 
 
 export async function synchronizeProjectsAction(values: File[]) {

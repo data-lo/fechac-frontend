@@ -1,4 +1,4 @@
-import { getDocument } from "../actions/get-documents";
+import { getDocument } from "../actions/get-document";
 import UpdateDocumentSection from "./update-documents-section";
 
 export default async function UpdateDocumentPage({

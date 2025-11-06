@@ -1,86 +1,40 @@
 'use server';
-
-import { ObjectId, Document } from "mongodb";
-
+// Funciones y utilidades del framework
 import { revalidatePath } from "next/cache";
 
+// Funciones locales
 import { getExpirationDate } from "@/functions/get-expiration-date";
 
-import { AccessRecord } from "@/interfaces/access-record";
+// Interfaces
 import { MicrosoftUserInfo } from "@/interfaces/microsoft-user-info";
 import { MicrosoftSessionObject } from "@/interfaces/microsoft-token-object";
 import { MicrosoftTokenResponse } from "@/interfaces/microsoft-token-response";
 
+// Conexiones / DB
 import getCollection from "./mongo/get-collection";
+
+// Constantes / Mensajes
 import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";
 
-
-export async function handleMicrosoftAuthCallback(data: { code: string }): Promise<GeneralResponse> {
+export async function handleMicrosoftAuthCallback(params: { code: string }): Promise<GeneralResponse> {
   try {
+    await deactivatePreviousSessions();
 
-    await desactivateAccessRecords({ isLastAccess: true }, { isLastAccess: false });
+    const microsoftToken = await exchangeAuthCodeForToken(params.code);
 
-    const newAccessObject = await createAccessRecord({ code: data.code });
-
-    const newMicrosoftObject = await exchangeCodeForToken(data.code, new ObjectId(newAccessObject._id));
-
-    await storeMicrosoftToken(newMicrosoftObject)
+    await saveMicrosoftToken(microsoftToken);
 
     return {
       status: 200,
-      message: LOGIN_SUCCESS_MESSAGE
-    }
-
-  } catch (error: any) {
-    console.error("❌ Error al intentar manejar el token de autenticación:", error);
+      message: LOGIN_SUCCESS_MESSAGE,
+    };
+  } catch (error) {
+    console.error("Error al manejar el callback de autenticación de Microsoft:", error);
     throw error;
   }
 }
 
-export async function desactivateAccessRecords<T extends Document>(
-  filter: Partial<T>,
-  update: Partial<T>
-): Promise<void> {
-  try {
-    const collection = await getCollection<AccessRecord>("access");
-
-    const result = await collection.updateMany(filter, { $set: update } as any);
-
-    if (result.modifiedCount === 0) console.warn('No se actualizo un ningún documento AccessRecord.');
-
-  } catch (error: any) {
-    console.error("❌ Error al actualizar los documentos AccessRecord:", error);
-    throw new Error('Ocurrió un error al intentar actualizar los documentos AccessRecord.');
-  }
-}
-
-
-export async function createAccessRecord(data: { code: string }): Promise<{ _id: string }> {
-  try {
-    const collection = await getCollection<AccessRecord>("access");
-
-    const currentDate = new Date();
-
-    const newDocument = await collection.insertOne({
-      code: data.code,
-      createdAt: currentDate,
-      isLastAccess: true,
-    });
-
-    if (!newDocument.insertedId) {
-      throw new Error('Ocurrió un error al intentar crear el documento AccessRecord.');
-    }
-
-    return { _id: newDocument.insertedId.toString() }
-
-  } catch (error: any) {
-    console.error("❌ Error al crear el documento AccessRecord:", error);
-    throw new Error('Ocurrió un error al intentar crear el documento AccessRecord.');
-  }
-}
-
-
-export async function exchangeCodeForToken(code: string, access_id: ObjectId): Promise<MicrosoftSessionObject> {
+export async function exchangeAuthCodeForToken(code: string): Promise<MicrosoftSessionObject> {
   const params = new URLSearchParams({
     client_id: process.env.CLIENT_ID!,
     client_secret: process.env.CLIENT_SECRET_VALUE!,
@@ -102,21 +56,21 @@ export async function exchangeCodeForToken(code: string, access_id: ObjectId): P
 
   if (!response.ok) {
     const errorBody = await response.text();
-    console.error("❌ Falló el intercambio de código por token en Microsoft OAuth:", errorBody);
+    console.error("Falló el intercambio de código por token en Microsoft OAuth:", errorBody);
     throw new Error('No se pudo obtener el token de Microsoft');
   }
 
   const responseInJSON: MicrosoftTokenResponse = await response.json();
 
-  return { access_id, ...responseInJSON, };
+  return { code, ...responseInJSON, };
 }
 
-export async function storeMicrosoftToken(data: MicrosoftSessionObject): Promise<{ _id: string }> {
+export async function saveMicrosoftToken(data: MicrosoftSessionObject): Promise<{ _id: string }> {
   try {
 
-    const collection = await getCollection<MicrosoftSessionObject>("session");
+    const sessionCollection = await getCollection<MicrosoftSessionObject>("microsoft_session");
 
-    const newDocument = await collection.insertOne({
+    const newDocument = await sessionCollection.insertOne({
       access_token: data.access_token,
       expires_in: data.expires_in,
       ext_expires_in: data.ext_expires_in,
@@ -125,8 +79,8 @@ export async function storeMicrosoftToken(data: MicrosoftSessionObject): Promise
       token_type: data.token_type,
       created_at: new Date(),
       renewed_token_expiration_date: getExpirationDate(data.expires_in),
-      isLastTokenObtenaided: true,
-      access_id: data.access_id
+      is_last_token_obtained: true,
+      code: data.code
     });
 
     if (!newDocument.insertedId) {
@@ -136,48 +90,30 @@ export async function storeMicrosoftToken(data: MicrosoftSessionObject): Promise
     return { _id: newDocument.insertedId.toString() }
 
   } catch (error: any) {
-    console.error("❌ Error al crear el documento MicrosoftSessionObject:", error);
+    console.error("Error al crear el documento MicrosoftSessionObject:", error);
     throw new Error('Ocurrió un error al intentar crear el documento MicrosoftSessionObject.');
   }
 }
 
 
-export async function getSession(): Promise<MicrosoftSessionObject | null> {
+export async function getActiveMicrosoftSession(): Promise<MicrosoftSessionObject | null> {
   try {
-    const accessCollection = await getCollection<AccessRecord>("access");
+    const sessionCollection = await getCollection<MicrosoftSessionObject>("microsoft_session");
 
-    const sessionCollection = await getCollection<MicrosoftSessionObject>("session");
+    const activeSession = await sessionCollection.findOne({ is_last_token_obtained: true });
 
-    const access = await accessCollection.findOne({ isLastAccess: true });
+    if (!activeSession) return null;
 
-    if (!access) return null;
-
-    let session = await sessionCollection.findOne({ access_id: access._id, isLastTokenObtenaided: true });
-
-    if (!session) return null;
-
-    let newMicrosoftObject;
-
-    if (session.created_at && session.renewed_token_expiration_date && new Date(session.renewed_token_expiration_date) < new Date()) {
-      newMicrosoftObject = await extendedDurationSession(session.refresh_token, access.code);
-
-      await desactivatePreviousSessions(access._id);
-
-      await storeMicrosoftToken(newMicrosoftObject);
-
-      session = await sessionCollection.findOne({ access_id: access._id, isLastTokenObtenaided: true });
-    }
-
-    return session;
+    return activeSession;
   } catch (error) {
-    console.error("❌ Error al recuperar la sesión:", error);
+    console.error("Error al recuperar la sesión activa:", error);
     throw new Error("No se pudo recuperar la sesión activa.");
   }
 }
 
 export async function getUserInformation(): Promise<MicrosoftUserInfo | null> {
 
-  const session = await getSession();
+  const session = await getActiveMicrosoftSession();
 
   if (!session) return null;
 
@@ -202,7 +138,7 @@ export async function getUserInformation(): Promise<MicrosoftUserInfo | null> {
 
 
 export async function handleLogout(): Promise<GeneralResponse> {
-  await desactivateAccessRecords({ isLastAccess: true }, { isLastAccess: false });
+  await desactivatePreviousSessions();
 
   revalidatePath("/session");
 
@@ -239,14 +175,13 @@ export async function extendedDurationSession(refreshToken: string, access_id: s
   return { ...responseInJSON, access_id }
 }
 
-export async function desactivatePreviousSessions(access_id: ObjectId) {
-  const collection = await getCollection<MicrosoftSessionObject>('session');
-
+export async function deactivatePreviousSessions() {
+  const collection = await getCollection<MicrosoftSessionObject>('microsoft_session');
 
   const result = await collection.updateMany(
-    { isLastTokenObtenaided: true, access_id: access_id },
-    { $set: { isLastTokenObtenaided: false } }
+    { is_last_token_obtained: true},
+    { $set: { is_last_token_obtained: false } }
   );
 
-  if (result.modifiedCount === 0) console.warn('No se actualizo un ningún documento SessionRecord.');
+  if (result.modifiedCount === 0) console.warn('No se actualizo un ningún documento Microsoft Session.');
 }
