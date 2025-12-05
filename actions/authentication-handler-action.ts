@@ -60,6 +60,8 @@ export async function exchangeAuthCodeForToken(code: string): Promise<MicrosoftS
     throw new Error('No se pudo obtener el token de Microsoft');
   }
 
+  
+
   const responseInJSON: MicrosoftTokenResponse = await response.json();
 
   return { code, ...responseInJSON, };
@@ -138,7 +140,7 @@ export async function getUserInformation(): Promise<MicrosoftUserInfo | null> {
 
 
 export async function handleLogout(): Promise<GeneralResponse> {
-  await desactivatePreviousSessions();
+  await deactivatePreviousSessions();
 
   revalidatePath("/session");
 
