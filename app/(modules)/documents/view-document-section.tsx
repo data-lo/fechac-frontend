@@ -22,7 +22,7 @@ const ViewDocumentSection = async ({ searchParams }: Props) => {
 
     const page = Math.max(1, Number(params?.page) || 1);
 
-    const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
+    const limit = Math.max(1, Math.min(100, Number(params?.limit) || 50));
 
     const response = await getPendingDocuments(page, limit);
 
@@ -68,12 +68,12 @@ const ViewDocumentSection = async ({ searchParams }: Props) => {
 
       {files.length > 0 ? (
         <Fragment>
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <LimitSelector
               currentLimit={limit}
               route="/documents"
             />
-          </div>
+          </div> */}
 
           <DocumentsTable data={filesPlain} />
         </ Fragment>

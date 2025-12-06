@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import getProject from "./actions/get-project";
 import UpdateProjectSection from "./update-project-section";
+import getDocumentsByProject from "./actions/get-documents-by-project";
 
 interface Props {
     params: {
@@ -21,6 +22,7 @@ export default async function UpdateProjectPage({ params }: Props) {
         );
     }
 
+    const documents = await getDocumentsByProject(project.sadap_id)
 
     return (
         <Fragment>

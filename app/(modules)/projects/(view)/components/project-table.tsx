@@ -33,11 +33,11 @@ const ProjectTable = ({ data }: Props) => {
     return (
         <Table>
             <TableHeader>
-                <TableRow className=" font-bold">
+                <TableRow className="font-bold">
                     <TableHead className="w-[50px] text-center">#</TableHead>
-                    <TableHead className="max-w-[400px]">NOMBRE</TableHead>
+                    <TableHead className="max-w-[380px]">NOMBRE</TableHead>
                     <TableHead className="w-[100px]">ID</TableHead>
-                    <TableHead className="w-[180px]">ESTATUS</TableHead>
+                    <TableHead className="w-[340px]">ESTATUS</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>

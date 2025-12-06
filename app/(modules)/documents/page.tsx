@@ -1,4 +1,4 @@
-import ViewDocumentSection from "./view-project-section";
+import ViewDocumentSection from "./view-document-section";
 
 interface Props {
     searchParams?: Promise<{ page?: string, limit?: string, query?: string}>;

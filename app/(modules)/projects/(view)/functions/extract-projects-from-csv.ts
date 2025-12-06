@@ -35,7 +35,6 @@ export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
             status: ProjectStatusEnum.UNPROCESSED,
         }));
 
-
         newObjects.push(...newRecord);
     }
 

@@ -32,12 +32,12 @@ const DocumentsTable = ({ data }: Props) => {
     return (
         <Table>
             <TableHeader>
-                <TableRow>
-                    <TableHead className="w-16 whitespace-nowrap">#</TableHead>
-                    <TableHead className="min-w-0">NOMBRE</TableHead>
-                    <TableHead className="">TIPO DE DOCUMENTO</TableHead> 
-                    <TableHead className="">ESTATUS</TableHead>
-                    <TableHead className="w-24"></TableHead>
+                <TableRow className=" font-bold">
+                    <TableHead className="w-[50px] text-center">#</TableHead>
+                    <TableHead className="max-w-[300px]">NOMBRE</TableHead>
+                    <TableHead className="w-[200px]">PROYECTO</TableHead> 
+                    <TableHead className="w-[340px]">ESTATUS</TableHead>
+                    <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>
 
@@ -59,7 +59,7 @@ const DocumentsTable = ({ data }: Props) => {
                                 </div>
                             </TableCell>
                             <TableCell className="text-sm">
-                                {document.metadata.mime_type}
+                                {document.sadap_id}
                             </TableCell>
                             <TableCell>
                                 <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm text-xs font-medium ${statusInfo.className}`}>

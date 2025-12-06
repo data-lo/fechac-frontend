@@ -5,7 +5,7 @@ export interface File {
     area: string;
     is_multimedia: boolean;
     status: "NOT_TRANSFERRED" | "TRANSFERRED" | "IN_PROCESS";
-    project_id: string;
+    sadap_id: string;
     uuid: string;
     metadata: {
         web_url: string
