@@ -7,8 +7,8 @@ import EmptyState from "@/components/empty-state";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 3. Componentes compartidos
-import LimitSelector from "../../../components/limit-selector";
-import PaginationComponent from "../../../components/pagination";
+import LimitSelector from "../../../../components/limit-selector";
+import PaginationComponent from "../../../../components/pagination";
 
 // 4. Componentes locales del módulo
 import UploadFileSection from "./upload-file-section";
@@ -26,7 +26,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   const page = Math.max(1, Number(params?.page) || 1);
 
-  const limit = Math.max(1, Math.min(100, Number(params?.limit) || 10));
+  const limit = Math.max(1, Math.min(100, Number(params?.limit) || 50));
 
   const response = await getPendingProjects(page, limit);
 
@@ -63,21 +63,21 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
   ];
 
   return (
-    <div className="px-6 py-4 flex flex-col h-screen gap-6 relative overflow-auto pt-16">
-      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
+    <Fragment >
+      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-b-2 border-gray-200">
         <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
       </nav>
 
-      <UploadFileSection />
+      {/* <UploadFileSection /> */}
 
       {projects.length > 0 ? (
         <Fragment>
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <LimitSelector
               currentLimit={limit}
               route="/projects"
             />
-          </div>
+          </div> */}
 
           <ProjectTable data={projects} />
         </ Fragment>
@@ -91,7 +91,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         limit={limit}
         baseUrl="/projects"
       />
-    </div>
+    </Fragment>
   );
 };
 

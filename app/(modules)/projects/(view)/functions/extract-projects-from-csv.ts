@@ -32,7 +32,7 @@ export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
             authorized_contract_amount: row["Monto Aut-Conv"],
             percentage: row["%"],
             total_investment: row["Inversión Total"],
-            transfer_status: ProjectStatusEnum.TRANSFERRED,
+            status: ProjectStatusEnum.UNPROCESSED,
         }));
 
 

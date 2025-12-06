@@ -2,7 +2,7 @@
 
 import getCollection from "@/actions/mongo/get-collection";
 import { extractProjectsFromCSV } from "../functions/extract-projects-from-csv";
-import { Project } from "../models/project";
+import { Project } from "../../models/project";
 import { revalidatePath } from "next/cache";
 
 import { uniqueProjectsBySadapId } from "../functions/unique-projects-by-sadap-id";

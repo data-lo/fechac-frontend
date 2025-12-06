@@ -5,7 +5,7 @@ import { DagRun } from "../interfaces/dag-run-interface";
 export const getDag = async (
   token: string,
   dagId: string | undefined = process.env.AIRFLOW_MAIN_DAG
-): Promise<DagRun> => {
+): Promise<DagRun[]> => {
   try {
     const response = await axios.get(
       `${process.env.AIRFLOW_API}/api/v2/dags/${dagId}/dagRuns?limit=10&order_by=-start_date`,
