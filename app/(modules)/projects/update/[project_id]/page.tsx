@@ -24,10 +24,14 @@ export default async function UpdateProjectPage({ params }: Props) {
 
     const documents = await getDocumentsByProject(project.sadap_id)
 
+    // const countDocuments = await countDocumentsPerProject(project.sadap_id);
+
+
     return (
-        <Fragment>
-            <UpdateProjectSection project={project} />
-        </Fragment>
+        <UpdateProjectSection
+            project={project}
+            documents={documents}
+        />
     );
 };
 

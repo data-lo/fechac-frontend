@@ -32,10 +32,10 @@ const DocumentsTable = ({ data }: Props) => {
     return (
         <Table>
             <TableHeader>
-                <TableRow className=" font-bold">
+                <TableRow className="font-bold">
                     <TableHead className="w-[50px] text-center">#</TableHead>
                     <TableHead className="max-w-[300px]">NOMBRE</TableHead>
-                    <TableHead className="w-[200px]">PROYECTO</TableHead> 
+                    <TableHead className="w-[200px]">PROYECTO</TableHead>
                     <TableHead className="w-[340px]">ESTATUS</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
@@ -44,9 +44,9 @@ const DocumentsTable = ({ data }: Props) => {
             <TableBody>
                 {data.map((document, index) => {
                     const statusInfo = getStatusInfo(document.status as DocumentStatusEnum);
-                    
+
                     const IconComponent = statusInfo.icon;
-                    
+
                     return (
                         <TableRow key={index}>
                             <TableCell className="text-center text-gray-500">
@@ -70,11 +70,11 @@ const DocumentsTable = ({ data }: Props) => {
                             <TableCell className="text-right">
                                 <ContextMenu>
                                     <ActionButton
-                                    title="Editar"
-                                    className="w-auto"
-                                    variant={"ghost"}
-                                    onClick={handleEdit(String(document._id))}
-                                />
+                                        title="Editar"
+                                        className="w-auto"
+                                        variant={"ghost"}
+                                        onClick={handleEdit(String(document._id))}
+                                    />
                                 </ContextMenu>
                             </TableCell>
                         </TableRow>

@@ -9,7 +9,10 @@ const getDocumentsByProject = async (sadapId: string) => {
 
     const documents = await cursor.toArray();
 
-    return documents;
+    return documents.map(doc => ({
+        ...doc,
+        _id: doc._id.toString(),
+    }));
 };
 
 export default getDocumentsByProject;

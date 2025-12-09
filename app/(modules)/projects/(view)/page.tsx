@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import ViewProjectSection from "./view-project-section";
 
 interface Props {
@@ -6,8 +7,6 @@ interface Props {
 
 export default function ProjectsPage({ searchParams }: Props) {
     return (
-        <div className="h-screen">
-            <ViewProjectSection searchParams={searchParams} />
-        </div>
+        <ViewProjectSection searchParams={searchParams} />
     )
 }

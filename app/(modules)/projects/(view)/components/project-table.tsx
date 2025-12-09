@@ -14,7 +14,7 @@ import {
 import { ProjectDocument } from "../../models/project-document";
 
 // 3. Utilidades/Funciones
-import { getStatusInfo, ProjectStatusEnum } from "../functions/get-status-translation";
+import { getStatusInfo, ProjectStatusEnum } from "../../functions/get-status-translation";
 import ActionButton from "@/components/action-button";
 import { useRouter } from "next/navigation";
 
@@ -48,7 +48,7 @@ const ProjectTable = ({ data }: Props) => {
                     const IconComponent = statusInfo.icon;
 
                     return (
-                        <TableRow key={index}>
+                        <TableRow key={index} className="text-xs">
                             <TableCell className="text-center text-gray-500 font-medium">
                                 {index + 1}
                             </TableCell>

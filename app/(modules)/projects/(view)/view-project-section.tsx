@@ -26,7 +26,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
 
   const page = Math.max(1, Number(params?.page) || 1);
 
-  const limit = Math.max(1, Math.min(100, Number(params?.limit) || 50));
+  const limit = Math.max(1, Math.min(100, Number(params?.limit) || 100));
 
   const response = await getPendingProjects(page, limit);
 
@@ -63,27 +63,34 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
   ];
 
   return (
-    <Fragment >
-      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-b-2 border-gray-200">
+    <Fragment>
+      {/* Navigation Bar - Fixed Height */}
+      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
         <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
       </nav>
+
+      {/* Main Content Area - Flexible Height with Scroll */}
 
       {/* <UploadFileSection /> */}
 
       {projects.length > 0 ? (
         <Fragment>
-          {/* <div className="flex items-center gap-2">
-            <LimitSelector
-              currentLimit={limit}
-              route="/projects"
-            />
-          </div> */}
 
+          {/* <div className="flex items-center gap-2">
+              <LimitSelector
+                currentLimit={limit}
+                route="/projects"
+              />
+            </div> */}
+
+          {/* Table Container with Scroll */}
           <ProjectTable data={projects} />
         </ Fragment>
       ) : (
         <EmptyState text={"No hay proyectos disponibles"} />
       )}
+
+      {/* Pagination - Fixed at Bottom */}
 
       <PaginationComponent
         currentPage={page}

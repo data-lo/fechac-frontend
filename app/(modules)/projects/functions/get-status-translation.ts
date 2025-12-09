@@ -7,7 +7,7 @@ const getStatusTranslation = (status: ProjectStatusEnum): string => {
         case ProjectStatusEnum.UNPROCESSED:
             return 'NO PROCESADO';
         case ProjectStatusEnum.SELECTED_FOR_TRANSFER:
-            return 'SELECCIONADO PARA TRANSFERIR';
+            return 'A TRANSFERIR';
         case ProjectStatusEnum.NOT_SELECT_TO_TRANSFER:
             return 'NO SELECCIONADO PARA TRANSFERIR';
         case ProjectStatusEnum.TRANSFERRED:

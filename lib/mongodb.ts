@@ -1,15 +1,26 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, Db } from "mongodb";
 
 const uri = process.env.DATABASE_URL!;
-const client = new MongoClient(uri);
+if (!uri) throw new Error("DATABASE_URL is not defined");
 
-let dbInstance: ReturnType<typeof client.db> | null = null;
+let cached = (global as any)._mongo || { client: null as MongoClient | null, db: null as Db | null };
 
 export async function getConnection() {
-  if (!dbInstance) {
-    await client.connect();
-    
-    dbInstance = client.db();
+  // Reusar si ya existe
+  if (cached.client && cached.db) {
+    return cached.db;
   }
-  return dbInstance;
+
+  // Crear nueva conexión UNA sola vez
+  const client = new MongoClient(uri);
+  await client.connect();
+
+  const db = client.db();
+
+  cached.client = client;
+  cached.db = db;
+
+  (global as any)._mongo = cached;
+
+  return db;
 }

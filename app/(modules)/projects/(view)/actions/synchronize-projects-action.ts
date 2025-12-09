@@ -1,12 +1,12 @@
 'use server';
 
 import getCollection from "@/actions/mongo/get-collection";
-import { extractProjectsFromCSV } from "../functions/extract-projects-from-csv";
+import { extractProjectsFromCSV } from "../../functions/extract-projects-from-csv";
 import { Project } from "../../models/project";
 import { revalidatePath } from "next/cache";
 
-import { uniqueProjectsBySadapId } from "../functions/unique-projects-by-sadap-id";
-import { isClosedProject } from "../functions/is-closed-project";
+import { uniqueProjectsBySadapId } from "../../functions/unique-projects-by-sadap-id";
+import { isClosedProject } from "../../functions/is-closed-project";
 
 
 export async function synchronizeProjectsAction(values: File[]) {

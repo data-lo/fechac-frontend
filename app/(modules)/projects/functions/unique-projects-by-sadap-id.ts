@@ -1,4 +1,4 @@
-import type { Project } from "../../models/project";
+import type { Project } from "../models/project";
 
 export function uniqueProjectsBySadapId(projects: Project[]): Project[] {
     const seen = new Set<string>();
