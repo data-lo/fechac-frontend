@@ -5,10 +5,11 @@ import { FileDocument } from "@/app/(modules)/documents/models/file-document";
 
 import { StatisticCard } from "@/components/statistic-card";
 import { CheckCircle2, FolderOpen, Layers, MapPin, Workflow, Wrench } from "lucide-react";
-import DocumentTable from "@/app/(modules)/documents/components/document-table";
+
 
 import { ProjectStatusEnum } from "@/enums/project-status-enum";
 import { getStatusTranslation } from "../../functions/get-status-translation";
+import DocumentTable from "../../components/document-table";
 
 interface Props {
     project: ProjectDocument;
