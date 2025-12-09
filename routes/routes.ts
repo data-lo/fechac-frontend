@@ -1,6 +1,11 @@
-import { Cloud, FileStack, Folder, Lock, SlidersHorizontal, WholeWord, } from "lucide-react";
+import { Cloud, FileStack, Folder, Lock, SlidersHorizontal, WholeWord, Workflow, } from "lucide-react";
 
 export const routes = [
+    {
+        icon: Workflow,
+        label: "Lotes",
+        href: "/workflows"
+    },
     {
         icon: Folder,
         label: "Proyectos",

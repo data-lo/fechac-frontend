@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import ViewProjectSection from "./view-project-section";
 
 interface Props {

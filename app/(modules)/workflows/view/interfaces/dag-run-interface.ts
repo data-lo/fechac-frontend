@@ -18,8 +18,13 @@ export interface DagRun {
 }
 
 export interface DagVersion {
-  version: number;
+  id: string;
+  version_number: number;
+  dag_id: string;
+  bundle_name: string;
+  bundle_version: string | null;
   created_at: string;
+  bundle_url: string | null;
 }
 
 export type DagRunsResponse = DagRun[];
