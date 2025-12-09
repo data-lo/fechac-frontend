@@ -86,7 +86,6 @@ const Modal = ({
         variant={variant}
         iconName={iconName}
         isPending={false}
-        className={buttonSize}
         disabled={buttonDisabled}
         type="button"
         title={dialogTrigger}

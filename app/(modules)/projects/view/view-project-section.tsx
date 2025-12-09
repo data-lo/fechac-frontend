@@ -7,15 +7,15 @@ import EmptyState from "@/components/empty-state";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 3. Componentes compartidos
-import LimitSelector from "../../../../components/limit-selector";
 import PaginationComponent from "../../../../components/pagination";
 
 // 4. Componentes locales del módulo
-import UploadFileSection from "./upload-file-section";
 import ProjectTable from "./components/project-table";
 
 // 5. Actions/Servicios
 import { getPendingProjects } from "./actions/get-pending-projects-action";
+import Modal from "@/components/modal";
+import UploadFileForm from "./components/upload-file-form";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -69,22 +69,23 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
       </nav>
 
-      {/* Main Content Area - Flexible Height with Scroll */}
-
-      {/* <UploadFileSection /> */}
+      <div className="flex justify-end">
+        <Modal
+          dialogTitle={"Cargar Proyectos"}
+          dialogTrigger="Cargar Proyectos"
+          iconName="FileUp"
+          dialogSize="3xl"
+        >
+          <UploadFileForm />
+        </Modal>
+      </div>
 
       {projects.length > 0 ? (
         <Fragment>
-
-          {/* <div className="flex items-center gap-2">
-              <LimitSelector
-                currentLimit={limit}
-                route="/projects"
-              />
-            </div> */}
-
-          {/* Table Container with Scroll */}
-          <ProjectTable data={projects} />
+          <ProjectTable
+            data={projects}
+            currentIndex={page * limit}
+          />
         </ Fragment>
       ) : (
         <EmptyState text={"No hay proyectos disponibles"} />
@@ -96,7 +97,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         currentPage={page}
         totalPages={totalPages}
         limit={limit}
-        baseUrl="/projects"
+        baseUrl="/projects/view"
       />
     </Fragment>
   );

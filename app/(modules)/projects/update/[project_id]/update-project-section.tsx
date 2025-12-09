@@ -10,6 +10,7 @@ import { CheckCircle2, FolderOpen, Layers, MapPin, Workflow, Wrench } from "luci
 import { ProjectStatusEnum } from "@/enums/project-status-enum";
 import { getStatusTranslation } from "../../functions/get-status-translation";
 import DocumentTable from "../../components/document-table";
+import EmptyMessage from "@/components/empty-message";
 
 interface Props {
     project: ProjectDocument;
@@ -50,7 +51,7 @@ export default async function UpdateProjectSection({
 
     const breadcrumbRoutes = [
         {
-            href: '/projects',
+            href: '/projects/view',
             title: 'PROYECTOS'
         },
         {
@@ -58,7 +59,6 @@ export default async function UpdateProjectSection({
             title: `PROYECTO ${project.sadap_id}`
         },
     ];
-
 
     return (
         <Fragment>
@@ -99,10 +99,14 @@ export default async function UpdateProjectSection({
                 </div>
             </div>
 
+            {documents.length > 0 && (
+                <DocumentTable data={documents} />
+            )}
 
+            {documents.length === 0 && (
+                <EmptyMessage text="¡No hay documentos asociados a este proyecto!" />
 
-            <DocumentTable data={documents} />
-
+            )}
         </Fragment >
     );
 }

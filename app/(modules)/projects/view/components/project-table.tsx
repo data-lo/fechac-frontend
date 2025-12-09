@@ -19,10 +19,11 @@ import ActionButton from "@/components/action-button";
 import { useRouter } from "next/navigation";
 
 interface Props {
-    data: ProjectDocument[]
+    data: ProjectDocument[];
+    currentIndex: number;
 }
 
-const ProjectTable = ({ data }: Props) => {
+const ProjectTable = ({ data, currentIndex }: Props) => {
 
     const router = useRouter();
 
@@ -50,7 +51,7 @@ const ProjectTable = ({ data }: Props) => {
                     return (
                         <TableRow key={index} className="text-xs">
                             <TableCell className="text-center text-gray-500 font-medium">
-                                {index + 1}
+                                {currentIndex + index + 1}
                             </TableCell>
                             <TableCell>
                                 <div className="line-clamp-1 max-w-[550px]" title={project.project_name}>

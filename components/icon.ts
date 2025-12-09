@@ -1,4 +1,4 @@
-import { Trash, Save, Pencil, Plus, Check, RefreshCcw, Navigation, FolderCog, FileCog } from "lucide-react";
+import { Trash, Save, Pencil, Plus, Check, RefreshCcw, Navigation, FolderCog, FileCog, FileUp } from "lucide-react";
 
 export const icons = {
   Trash,
@@ -9,7 +9,8 @@ export const icons = {
   RefreshCcw,
   Navigation,
   FolderCog,
-  FileCog
+  FileCog,
+  FileUp
 } as const;
 
 export type IconName = keyof typeof icons;

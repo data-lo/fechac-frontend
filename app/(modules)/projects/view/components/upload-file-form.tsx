@@ -4,14 +4,12 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
-import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "./schema/file-project";
+import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "../schema/file-project";
 import { AlertTriangle } from "lucide-react";
-import { useSynchronizeProjects } from "./hooks/use-synchronize-projects";
+import { useSynchronizeProjects } from "../hooks/use-synchronize-projects";
 import ActionButton from "@/components/action-button";
 
-
-
-const UploadFileSection = () => {
+const UploadFileForm = () => {
 
     const mutation = useSynchronizeProjects();
 
@@ -37,15 +35,6 @@ const UploadFileSection = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="flex justify-end">
-                <ActionButton
-                    type="submit"
-                    title="Sincronizar Projectos"
-                    iconName="RefreshCcw"
-                    isPending={mutation.isPending}
-                />
-            </div>
-
             <Controller
                 control={control}
                 name="file"
@@ -73,8 +62,15 @@ const UploadFileSection = () => {
                     </div>
                 )}
             />
+            <ActionButton
+                type="submit"
+                className="w-full"
+                title="Sincronizar Proyectos"
+                iconName="RefreshCcw"
+                isPending={mutation.isPending}
+            />
         </form>
     );
 }
 
-export default UploadFileSection;
+export default UploadFileForm;
