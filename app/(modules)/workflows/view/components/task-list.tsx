@@ -56,18 +56,9 @@ const statusStyles: Record<
   },
 };
 
-export default function TaskList({ tasks, title = "TAREAS DEL LOTE" }: TaskListProps) {
+export default function TaskList({ tasks }: TaskListProps) {
   return (
     <Card className="shadow-none rounded-none border-none">
-      <CardHeader>
-        <CardTitle className="text-lg font-bold text-gray-500 flex items-center gap-4">
-          {title}
-          {tasks.some(t => t.state === "running") && (
-            <Loader2 className="w-5 h-5 text-gray-500 animate-spin" />
-          )}
-        </CardTitle>
-      </CardHeader>
-
       <CardContent>
         <ul className="w-full">
           {tasks.map((task, index) => {
@@ -108,9 +99,9 @@ export default function TaskList({ tasks, title = "TAREAS DEL LOTE" }: TaskListP
                     {style.label}
                   </span>
 
-                  {task.state === "running" && (
+                  {/* {task.state === "running" && (
                     <ActionButton iconName="Eye" variant="ghost" className="w-min" />
-                  )}
+                  )} */}
                 </div>
               </li>
             );

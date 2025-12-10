@@ -1,22 +1,23 @@
-import axios from "axios";
+"use server"
 
-export async function startDagRun(dagId: string, runId?: string, conf: any = {}) {
-  if (!dagId) throw new Error("dagId es requerido");
+import axios from "axios";
+import { revalidatePath } from "next/cache";
+
+export default async function startDagRun(token: string) {
+  const dagId = process.env.AIRFLOW_MAIN_DAG;
+
+  if (!dagId) throw new Error("AIRFLOW_MAIN_DAG no está definido");
 
   try {
-    const payload = {
-      dagId,
-      runId: runId ?? `manual__${Date.now()}`,
-      conf,
-    };
+    const response = await axios.post(`${process.env.AIRFLOW_API}/api/v2/dags/${dagId}/dagRuns`,
+      { logical_date: Date.now() },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
-    const response = await axios.post("/api/airflow/run", payload);
+    revalidatePath("/workflows/view");
 
     return response.data;
   } catch (error: any) {
-    console.error("Error al iniciar DAG Run:", error?.response?.data || error);
-    throw new Error(
-      error?.response?.data?.error || "No se pudo iniciar el DAG Run"
-    );
+    throw error;
   }
 }

@@ -2,65 +2,65 @@
 import { Fragment } from "react";
 
 // 2. Componentes globales
-import AlertMessage from "@/components/alert-message";
 import EmptyState from "@/components/empty-state";
+import AlertMessage from "@/components/alert-message";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
-// 3. Componentes compartidos
-import PaginationComponent from "@/components/pagination"; // <-- (No lo usas, puedes eliminarlo si quieres)
-
-// 4. Actions / Servicios
-import { getDagExecutions } from "./actions/get-dag-executions";
+// 3. Actions / Servicios
 import getTask from "./actions/get-task";
-import { getToken } from "./actions/get-token";
+import getAirflowToken from "./actions/get-airflow-token";
+import getDagExecutions from "./actions/get-dag-executions";
 
-// 5. Componentes de la vista
+// 4. Componentes locales de la vista
 import DagTable from "./components/dag-table";
 import TaskList from "./components/task-list";
-import ActionButton from "@/components/action-button";
-import { startDagRun } from "./actions/start-dag-run";
-import toast from "react-hot-toast";
-import { stopDagRun } from "./actions/stop-dag-run";
 import ProcessControl from "./components/process-control";
 
-const ViewWorkflowSection = async () => {
-    const token = await getToken();
+// 5. Tipos / Interfaces
+import { DagRun } from "./interfaces/dag-run-interface";
 
-    // Obtener DAG runs
-    const executionsResponse = await getDagExecutions({ token });
+export default async function ViewWorkflowSection() {
+    const token = await getAirflowToken();
 
-    if (!executionsResponse.success || !executionsResponse.data) {
-        return (
-            <div className="px-6 py-4">
-                <AlertMessage
-                    buttonText="Recargar Página"
-                    message={executionsResponse.error ?? "Error desconocido"}
-                />
-            </div>
-        );
+    // 1. Obtener ejecuciones
+    const executions = await getDagExecutions(token);
+
+    // 2. Validar error en ejecuciones
+    if (!executions.success) {
+        return <AlertMessage message="Error al cargar los procesos" buttonText="" />;
     }
 
-    const { dagRuns } = executionsResponse.data;
+    // 3. Inicializar dagRuns
+    let dagRuns: DagRun[] = [];
 
-    // Si hay dagRuns, obtener tareas del primero
-    let tasksResponse = null;
+    if (executions.data && executions.data.dagRuns) {
+        dagRuns = executions.data.dagRuns;
+    }
+
+    // 4. Obtener el último dagRun
+    let lastDagRun: DagRun | null | undefined = null;
 
     if (dagRuns.length > 0) {
-        tasksResponse = await getTask(
-            token,
-            dagRuns[0].dag_run_id
-        );
+        lastDagRun = dagRuns.at(0);
     }
 
-    if (!tasksResponse) {
-        return <AlertMessage message="Error al cargar tareas" buttonText={""} />;
+    // 5. Obtener tareas
+    let tasks = null;
+
+    if (lastDagRun) {
+        tasks = await getTask(token, lastDagRun.dag_run_id);
     }
 
-    const currentTaskState = dagRuns[0].state
+    // 6. Determinar estado actual
+    let currentTaskState = null;
+
+    if (lastDagRun) {
+        currentTaskState = lastDagRun.state;
+    }
 
     const isRunning = currentTaskState === "running";
 
-    const breadcrumbRoutes = [{ href: "#", title: "LOTES" }];
+    const breadcrumbRoutes = [{ href: "#", title: "PROCESOS" }];
 
     return (
         <Fragment>
@@ -68,26 +68,30 @@ const ViewWorkflowSection = async () => {
                 <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
             </nav>
 
-            <ProcessControl
-                token={token}
-                dagRunId={dagRuns[0].dag_run_id}
-                isRunning={isRunning}
-            />
-
-            {dagRuns.length > 0 && tasksResponse.data && (
-                <TaskList
-                    title={`PROCESO ${dagRuns[0].dag_versions[0].version_number} EN EJECUCIÓN`}
-                    tasks={tasksResponse.data.task_instances}
+            {lastDagRun && (
+                <ProcessControl
+                    token={token}
+                    dagRunId={lastDagRun.dag_run_id}
+                    isRunning={isRunning}
                 />
             )}
 
+            {lastDagRun && tasks && tasks.data && (
+                <Fragment>
+                    <h2 className="font-bold"> ÚLTIMA EJECUCIÓN</h2>
+                    <TaskList tasks={tasks.data.task_instances} />
+                </Fragment>
+            )}
+
             {dagRuns.length > 0 ? (
-                <DagTable data={dagRuns} />
+                <Fragment>
+                    <h2 className="font-bold">TODAS LAS EJECUCIONES</h2>
+                    <DagTable data={dagRuns} />
+                </Fragment>
             ) : (
                 <EmptyState text="No hay ejecuciones disponibles" />
             )}
+
         </Fragment>
     );
-};
-
-export default ViewWorkflowSection;
+}

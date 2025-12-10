@@ -1,24 +1,27 @@
 "use client";
 
-import ActionButton from "@/components/action-button";
 import toast from "react-hot-toast";
-import { startDagRun } from "../actions/start-dag-run";
-import { stopDagRun } from "../actions/stop-dag-run";
+import ActionButton from "@/components/action-button";
 
-interface ProcessControlsProps {
+import stopDagRun from "../actions/stop-dag-run";
+import startDagRun from "../actions/start-dag-run";
+
+
+interface Props {
     token: string,
     dagRunId: string
     isRunning: boolean;
 }
 
-export default function ProcessControls({ token, isRunning, dagRunId }: ProcessControlsProps) {
+export default function ProcessControls({ token, isRunning, dagRunId }: Props) {
     async function handleStart() {
         try {
-            await startDagRun("fechac_test_pipeline");
+            await startDagRun(token);
 
             toast.success("¡Ejecución iniciada correctamente!");
         } catch (error) {
             toast.error("¡Ocurrió un error al iniciar el proceso!");
+            console.error("Error al inciar el DAG Run:", error);
         }
 
     }
@@ -27,8 +30,9 @@ export default function ProcessControls({ token, isRunning, dagRunId }: ProcessC
             await stopDagRun(token, dagRunId);
 
             toast.success("¡El proceso se detuvo correctamente!");
-        } catch (err) {
-            console.error("Error al detener el DAG Run:", err);
+        } catch (error) {
+            toast.error("¡Ocurrió un error al detener el proceso!");
+            console.error("Error al detener el DAG Run:", error);
         }
     }
     return (
@@ -38,7 +42,6 @@ export default function ProcessControls({ token, isRunning, dagRunId }: ProcessC
                 title="Iniciar Proceso"
                 onClick={handleStart}
                 disabled={isRunning}
-                className="sm:w-auto"
             />
 
             <ActionButton
@@ -46,7 +49,6 @@ export default function ProcessControls({ token, isRunning, dagRunId }: ProcessC
                 title="Detener Proceso"
                 onClick={handleStop}
                 disabled={!isRunning}
-                className="sm:w-auto"
             />
         </div>
     );

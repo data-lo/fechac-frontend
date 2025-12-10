@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GetTokenInterface } from "../interfaces/get-token-response";
 
-export async function getToken(): Promise<string> {
+export default async function getAirflowToken(): Promise<string> {
   try {
     const response = await axios.post<GetTokenInterface>(
       `${process.env.AIRFLOW_API}/auth/token`,

@@ -4,13 +4,10 @@ import axios from "axios";
 import { DagRun } from "../interfaces/dag-run-interface";
 import { ActionResponse } from "@/interfaces/action/action-response";
 
-export async function getDagExecutions({
-  token,
-  dagId = process.env.AIRFLOW_MAIN_DAG
-}: {
-  token: string;
-  dagId?: string;
-}): Promise<ActionResponse<{
+export default async function getDagExecutions(
+  token: string,
+  dagId = process.env.AIRFLOW_MAIN_DAG):
+Promise<ActionResponse<{
   dagRuns: DagRun[];
 }>> {
 
