@@ -2,7 +2,6 @@
 
 
 import { ProjectDocument } from "../../models/project-document";
-import { Project } from "../../models/project";
 import { ActionResponse } from "@/interfaces/action/action-response";
 import getCollection from "@/actions/mongo/get-collection";
 

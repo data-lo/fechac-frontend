@@ -26,5 +26,3 @@ export interface DagVersion {
   created_at: string;
   bundle_url: string | null;
 }
-
-export type DagRunsResponse = DagRun[];

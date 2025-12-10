@@ -32,7 +32,7 @@ interface Props extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onC
 
     // Contenido
     children?: React.ReactNode;
-    title?: string; // Deprecated
+    title?: string;
     iconName?: IconName;
     iconPosition?: ButtonIconPosition;
     loadingText?: string;
