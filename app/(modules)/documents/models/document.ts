@@ -5,11 +5,16 @@ export interface Metadata {
     mime_type: string;
 }
 
-export interface Similarity {
-    criterion_id?: string | null;
+interface SimilarityDetail {
     similar: boolean;
     score: number;
     reason: string;
+}
+
+export interface Similarity {
+    criterion_id: string;
+    path: SimilarityDetail;
+    name: SimilarityDetail;
 }
 
 export interface File {
@@ -30,10 +35,7 @@ export interface File {
     sadap_id?: string | null;
     text_extracted?: string | null;
     weight?: number | null;
-
     status: DocumentStatusEnum;
-
-    file_name_matches?: Similarity[] | null;
-    path_matches?: Similarity[] | null;
+    matches?: Similarity[] | null;
     selected_criterion_id?: string | null;
 }

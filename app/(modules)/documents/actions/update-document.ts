@@ -3,15 +3,16 @@
 
 import { ActionResponse } from "@/interfaces/action/action-response";
 
-import { FileDocument } from "../../../models/document-entity";
+
 import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
 import { ObjectId } from "mongodb";
 import getCollection from "@/actions/mongo/get-collection";
+import { DocumentEntity } from "../models/document-entity";
 
-export async function updateDocument(values: FileDocument): Promise<ActionResponse<UpdateOneResponse>>{
+export async function updateDocumentAction(values: DocumentEntity): Promise<ActionResponse<UpdateOneResponse>> {
     try {
 
-        const collection = await getCollection<FileDocument>("documents");
+        const collection = await getCollection<DocumentEntity>("documents");
 
         const { _id, ...fieldsToUpdate } = values
 

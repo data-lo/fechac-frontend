@@ -1,9 +1,7 @@
 'use client';
-
-
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
 
+import { useMutation } from "@tanstack/react-query";
 
 import { updateDocument } from "../actions/update-document";
 

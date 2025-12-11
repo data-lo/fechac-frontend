@@ -1,13 +1,12 @@
 'use server';
-
-
-import { ActionResponse } from "@/interfaces/action/action-response";
 import { ObjectId } from "mongodb";
 
 import getCollection from "@/actions/mongo/get-collection";
-import { DocumentEntity } from "../models/document-entity";
 
-export async function getDocument(_id: string): Promise<ActionResponse<{ document: DocumentEntity; }>> {
+import { DocumentEntity } from "../models/document-entity";
+import { ActionResponse } from "@/interfaces/action/action-response";
+
+export default async function getDocumentAction(_id: string): Promise<ActionResponse<{ document: DocumentEntity; }>> {
     try {
         const collection = await getCollection<DocumentEntity>("documents");
         

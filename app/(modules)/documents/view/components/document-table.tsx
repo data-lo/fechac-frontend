@@ -11,15 +11,16 @@ import {
     TableRow
 } from "@/components/ui/table"
 
-import ActionButton from "@/components/action-button"
-
-import { getStatusInfo, DocumentStatusEnum } from "../../functions/get-status-translation"
-import { FileDocument } from "../../models/document-entity"
 import { AlertTriangle } from "lucide-react"
 
+import ActionButton from "@/components/action-button"
+
+import { DocumentEntity } from "../../models/document-entity"
+
+import { getStatusInfo, DocumentStatusEnum } from "../../functions/get-status-translation"
 
 interface Props {
-    data: FileDocument[];
+    data: DocumentEntity[];
     currentIndex: number;
 }
 
@@ -29,7 +30,7 @@ const DocumentsTable = ({ data, currentIndex }: Props) => {
 
     const handleEdit = (documentId: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        router.push(`/documents/${encodeURIComponent(documentId)}/update`)
+        router.push(`/documents/update/${encodeURIComponent(documentId)}`)
     }
 
     return (

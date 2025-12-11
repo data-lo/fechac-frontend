@@ -1,9 +1,8 @@
 'use server';
 
-import { FileDocument } from "../../models/document-entity";
-import { ActionResponse } from "@/interfaces/action/action-response";
 import getCollection from "@/actions/mongo/get-collection";
-
+import { DocumentEntity } from "../models/document-entity";
+import { ActionResponse } from "@/interfaces/action/action-response";
 
 interface PaginationParams {
     page?: number;
@@ -17,7 +16,7 @@ export async function getPendingDocuments(
     limit: number = 10,
     options: Omit<PaginationParams, 'page' | 'limit'> = {}
 ): Promise<ActionResponse<{
-    files: FileDocument[];
+    files: DocumentEntity[];
     total: number;
     currentPage: number;
     totalPages: number;
@@ -41,7 +40,7 @@ export async function getPendingDocuments(
             };
         }
 
-        const collection = await getCollection<FileDocument>("documents");
+        const collection = await getCollection<DocumentEntity>("documents");
 
         const skip = (page - 1) * limit;
 

@@ -1,18 +1,20 @@
 'use client';
 
 import * as z from "zod";
-import { useForm, type DefaultValues, type SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 
 import { Form } from "@/components/ui/form";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+
+
+
+import { useForm, type SubmitHandler } from "react-hook-form";
+
+
 import ActionButton from "@/components/action-button";
 
-
 import { DocumentEntity } from "../../../models/document-entity";
-
-
-
 
 import {
     FORM_IDENTIFICATION_FIELDS,
@@ -28,8 +30,6 @@ import useUpdateDocument from "../../../hooks/use-update-document";
 
 import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-document-schema";
 
-
-
 interface Props {
     data: {
         document: DocumentEntity
@@ -37,59 +37,35 @@ interface Props {
 }
 
 const DocumentUpdateForm = ({ data }: Props) => {
-    
+
     const updateMutation = useUpdateDocument();
 
     const document = data.document;
 
-    type InputValues = z.input<typeof UPDATE_DOCUMENT_SCHEMA> & {
-        metadata_readonly?: string;
-    };
-
-    type OutputValues = z.output<typeof UPDATE_DOCUMENT_SCHEMA>;
-
-    const form = useForm<InputValues>({
+    const form = useForm<z.infer<typeof UPDATE_DOCUMENT_SCHEMA>>({
         resolver: zodResolver(UPDATE_DOCUMENT_SCHEMA),
-        mode: "onChange",
-        reValidateMode: "onChange",
-        shouldUnregister: true,
         defaultValues: {
-            _id: String(document._id),
-            uuid: document.uuid,
-            path: document.path,
-            download_url: document.download_url,
-            area: document.area,
-            is_multimedia: document.is_multimedia ? "true" : "false",
-            project_id: document.project_id,
-            file_name: document.file_name,
-            status: document.status,
-            one_drive_item_id: document.one_drive_item_id
-        } as DefaultValues<InputValues>,
+            uuid: "",
+            sadap_id: "",
+            selected_criterion_id: "",
+        },
     });
 
-
-    const onSubmitError = (errs: any) => {
-        console.warn("Form errors:", errs);
+    const onSubmit = async (values: z.infer<typeof UPDATE_DOCUMENT_SCHEMA>) => {
+        console.log(values)
+        // updateMutation.mutate(values);
     };
 
-    const onSubmit: SubmitHandler<InputValues> = (values) => {
-
-
-
-        // updateMutation.mutate(parsed);
-    };
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit, onSubmitError)} className="flex flex-col gap-6">
-
-                <input type="hidden" {...form.register("_id")} />
-                <input type="hidden" {...form.register("uuid")} />
-
-                <h1 className="text-base font-semibold">Identificación</h1>
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="flex flex-col gap-6"
+            >                <h1 className="text-base font-semibold">Identificación</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {FORM_IDENTIFICATION_FIELDS.map
-                        (({ component: Component, props}, index) => (
+                        (({ component: Component, props }, index) => (
                             <Component key={index} {...props} control={form.control} />
                         ))}
                 </div>
@@ -103,28 +79,28 @@ const DocumentUpdateForm = ({ data }: Props) => {
 
                 <h1 className="text-base font-semibold">Clasificación</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_CLASSIFICATION_FIELDS.map(({ component: Component, props}, index) => (
+                    {FORM_CLASSIFICATION_FIELDS.map(({ component: Component, props }, index) => (
                         <Component key={index} {...props} control={form.control} />
                     ))}
                 </div>
-                
+
                 <h1 className="text-base font-semibold">Enlaces</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_LINKAGE_FIELDS.map(({ component: Component, props}, index) => (
+                    {FORM_LINKAGE_FIELDS.map(({ component: Component, props }, index) => (
                         <Component key={index} {...props} control={form.control} />
                     ))}
                 </div>
 
                 <h1 className="text-base font-semibold">Estatus</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_STATUS_FIELDS.map(({ component: Component, props}, index) => (
+                    {FORM_STATUS_FIELDS.map(({ component: Component, props }, index) => (
                         <Component key={index} {...props} control={form.control} />
                     ))}
                 </div>
 
                 <h1 className="text-base font-semibold">Metadata</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_METADATA_FIELDS.map(({ component: Component, props}, index) => (
+                    {FORM_METADATA_FIELDS.map(({ component: Component, props }, index) => (
                         <Component key={index} {...props} control={form.control} />
                     ))}
                 </div>
@@ -138,7 +114,7 @@ const DocumentUpdateForm = ({ data }: Props) => {
                     />
                 </footer>
             </form>
-        </Form>  
+        </Form>
     );
 };
 
