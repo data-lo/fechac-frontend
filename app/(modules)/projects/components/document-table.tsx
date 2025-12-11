@@ -11,7 +11,7 @@ import {
     TableRow
 } from "@/components/ui/table"
 import ActionButton from "@/components/action-button"
-import { FileDocument } from "../../documents/models/file-document"
+import { FileDocument } from "../../documents/models/document-entity"
 import { DocumentStatusEnum, getStatusInfo } from "../../documents/functions/get-status-translation"
 
 import { AlertTriangle } from "lucide-react";

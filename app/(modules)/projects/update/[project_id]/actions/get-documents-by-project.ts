@@ -1,6 +1,6 @@
 import getCollection from "@/actions/mongo/get-collection";
 
-import { FileDocument } from "@/app/(modules)/documents/models/file-document";
+import { FileDocument } from "@/app/(modules)/documents/models/document-entity";
 
 const getDocumentsByProject = async (sadapId: string) => {
     const collection = await getCollection<FileDocument>("documents");

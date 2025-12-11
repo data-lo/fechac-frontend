@@ -1,9 +1,10 @@
 import * as z from "zod";
 
 import { REQUIRED_FIELD } from "@/messages/form-messages";
+
 import { ProjectStatusEnum } from "@/enums/project-status-enum";
 
-const BASE_DOCUMENT_SCHEMA = z.object({
+const DOCUMENT_SCHEMA = z.object({
 
     file_name: z
         .string()
@@ -47,4 +48,4 @@ const BASE_DOCUMENT_SCHEMA = z.object({
 
 });
 
-export { BASE_DOCUMENT_SCHEMA };
+export default DOCUMENT_SCHEMA ;

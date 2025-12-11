@@ -2,13 +2,14 @@
 
 
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { FileDocument } from "../../../models/file-document";
 import { ObjectId } from "mongodb";
-import getCollection from "@/actions/mongo/get-collection";
 
-export async function getDocument(_id: string): Promise<ActionResponse<{ document: FileDocument; }>> {
+import getCollection from "@/actions/mongo/get-collection";
+import { DocumentEntity } from "../models/document-entity";
+
+export async function getDocument(_id: string): Promise<ActionResponse<{ document: DocumentEntity; }>> {
     try {
-        const collection = await getCollection<FileDocument>("documents");
+        const collection = await getCollection<DocumentEntity>("documents");
         
         if (!ObjectId.isValid(_id)) {
             return {

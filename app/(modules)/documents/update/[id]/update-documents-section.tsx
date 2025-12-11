@@ -1,6 +1,6 @@
 'use client'
 
-import { FileDocument } from "../../models/file-document";
+import { FileDocument } from "../../models/document-entity";
 import DocumentUpdateForm from "./components/document-update-form";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 

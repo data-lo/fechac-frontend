@@ -1,6 +1,6 @@
 'use server';
 
-import { FileDocument } from "../../models/file-document";
+import { FileDocument } from "../../models/document-entity";
 import { ActionResponse } from "@/interfaces/action/action-response";
 import getCollection from "@/actions/mongo/get-collection";
 

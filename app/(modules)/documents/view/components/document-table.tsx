@@ -14,7 +14,7 @@ import {
 import ActionButton from "@/components/action-button"
 
 import { getStatusInfo, DocumentStatusEnum } from "../../functions/get-status-translation"
-import { FileDocument } from "../../models/file-document"
+import { FileDocument } from "../../models/document-entity"
 import { AlertTriangle } from "lucide-react"
 
 

@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from "react";
 import * as z from "zod";
 import { useForm, type DefaultValues, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,10 +9,9 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 
-import { FileDocument } from "../../../models/file-document";
+import { DocumentEntity } from "../../../models/document-entity";
 
 
-import { UPDATE_DOCUMENT_SCHEMA } from "../schemas/update-document-schema";
 
 
 import {
@@ -23,16 +21,18 @@ import {
     FORM_LINKAGE_FIELDS,
     FORM_STATUS_FIELDS,
     FORM_METADATA_FIELDS
-} from "../../../fields/base-document-fields"
+} from "../../../fields/document-fields"
 
 
-import useUpdateDocument from "../hooks/use-update-document";
+import useUpdateDocument from "../../../hooks/use-update-document";
+
+import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-document-schema";
 
 
 
 interface Props {
     data: {
-        document: FileDocument
+        document: DocumentEntity
     }
 }
 

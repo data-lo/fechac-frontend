@@ -8,7 +8,7 @@ import NavigationBreadcrumb from "@/components/breadcrumb";
 import LimitSelector from "@/components/limit-selector";
 import PaginationComponent from "@/components/pagination";
 
-import { toPlain } from "../functions/toPlain";
+import { toPlain } from "../functions/to-plain";
 import DocumentsTable from "./components/document-table";
 
 import { getPendingDocuments } from "./actions/get-pending-documents";

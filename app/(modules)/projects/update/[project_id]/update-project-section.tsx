@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 import { ProjectDocument } from "../../models/project-document";
-import { FileDocument } from "@/app/(modules)/documents/models/file-document";
+import { FileDocument } from "@/app/(modules)/documents/models/document-entity";
 
 import { StatisticCard } from "@/components/statistic-card";
 import { CheckCircle2, FolderOpen, Layers, MapPin, Workflow, Wrench } from "lucide-react";

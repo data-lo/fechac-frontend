@@ -3,7 +3,7 @@
 
 import { ActionResponse } from "@/interfaces/action/action-response";
 
-import { FileDocument } from "../../../models/file-document";
+import { FileDocument } from "../../../models/document-entity";
 import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
 import { ObjectId } from "mongodb";
 import getCollection from "@/actions/mongo/get-collection";
