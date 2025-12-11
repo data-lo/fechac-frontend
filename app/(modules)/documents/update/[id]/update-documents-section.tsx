@@ -6,6 +6,7 @@ import { DocumentEntity } from "../../models/document-entity";
 
 import DocumentUpdateForm from "./components/document-update-form";
 import { Fragment } from "react";
+import DocumentCard from "./components/document-card";
 
 interface Props {
     data: {
@@ -33,6 +34,12 @@ const UpdateDocumentSection = ({ data }: Props) => {
             <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
                 <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
             </nav>
+
+            <h2 className="font-bold">INFORMACIÓN</h2>
+
+            <DocumentCard document={data.document} />
+
+            <h2 className="font-bold">FORMULARIO</h2>
 
             <DocumentUpdateForm
                 data={{ document: data.document }}

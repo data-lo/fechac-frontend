@@ -11,13 +11,13 @@ import {
     TableRow
 } from "@/components/ui/table"
 import ActionButton from "@/components/action-button"
-import { FileDocument } from "../../documents/models/document-entity"
+import { DocumentEntity } from "../../documents/models/document-entity"
 import { DocumentStatusEnum, getStatusInfo } from "../../documents/functions/get-status-translation"
 
 import { AlertTriangle } from "lucide-react";
 
 interface Props {
-    data: FileDocument[];
+    data: DocumentEntity[];
 }
 
 const STATUS_REQUIERE_REVISION: DocumentStatusEnum[] = [

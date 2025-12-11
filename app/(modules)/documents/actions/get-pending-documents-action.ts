@@ -11,7 +11,7 @@ interface PaginationParams {
     sortOrder?: 'asc' | 'desc';
 }
 
-export async function getPendingDocuments(
+export async function getPendingDocumentsAction(
     page: number = 1,
     limit: number = 10,
     options: Omit<PaginationParams, 'page' | 'limit'> = {}

@@ -2,16 +2,13 @@ import InputField from "@/components/form/input-field";
 import SelectField from "@/components/form/select-field";
 import { DepartmentList} from "@/functions/transform-enums";
 
-
-// 1. Identification
 export const FORM_IDENTIFICATION_FIELDS = [
     {
         component: InputField,
         props: {
             name: "uuid",
-            label: "uuid",
-            placeholder: "Ingresa el uuid",
-            disabled: true,
+            label: "PROYECTO ID",
+            placeholder: "Ingresa el número de proyecto",
             items: []
         },
     },
@@ -19,8 +16,8 @@ export const FORM_IDENTIFICATION_FIELDS = [
         component: InputField,
         props: {
             name: "project_id",
-            label: "Proyecto Asociado",
-            placeholder: "Ingresa el ID del proyecto",
+            label: "ESTATUS",
+            placeholder: "Selecciona una opción",
             items: []
         },
     },

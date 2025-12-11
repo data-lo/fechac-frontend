@@ -1,4 +1,4 @@
-import getDocument from "../../actions/get-document";
+import getDocument from "../../actions/get-document-action";
 
 import UpdateDocumentSection from "./update-documents-section";
 
@@ -9,7 +9,7 @@ export default async function UpdateDocumentPage({
 }) {
     const { id } = await params;
 
-    if (!id || typeof id !== 'string' ) {
+    if (!id || typeof id !== 'string') {
         console.error('[ERROR] Invalid or missing id parameter:', { params, id });
         return <div>InvalidCriteria ID</div>
     }
@@ -20,10 +20,8 @@ export default async function UpdateDocumentPage({
     }
 
     return (
-        <div className="h-screen">
-            <UpdateDocumentSection data={{
-                document: response.data.document
-            }} />
-        </div>
+        <UpdateDocumentSection data={{
+            document: response.data.document
+        }} />
     );
 }

@@ -1,16 +1,14 @@
 import { Fragment } from "react";
 
-import AlertMessage from "@/components/alert-message";
+import { toPlain } from "../functions/to-plain";
+
 import EmptyState from "@/components/empty-state";
+import AlertMessage from "@/components/alert-message";
+import DocumentsTable from "./components/document-table";
+import PaginationComponent from "@/components/pagination";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
-import PaginationComponent from "@/components/pagination";
-
-import { toPlain } from "../functions/to-plain";
-import DocumentsTable from "./components/document-table";
-import { getPendingDocuments } from "../actions/get-pending-documents";
-
-
+import { getPendingDocumentsAction } from "../actions/get-pending-documents-action";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -23,7 +21,7 @@ const ViewDocumentSection = async ({ searchParams }: Props) => {
 
   const limit = Math.max(1, Math.min(100, Number(params?.limit) || 100));
 
-  const response = await getPendingDocuments(page, limit);
+  const response = await getPendingDocumentsAction(page, limit);
 
   if (response.error || !response.data) {
     return (

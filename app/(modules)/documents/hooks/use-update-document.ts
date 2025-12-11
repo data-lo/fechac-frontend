@@ -3,11 +3,11 @@ import toast from "react-hot-toast";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { updateDocument } from "../actions/update-document";
+import { updateDocumentAction } from "../actions/update-document-action";
 
 const useUpdateDocument = () => {
     return useMutation({
-        mutationFn: updateDocument,
+        mutationFn: updateDocumentAction,
         onSuccess: (response) => {
             if (response.success) {
                 toast.success("¡El documento se ha modificado con exito!");

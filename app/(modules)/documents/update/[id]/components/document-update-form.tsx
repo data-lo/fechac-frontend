@@ -61,48 +61,13 @@ const DocumentUpdateForm = ({ data }: Props) => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="flex flex-col gap-6"
-            >                <h1 className="text-base font-semibold">Identificación</h1>
+                className="flex flex-col gap-6 bg-white p-4"
+            >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {FORM_IDENTIFICATION_FIELDS.map
                         (({ component: Component, props }, index) => (
                             <Component key={index} {...props} control={form.control} />
                         ))}
-                </div>
-
-                <h1 className="text-base font-semibold">Acceso</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_ACCESS_FIELDS.map(({ component: Component, props }, index) => (
-                        <Component key={index} {...props} control={form.control} />
-                    ))}
-                </div>
-
-                <h1 className="text-base font-semibold">Clasificación</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_CLASSIFICATION_FIELDS.map(({ component: Component, props }, index) => (
-                        <Component key={index} {...props} control={form.control} />
-                    ))}
-                </div>
-
-                <h1 className="text-base font-semibold">Enlaces</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_LINKAGE_FIELDS.map(({ component: Component, props }, index) => (
-                        <Component key={index} {...props} control={form.control} />
-                    ))}
-                </div>
-
-                <h1 className="text-base font-semibold">Estatus</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_STATUS_FIELDS.map(({ component: Component, props }, index) => (
-                        <Component key={index} {...props} control={form.control} />
-                    ))}
-                </div>
-
-                <h1 className="text-base font-semibold">Metadata</h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_METADATA_FIELDS.map(({ component: Component, props }, index) => (
-                        <Component key={index} {...props} control={form.control} />
-                    ))}
                 </div>
 
                 <footer className="flex justify-end">
