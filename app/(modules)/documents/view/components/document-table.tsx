@@ -10,18 +10,20 @@ import {
     TableHeader,
     TableRow
 } from "@/components/ui/table"
-import ContextMenu from "@/components/context-menu"
+
 import ActionButton from "@/components/action-button"
 
-import { getStatusInfo, DocumentStatusEnum } from "../functions/get-status-translation"
-import { FileDocument } from "../models/file-document"
+import { getStatusInfo, DocumentStatusEnum } from "../../functions/get-status-translation"
+import { FileDocument } from "../../models/file-document"
+import { AlertTriangle } from "lucide-react"
 
 
 interface Props {
     data: FileDocument[];
+    currentIndex: number;
 }
 
-const DocumentsTable = ({ data }: Props) => {
+const DocumentsTable = ({ data, currentIndex }: Props) => {
     const router = useRouter();
 
 
@@ -29,13 +31,14 @@ const DocumentsTable = ({ data }: Props) => {
         event.preventDefault();
         router.push(`/documents/${encodeURIComponent(documentId)}/update`)
     }
+
     return (
         <Table>
             <TableHeader>
                 <TableRow className="font-bold">
                     <TableHead className="w-[50px] text-center">#</TableHead>
-                    <TableHead className="max-w-[300px]">NOMBRE</TableHead>
-                    <TableHead className="w-[200px]">PROYECTO</TableHead>
+                    <TableHead className="max-w-[380px]">NOMBRE</TableHead>
+                    <TableHead className="w-[100px]">PROYECTO</TableHead>
                     <TableHead className="w-[340px]">ESTATUS</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
@@ -48,34 +51,38 @@ const DocumentsTable = ({ data }: Props) => {
                     const IconComponent = statusInfo.icon;
 
                     return (
-                        <TableRow key={index}>
-                            <TableCell className="text-center text-gray-500">
-                                {index + 1}
+                        <TableRow key={document.uuid} className="text-xs">
+
+                            <TableCell className="text-center text-gray-500 font-medium">
+                                {currentIndex + index + 1}
                             </TableCell>
                             <TableCell>
-                                <div className="line-clamp-2 leading-tight" title={document.uuid}>
+                                <div className="line-clamp-1 max-w-[550px]" title={document.uuid}>
                                     {String(document.file_name).replace(/\.[^/.]+$/, "").toUpperCase()}
-
                                 </div>
                             </TableCell>
-                            <TableCell className="text-sm">
-                                {document.sadap_id}
+                            <TableCell className="whitespace-nowrap">
+                                {document.sadap_id && (
+                                    document.sadap_id
+                                )}
+
+                                {!document.sadap_id && (
+                                    <AlertTriangle size={14} className="text-yellow-600" />
+                                )}
                             </TableCell>
                             <TableCell>
-                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm text-xs font-medium ${statusInfo.className}`}>
+                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm font-medium ${statusInfo.className}`}>
                                     <IconComponent size={12} />
                                     {statusInfo.text}
                                 </span>
                             </TableCell>
-                            <TableCell className="text-right">
-                                <ContextMenu>
-                                    <ActionButton
-                                        title="Editar"
-                                        className="w-auto"
-                                        variant={"ghost"}
-                                        onClick={handleEdit(String(document._id))}
-                                    />
-                                </ContextMenu>
+                            <TableCell>
+                                <ActionButton
+                                    iconName="FileCog"
+                                    className="w-auto"
+                                    variant={"ghost"}
+                                    onClick={handleEdit(String(document._id))}
+                                />
                             </TableCell>
                         </TableRow>
                     );

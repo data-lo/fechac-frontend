@@ -1,6 +1,6 @@
 'use server';
 
-import { FileDocument } from "../models/file-document";
+import { FileDocument } from "../../models/file-document";
 import { ActionResponse } from "@/interfaces/action/action-response";
 import getCollection from "@/actions/mongo/get-collection";
 
@@ -33,7 +33,7 @@ export async function getPendingDocuments(
             };
         }
 
-        if (limit < 1 || limit > 100){
+        if (limit < 1 || limit > 100) {
             return {
                 success: false,
                 error: "El límite debe estar entre 1 y 100",
@@ -42,14 +42,19 @@ export async function getPendingDocuments(
         }
 
         const collection = await getCollection<FileDocument>("documents");
+
         const skip = (page - 1) * limit;
 
-        const { sortBy = 'area', sortOrder = 'desc' } = options;
-        const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
+        const { sortBy = 'sadap_id', sortOrder = 'asc' } = options;
+
+        const sort: Record<string, 1 | -1> = {
+            [sortBy]: sortOrder === 'asc' ? 1 : -1
+        };
 
         const [filesFromDB, total] = await Promise.all([
             collection
                 .find()
+                .collation({ locale: "en", numericOrdering: true })
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
@@ -58,6 +63,7 @@ export async function getPendingDocuments(
         ]);
 
         const totalPages = Math.ceil(total / limit);
+
 
         return {
             success: true,

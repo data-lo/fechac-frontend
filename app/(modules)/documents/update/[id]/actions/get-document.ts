@@ -2,7 +2,7 @@
 
 
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { FileDocument } from "../../models/file-document";
+import { FileDocument } from "../../../models/file-document";
 import { ObjectId } from "mongodb";
 import getCollection from "@/actions/mongo/get-collection";
 

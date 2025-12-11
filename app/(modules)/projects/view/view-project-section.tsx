@@ -84,7 +84,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
         <Fragment>
           <ProjectTable
             data={projects}
-            currentIndex={page * limit}
+            currentIndex={(page * limit) - 100}
           />
         </ Fragment>
       ) : (
