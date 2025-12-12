@@ -1,5 +1,5 @@
 'use client'
-import { CriterionDocument } from "../../models/criterion-document";
+import { CriterionDocument } from "../../models/criterion-entity";
 import UpdateCriterionForm from "./components/criterion-update-form";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 

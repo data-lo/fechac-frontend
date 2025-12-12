@@ -8,7 +8,7 @@ import { ActionResponse } from "@/interfaces/action/action-response";
 import { DeleteOneResponse } from "@/interfaces/mongo/delete-one-response";
 
 // 3. Modelos
-import { CriterionDocument } from "../../models/criterion-document";
+import { CriterionDocument } from "../../models/criterion-entity";
 import { ObjectId } from "mongodb";
 
 // 4. Librerías

@@ -18,7 +18,7 @@ import ActionButton from "@/components/action-button";
 import ContextMenu from "@/components/context-menu";
 
 // 4. Tipos/Modelos
-import { CriterionDocument } from "../models/criterion-document";
+import { CriterionDocument } from "../models/criterion-entity";
 import DeleteCriterionButton from "../delete/components/delete-criterion-button";
 
 interface Props {

@@ -1,8 +1,8 @@
 'use server';
 
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { CriterionDocument } from "../models/criterion-document";
 import getCollection from "@/actions/mongo/get-collection";
+import { CriterionEntity } from "../models/criterion-entity";
+import { ActionResponse } from "@/interfaces/action/action-response";
 
 interface PaginationParams {
   page?: number;
@@ -16,7 +16,7 @@ export async function getCriteria(
   limit: number = 10,
   options: Omit<PaginationParams, 'page' | 'limit'> = {}
 ): Promise<ActionResponse<{
-  criteria: CriterionDocument[];
+  criteria: CriterionEntity[];
   total: number;
   currentPage: number;
   totalPages: number;
@@ -40,7 +40,7 @@ export async function getCriteria(
       };
     }
 
-    const collection = await getCollection<CriterionDocument>("criteria");
+    const collection = await getCollection<CriterionEntity>("criteria");
     const skip = (page - 1) * limit;
 
     const { sortBy = 'approval_date', sortOrder = 'desc' } = options;

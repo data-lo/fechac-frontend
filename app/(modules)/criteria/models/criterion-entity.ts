@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import { Criterion } from "./criterion";
 
-export interface CriterionDocument extends Criterion {
+export interface CriterionEntity extends Criterion {
     _id: string | ObjectId;
 }

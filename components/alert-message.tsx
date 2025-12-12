@@ -44,23 +44,24 @@ const AlertMessage = ({
     if (isDismissed) return null;
 
     const variants = {
-        error: {
-            bg: "bg-gradient-to-r from-red-50 to-red-100",
-            border: "border-red-200",
-            text: "text-red-900",
-            icon: "text-red-500",
-            button: "bg-red-600 hover:bg-red-700 text-white",
-            buttonOutline: "border-red-300 text-red-700 hover:bg-red-50"
-        },
-        warning: {
-            bg: "bg-gradient-to-r from-amber-50 to-orange-100",
-            border: "border-amber-200",
-            text: "text-amber-900",
-            icon: "text-amber-500",
-            button: "bg-amber-600 hover:bg-amber-700 text-white",
-            buttonOutline: "border-amber-300 text-amber-700 hover:bg-amber-50"
-        }
-    };
+    error: {
+        bg: "bg-red-100",     // ← sólido, sin gradiente
+        border: "border-red-200",
+        text: "text-red-900",
+        icon: "text-red-500",
+        button: "bg-red-600 hover:bg-red-700 text-white",
+        buttonOutline: "border-red-300 text-red-700 hover:bg-red-50"
+    },
+    warning: {
+        bg: "bg-amber-50",   // ← sólido, sin gradiente
+        border: "border-amber-200",
+        text: "text-amber-900",
+        icon: "text-amber-500",
+        button: "bg-amber-600 hover:bg-amber-700 text-white",
+        buttonOutline: "border-amber-300 text-amber-700 hover:bg-amber-50"
+    }
+};
+
 
     const currentVariant = variants[variant];
 
@@ -68,9 +69,9 @@ const AlertMessage = ({
         <div
             className={`
                 ${currentVariant.bg} ${currentVariant.text}
-                relative border rounded-xl px-6 py-5 
-                backdrop-blur-sm transition-all duration-500
-                animate-in slide-in-from-top-2 duration-500
+                relative border-none rounded-sm px-6 py-5 
+                backdrop-blur-sm transition-all
+                animate-in slide-in-from-top-2
                 ${className}
             `}
             role="alert"
@@ -109,9 +110,9 @@ const AlertMessage = ({
                         </div>
                     )}
 
-                    <p className="text-sm opacity-80 leading-relaxed mt-1">
+                    {/* <p className="text-sm opacity-80 leading-relaxed mt-1">
                         Intenta recargar la página. Si el problema continúa, por favor, contacta al soporte técnico.
-                    </p>
+                    </p> */}
                 </div>
 
                 {/* Action buttons */}

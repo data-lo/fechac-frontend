@@ -2,7 +2,7 @@
 
 
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { CriterionDocument } from "../../models/criterion-document";
+import { CriterionDocument } from "../../models/criterion-entity";
 import { ObjectId } from "mongodb";
 import getCollection from "@/actions/mongo/get-collection";
 

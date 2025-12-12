@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 
 
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 
 import ActionButton from "@/components/action-button";
@@ -18,21 +18,18 @@ import { DocumentEntity } from "../../../models/document-entity";
 
 import {
     FORM_IDENTIFICATION_FIELDS,
-    FORM_ACCESS_FIELDS,
-    FORM_CLASSIFICATION_FIELDS,
-    FORM_LINKAGE_FIELDS,
-    FORM_STATUS_FIELDS,
-    FORM_METADATA_FIELDS
 } from "../../../fields/document-fields"
 
 
 import useUpdateDocument from "../../../hooks/use-update-document";
 
 import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-document-schema";
+import applyFormOverrides from "@/functions/apply-form-overrides";
 
 interface Props {
     data: {
         document: DocumentEntity
+        criteriaItems: any
     }
 }
 
@@ -45,9 +42,9 @@ const DocumentUpdateForm = ({ data }: Props) => {
     const form = useForm<z.infer<typeof UPDATE_DOCUMENT_SCHEMA>>({
         resolver: zodResolver(UPDATE_DOCUMENT_SCHEMA),
         defaultValues: {
-            uuid: "",
-            sadap_id: "",
-            selected_criterion_id: "",
+            uuid: document.uuid,
+            sadap_id: document.sadap_id ?? "",
+            selected_criterion_id: document.selected_criterion_id ?? "",
         },
     });
 
@@ -57,6 +54,19 @@ const DocumentUpdateForm = ({ data }: Props) => {
     };
 
 
+    const FORM_IDENTIFICATION_FIELDS_UPDATED = applyFormOverrides(
+        FORM_IDENTIFICATION_FIELDS,
+        {
+            selected_criterion_id: {
+                props: {
+                    items: data.criteriaItems,
+                },
+            },
+        }
+    );
+
+
+
     return (
         <Form {...form}>
             <form
@@ -64,7 +74,7 @@ const DocumentUpdateForm = ({ data }: Props) => {
                 className="flex flex-col gap-6 bg-white p-4"
             >
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {FORM_IDENTIFICATION_FIELDS.map
+                    {FORM_IDENTIFICATION_FIELDS_UPDATED.map
                         (({ component: Component, props }, index) => (
                             <Component key={index} {...props} control={form.control} />
                         ))}
