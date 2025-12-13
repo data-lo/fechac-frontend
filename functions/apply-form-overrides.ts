@@ -3,6 +3,7 @@ export interface FieldProps {
     label: string;
     placeholder?: string;
     disabled?: boolean;
+    hidden?: boolean;
     items?: Array<{ label: string; value: any }>;
     [key: string]: any;
 }

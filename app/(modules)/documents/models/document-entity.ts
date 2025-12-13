@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb"; 
-import { File } from "./document"; 
+import Document from "./document"; 
 
-export interface DocumentEntity extends File {
+export interface DocumentEntity extends Document {
     _id: string | ObjectId;
 }

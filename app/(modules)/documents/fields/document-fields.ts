@@ -7,7 +7,7 @@ export const FORM_IDENTIFICATION_FIELDS = [
         component: InputField,
         props: {
             name: "sadap_id",
-            label: "PROYECTO ID",
+            label: "Número de Proyecto",
             placeholder: "Ingresa el número de proyecto",
             items: []
         },

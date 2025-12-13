@@ -9,14 +9,10 @@ const useUpdateDocument = () => {
     return useMutation({
         mutationFn: updateDocumentAction,
         onSuccess: (response) => {
-            if (response.success) {
-                toast.success("¡El documento se ha modificado con exito!");
-            } else {
-                toast.error(response.error);
-            }
+            toast.success(response.message);
         },
         onError(error) {
-            toast.error(`Error: ${error.message}`);
+            toast.error(error.message);
         },
     });
 }

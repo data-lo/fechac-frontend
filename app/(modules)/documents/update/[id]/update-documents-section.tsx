@@ -6,9 +6,11 @@ import { DocumentEntity } from "../../models/document-entity";
 
 import DocumentUpdateForm from "./components/document-update-form";
 import { Fragment } from "react";
-import DocumentCard from "./components/document-card";
 import { CriterionEntity } from "@/app/(modules)/criteria/models/criterion-entity";
 import AlertMessage from "@/components/alert-message";
+import { StatisticCard } from "@/components/statistic-card";
+import { CheckCircle2, Link2, Users } from "lucide-react";
+import DocumentLocationCard from "./components/document-loaction-card";
 
 interface Props {
     data: {
@@ -18,6 +20,23 @@ interface Props {
 }
 
 const UpdateDocumentSection = ({ data }: Props) => {
+
+    const summary = [
+        {
+            title: "ESTATUS",
+            value: data.document.status,
+            icon: CheckCircle2,
+            iconColor: "text-green-600",
+            iconBgColor: "bg-green-50",
+        },
+        {
+            title: "DEPARTAMENTO",
+            value: data.document.department,
+            icon: Users,
+            iconColor: "text-purple-600",
+            iconBgColor: "bg-purple-50",
+        },
+    ];
 
     const breadcrumbRoutes = [
         {
@@ -43,23 +62,44 @@ const UpdateDocumentSection = ({ data }: Props) => {
 
             <h2 className="font-bold">INFORMACIÓN</h2>
 
-            <DocumentCard document={data.document} />
+            <div className="flex gap-4 w-full">
+                {summary.map(item => (
+                    <StatisticCard
+                        key={item.title}
+                        title={item.title}
+                        value={item.value}
+                        icon={item.icon}
+                        iconColor={item.iconColor}
+                        iconBgColor={item.iconBgColor}
+                    />
+                ))}
+            </div>
 
-            <h2 className="font-bold">FORMULARIO</h2>
-
-            <AlertMessage
-                message="Este documento no está vinculado a ningún proyecto. Por favor, realiza la asignación manual."
-                showActions={false}
-                buttonText=""
-                variant='warning'
+            <DocumentLocationCard
+                path={data.document.path}
+                webUrl={data.document.metadata.web_url}
             />
 
-            <DocumentUpdateForm
-                data={{
-                    document: data.document,
-                    criteriaItems: criteria
-                }}
-            />
+
+            {!data.document.sadap_id && (
+                <Fragment>
+                    <h2 className="font-bold">FORMULARIO</h2>
+
+                    <AlertMessage
+                        message="Este documento no está vinculado a ningún proyecto. Por favor, realiza la asignación manual."
+                        showActions={false}
+                        buttonText=""
+                        variant='warning'
+                    />
+
+                    <DocumentUpdateForm
+                        data={{
+                            document: data.document,
+                            criteriaItems: criteria
+                        }}
+                    />
+                </ Fragment>
+            )}
         </Fragment>
     );
 };

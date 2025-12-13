@@ -1,49 +1,29 @@
 'use server';
-import { ObjectId } from "mongodb";
 
-import { ActionResponse } from "@/interfaces/action/action-response";
+import { ObjectId } from "mongodb";
 
 import getCollection from "@/actions/mongo/get-collection";
 
-import { DocumentEntity } from "../models/document-entity";
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
+import Document from "../models/document";
 
-export async function updateDocumentAction(values: DocumentEntity): Promise<ActionResponse<UpdateOneResponse>> {
-    try {
+export async function updateDocumentAction(data: { _id: string; payload: Partial<Document> }) {
+    const collection = await getCollection<Document>("documents");
 
-        const collection = await getCollection<DocumentEntity>("documents");
+    const result = await collection.updateOne(
+        { _id: new ObjectId(data._id) },
+        { $set: data.payload }
+    );
 
-        const { _id, ...fieldsToUpdate } = values
-
-        const response: UpdateOneResponse = await collection.updateOne(
-            { _id: new ObjectId(_id) },
-            { $set: fieldsToUpdate },
-            { upsert: false }
-        );
-
-        if (response.modifiedCount === 0) {
-            return {
-                success: false,
-                error: "¡No se actualizo el documento solicitado!",
-                data: null
-            };
-        }
-
-        return {
-            success: true,
-            error: null,
-            data: {
-                ...response,
-            },
-        };
-
-    } catch (error) {
-        console.error('[update-documents] Error en el action:', error);
-
-        return {
-            success: false,
-            error: error instanceof Error ? error.message : "¡Error desconocido al actualizar el documento!",
-            data: null
-        };
+    if (result.matchedCount === 0) {
+        throw new Error("¡El documento no existe!");
     }
+
+    if (result.modifiedCount === 0) {
+        throw new Error("¡No hubo cambios para guardar!");
+    }
+
+    return {
+        success: true,
+        message: "¡El documento se ha modificado con exito!",
+    };
 }

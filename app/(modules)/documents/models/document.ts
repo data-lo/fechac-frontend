@@ -1,6 +1,6 @@
 import { DocumentStatusEnum } from "@/enums/document-status-enum";
 
-export interface Metadata {
+interface Metadata {
     web_url: string;
     mime_type: string;
 }
@@ -11,13 +11,13 @@ interface SimilarityDetail {
     reason: string;
 }
 
-export interface Similarity {
+interface Similarity {
     criterion_id: string;
     path: SimilarityDetail;
     name: SimilarityDetail;
 }
 
-export interface File {
+export default interface Document {
     uuid: string;
 
     one_drive_id: string;
@@ -29,7 +29,7 @@ export interface File {
     is_multimedia: boolean;
     metadata: Metadata;
 
-    path?: string | null;
+    path: string;
     project_area?: string[] | null;
     project_focus?: string[] | null;
     sadap_id?: string | null;

@@ -1,7 +1,10 @@
 'use client'
-import { AlertTriangle, RefreshCw, X } from "lucide-react";
+
 import { useState } from "react";
+
 import ActionButton from "./action-button";
+
+import { AlertTriangle, RefreshCw, X } from "lucide-react";
 
 interface Props {
     buttonText: string;
@@ -44,24 +47,23 @@ const AlertMessage = ({
     if (isDismissed) return null;
 
     const variants = {
-    error: {
-        bg: "bg-red-100",     // ← sólido, sin gradiente
-        border: "border-red-200",
-        text: "text-red-900",
-        icon: "text-red-500",
-        button: "bg-red-600 hover:bg-red-700 text-white",
-        buttonOutline: "border-red-300 text-red-700 hover:bg-red-50"
-    },
-    warning: {
-        bg: "bg-amber-50",   // ← sólido, sin gradiente
-        border: "border-amber-200",
-        text: "text-amber-900",
-        icon: "text-amber-500",
-        button: "bg-amber-600 hover:bg-amber-700 text-white",
-        buttonOutline: "border-amber-300 text-amber-700 hover:bg-amber-50"
-    }
-};
-
+        error: {
+            bg: "bg-red-100",
+            border: "border-red-200",
+            text: "text-red-900",
+            icon: "text-red-500",
+            button: "bg-red-600 hover:bg-red-700 text-white",
+            buttonOutline: "border-red-300 text-red-700 hover:bg-red-50"
+        },
+        warning: {
+            bg: "bg-amber-50",
+            border: "border-amber-200",
+            text: "text-amber-900",
+            icon: "text-amber-500",
+            button: "bg-amber-600 hover:bg-amber-700 text-white",
+            buttonOutline: "border-amber-300 text-amber-700 hover:bg-amber-50"
+        }
+    };
 
     const currentVariant = variants[variant];
 
@@ -137,7 +139,7 @@ const AlertMessage = ({
                         <ActionButton
                             title={buttonText}
                             type="button"
-                            variant="default"   
+                            variant="default"
                             fullWidth={true}
                             onClick={handleAction}
                         />
