@@ -1,34 +1,33 @@
 'use client';
 
+'use client';
+
+// External libraries
 import * as z from "zod";
-
-
-import { Form } from "@/components/ui/form";
-
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
-
-import { useForm } from "react-hook-form";
-
-
+// UI components
+import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
+// Domain models and enums
 import { DocumentEntity } from "../../../models/document-entity";
+import { DocumentStatusEnum } from "@/enums/document-status-enum";
 
+// Form configuration
 import {
     FORM_IDENTIFICATION_FIELDS,
-} from "../../../fields/document-fields"
+} from "../../../fields/document-fields";
+import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-document-schema";
 
-
+// Hooks and actions
 import useUpdateDocument from "../../../hooks/use-update-document";
 
-import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-document-schema";
+// Utilities
 import applyFormOverrides from "@/functions/apply-form-overrides";
-import { DocumentStatusEnum } from "@/enums/document-status-enum";
-import getProjectBySadapId from "@/app/(modules)/projects/update/[project_id]/actions/get-project-by-sadap-id";
-import { error } from "console";
-import useGetProjectBySadapId from "@/app/(modules)/projects/hooks/use-get-project-by-sadap-id";
+
 
 interface Props {
     data: {
@@ -39,9 +38,11 @@ interface Props {
 
 const DocumentUpdateForm = ({ data }: Props) => {
 
-    const updateDocument = useUpdateDocument();
+    const router = useRouter();
 
     const document = data.document;
+
+    const updateDocument = useUpdateDocument();
 
     const form = useForm<z.infer<typeof UPDATE_DOCUMENT_SCHEMA>>({
         resolver: zodResolver(UPDATE_DOCUMENT_SCHEMA),
@@ -60,6 +61,7 @@ const DocumentUpdateForm = ({ data }: Props) => {
             {
                 onSuccess: () => {
                     form.reset()
+                    router.refresh();
                 }
             });
     };

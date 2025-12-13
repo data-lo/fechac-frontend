@@ -1,16 +1,23 @@
 'use client'
 
-import NavigationBreadcrumb from "@/components/breadcrumb";
-
-import { DocumentEntity } from "../../models/document-entity";
-
-import DocumentUpdateForm from "./components/document-update-form";
+// React
 import { Fragment } from "react";
-import { CriterionEntity } from "@/app/(modules)/criteria/models/criterion-entity";
+
+// UI components
 import AlertMessage from "@/components/alert-message";
+import NavigationBreadcrumb from "@/components/breadcrumb";
 import { StatisticCard } from "@/components/statistic-card";
-import { CheckCircle2, Link2, Users } from "lucide-react";
+
+// Page components
+import DocumentUpdateForm from "./components/document-update-form";
 import DocumentLocationCard from "./components/document-loaction-card";
+
+// Domain models
+import { DocumentEntity } from "../../models/document-entity";
+import { CriterionEntity } from "@/app/(modules)/criteria/models/criterion-entity";
+
+// Icons
+import { CheckCircle2, Users } from "lucide-react";
 
 interface Props {
     data: {
@@ -20,7 +27,6 @@ interface Props {
 }
 
 const UpdateDocumentSection = ({ data }: Props) => {
-
     const summary = [
         {
             title: "ESTATUS",
@@ -40,7 +46,7 @@ const UpdateDocumentSection = ({ data }: Props) => {
 
     const breadcrumbRoutes = [
         {
-            href: '/document',
+            href: '/documents/view',
             title: "DOCUMENTOS"
         },
         {
@@ -80,13 +86,12 @@ const UpdateDocumentSection = ({ data }: Props) => {
                 webUrl={data.document.metadata.web_url}
             />
 
-
             {!data.document.sadap_id && (
                 <Fragment>
                     <h2 className="font-bold">FORMULARIO</h2>
 
                     <AlertMessage
-                        message="Este documento no está vinculado a ningún proyecto. Por favor, realiza la asignación manual."
+                        message="Este documento no está vinculado a ningún proyecto. Por favor, realiza la asignación manual. Una vez completada, no podrá modificarse."
                         showActions={false}
                         buttonText=""
                         variant='warning'
