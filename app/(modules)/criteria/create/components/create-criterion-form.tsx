@@ -14,7 +14,7 @@ import ActionButton from "@/components/action-button";
 import { useCreateCriterion } from "../../hooks/use-create-criterion";
 
 // 4. Esquemas de validación
-import { CRITERIA_SCHEMA } from "../../schema/criteria-schema";
+import CRITERIA_SCHEMA from "../../schema/criteria-schema";
 
 // 5. Definiciones locales de campos
 import {
@@ -24,31 +24,53 @@ import {
     CRITERIA_STORAGE_FIELDS
 } from "../../fields/criteria-fields";
 
+import { Criterion } from "../../models/criterion";
+
 
 const CreateCriterionForm = () => {
 
     const router = useRouter()
 
-    const createMutation = useCreateCriterion();
+    const createCriterion = useCreateCriterion();
 
     const schema = CRITERIA_SCHEMA
 
-    const form = useForm<z.infer<typeof schema>>({
-        resolver: zodResolver(schema),
+    const form = useForm<z.infer<typeof CRITERIA_SCHEMA>>({
+        resolver: zodResolver(CRITERIA_SCHEMA),
         defaultValues: {
             file_name: "",
-
+            quality_system_code: "",
+            file_types: [],
+            department: "",
+            target_drives: [],
+            project_focus: [],
+            project_area: [],
+            project_type: [],
+            primary_keywords: null,
+            secondary_keywords: null,
+            name_variants: null,
+            target_path: null,
         },
     });
 
+
     const onSubmit = async (values: z.infer<typeof schema>) => {
-        // createMutation.mutate(values, {
-        //     onSuccess: (response) => {
-        //         if (response.success && response.data) {
-        //             router.push(`/criteria/${response.data.insertedId}/update`);
-        //         }
-        //     },
-        // });
+        const normalized: Criterion = {
+            ...values,
+            primary_keywords: values.primary_keywords ?? null,
+            secondary_keywords: values.secondary_keywords ?? null,
+            name_variants: values.name_variants ?? null,
+            target_path: values.target_path ?? null,
+            is_active: true,
+        };
+
+        createCriterion.mutate(normalized, {
+            // onSuccess: (response) => {
+            //     if (response.success && response.data) {
+            //         router.push(`/criteria/${response.data.insertedId}/update`);
+            //     }
+            // },
+        });
     };
 
     return (
@@ -57,7 +79,7 @@ const CreateCriterionForm = () => {
                 <h2 className="text-base font-semibold">IDENTIFICACIÓN DEL DOCUMENTO</h2>
                 <p className="text-sm text-muted-foreground">
                     Información básica para identificar el criterio documental.
-                </p>   
+                </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {CRITERIA_IDENTIFICATION_FIELDS.map
@@ -103,14 +125,14 @@ const CreateCriterionForm = () => {
                         ))}
                 </div>
 
-                <footer className="flex justify-end">
+                <div className="flex justify-end">
                     <ActionButton
                         type="submit"
                         title="Guardar Información"
                         iconName="Save"
-                        isPending={createMutation.isPending}
+                        isPending={createCriterion.isPending}
                     />
-                </footer>
+                </div>
             </form>
         </Form>
     );

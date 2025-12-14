@@ -1,16 +1,14 @@
 export interface Criterion {
-  id: string; // ObjectId como string
-
   file_types: string[];
   file_name: string;
 
-  quality_system_code: string | null;
-  reference_documents: string[] | null;
+  quality_system_code: string | null ;
 
-  primary_keywords: string[];
-  secondary_keywords: string[];
+  name_variants: string[] | null;
+  primary_keywords: string[] | null;
+  secondary_keywords: string[] | null;
 
-  target_path: string;
+  target_path: string | null;
   target_drives: string[];
 
   department: string;
@@ -19,12 +17,9 @@ export interface Criterion {
   project_area: string[];
   project_type: string[];
 
-  created_at: Date;
-  version: string;
-
   is_active: boolean;
 
-  name_variants: string[];
+  
 }
 
 export interface VisualLayout {

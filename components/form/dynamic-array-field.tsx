@@ -19,7 +19,7 @@ const DynamicArrayField = ({
   control,
   name,
   label,
-  placeholder = "Agregar elemento",
+  placeholder = "Palabra",
   showLabel = true
 }: DynamicArrayFieldProps) => {
 
@@ -80,7 +80,7 @@ const DynamicArrayField = ({
                   className="w-full mt-2"
                 >
                   <Plus className="h-4 w-4 mr-2" />
-                  Agregar {label}
+                  Agregar
                 </Button>
               </div>
             </FormControl>

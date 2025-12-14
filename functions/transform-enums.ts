@@ -3,7 +3,7 @@ import { DestinationPathEnum } from "@/enums/destination-path-enum";
 import { TypeOfAbbreviationEnum } from "@/enums/type-of-abbreviation-enum";
 import { TypeOfFileEnum } from "@/enums/type-of-file-enum";
 
-export const TypeOfFileList = Object.values(TypeOfFileEnum).map(value => ({
+export const TYPE_OF_FILE_LIST = Object.values(TypeOfFileEnum).map(value => ({
     value,
     label: value
 }));

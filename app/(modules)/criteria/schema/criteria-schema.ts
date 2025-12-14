@@ -1,65 +1,39 @@
 import * as z from "zod";
 
-import { REQUIRED_FIELD } from "@/messages/form-messages";
+import { REQUIRED_FIELD, REQUIRED_SELECTION_MESSAGE } from "@/messages/form-messages";
 
 const CRITERIA_SCHEMA = z.object({
-    file_name: z
-        .string()
-        .min(1, REQUIRED_FIELD)
-        .transform((val) => val.toUpperCase()),
+    file_name: z.string().min(1, REQUIRED_FIELD).transform(v => v.toUpperCase()),
 
-    quality_system_code: z
-        .string()
-        .min(1, REQUIRED_FIELD)
-        .transform((val) => val.toUpperCase()),
+    quality_system_code: z.string().min(1, REQUIRED_FIELD).transform(v => v.toUpperCase()),
+
+    file_types: z.array(z.string()).min(1, REQUIRED_SELECTION_MESSAGE),
 
     primary_keywords: z
-        .array(z.string().transform((val) => val.toUpperCase()))
-        .transform(item => item.filter(item => item.trim() !== ""))
-        .optional(),
+        .array(z.string().transform(v => v.toUpperCase()))
+        .transform(arr => arr.filter(v => v.trim() !== ""))
+        .nullable(),
 
-    secundary_keywords: z
-        .array(z.string().transform((val) => val.toUpperCase()))
-        .transform(item => item.filter(item => item.trim() !== ""))
-        .optional(),
+    secondary_keywords: z
+        .array(z.string().transform(v => v.toUpperCase()))
+        .transform(arr => arr.filter(v => v.trim() !== ""))
+        .nullable(),
 
     name_variants: z
-        .array(z.string().transform((val) => val.toUpperCase()))
-        .transform(item => item.filter(item => item.trim() !== ""))
-        .optional(),
+        .array(z.string().transform(v => v.toUpperCase()))
+        .transform(arr => arr.filter(v => v.trim() !== ""))
+        .nullable(),
 
-    department: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
+    department: z.string().min(1, REQUIRED_FIELD).transform(v => v.toUpperCase()),
 
-    target_drives: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
+    target_drives: z.array(z.string()).min(1, REQUIRED_SELECTION_MESSAGE),
 
-    target_path: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
+    target_path: z.string().transform(v => v.toUpperCase()).nullable(),
 
-    domain_tags: z
-        .array(z.string().transform((val) => val.toUpperCase()))
-        .transform(item => item.filter(item => item.trim() !== ""))
-        .optional(),
-
-    project_focus: z
-        .string()
-        .transform((val) => val.toUpperCase()),
-
-    project_area: z
-        .string()
-        .transform((val) => val.toUpperCase()),
-
-    project_type: z
-        .string()
-        .transform((val) => val.toUpperCase()),
-
-    version: z
-        .string()
-        .transform((val) => val.toUpperCase()),
+    project_focus: z.array(z.string()).min(1, REQUIRED_SELECTION_MESSAGE),
+    project_area: z.array(z.string()).min(1, REQUIRED_SELECTION_MESSAGE),
+    project_type: z.array(z.string()).min(1, REQUIRED_SELECTION_MESSAGE),
 });
 
-export { CRITERIA_SCHEMA };
+
+export default CRITERIA_SCHEMA

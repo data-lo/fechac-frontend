@@ -1,5 +1,6 @@
 export enum TypeOfFileEnum {
-    PDF = "PDF",
-    DOCX = "DOCX",
-    EXCEL = "EXCEL"
+    PDF = ".pdf",
+    DOCX = ".docx",
+    EXCEL = ".xlsx",
+    JPG = ".jpg"
 }

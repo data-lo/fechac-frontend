@@ -2,8 +2,11 @@ import DynamicArrayField from "@/components/form/dynamic-array-field";
 import InputField from "@/components/form/input-field";
 import MultipleSelectComponent from "@/components/form/multiple-select-field";
 import SelectField from "@/components/form/select-field";
-import { DepartmentList } from "@/functions/transform-enums";
-import { TARGET_DRIVES_LIST } from "../utils/target_drives-list";
+import { DepartmentList, TYPE_OF_FILE_LIST } from "@/functions/transform-enums";
+import { TARGET_DRIVES_LIST } from "../utils/target-drives-list";
+import PROJECT_TYPE_LIST from "../utils/project-type-list";
+import PROJECT_FOCUS_LIST from "../utils/project-focus-list";
+import PROJECT_AREA_LIST from "../utils/project-area-list";
 
 // 1. Identification
 export const CRITERIA_IDENTIFICATION_FIELDS = [
@@ -34,6 +37,15 @@ export const CRITERIA_IDENTIFICATION_FIELDS = [
             items: DepartmentList,
         },
     },
+     {
+        component: MultipleSelectComponent,
+        props: {
+            name: "file_type",
+            label: "Tipo de archivo",
+            placeholder: "Seleccione un tipo",
+            items: TYPE_OF_FILE_LIST,
+        },
+    },
 ];
 
 // 2. Classification
@@ -43,7 +55,6 @@ export const CRITERIA_CLASSIFICATION_FIELDS = [
         props: {
             name: "primary_keywords",
             label: "Palabras Clave Primarias",
-            placeholder: "Agregar palabra",
             items: [],
         },
     },
@@ -52,25 +63,15 @@ export const CRITERIA_CLASSIFICATION_FIELDS = [
         props: {
             name: "secundary_keywords",
             label: "Palabras Clave Secundarias",
-            placeholder: "Agregar palabra",
             items: [],
         },
     },
-    {
-        component: DynamicArrayField,
-        props: {
-            name: "domain_tags",
-            label: "Etiquetas de Dominio",
-            placeholder: "Agregar etiqueta",
-            items: [],
-        },
-    },
+
     {
         component: DynamicArrayField,
         props: {
             name: "name_variants",
             label: "Variantes de Nombre",
-            placeholder: "Agregar variante",
             items: [],
         },
     },
@@ -79,7 +80,7 @@ export const CRITERIA_CLASSIFICATION_FIELDS = [
 // 3. Storage
 export const CRITERIA_STORAGE_FIELDS = [
     {
-        component:  MultipleSelectComponent,
+        component: MultipleSelectComponent,
         props: {
             name: "target_drives",
             label: "Drive Destino",
@@ -101,35 +102,40 @@ export const CRITERIA_STORAGE_FIELDS = [
 // 4. Project
 export const CRITERIA_PROJECT_FIELDS = [
     {
-        component: InputField,
+        component: MultipleSelectComponent,
         props: {
             name: "project_focus",
-            label: "Enfoque del Proyecto",
-            items: [],
+            label: "Enfoque",
+            placeholder: "Seleccione un enfoque",
+            items: PROJECT_FOCUS_LIST,
         },
     },
     {
-        component: InputField,
+        component: MultipleSelectComponent,
         props: {
+
             name: "project_area",
-            label: "Área del Proyecto",
-            items: [],
+            label: "Área",
+            placeholder: "Seleccione un área",
+            items: PROJECT_AREA_LIST,
         },
     },
     {
-        component: InputField,
+        component: MultipleSelectComponent,
         props: {
             name: "project_type",
             label: "Tipo de Proyecto",
-            items: [],
+            placeholder: "Seleccione un tipo",
+            items: PROJECT_TYPE_LIST,
         },
     },
-    {
-        component: InputField,
-        props: {
-            name: "version",
-            label: "Versión",
-            items: [],
-        },
-    },
+    // {
+    //     component: InputField,
+    //     props: {
+    //         name: "version",
+    //         label: "Versión",
+    //         placeholder: "Seleccione un tipo de proyecto",
+    //         items: [],
+    //     },
+    // },
 ];
