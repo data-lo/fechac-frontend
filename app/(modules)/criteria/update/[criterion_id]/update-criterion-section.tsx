@@ -1,12 +1,15 @@
 'use client'
 import { Fragment } from "react";
-import { CriterionDocument } from "../models/criterion-entity";
-import UpdateCriterionForm from "./components/criterion-update-form";
+
 import NavigationBreadcrumb from "@/components/breadcrumb";
+
+import { CriterionEntity } from "../../models/criterion-entity";
+
+import UpdateCriterionForm from "./components/criterion-update-form";
 
 interface Props {
     data: {
-        criterion: CriterionDocument
+        criterion: CriterionEntity
     }
 }
 

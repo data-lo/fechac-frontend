@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache";
 import { uniqueProjectsBySadapId } from "../../functions/unique-projects-by-sadap-id";
 import { isClosedProject } from "../../functions/is-closed-project";
 
-
 export async function synchronizeProjectsAction(values: File[]) {
     try {
         // 1. Extraer proyectos desde CSV

@@ -11,14 +11,10 @@ const useUpdateCriterion = () => {
     return useMutation({
         mutationFn: updateCriterion,
         onSuccess: (response) => {
-            if (response.success) {
-                toast.success("¡El criterio se ha modificado con éxito!");
-            } else {
-                toast.error(response.error);
-            }
+            toast.success(response.message);
         },
         onError: (error) => {
-            toast.error(`Error: ${error.message}`);
+            toast.error(error.message);
         },
     });
 }

@@ -61,7 +61,7 @@ export const CRITERIA_CLASSIFICATION_FIELDS = [
     {
         component: DynamicArrayField,
         props: {
-            name: "secundary_keywords",
+            name: "secondary_keywords",
             label: "Palabras Clave Secundarias",
             items: [],
         },
