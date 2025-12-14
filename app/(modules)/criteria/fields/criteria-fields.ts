@@ -40,7 +40,7 @@ export const CRITERIA_IDENTIFICATION_FIELDS = [
      {
         component: MultipleSelectComponent,
         props: {
-            name: "file_type",
+            name: "file_types",
             label: "Tipo de archivo",
             placeholder: "Seleccione un tipo",
             items: TYPE_OF_FILE_LIST,

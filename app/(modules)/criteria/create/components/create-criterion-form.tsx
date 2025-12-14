@@ -46,15 +46,16 @@ const CreateCriterionForm = () => {
             project_focus: [],
             project_area: [],
             project_type: [],
-            primary_keywords: null,
-            secondary_keywords: null,
-            name_variants: null,
-            target_path: null,
+            primary_keywords: [],
+            secondary_keywords: [],
+            name_variants: [],
+            target_path: "",
         },
     });
 
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
+        console.log(values)
         const normalized: Criterion = {
             ...values,
             primary_keywords: values.primary_keywords ?? null,
@@ -65,11 +66,9 @@ const CreateCriterionForm = () => {
         };
 
         createCriterion.mutate(normalized, {
-            // onSuccess: (response) => {
-            //     if (response.success && response.data) {
-            //         router.push(`/criteria/${response.data.insertedId}/update`);
-            //     }
-            // },
+            onSuccess: (response) => {
+                router.push(`/criteria/${response._id}/update`);
+            },
         });
     };
 

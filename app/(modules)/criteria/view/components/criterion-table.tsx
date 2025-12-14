@@ -21,9 +21,10 @@ import { CriterionEntity } from "../../models/criterion-entity";
 
 interface Props {
     data: CriterionEntity[];
+    currentIndex: number;
 }
 
-const CriterionTable = ({ data }: Props) => {
+const CriterionTable = ({ data, currentIndex }: Props) => {
     const router = useRouter();
 
     const handleEdit = (criterionId: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -47,7 +48,7 @@ const CriterionTable = ({ data }: Props) => {
                 {data.map((criterion, index) => (
                     <TableRow key={index}>
                         <TableCell className="text-center text-gray-500 font-medium">
-                            {index + 1}
+                            {currentIndex + index + 1}
                         </TableCell>
                         <TableCell className="min-w-0">
                             <div className="text-sm line-clamp-2 leading-tight pr-4">

@@ -62,6 +62,8 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
     },
   ];
 
+  console.log(page, limit)
+
   return (
     <Fragment>
       <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
@@ -72,7 +74,10 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
 
       {criteria.length > 0 ? (
         <Fragment>
-          <CriterionTable data={criteria} />
+          <CriterionTable
+            data={criteria}
+            currentIndex={(page * limit) - 50}
+          />
 
           <PaginationComponent
             currentPage={page}

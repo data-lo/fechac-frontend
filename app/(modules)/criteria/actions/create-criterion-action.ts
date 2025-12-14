@@ -24,6 +24,7 @@ export default async function createCriterionAction(criterion: Criterion) {
     return {
         success: true,
         message: "¡El criterio se ha creado con éxito!",
+        _id: result.insertedId.toString(),
     };
 
 }

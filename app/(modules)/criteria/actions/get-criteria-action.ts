@@ -43,13 +43,9 @@ export async function getCriteria(
     const collection = await getCollection<CriterionEntity>("criteria");
     const skip = (page - 1) * limit;
 
-    const { sortBy = 'approval_date', sortOrder = 'desc' } = options;
-    const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
-
     const [criteriaFromDB, total] = await Promise.all([
       collection
         .find()
-        .sort(sort)
         .skip(skip)
         .limit(limit)
         .toArray(),
