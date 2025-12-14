@@ -3,7 +3,7 @@
 
 import { ActionResponse } from "@/interfaces/action/action-response";
 
-import { CriterionDocument } from "../../../models/criterion-entity";
+import { CriterionDocument } from "../models/criterion-entity";
 import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
 import { ObjectId } from "mongodb";
 import getCollection from "@/actions/mongo/get-collection";

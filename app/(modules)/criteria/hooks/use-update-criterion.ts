@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { updateCriterion } from "../actions/update-criterion";
+import { updateCriterion } from "../../../actions/update-criterion";
 
 const useUpdateCriterion = () => {
     return useMutation({

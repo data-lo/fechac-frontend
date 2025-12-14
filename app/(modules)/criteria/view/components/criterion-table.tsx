@@ -29,7 +29,7 @@ const CriterionTable = ({ data, currentIndex }: Props) => {
 
     const handleEdit = (criterionId: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        router.push(`/criteria/${criterionId}/update`);
+        router.push(`/criteria/update/${criterionId}`);
     };
 
     return (

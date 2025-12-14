@@ -1,5 +1,5 @@
 import { getCriterion } from "../actions/get-criterion";
-import UpdateCriterionSection from "./update-criterion-section";
+import UpdateCriterionSection from "./update/update-criterion-section";
 
 export default async function UpdateCriterionPage({
     params,
@@ -19,11 +19,9 @@ export default async function UpdateCriterionPage({
     }
 
     return (
-        <div className="h-screen">
-            <UpdateCriterionSection data={{
-                criterion: response.data.criterion
-            }} />
-        </div>
+        <UpdateCriterionSection data={{
+            criterion: response.data.criterion
+        }} />
     );
 }
 

@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // 3. Modelos
-import { CriterionDocument } from "../../../models/criterion-entity";
+import { CriterionDocument } from "../../models/criterion-entity";
 
 // 4. Esquemas de validación
 import { UPDATE_CRITERIA_SCHEMA } from "../schemas/update-criterion-schema";
@@ -23,7 +23,7 @@ import {
   CONTENT_FIELDS, 
   CLASSIFICATION_FIELDS, 
   STORAGE_FIELDS 
-} from "../../../fields/criteria-fields";
+} from "../../fields/criteria-fields";
 
 // 6. Hooks
 import useUpdateCriterion from "../hooks/use-update-criterion";
