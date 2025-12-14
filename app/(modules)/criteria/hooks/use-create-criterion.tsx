@@ -5,16 +5,16 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { createCriterion } from "../actions/create-criterion";
+import createCriterionAction from "../actions/create-criterion-action";
 
 export function useCreateCriterion() {
     return useMutation({
-        mutationFn: createCriterion,
+        mutationFn: createCriterionAction,
         onSuccess: (response) => {
-            if (response.success) toast.success("¡El criterio se ha creado con éxito!");
+            toast.success(response.message);
         },
         onError: (error) => {
-            toast.error(`Error: ${error.message}`);
+            toast.error(error.message);
         },
     });
 }

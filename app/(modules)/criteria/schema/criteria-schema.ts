@@ -2,12 +2,28 @@ import * as z from "zod";
 
 import { REQUIRED_FIELD } from "@/messages/form-messages";
 
-const BASE_CRITERIA_SCHEMA = z.object({
-    access_url: z
-        .string({ required_error: REQUIRED_FIELD })
+const CRITERIA_SCHEMA = z.object({
+    file_name: z
+        .string()
+        .min(1, REQUIRED_FIELD)
         .transform((val) => val.toUpperCase()),
 
-    additional_keywords: z
+    quality_system_code: z
+        .string()
+        .min(1, REQUIRED_FIELD)
+        .transform((val) => val.toUpperCase()),
+
+    primary_keywords: z
+        .array(z.string().transform((val) => val.toUpperCase()))
+        .transform(item => item.filter(item => item.trim() !== ""))
+        .optional(),
+
+    secundary_keywords: z
+        .array(z.string().transform((val) => val.toUpperCase()))
+        .transform(item => item.filter(item => item.trim() !== ""))
+        .optional(),
+
+    name_variants: z
         .array(z.string().transform((val) => val.toUpperCase()))
         .transform(item => item.filter(item => item.trim() !== ""))
         .optional(),
@@ -16,11 +32,11 @@ const BASE_CRITERIA_SCHEMA = z.object({
         .string({ required_error: REQUIRED_FIELD })
         .transform((val) => val.toUpperCase()),
 
-    destination_drive: z
+    target_drives: z
         .string({ required_error: REQUIRED_FIELD })
         .transform((val) => val.toUpperCase()),
 
-    destination_path: z
+    target_path: z
         .string({ required_error: REQUIRED_FIELD })
         .transform((val) => val.toUpperCase()),
 
@@ -29,44 +45,21 @@ const BASE_CRITERIA_SCHEMA = z.object({
         .transform(item => item.filter(item => item.trim() !== ""))
         .optional(),
 
-    file_name: z
-        .string()
-        .min(1, REQUIRED_FIELD)
-        .transform((val) => val.toUpperCase()),
-
-    file_type: z
-        .string({ required_error: REQUIRED_FIELD })
-        .transform((val) => val.toUpperCase()),
-
-    form_code: z
-        .string()
-        .min(1, REQUIRED_FIELD)
-        .transform((val) => val.toUpperCase()),
-
-    form_title: z
-        .string()
-        .min(1, REQUIRED_FIELD)
-        .transform((val) => val.toUpperCase()),
-
-    issuing_organization: z
+    project_focus: z
         .string()
         .transform((val) => val.toUpperCase()),
 
-    main_sections: z
-        .array(z.string().transform((val) => val.toUpperCase()))
-        .transform(item => item.filter(item => item.trim() !== ""))
-        .optional(),
-
-    revision_number: z
+    project_area: z
         .string()
         .transform((val) => val.toUpperCase()),
 
-    standard_fields: z
-        .array(z.string().transform((val) => val.toUpperCase()))
-        .transform(item => item.filter(item => item.trim() !== ""))
-        .optional(),
+    project_type: z
+        .string()
+        .transform((val) => val.toUpperCase()),
 
+    version: z
+        .string()
+        .transform((val) => val.toUpperCase()),
 });
 
-
-export { BASE_CRITERIA_SCHEMA };
+export { CRITERIA_SCHEMA };

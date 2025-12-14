@@ -6,16 +6,16 @@ import AlertMessage from "@/components/alert-message";
 import EmptySate from "@/components/empty-state";
 
 // 3. Componentes compartidos
-import LimitSelector from "../../../../components/limit-selector";
-import PaginationComponent from "../../../../components/pagination";
+import PaginationComponent from "@/components/pagination";
+import CriterionTable from "./components/criterion-table";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 4. Componentes locales del módulo
-import CriterionTable from "../components/criterion-table";
-import CreateCriterionButtonSection from "../create/components/create-criterion-button-section";
+
+import CreateCriterionButtonSection from "../components/create-criterion-button-section";
 
 // 5. Actions/Servicios
-import { getCriteria } from "../actions/get-criteria";
+import { getCriteria } from "../actions/get-criteria-action";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;

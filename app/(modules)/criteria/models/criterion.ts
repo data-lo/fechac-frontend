@@ -1,19 +1,30 @@
 export interface Criterion {
+  id: string; // ObjectId como string
+
+  file_types: string[];
   file_name: string;
-  form_code: string;
-  form_title: string;
-  issuing_organization: string;
-  revision_number: string;
-  access_url: string;
-  main_sections?: string[] | undefined;
-  standard_fields?: string[] | undefined;
-  visual_layout?: VisualLayout | undefined;
-  domain_tags?: string[] | undefined;
-  additional_keywords?: string[] | undefined;
-  destination_drive: string;
-  destination_path: string;
+
+  quality_system_code: string | null;
+  reference_documents: string[] | null;
+
+  primary_keywords: string[];
+  secondary_keywords: string[];
+
+  target_path: string;
+  target_drives: string[];
+
   department: string;
-  file_type: string;
+
+  project_focus: string[];
+  project_area: string[];
+  project_type: string[];
+
+  created_at: Date;
+  version: string;
+
+  is_active: boolean;
+
+  name_variants: string[];
 }
 
 export interface VisualLayout {

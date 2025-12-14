@@ -23,7 +23,7 @@ import {
   CONTENT_FIELDS, 
   CLASSIFICATION_FIELDS, 
   STORAGE_FIELDS 
-} from "../../../fields/base-criteria-fields";
+} from "../../../fields/criteria-fields";
 
 // 6. Hooks
 import useUpdateCriterion from "../hooks/use-update-criterion";

@@ -15,14 +15,12 @@ import {
 
 // 3. Componentes propios
 import ActionButton from "@/components/action-button";
-import ContextMenu from "@/components/context-menu";
 
 // 4. Tipos/Modelos
-import { CriterionDocument } from "../models/criterion-entity";
-import DeleteCriterionButton from "../delete/components/delete-criterion-button";
+import { CriterionEntity } from "../../models/criterion-entity";
 
 interface Props {
-    data: CriterionDocument[];
+    data: CriterionEntity[];
 }
 
 const CriterionTable = ({ data }: Props) => {
@@ -37,11 +35,11 @@ const CriterionTable = ({ data }: Props) => {
         <Table className="table-fixed">
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-12 text-center">#</TableHead>
-                    <TableHead className="min-w-0 w-full">NOMBRE DEL ARCHIVO</TableHead>
-                    <TableHead className="w-36 whitespace-nowrap">DEPARTAMENTO</TableHead>
-                    <TableHead className="w-44 whitespace-nowrap">CÓDIGO</TableHead>
-                    <TableHead className="w-24"></TableHead>
+                    <TableHead className="w-[50px] text-center">#</TableHead>
+                    <TableHead className="max-w-[340px]">NOMBRE DEL ARCHIVO</TableHead>
+                    <TableHead className="w-[240px]">DEPARTAMENTO</TableHead>
+                    <TableHead className="w-[240px]">CÓDIGO</TableHead>
+                    <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>
 
@@ -59,22 +57,18 @@ const CriterionTable = ({ data }: Props) => {
                         <TableCell className="text-sm whitespace-nowrap">
                             {criterion.department}
                         </TableCell>
+                        
                         <TableCell className="text-sm whitespace-nowrap overflow-hidden">
-                            {String(criterion.form_code).toUpperCase()}
+                            {(criterion.quality_system_code ?? "SIN CÓDIGO").toUpperCase()}
                         </TableCell>
-                        <TableCell className="text-right">
-                            <ContextMenu>
-                                <ActionButton
-                                    title="Editar"
-                                    className="w-auto"
-                                    variant={"ghost"}
-                                    onClick={handleEdit(String(criterion._id))}
-                                />
 
-                                <DeleteCriterionButton
-                                    _id={criterion._id}
-                                />
-                            </ContextMenu>
+                        <TableCell>
+                            <ActionButton
+                                iconName="FileSliders"
+                                className="w-min"
+                                variant="ghost"
+                                onClick={handleEdit(criterion._id.toString())}
+                            />
                         </TableCell>
                     </TableRow>
                 ))}
