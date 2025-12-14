@@ -1,4 +1,4 @@
-import ViewCriteriaSection from "./view-criterion-section";
+import ViewCriterionSection from "./view-criterion-section";
 
 interface Props {
     searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -6,8 +6,6 @@ interface Props {
 
 export default function CriteriaPage({ searchParams }: Props) {
     return (
-         <div className="h-screen">
-                <ViewCriteriaSection searchParams={searchParams} />
-        </div>
+        <ViewCriterionSection searchParams={searchParams} />
     )
 }
