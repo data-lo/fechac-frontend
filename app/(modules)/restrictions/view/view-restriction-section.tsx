@@ -8,11 +8,11 @@ import ModalComponent from "@/components/modal";
 import AlertMessage from "@/components/alert-message";
 
 // 3. Componentes locales del módulo
-import RestrictionTable from "./components/restriction-table";
-import CreateRestrictionForm from "./create/create-restriction-form";
+import RestrictionTable from "../components/restriction-table";
+import CreateRestrictionForm from "../create/create-restriction-form";
 
 // 4. Actions/Servicios
-import getRestrictions from "./actions/get-restrictions";
+import getRestrictions from "../actions/get-restrictions";
 import PaginationComponent from "@/components/pagination";
 import LimitSelector from "@/components/limit-selector";
 

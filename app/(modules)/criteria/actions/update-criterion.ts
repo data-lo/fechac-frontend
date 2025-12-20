@@ -1,49 +1,38 @@
 'use server';
 
-
-import { ActionResponse } from "@/interfaces/action/action-response";
-
-import { CriterionDocument } from "../models/criterion-entity";
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
 import { ObjectId } from "mongodb";
+
 import getCollection from "@/actions/mongo/get-collection";
 
-export async function updateCriterion(values: CriterionDocument): Promise<ActionResponse<UpdateOneResponse>> {
-    try {
+import { CriterionEntity } from "../models/criterion-entity";
 
-        const collection = await getCollection<CriterionDocument>("document_prompts");
+import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
 
-        const { _id, ...fieldsToUpdate } = values
+export async function updateCriterion({
+    _id,
+    payload,
+}: {
+    _id: string | ObjectId;
+    payload: Partial<CriterionEntity>;
+}) {
+    const collection = await getCollection<CriterionEntity>("criteria");
 
-        const response: UpdateOneResponse = await collection.updateOne(
-            { _id: new ObjectId(_id) },
-            { $set: fieldsToUpdate },
-            { upsert: false }
-        );
+    const result: UpdateOneResponse = await collection.updateOne(
+        { _id: new ObjectId(_id) },
+        { $set: payload },
+        { upsert: false }
+    );
 
-        if (response.modifiedCount === 0) {
-            return {
-                success: false,
-                error: '¡No se actualizo el criterio solicitado!',
-                data: null
-            };
-        }
-
-        return {
-            success: true,
-            error: null,
-            data: {
-                ...response,
-            },
-        };
-
-    } catch (error) {
-        console.error('[update-criterion] Error en el action:', error);
-
-        return {
-            success: false,
-            error: error instanceof Error ? error.message : "¡Error desconocido al actualizar el criterio!",
-            data: null
-        };
+    if (result.matchedCount === 0) {
+        throw new Error("¡El documento no existe!");
     }
+
+    if (result.modifiedCount === 0) {
+        throw new Error("¡No hubo cambios para guardar!");
+    }
+
+    return {
+        success: true,
+        message: "¡El documento se ha modificado con exito!",
+    };
 }

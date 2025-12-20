@@ -52,8 +52,7 @@ const CriterionUpdateForm = ({ data }: Props) => {
     });
 
     const onSubmit = (values: z.infer<typeof UPDATE_CRITERIA_SCHEMA>) => {
-        console.log(values)
-        // updateMutation.mutate(values);
+        updateCriterion.mutate({_id: criterion._id, payload: values});
     };
 
     return (
@@ -87,7 +86,6 @@ const CriterionUpdateForm = ({ data }: Props) => {
                 <p className="text-sm text-muted-foreground">
                     Información del proyecto al que pertenece este documento.
                 </p>
-
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {CRITERIA_PROJECT_FIELDS.map

@@ -27,11 +27,11 @@ export const routes = [
         label: "Restricciones",
         href: "/restrictions"
     },
-    {
-        icon: WholeWord,
-        label: "Abreviaciones",
-        href: "/abbreviations"
-    },
+    // {
+    //     icon: WholeWord,
+    //     label: "Abreviaciones",
+    //     href: "/abbreviations"
+    // },
     {
         icon: Cloud,
         label: "One Drive",

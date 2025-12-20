@@ -1,6 +1,6 @@
 import { getUserInformation } from "@/actions/authentication-handler-action";
-import AuthorizationCard from "./components/authentication-card";
-import AuthenticatedUserCard from "./components/authentication-user-card";
+import AuthorizationCard from "../components/authentication-card";
+import AuthenticatedUserCard from "../components/authentication-user-card";
 
 const SessionPage = async () => {
 

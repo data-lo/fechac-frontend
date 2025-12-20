@@ -17,7 +17,7 @@ const UpdateCriterionSection = ({ data }: Props) => {
 
     const breadcrumbRoutes = [
         {
-            href: '/criteria',
+            href: '/criteria/view',
             title: 'CRITERIOS'
         },
         {
