@@ -6,8 +6,9 @@ const SessionPage = async () => {
 
     const user = await getUserInformation();
 
-    const SCOPES = encodeURIComponent('https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.Read offline_access');
-
+    const SCOPES = encodeURIComponent(
+        'https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.ReadWrite offline_access'
+    );
     const microsoftAuthUrl = `https://login.microsoftonline.com/${process.env.TENANT_TYPE}/oauth2/v2.0/authorize?client_id=${process.env.CLIENT_ID}&response_type=code&redirect_uri=${process.env.REDIRECT_URI}&response_mode=query&scope=${SCOPES}&prompt=consent`;
 
     return (
@@ -18,9 +19,9 @@ const SessionPage = async () => {
                     {!user && (
                         <AuthorizationCard
                             description="Inicia sesión con la cuenta del usuario integrador para acceder a los archivos compartidos."
-                            title="Microsoft" 
-                            microsoftAuthUrl={microsoftAuthUrl} 
-                            />
+                            title="Microsoft"
+                            microsoftAuthUrl={microsoftAuthUrl}
+                        />
                     )}
                     {user && (<AuthenticatedUserCard user={user} />)}
                 </div>

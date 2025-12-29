@@ -41,8 +41,7 @@ export async function exchangeAuthCodeForToken(code: string): Promise<MicrosoftS
     code,
     redirect_uri: process.env.REDIRECT_URI!,
     grant_type: 'authorization_code',
-    scope: 'https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.Read offline_access'
-
+    scope: 'https://graph.microsoft.com/User.Read https://graph.microsoft.com/Files.ReadWrite offline_access',
   });
 
   const response = await fetch(`https://login.microsoftonline.com/common/oauth2/v2.0/token`, {
