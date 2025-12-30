@@ -1,6 +1,5 @@
 "use server"
-
-import getCollection from "@/actions/mongo/get-collection";
+import getCollection from "@/lib/mongodb";
 
 import { ProjectDocument } from "../../../models/project-document";
 
