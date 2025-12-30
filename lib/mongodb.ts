@@ -1,4 +1,4 @@
-import { MongoClient, Db } from "mongodb";
+import { MongoClient, Db, Collection, Document } from "mongodb";
 
 const uri = process.env.DATABASE_URL!;
 if (!uri) throw new Error("DATABASE_URL is not defined");
@@ -23,4 +23,21 @@ export async function getConnection() {
   (global as any)._mongo = cached;
 
   return db;
+}
+
+export default async function getCollection<T extends Document>(name: string): Promise<Collection<T>> {
+  try {
+    if (!name || typeof name !== 'string') {
+      throw new Error('El nombre de la colección es requerido y debe ser string');
+    }
+
+    const db: Db = await getConnection();
+
+    return db.collection<T>(name);
+  } catch (error) {
+
+    console.error(`Error al obtener la colección '${name}':`, error);
+
+    throw error;
+  }
 }

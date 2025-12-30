@@ -1,4 +1,4 @@
-import { getUserInformation } from "@/actions/authentication-handler-action";
+import { getUserInformation } from "@/actions/microsoft/authentication-handler";
 import AuthorizationCard from "../components/authentication-card";
 import AuthenticatedUserCard from "../components/authentication-user-card";
 

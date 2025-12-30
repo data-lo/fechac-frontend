@@ -3,7 +3,7 @@
 import { MicrosoftUserInfo } from '@/interfaces/microsoft-user-info';
 import { FaUserCircle } from 'react-icons/fa';
 import ButtonComponent from '@/components/action-button';
-import { handleLogout } from '@/actions/authentication-handler-action';
+import { handleLogout } from '@/actions/microsoft/authentication-handler';
 import toast from 'react-hot-toast';
 
 interface Props {
