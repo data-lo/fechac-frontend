@@ -2,9 +2,11 @@
 
 import toast from "react-hot-toast";
 import ActionButton from "@/components/action-button";
+import startDagRun from "../../actions/start-dag-run";
+import stopDagRun from "../../actions/stop-dag-run";
+import ScheduleSettings from "./scheduled-settings";
 
-import stopDagRun from "../actions/stop-dag-run";
-import startDagRun from "../actions/start-dag-run";
+
 
 
 interface Props {
@@ -37,6 +39,8 @@ export default function ProcessControls({ token, isRunning, dagRunId }: Props) {
     }
     return (
         <div className="flex flex-col sm:flex-row justify-end gap-4 w-full mt-4 px-2">
+            <ScheduleSettings />
+
             <ActionButton
                 iconName="Play"
                 title="Iniciar Proceso"

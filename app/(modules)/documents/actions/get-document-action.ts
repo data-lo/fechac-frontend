@@ -1,15 +1,15 @@
 'use server';
 import { ObjectId } from "mongodb";
 
-import getCollection from "@/actions/mongo/get-collection";
 
 import { DocumentEntity } from "../models/document-entity";
 import { ActionResponse } from "@/interfaces/action/action-response";
+import getCollection from "@/lib/mongodb";
 
 export default async function getDocumentAction(_id: string): Promise<ActionResponse<{ document: DocumentEntity; }>> {
     try {
         const collection = await getCollection<DocumentEntity>("documents");
-        
+
         if (!ObjectId.isValid(_id)) {
             return {
                 success: false,
@@ -20,7 +20,7 @@ export default async function getDocumentAction(_id: string): Promise<ActionResp
 
         const document = await collection.findOne({ _id: new ObjectId(_id) });
 
-        if (!document){
+        if (!document) {
             return {
                 success: false,
                 error: "¡No se encontró el documento solicitado!",

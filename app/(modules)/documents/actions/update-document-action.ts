@@ -2,9 +2,10 @@
 
 import { ObjectId } from "mongodb";
 
-import getCollection from "@/actions/mongo/get-collection";
+
 
 import Document from "../models/document";
+import getCollection from "@/lib/mongodb";
 
 export async function updateDocumentAction(data: { _id: string; payload: Partial<Document> }) {
     const collection = await getCollection<Document>("documents");

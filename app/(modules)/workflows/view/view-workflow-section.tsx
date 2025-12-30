@@ -7,9 +7,7 @@ import AlertMessage from "@/components/alert-message";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 3. Actions / Servicios
-import getTask from "./actions/get-task";
-import getAirflowToken from "./actions/get-airflow-token";
-import getDagExecutions from "./actions/get-dag-executions";
+
 
 // 4. Componentes locales de la vista
 import DagTable from "./components/dag-table";
@@ -17,7 +15,10 @@ import TaskList from "./components/task-list";
 import ProcessControl from "./components/process-control";
 
 // 5. Tipos / Interfaces
-import { DagRun } from "./interfaces/dag-run-interface";
+import { DagRun } from "../interfaces/dag-run-interface";
+import getAirflowToken from "../actions/get-airflow-token";
+import getDagExecutions from "../actions/get-dag-executions";
+import getTask from "../actions/get-task";
 
 export default async function ViewWorkflowSection() {
     const token = await getAirflowToken();
@@ -48,6 +49,7 @@ export default async function ViewWorkflowSection() {
     let tasks = null;
 
     if (lastDagRun) {
+        console.log(lastDagRun)
         tasks = await getTask(token, lastDagRun.dag_run_id);
     }
 

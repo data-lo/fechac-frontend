@@ -1,6 +1,7 @@
 'use server';
 
-import getCollection from "@/actions/mongo/get-collection";
+
+import getCollection from "@/lib/mongodb";
 import { DocumentEntity } from "../models/document-entity";
 import { ActionResponse } from "@/interfaces/action/action-response";
 

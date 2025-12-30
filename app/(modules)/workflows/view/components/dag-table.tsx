@@ -9,7 +9,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-import { DagRun } from "../interfaces/dag-run-interface";
+import { DagRun } from "../../interfaces/dag-run-interface";
 
 interface Props {
     data: DagRun[];
