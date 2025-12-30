@@ -1,8 +1,8 @@
 'use server';
 
-import { getCollection } from "@/actions/authentication-handler-action";
 import { ActionResponse } from "@/interfaces/action/action-response";
 import { CriterionDocument } from "../models/criterion-document";
+import getCollection from "@/actions/mongo/get-collection";
 
 interface PaginationParams {
   page?: number;
@@ -40,7 +40,7 @@ export async function getCriteria(
       };
     }
 
-    const collection = await getCollection<CriterionDocument>("document_prompts");
+    const collection = await getCollection<CriterionDocument>("criteria");
     const skip = (page - 1) * limit;
 
     const { sortBy = 'approval_date', sortOrder = 'desc' } = options;

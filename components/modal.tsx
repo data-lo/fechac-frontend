@@ -55,7 +55,7 @@ const sizeClassMap: Record<DialogSize, string> = {
   full: "sm:max-w-full"
 }
 
-const ModalComponent = ({
+const Modal = ({
   dialogTitle,
   dialogDescription,
   children,
@@ -86,7 +86,6 @@ const ModalComponent = ({
         variant={variant}
         iconName={iconName}
         isPending={false}
-        className={buttonSize}
         disabled={buttonDisabled}
         type="button"
         title={dialogTrigger}
@@ -135,6 +134,6 @@ const ModalComponent = ({
   )
 }
 
-export default ModalComponent
+export default Modal
 
 export type { Props, ButtonVariant, DialogSize }

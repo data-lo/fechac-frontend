@@ -1,7 +1,7 @@
 import { ActionResponse } from "@/interfaces/action/action-response";
 
 import { AbbreviationDocument } from "../models/abbreviation-document";
-import { getCollection } from "@/actions/mongo/get-collection";
+import getCollection from "@/actions/mongo/get-collection";
 
 export default async function abbreviationExist(abbreviation: string): Promise<ActionResponse<AbbreviationDocument>> {
     try {

@@ -1,5 +1,5 @@
-import { REQUIRED_FIELD } from "@/messages/form-messages";
 import * as z from "zod";
+import { REQUIRED_FIELD } from "@/messages/form-messages";
 
 const BASE_ABBREVIATION_SCHEMA = z.object({
     abbreviation: z.string()

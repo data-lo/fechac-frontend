@@ -8,6 +8,10 @@ import {
 } from "@/components/ui/table"
 
 import { AbbreviationDocument } from "../models/abbreviation-document";
+import ContextMenu from "@/components/context-menu";
+import Modal from "@/components/modal";
+import UpdateAbbreviationForm from "../update/update-abbreviation-form";
+import DeleteAbbreviationButton from "../delete/components/delete-abbreviation-button";
 
 
 interface Props {
@@ -19,20 +23,39 @@ const AbbreviationTable = ({
 }: Props) => {
 
     return (
-        <Table>
+        <Table className="table-fixed">
             <TableHeader>
                 <TableRow>
-                    <TableHead >#</TableHead>
-                    <TableHead >NOMBRE</TableHead>
-                    <TableHead >ABREVIACIÓN</TableHead>
+                    <TableHead className="w-12 text-center">#</TableHead>
+                    <TableHead className="min-w-0 w-full">NOMBRE</TableHead>
+                    <TableHead className="w-24">ABREVIACIÓN</TableHead>
+                    <TableHead className="w-24"></TableHead>
                 </TableRow>
             </TableHeader>
-            <TableBody className="w-full">
+            <TableBody>
                 {data.map((abbreviation, index) => (
                     <TableRow key={abbreviation._id.toString()}>
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{abbreviation.name}</TableCell>
                         <TableCell>{abbreviation.abbreviation}</TableCell>
+                        <TableCell>
+                            <ContextMenu>
+                                <Modal
+                                    dialogTitle="Actualizar Carácter"
+                                    dialogTrigger={"Editar"}
+                                    variant={'ghost'}
+                                >
+                                    <UpdateAbbreviationForm
+                                        data={abbreviation}
+                                    />
+                                </Modal>
+
+
+                                <DeleteAbbreviationButton
+                                    _id={abbreviation._id}
+                                />
+                            </ContextMenu>
+                        </TableCell>
                     </TableRow>
                 ))}
             </TableBody>

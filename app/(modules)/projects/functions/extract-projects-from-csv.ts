@@ -1,5 +1,6 @@
 import { Project } from "@/app/(modules)/projects/models/project";
 import { parse } from "csv-parse/sync";
+import { ProjectStatusEnum } from "./get-status-translation";
 
 export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
     const newObjects: Project[] = [];
@@ -13,25 +14,25 @@ export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
         });
 
         const newRecord: Project[] = records.map((row) => ({
-            sadap_id: row.id,
-            project_status: row.Estatus,
-            approval_date: row.Aprobado,
-            council: row.Consejo,
-            municipality: row.Municipio,
-            area: row["Área"],
-            category: row.Clase,
-            project_type: row.Proy,
-            support_area: row["Apoyo en"],
-            applicant_institution: row["Institución solicitante"],
-            authorized_donor: row["Donataria aut."],
-            regulatory_institution: row["Institución normativa"],
-            project_name: row["Nombre del proyecto"].toUpperCase(),
-            address: row.Domicilio,
+            sadap_id: row.id?.toUpperCase(),
+            project_status: row.Estatus?.toUpperCase(),
+            approval_date: row.Aprobado?.toUpperCase(),
+            council: row.Consejo?.toUpperCase(),
+            municipality: row.Municipio?.toUpperCase(),
+            area: row["Área"]?.toUpperCase(),
+            category: row.Clase?.toUpperCase(),
+            project_type: row.Proy?.toUpperCase(),
+            support_area: row["Apoyo en"]?.toUpperCase(),
+            applicant_institution: row["Institución solicitante"]?.toUpperCase(),
+            authorized_donor: row["Donataria aut."]?.toUpperCase(),
+            regulatory_institution: row["Institución normativa"]?.toUpperCase(),
+            project_name: row["Nombre del proyecto"]?.toUpperCase(),
+            address: row.Domicilio?.toUpperCase(),
             authorized_amount: row["Monto Autorizado"],
             authorized_contract_amount: row["Monto Aut-Conv"],
             percentage: row["%"],
             total_investment: row["Inversión Total"],
-            transfer_status: "NOT_TRANSFERRED",
+            status: ProjectStatusEnum.UNPROCESSED,
         }));
 
         newObjects.push(...newRecord);

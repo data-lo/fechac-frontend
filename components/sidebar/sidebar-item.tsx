@@ -21,11 +21,11 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 
     const isActive =
         pathname === href ||
-        pathname.startsWith(`${href}/`);
+        pathname.startsWith(`${href}`);
 
     const onClick = () => {
-        router.push(href)
-    }
+        router.push(`${href}/view`);
+    };
 
     return (
         <button

@@ -1,3 +1,5 @@
+import { ProjectStatusEnum } from "@/enums/project-status-enum";
+
 export interface Project {
     sadap_id: string;
     project_status: string;
@@ -17,6 +19,6 @@ export interface Project {
     authorized_contract_amount: string;
     percentage: string;
     total_investment: string;
-    transfer_status: "NOT_TRANSFERRED" | "TRANSFERRED" | 'IN_PROGRESS';
+    status: ProjectStatusEnum;
 }
 

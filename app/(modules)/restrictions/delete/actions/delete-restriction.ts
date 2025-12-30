@@ -7,7 +7,7 @@ import { ActionResponse } from "@/interfaces/action/action-response";
 import { DeleteOneResponse } from "@/interfaces/mongo/delete-one-response";
 
 // Acciones / Servicios
-import { getCollection } from "@/actions/mongo/get-collection";
+import getCollection from "@/actions/mongo/get-collection";
 
 // Modelos
 import { RestrictionDocument } from "../../models/restriction-document";

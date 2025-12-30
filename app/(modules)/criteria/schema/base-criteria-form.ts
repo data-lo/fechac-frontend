@@ -57,11 +57,6 @@ const BASE_CRITERIA_SCHEMA = z.object({
         .transform(item => item.filter(item => item.trim() !== ""))
         .optional(),
 
-
-    revision_date: z
-        .string()
-        .transform((val) => val.toUpperCase()),
-
     revision_number: z
         .string()
         .transform((val) => val.toUpperCase()),

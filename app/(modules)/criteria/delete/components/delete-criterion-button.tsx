@@ -7,15 +7,15 @@ import { useDeleteCriterion } from "../hooks/use-delete-criterion";
 // 2.Componentes reutilizables
 import ActionButton from "@/components/action-button";
 
-interface DeleteCriterionProps {
-  criterionId: string | ObjectId;
+interface Props {
+  _id: string | ObjectId;
 }
 
-const DeleteCriterionButton = ({ criterionId }: DeleteCriterionProps) => {
+const DeleteCriterionButton = ({ _id }: Props) => {
   const deleteMutation = useDeleteCriterion();
 
   const handleDelete = () => {
-    deleteMutation.mutate(criterionId);
+    deleteMutation.mutate(_id);
   };
 
   return (

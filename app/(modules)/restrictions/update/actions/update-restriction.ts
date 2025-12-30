@@ -7,7 +7,7 @@ import { ActionResponse } from "@/interfaces/action/action-response";
 import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
 
 // 3.- Acciones / Servicios
-import { getCollection } from "@/actions/mongo/get-collection";
+import getCollection from "@/actions/mongo/get-collection";
 import { restrictionExists } from "../../actions/restriction-exists";
 
 // 4.- Modelos

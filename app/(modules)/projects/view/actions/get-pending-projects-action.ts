@@ -1,9 +1,10 @@
 'use server';
 
-import { getCollection } from "@/actions/authentication-handler-action";
-import { ProjectDocument } from "../models/project-document";
-import { Project } from "../models/project";
+
+import { ProjectDocument } from "../../models/project-document";
+import { Project } from "../../models/project";
 import { ActionResponse } from "@/interfaces/action/action-response";
+import getCollection from "@/actions/mongo/get-collection";
 
 interface PaginationParams {
   page?: number;
@@ -16,8 +17,8 @@ export async function getPendingProjects(
   page: number = 1,
   limit: number = 10,
   options: Omit<PaginationParams, 'page' | 'limit'> = {}
-): Promise<ActionResponse<{ 
-  projects: Project[];
+): Promise<ActionResponse<{
+  projects: ProjectDocument[];
   total: number;
   currentPage: number;
   totalPages: number;
@@ -44,7 +45,7 @@ export async function getPendingProjects(
     const collection = await getCollection<ProjectDocument>("projects");
     const skip = (page - 1) * limit;
 
-    const { sortBy = 'approval_date', sortOrder = 'desc' } = options;
+    const { sortBy = 'sadap_id', sortOrder = 'desc' } = options;
     const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
     const [projectsFromDB, total] = await Promise.all([
@@ -59,11 +60,16 @@ export async function getPendingProjects(
 
     const totalPages = Math.ceil(total / limit);
 
+    const serializedProjects = projectsFromDB.map(project => ({
+      ...project,
+      _id: project._id.toString(),
+    }));
+
     return {
       success: true,
       error: null,
       data: {
-        projects: projectsFromDB,
+        projects: serializedProjects,
         total,
         currentPage: page,
         totalPages,
@@ -74,7 +80,7 @@ export async function getPendingProjects(
 
   } catch (error) {
     console.error('Error en getPendingProjects:', error);
-    
+
     return {
       success: false,
       error: error instanceof Error ? error.message : "Error desconocido al obtener proyectos",

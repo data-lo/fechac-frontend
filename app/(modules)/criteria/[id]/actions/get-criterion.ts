@@ -1,13 +1,14 @@
 'use server';
 
-import { getCollection } from "@/actions/authentication-handler-action";
+
 import { ActionResponse } from "@/interfaces/action/action-response";
 import { CriterionDocument } from "../../models/criterion-document";
 import { ObjectId } from "mongodb";
+import getCollection from "@/actions/mongo/get-collection";
 
 export async function getCriterion(_id: string): Promise<ActionResponse<{ criterion: CriterionDocument; }>> {
     try {
-        const collection = await getCollection<CriterionDocument>("document_prompts");
+        const collection = await getCollection<CriterionDocument>("criteria");
 
         const criterion = await collection.findOne({ _id: new ObjectId(_id) });
 

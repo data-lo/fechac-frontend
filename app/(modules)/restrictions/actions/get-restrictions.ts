@@ -1,7 +1,7 @@
 'use server';
 
 // 1. Acciones / Servicios
-import { getCollection } from "@/actions/mongo/get-collection";
+import getCollection from "@/actions/mongo/get-collection";
 
 // 2. Modelos
 import { RestrictionDocument } from "../models/restriction-document";
