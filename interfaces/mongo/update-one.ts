@@ -1,7 +1,8 @@
 import { ObjectId } from "mongodb";
+
 import { MongoResponse } from "./mongo-response";
 
-export interface UpdateOneResponse extends MongoResponse {
+export interface UpdateOne extends MongoResponse {
   matchedCount: number;
   modifiedCount: number;
   upsertedCount?: number;

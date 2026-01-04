@@ -8,7 +8,7 @@ import getCollection from "@/actions/mongo/get-collection";
 
 // 3. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { InsertOneResponse } from "@/interfaces/mongo/insert-one-response";
+import { InsertOneResponse } from "@/interfaces/mongo/insert-one";
 
 // 4. Modelos locales
 import { Abbreviation } from "../../models/abbreviation";

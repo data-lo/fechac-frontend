@@ -1,11 +1,13 @@
 import { Db, Collection } from "mongodb";
 
+import type { OptionalId } from "mongodb";
+
 import { getConnection } from "./connection";
 
 import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
 
 export interface ApplicationDatabase {
-    scheduledJobs: Collection<ScheduledJobDocument>;
+    scheduledJobs: Collection<OptionalId<ScheduledJobDocument>>;
 }
 
 let cachedDb: ApplicationDatabase | null = null;
@@ -16,7 +18,8 @@ export async function getDatabase(): Promise<ApplicationDatabase> {
     const db: Db = await getConnection();
 
     cachedDb = {
-        scheduledJobs: db.collection<ScheduledJobDocument>("ScheduledJobs"),
+        scheduledJobs: db.collection<OptionalId<ScheduledJobDocument>>("ScheduledJobs"),
+
     };
 
     return cachedDb;

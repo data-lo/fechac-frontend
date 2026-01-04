@@ -6,7 +6,7 @@ import getCollection from "@/actions/mongo/get-collection";
 
 import { CriterionEntity } from "../models/criterion-entity";
 
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
+import { UpdateOneResponse } from "@/interfaces/mongo/update-one";
 
 export async function updateCriterion({
     _id,

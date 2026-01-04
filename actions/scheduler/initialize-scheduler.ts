@@ -1,21 +1,24 @@
 'use server'
 
-import getCollection from "@/lib/connection";
-
+// Enums
 import { Periodicity } from "@/enums/periodicity";
 import { ActivationSource } from "@/enums/activation-source";
 
-import ScheduledJob from "@/models/schedules/scheduled-job";
-
+// Helpers / Utils
 import { getDaysByPeriodicity } from "@/functions/get-days-by-periodicity";
 
+// External services / Actions (Airflow)
 import startDagRun from "@/app/(modules)/workflows/actions/start-dag-run";
 import getAirflowToken from "@/app/(modules)/workflows/actions/get-airflow-token";
 import getDagRunsByDagId from "@/app/(modules)/workflows/actions/get-dag-runs-by-dag-id";
 
-export default async function initializeScheduler() {
+// Database / Repositories
+import { updateScheduler } from "./update-scheduler";
+import { insertScheduler } from "./insert-scheduler";
+import { getLatestScheduleExecution } from "./get-latest-scheduler";
 
-    const schedulesCollection = await getCollection<ScheduledJob>("schedules")
+
+export default async function initializeScheduler() {
 
     const currentDate = new Date();
 
@@ -29,9 +32,7 @@ export default async function initializeScheduler() {
         return;
     }
 
-    const lastSchedule = await schedulesCollection.findOne({
-        lastExecution: true,
-    });
+    const lastSchedule = await getLatestScheduleExecution();
 
     if (!lastSchedule) {
         return
@@ -49,30 +50,30 @@ export default async function initializeScheduler() {
 
         lastRunAt = new Date(latestDagRun.end_date);
 
-        await schedulesCollection.updateOne(
-            { _id: lastSchedule._id },
-            {
-                $set: {
-                    enabled: false,
-                    updatedAt: new Date(),
-                    lastRunAt: new Date(latestDagRun.end_date)
-                },
-            }
-        );
+        const filter = { _id: lastSchedule._id }
+
+        const update = {
+            enabled: false,
+            updatedAt: new Date(),
+            lastRunAt: new Date(latestDagRun.end_date)
+        }
+
+        await updateScheduler(filter, update);
     }
 
     if (currentDate <= lastSchedule.nextRunAt) {
         return;
     }
-
-    await schedulesCollection.insertOne({
+    
+    const data = {
+        enabled: true,
+        lastRunAt: lastRunAt,
+        createdAt: new Date(),
+        updatedAt: new Date(),
         periodicity: periodicity,
         nextRunAt: addDays(getDaysByPeriodicity(periodicity)),
-        lastRunAt: lastRunAt,
-        enabled: true,
-        updatedAt: new Date(),
-        createdAt: new Date()
-    })
+    }
+    await insertScheduler(data)
 
     await startDagRun(airflowToken, ActivationSource.OS)
 

@@ -5,7 +5,7 @@ import getCollection from "@/actions/mongo/get-collection";
 
 // 2. Interfaces
 import { Criterion } from "../models/criterion";
-import { InsertOneResponse } from "@/interfaces/mongo/insert-one-response";
+import { InsertOneResponse } from "@/interfaces/mongo/insert-one";
 
 export default async function createCriterionAction(criterion: Criterion) {
 
