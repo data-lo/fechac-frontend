@@ -17,8 +17,8 @@ import ProcessControl from "./components/process-control";
 // 5. Tipos / Interfaces
 import { DagRun } from "../interfaces/dag-run-interface";
 import getAirflowToken from "../actions/get-airflow-token";
-import getDagExecutions from "../actions/get-dag-executions";
-import getTask from "../actions/get-task";
+import getDagExecutions from "../actions/get-dag-runs-by-dag-id";
+import getTask from "../actions/get-dag-run-task-instances";
 
 export default async function ViewWorkflowSection() {
     const token = await getAirflowToken();
@@ -27,7 +27,7 @@ export default async function ViewWorkflowSection() {
     const executions = await getDagExecutions(token);
 
     // 2. Validar error en ejecuciones
-    if (!executions.success) {
+    if (!executions) {
         return <AlertMessage message="Error al cargar los procesos" buttonText="" />;
     }
 
@@ -35,7 +35,7 @@ export default async function ViewWorkflowSection() {
     let dagRuns: DagRun[] = [];
 
     if (executions.data && executions.data.dagRuns) {
-        dagRuns = executions.data.dagRuns;
+        dagRuns = executions.dagRuns;
     }
 
     // 4. Obtener el último dagRun

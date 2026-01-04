@@ -1,18 +1,7 @@
 import { ObjectId } from "mongodb"
+import ScheduledJob from "./scheduled-job-document"
 
-export default interface ScheduledJob {
+
+export default interface ScheduledJobDocument extends ScheduledJob {
     _id: ObjectId
-
-    dagRunId: string
-
-    periodicity: "daily" | "weekly" | "biweekly" | "monthly"
-
-    enabled: boolean
-
-    lastRunAt: Date | null
-
-    nextRunAt: Date
-
-    createdAt: Date
-    updatedAt: Date
 }

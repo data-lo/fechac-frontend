@@ -1,9 +1,11 @@
 "use server"
 
+import { ActivationSource } from "@/enums/activation-source";
 import axios from "axios";
+
 import { revalidatePath } from "next/cache";
 
-export default async function startDagRun(token: string) {
+export default async function startDagRun(token: string, activationSource: ActivationSource = ActivationSource.UI) {
   const dagId = process.env.AIRFLOW_MAIN_DAG;
 
   if (!dagId) throw new Error("AIRFLOW_MAIN_DAG no está definido");
@@ -14,7 +16,9 @@ export default async function startDagRun(token: string) {
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    revalidatePath("/workflows/view");
+    if (activationSource == ActivationSource.UI) {
+      revalidatePath("/workflows/view");
+    }
 
     return response.data;
   } catch (error: any) {
