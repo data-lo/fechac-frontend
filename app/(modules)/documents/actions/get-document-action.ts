@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 import { DocumentEntity } from "../models/document-entity";
 import { ActionResponse } from "@/interfaces/action/action-response";
-import getCollection from "@/lib/mongodb";
+import getCollection from "@/lib/connection";
 
 export default async function getDocumentAction(_id: string): Promise<ActionResponse<{ document: DocumentEntity; }>> {
     try {

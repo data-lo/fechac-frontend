@@ -1,11 +1,11 @@
 'use server'
 
-import getCollection from "@/lib/mongodb";
+import getCollection from "@/lib/connection";
 
 import { Periodicity } from "@/enums/periodicity";
 import { ActivationSource } from "@/enums/activation-source";
 
-import ScheduledJob from "@/models/schedules/scheduled-job-document";
+import ScheduledJob from "@/models/schedules/scheduled-job";
 
 import { getDaysByPeriodicity } from "@/functions/get-days-by-periodicity";
 
@@ -13,7 +13,7 @@ import startDagRun from "@/app/(modules)/workflows/actions/start-dag-run";
 import getAirflowToken from "@/app/(modules)/workflows/actions/get-airflow-token";
 import getDagRunsByDagId from "@/app/(modules)/workflows/actions/get-dag-runs-by-dag-id";
 
-export default async function initializeScheduler(data: ScheduledJob | null) {
+export default async function initializeScheduler() {
 
     const schedulesCollection = await getCollection<ScheduledJob>("schedules")
 
@@ -32,6 +32,10 @@ export default async function initializeScheduler(data: ScheduledJob | null) {
     const lastSchedule = await schedulesCollection.findOne({
         lastExecution: true,
     });
+
+    if (!lastSchedule) {
+        return
+    }
 
     let periodicity: Periodicity = Periodicity.MONTHLY;
 
@@ -55,18 +59,6 @@ export default async function initializeScheduler(data: ScheduledJob | null) {
                 },
             }
         );
-    }
-
-    if (!lastSchedule) {
-        await schedulesCollection.insertOne({
-            periodicity: periodicity,
-            nextRunAt: addDays(getDaysByPeriodicity(periodicity)),
-            lastRunAt: null,
-            enabled: true,
-            updatedAt: new Date(),
-            createdAt: new Date()
-        });
-        return
     }
 
     if (currentDate <= lastSchedule.nextRunAt) {

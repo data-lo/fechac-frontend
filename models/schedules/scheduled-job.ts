@@ -1,7 +1,10 @@
-import { ObjectId } from "mongodb"
-import ScheduledJob from "./scheduled-job-document"
+import { Periodicity } from "@/enums/periodicity"
 
-
-export default interface ScheduledJobDocument extends ScheduledJob {
-    _id: ObjectId
+export default interface ScheduledJob {
+    periodicity: Periodicity
+    enabled: boolean
+    lastRunAt: Date | null
+    nextRunAt: Date
+    createdAt: Date
+    updatedAt: Date
 }
