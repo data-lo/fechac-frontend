@@ -8,8 +8,6 @@ const SCHEDULE_SCHEMA = z.object({
     periodicity: z.nativeEnum(PeriodicityEnum, {
         required_error: REQUIRED_FIELD,
     }),
-
-    triggerNow: z.boolean(),
 });
 
 export default SCHEDULE_SCHEMA;

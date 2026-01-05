@@ -12,14 +12,4 @@ export const FORM_SHEDULE_FIELDS = [
             items: []
         },
     },
-    {
-        key: "triggerNow",
-        component: SelectField,
-        props: {
-            name: "triggerNow",
-            label: "Ejecutar ahora",
-            placeholder: "",
-            items: []
-        },
-    },
 ];

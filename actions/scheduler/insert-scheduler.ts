@@ -1,11 +1,10 @@
-import type { ObjectId } from "mongodb";
-
 import { getDatabase } from "@/lib/get-database";
 
-import ScheduledJob from "@/models/schedules/scheduled-job";
 import { InsertOne } from "@/interfaces/mongo/insert-one";
 
-export async function insertScheduler(
+import ScheduledJob from "@/models/schedules/scheduled-job";
+
+export default async function insertScheduler(
     document: ScheduledJob
 ): Promise<InsertOne> {
 
