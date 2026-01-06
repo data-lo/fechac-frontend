@@ -18,30 +18,28 @@ import ProcessControl from "./components/process-control";
 import { DagRun } from "../interfaces/dag-run-interface";
 import getAirflowToken from "../actions/get-airflow-token";
 import getDagExecutions from "../actions/get-dag-runs-by-dag-id";
-import getTask from "../actions/get-dag-run-task-instances";
+import getDagRunTaskInstances from "../actions/get-dag-run-task-instances";
 
 export default async function ViewWorkflowSection() {
     const token = await getAirflowToken();
 
     // 1. Obtener ejecuciones
-    const executions = await getDagExecutions(token);
+    const dagExecutions = await getDagExecutions(token);
 
     // 2. Validar error en ejecuciones
-    if (!executions) {
+    if (!dagExecutions) {
         return <AlertMessage message="Error al cargar los procesos" buttonText="" />;
     }
 
     // 3. Inicializar dagRuns
-    let dagRuns: DagRun[] = [];
-
-    if (executions.data && executions.data.dagRuns) {
-        dagRuns = executions.dagRuns;
-    }
+    let dagRuns: DagRun[] = dagExecutions;
 
     // 4. Obtener el último dagRun
     let lastDagRun: DagRun | null | undefined = null;
 
-    if (dagRuns.length > 0) {
+    console.log(dagRuns)
+
+    if (dagRuns && dagRuns.length > 0) {
         lastDagRun = dagRuns.at(0);
     }
 
@@ -49,8 +47,7 @@ export default async function ViewWorkflowSection() {
     let tasks = null;
 
     if (lastDagRun) {
-        console.log(lastDagRun)
-        tasks = await getTask(token, lastDagRun.dag_run_id);
+        tasks = await getDagRunTaskInstances(token, lastDagRun.dag_run_id);
     }
 
     // 6. Determinar estado actual
@@ -78,10 +75,10 @@ export default async function ViewWorkflowSection() {
                 />
             )}
 
-            {lastDagRun && tasks && tasks.data && (
+            {lastDagRun && tasks && (
                 <Fragment>
                     <h2 className="font-bold"> ÚLTIMA EJECUCIÓN</h2>
-                    <TaskList tasks={tasks.data.task_instances} />
+                    <TaskList tasks={tasks.task_instances} />
                 </Fragment>
             )}
 

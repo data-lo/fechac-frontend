@@ -1,3 +1,5 @@
+"use server"
+
 import { Db, Collection } from "mongodb";
 
 import type { OptionalId } from "mongodb";

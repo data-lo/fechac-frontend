@@ -1,12 +1,14 @@
 'use server'
 
+'use server'
+
 // Enums
 import { Periodicity } from "@/enums/periodicity";
 import { ActivationSource } from "@/enums/activation-source";
 
 // Helpers / Utils
-import { getDaysByPeriodicity } from "@/functions/get-days-by-periodicity";
 import { addDays } from "@/functions/add-days";
+import { getDaysByPeriodicity } from "@/functions/get-days-by-periodicity";
 
 // External services / Actions (Airflow)
 import startDagRun from "@/app/(modules)/workflows/actions/start-dag-run";
@@ -19,8 +21,8 @@ import insertScheduler from "./insert-scheduler";
 import countScheduledJobs from "./count-schedules";
 import getLatestScheduleExecution from "./get-latest-scheduler";
 
-import { ActionResponse } from "@/interfaces/action/action-response";
-
+// Types / Interfaces
+import ActionResponse from "@/interfaces/action/action-response";
 import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
 
 export default async function runScheduler(): Promise<ActionResponse<Partial<ScheduledJobDocument>>> {

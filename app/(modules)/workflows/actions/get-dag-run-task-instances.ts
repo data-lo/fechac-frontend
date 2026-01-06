@@ -1,6 +1,6 @@
 import axios from "axios";
+
 import { TaskInstances } from "../interfaces/task-instance-response";
-import { ActionResponse } from "@/interfaces/action/action-response";
 
 export default async function getDagRunTaskInstances(
   token: string,

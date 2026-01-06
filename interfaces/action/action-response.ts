@@ -1,4 +1,4 @@
-export interface ActionResponse<T> {
+export default interface ActionResponse<T> {
   success: boolean;
   message: string;
   error: string | null;

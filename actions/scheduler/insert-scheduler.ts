@@ -1,3 +1,5 @@
+"use server"
+
 import { getDatabase } from "@/lib/get-database";
 
 import { InsertOne } from "@/interfaces/mongo/insert-one";

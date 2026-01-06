@@ -1,6 +1,6 @@
 export enum Periodicity {
-  DAILY = "daily",
-  WEEKLY = "weekly",
-  BIWEEKLY = "biweekly",
-  MONTHLY = "monthly",
+  DAILY = "DIARIA",
+  WEEKLY = "SEMANAL",
+  BIWEEKLY = "QUINCENAL",
+  MONTHLY = "MENSUAL",
 }

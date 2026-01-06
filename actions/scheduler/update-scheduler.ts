@@ -1,3 +1,5 @@
+"use server"
+
 import { Filter } from "mongodb";
 
 import { getDatabase } from "@/lib/get-database";
