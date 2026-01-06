@@ -3,38 +3,38 @@ import { Cloud, FileStack, Folder, Lock, SlidersHorizontal, WholeWord, Workflow,
 export const routes = [
     {
         icon: Workflow,
-        label: "Lotes",
-        href: "/workflows"
+        title: "Lotes",
+        url: "/workflows"
     },
     {
         icon: Folder,
-        label: "Proyectos",
-        href: "/projects"
+        title: "Proyectos",
+        url: "/projects"
     },
     {
         icon: FileStack,
-        label: "Documentos",
-        href: "/documents"
+        title: "Documentos",
+        url: "/documents"
     },
     {
         icon: SlidersHorizontal,
-        label: "Criterios",
-        href: "/criteria"
+        title: "Criterios",
+        url: "/criteria"
     },
 
     {
         icon: Lock,
-        label: "Restricciones",
-        href: "/restrictions"
+        title: "Restricciones",
+        url: "/restrictions"
     },
-    {
-        icon: WholeWord,
-        label: "Abreviaciones",
-        href: "/abbreviations"
-    },
+    // {
+    //     icon: WholeWord,
+    //     title: "Abreviaciones",
+    //     href: "/abbreviations"
+    // },
     {
         icon: Cloud,
-        label: "One Drive",
-        href: "/session"
+        title: "One Drive",
+        url: "/session"
     },
 ]

@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 // 2.- Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
+import { UpdateOneResponse } from "@/interfaces/mongo/update-one";
 
 // 3.- Acciones / Servicios
 import getCollection from "@/actions/mongo/get-collection";

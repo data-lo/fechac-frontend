@@ -106,7 +106,7 @@ const Modal = ({
       open={open}
       onOpenChange={onOpenChange}
     >
-      <DialogTrigger asChild>
+      <DialogTrigger className="w-auto" asChild>
         {trigger}
       </DialogTrigger>
       <DialogContent

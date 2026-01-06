@@ -1,20 +1,22 @@
 import { Fragment } from "react";
+import { CheckCircle2, FolderOpen, Workflow} from "lucide-react";
+
 import NavigationBreadcrumb from "@/components/breadcrumb";
-import { ProjectDocument } from "../../models/project-document";
-import { FileDocument } from "@/app/(modules)/documents/models/file-document";
-
 import { StatisticCard } from "@/components/statistic-card";
-import { CheckCircle2, FolderOpen, Layers, MapPin, Workflow, Wrench } from "lucide-react";
-
+import EmptyMessage from "@/components/empty-message";
 
 import { ProjectStatusEnum } from "@/enums/project-status-enum";
+
+import { DocumentEntity } from "@/app/(modules)/documents/models/document-entity";
+import { ProjectDocument } from "../../models/project-document";
+
 import { getStatusTranslation } from "../../functions/get-status-translation";
+
 import DocumentTable from "../../components/document-table";
-import EmptyMessage from "@/components/empty-message";
 
 interface Props {
     project: ProjectDocument;
-    documents: FileDocument[];
+    documents: DocumentEntity[];
 
 }
 export default async function UpdateProjectSection({

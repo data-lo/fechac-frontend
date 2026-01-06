@@ -1,7 +1,7 @@
-import { ActionResponse } from "@/interfaces/action/action-response";
 
+import { getDatabase } from "@/lib/get-database";
+import ActionResponse from "@/interfaces/action/action-response";
 import { AbbreviationDocument } from "../models/abbreviation-document";
-import getCollection from "@/actions/mongo/get-collection";
 
 export default async function abbreviationExist(abbreviation: string): Promise<ActionResponse<AbbreviationDocument>> {
     try {
@@ -9,9 +9,9 @@ export default async function abbreviationExist(abbreviation: string): Promise<A
             throw new Error('El parámetro abreviación es requerido y debe ser un string válido');
         }
 
-        const collection = await getCollection<AbbreviationDocument>("abbreviations");
+        const db = await getDatabase()
 
-        const response = await collection.findOne({ abbreviation: abbreviation });
+        const response = await db.abbreviations.findOne({ abbreviation: abbreviation });
 
         return {
             success: true,
@@ -20,7 +20,7 @@ export default async function abbreviationExist(abbreviation: string): Promise<A
         }
 
     } catch (error) {
-        console.error('Error en action: get-pending-projects:', error);
+        console.error('Error en action: abbreviation-exist:', error);
         return {
             success: false,
             error: error instanceof Error ? error.message : "Error desconocido al obtener restricciones",

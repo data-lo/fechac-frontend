@@ -14,7 +14,7 @@ import { revalidatePath } from "next/cache";
 
 // 5. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one-response";
+import { UpdateOneResponse } from "@/interfaces/mongo/update-one";
 
 export async function toggleRestrictionStatus(values: { _id: string, status: boolean }): Promise<ActionResponse<UpdateOneResponse>> {
     try {

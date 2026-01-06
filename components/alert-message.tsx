@@ -1,7 +1,10 @@
 'use client'
-import { AlertTriangle, RefreshCw, X } from "lucide-react";
+
 import { useState } from "react";
+
 import ActionButton from "./action-button";
+
+import { AlertTriangle, RefreshCw, X } from "lucide-react";
 
 interface Props {
     buttonText: string;
@@ -45,7 +48,7 @@ const AlertMessage = ({
 
     const variants = {
         error: {
-            bg: "bg-gradient-to-r from-red-50 to-red-100",
+            bg: "bg-red-100",
             border: "border-red-200",
             text: "text-red-900",
             icon: "text-red-500",
@@ -53,7 +56,7 @@ const AlertMessage = ({
             buttonOutline: "border-red-300 text-red-700 hover:bg-red-50"
         },
         warning: {
-            bg: "bg-gradient-to-r from-amber-50 to-orange-100",
+            bg: "bg-amber-50",
             border: "border-amber-200",
             text: "text-amber-900",
             icon: "text-amber-500",
@@ -68,9 +71,9 @@ const AlertMessage = ({
         <div
             className={`
                 ${currentVariant.bg} ${currentVariant.text}
-                relative border rounded-xl px-6 py-5 
-                backdrop-blur-sm transition-all duration-500
-                animate-in slide-in-from-top-2 duration-500
+                relative border-none rounded-sm px-6 py-5 
+                backdrop-blur-sm transition-all
+                animate-in slide-in-from-top-2
                 ${className}
             `}
             role="alert"
@@ -109,9 +112,9 @@ const AlertMessage = ({
                         </div>
                     )}
 
-                    <p className="text-sm opacity-80 leading-relaxed mt-1">
+                    {/* <p className="text-sm opacity-80 leading-relaxed mt-1">
                         Intenta recargar la página. Si el problema continúa, por favor, contacta al soporte técnico.
-                    </p>
+                    </p> */}
                 </div>
 
                 {/* Action buttons */}
@@ -136,7 +139,7 @@ const AlertMessage = ({
                         <ActionButton
                             title={buttonText}
                             type="button"
-                            variant="default"   
+                            variant="default"
                             fullWidth={true}
                             onClick={handleAction}
                         />

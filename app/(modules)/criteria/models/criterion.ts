@@ -1,19 +1,25 @@
 export interface Criterion {
+  file_types: string[];
   file_name: string;
-  form_code: string;
-  form_title: string;
-  issuing_organization: string;
-  revision_number: string;
-  access_url: string;
-  main_sections?: string[] | undefined;
-  standard_fields?: string[] | undefined;
-  visual_layout?: VisualLayout | undefined;
-  domain_tags?: string[] | undefined;
-  additional_keywords?: string[] | undefined;
-  destination_drive: string;
-  destination_path: string;
+
+  quality_system_code: string | null ;
+
+  name_variants: string[] | null;
+  primary_keywords: string[] | null;
+  secondary_keywords: string[] | null;
+
+  target_path: string | null;
+  target_drives: string[];
+
   department: string;
-  file_type: string;
+
+  project_focus: string[];
+  project_area: string[];
+  project_type: string[];
+
+  is_active: boolean;
+
+  
 }
 
 export interface VisualLayout {

@@ -1,8 +1,6 @@
-import { DocumentStatusEnum } from "@/enums/document-status-enum";
-import { 
-    XCircle, 
-    Clock, 
-    CheckCircle, 
+import {
+    XCircle,
+    Clock,
     HelpCircle,
     FileWarning,
     FileCheck,
@@ -10,12 +8,13 @@ import {
     FileKey,
     Upload,
     ScanSearch,
-    Search,
     FileCog
 } from "lucide-react";
 
+import { DocumentStatusEnum } from "@/enums/document-status-enum";
+
 const getStatusTranslation = (status: DocumentStatusEnum): string => {
-    switch(status) {
+    switch (status) {
         case DocumentStatusEnum.UNPROCESSED:
             return "NO PROCESADO";
 
@@ -58,7 +57,7 @@ const getStatusTranslation = (status: DocumentStatusEnum): string => {
 };
 
 const getStatusStyle = (status: DocumentStatusEnum): string => {
-    switch (status){
+    switch (status) {
         case DocumentStatusEnum.UNPROCESSED:
         case DocumentStatusEnum.NOT_SELECTED_FOR_TRANSFER:
         case DocumentStatusEnum.WEIGHT_BELOW_THRESHOLD:
@@ -87,7 +86,7 @@ const getStatusStyle = (status: DocumentStatusEnum): string => {
 };
 
 const getStatusIcon = (status: DocumentStatusEnum) => {
-    switch (status){
+    switch (status) {
 
         case DocumentStatusEnum.UNPROCESSED:
         case DocumentStatusEnum.NOT_SELECTED_FOR_TRANSFER:

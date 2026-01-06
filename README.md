@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Configuración
 
-## Getting Started
 
-First, run the development server:
+Archivo .env
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+darle permisos de ejecución al script (Linux/MacOs)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+agregarlo al cron  a la carpeta de scripts; y darle permisos de ejecucion:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+mkdir -p ~/scripts
+mv /Users/isaaysosa/Desktop/GIT_HUB/fechac-frontend/cron-job.sh (ruta actual) ~/scripts/
+chmod +x ~/scripts/cron-job.sh
 
-To learn more about Next.js, take a look at the following resources:
+crontab e-
+pegar esto
+* * * * * /Users/isaaysosa/scripts/cron-job.sh >> /Users/isaaysosa/scripts/cron.log 2>&1
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+salir de editor
 
-## Deploy on Vercel
+ESC
+:wq
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+verificar que todo este en orden crontab -l
