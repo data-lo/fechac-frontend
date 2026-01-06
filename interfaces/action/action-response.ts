@@ -1,6 +1,6 @@
 export default interface ActionResponse<T> {
   success: boolean;
-  message: string;
+  message?: string;
   error: string | null;
   data: T | null;
 }

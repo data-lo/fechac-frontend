@@ -4,16 +4,16 @@
 import abbreviationExist from "../../actions/abbreviation-exist";
 
 // 2. Librerías internas (acciones/helpers locales del módulo)
-import getCollection from "@/actions/mongo/get-collection";
+import { getDatabase } from "@/lib/get-database";
+
 
 // 3. Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { InsertOneResponse } from "@/interfaces/mongo/insert-one";
+import { InsertOne } from "@/interfaces/mongo/insert-one";
+import ActionResponse from "@/interfaces/action/action-response";
 
 // 4. Modelos locales
-import { Abbreviation } from "../../models/abbreviation";
 
-export async function createAbbreviation(values: { name: string, abbreviation: string, type: string }): Promise<ActionResponse<InsertOneResponse>> {
+export async function createAbbreviation(values: { name: string, abbreviation: string, type: string }): Promise<ActionResponse<InsertOne>> {
     try {
         const restriction = await abbreviationExist(values.abbreviation);
  
@@ -26,9 +26,9 @@ export async function createAbbreviation(values: { name: string, abbreviation: s
             };
         }
 
-        const collection = await getCollection<Abbreviation>("abbreviations");
+        const db = await getDatabase();
 
-        const response: InsertOneResponse = await collection.insertOne({
+        const response: InsertOne = await db.abbreviations.insertOne({
             name: values.name,
             abbreviation: values.abbreviation,
             type: values.type,

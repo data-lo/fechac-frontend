@@ -47,17 +47,11 @@ export default function RootLayout({
         <ReactQueryProvider>
           <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
             <div className="h-screen flex flex-col">
-              <div className="flex flex-1 overflow-hidden">
+              <div className="overflow-hidden">
                 <ToasterProvider />
                 <SidebarProvider>
                   <AppSidebar />
-                  {/* <ToasterProvider />
-                  <Sidebar /> */}
-                  {/* <main className="flex-1 overflow-y-auto">
-                    {children}
-                  </main> */}
-
-                  <main className="flex-1 overflow-y-auto">
+                  <main>
                     <SidebarInset>
                       <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
                         <SidebarTrigger className="-ml-1" />

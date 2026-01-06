@@ -1,25 +1,22 @@
 'use server';
 
-// 1. Acciones internas / helpers
-import getCollection from "@/actions/mongo/get-collection";
-
 // 2. Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
+import ActionResponse from "@/interfaces/action/action-response";
 import { DeleteOneResponse } from "@/interfaces/mongo/delete-one-response";
 
 // 3. Modelos
-import { AbbreviationDocument } from "../../models/abbreviation-document";
 import { ObjectId } from "mongodb";
 
 // 4. Librerías
 import { revalidatePath } from "next/cache";
+import { getDatabase } from "@/lib/get-database";
 
 export async function deleteAbbreviation(_id: string | ObjectId): Promise<ActionResponse<DeleteOneResponse>> {
     try {
 
-        const collection = await getCollection<AbbreviationDocument>("abbreviations");
+        const db = await getDatabase();
 
-        const response: DeleteOneResponse = await collection.deleteOne({ _id: new ObjectId(_id) });
+        const response: DeleteOneResponse = await db.abbreviations.deleteOne({ _id: new ObjectId(_id) });
 
         if (!response.acknowledged || response.deletedCount === 0) {
             return {

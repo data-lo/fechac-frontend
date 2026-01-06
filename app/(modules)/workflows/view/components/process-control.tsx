@@ -42,6 +42,7 @@ export default function ProcessControls({ token, isRunning, dagRunId }: Props) {
             <ScheduleSettings />
 
             <ActionButton
+            className="w-auto"
                 iconName="Play"
                 title="Iniciar Proceso"
                 onClick={handleStart}
@@ -49,6 +50,7 @@ export default function ProcessControls({ token, isRunning, dagRunId }: Props) {
             />
 
             <ActionButton
+                className="w-auto"
                 iconName="CircleStop"
                 title="Detener Proceso"
                 onClick={handleStop}

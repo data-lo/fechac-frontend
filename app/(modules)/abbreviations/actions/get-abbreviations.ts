@@ -1,9 +1,10 @@
 'use server';
 
 
-import { ActionResponse } from "@/interfaces/action/action-response";
+
+import ActionResponse from "@/interfaces/action/action-response";
 import { AbbreviationDocument } from "../models/abbreviation-document";
-import getCollection from "@/actions/mongo/get-collection";
+
 
 interface PaginationParams {
   page?: number;
@@ -42,6 +43,7 @@ export async function getAbbreviations(
     }
 
     const collection = await getCollection<AbbreviationDocument>("abbreviations");
+    
     const skip = (page - 1) * limit;
 
     const { sortBy = 'approval_date', sortOrder = 'desc' } = options;

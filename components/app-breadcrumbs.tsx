@@ -8,6 +8,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
+import routeLabels from '@/lib/route-labels'
 
 export function AppBreadcrumbs() {
   const pathname = usePathname()
@@ -24,10 +25,8 @@ export function AppBreadcrumbs() {
           const href =
             '/' + visibleSegments.slice(0, index + 1).join('/')
 
-          const label = segment
-            .replace(/-/g, ' ')
-            .replace(/\b\w/g, (l) => l.toUpperCase())
-
+          const label = routeLabels[segment.replace(/-/g, ' ') as keyof typeof routeLabels]
+          
           return (
             <BreadcrumbItem key={href}>
               <BreadcrumbLink href={href}>
