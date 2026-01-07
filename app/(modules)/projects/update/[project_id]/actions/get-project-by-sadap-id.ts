@@ -1,12 +1,13 @@
 "use server"
-import getCollection from "@/lib/connection";
+
+import { getDb } from "@/lib/get-db";
 
 import { ProjectDocument } from "../../../models/project-document";
 
-export default async function getProjectBySadapId(sadap_id: string) {
-    const collection = await getCollection<ProjectDocument>("projects");
+export default async function getProjectBySadapId(sadap_id: string): Promise<ProjectDocument | null> {
+    const db = await getDb();
 
-    const project = await collection.findOne({ sadap_id });
+    const project = await db.projects.findOne({ sadap_id });
 
     if (!project) {
         return null;

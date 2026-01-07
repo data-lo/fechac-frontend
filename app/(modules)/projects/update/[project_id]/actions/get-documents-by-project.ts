@@ -1,11 +1,11 @@
-import getCollection from "@/actions/mongo/get-collection";
 
 import { DocumentEntity } from "@/app/(modules)/documents/models/document-entity";
+import { getDb } from "@/lib/get-db";
 
 const getDocumentsByProject = async (sadapId: string) => {
-    const collection = await getCollection<DocumentEntity>("documents");
+    const db = await getDb();
 
-    const cursor = collection.find({ sadap_id: sadapId });
+    const cursor = db.projects.find({ sadap_id: sadapId });
 
     const documents = await cursor.toArray();
 

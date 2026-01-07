@@ -9,12 +9,12 @@ import { ObjectId } from "mongodb";
 
 // 4. Librerías
 import { revalidatePath } from "next/cache";
-import { getDatabase } from "@/lib/get-database";
+import { getDb } from "@/lib/get-db";
 
 export async function deleteAbbreviation(_id: string | ObjectId): Promise<ActionResponse<DeleteOneResponse>> {
     try {
 
-        const db = await getDatabase();
+        const db = await getDb();
 
         const response: DeleteOneResponse = await db.abbreviations.deleteOne({ _id: new ObjectId(_id) });
 

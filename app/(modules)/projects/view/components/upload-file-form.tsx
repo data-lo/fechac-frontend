@@ -1,12 +1,26 @@
 'use client';
 
-import { useForm, Controller } from "react-hook-form";
+// React / Forms
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+// UI / Icons
+import { AlertTriangle } from "lucide-react";
+
+// File upload
 import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
-import { FILE_PROJECT_SCHEMA, FILE_PROJECT_FORM } from "../schema/file-project";
-import { AlertTriangle } from "lucide-react";
+
+// Schema
+import {
+    FILE_PROJECT_FORM,
+    FILE_PROJECT_SCHEMA,
+} from "../schema/file-project";
+
+// Hooks
 import { useSynchronizeProjects } from "../hooks/use-synchronize-projects";
+
+// Components
 import ActionButton from "@/components/action-button";
 
 const UploadFileForm = () => {

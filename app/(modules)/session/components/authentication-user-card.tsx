@@ -5,7 +5,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
 // Actions
-import { handleLogout } from '@/actions/auth';
+import { handleLogout } from '@/actions/authorization/auth';
 
 // UI Components
 import ButtonComponent from '@/components/action-button';

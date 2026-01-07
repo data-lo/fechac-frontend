@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import getProject from "./actions/get-project-action";
 import UpdateProjectSection from "./update-project-section";
 import getDocumentsByProject from "./actions/get-documents-by-project";

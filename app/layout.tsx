@@ -58,7 +58,10 @@ export default function RootLayout({
                         <AppBreadcrumbs />
                       </header>
                     </SidebarInset>
-                    {children}
+                    <div className="px-6 py-4 flex flex-col h-[calc(100vh-4rem)] gap-6 relative overflow-auto pt-4 bg-slate-50">
+                      {children}
+                    </div>
+
                   </main>
                 </SidebarProvider>
               </div>

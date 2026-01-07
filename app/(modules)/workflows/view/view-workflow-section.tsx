@@ -4,10 +4,11 @@ import { Fragment } from "react";
 // 2. Componentes globales
 import EmptyState from "@/components/empty-state";
 import AlertMessage from "@/components/alert-message";
-import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 3. Actions / Servicios
-
+import getAirflowToken from "../actions/get-airflow-token";
+import getDagExecutions from "../actions/get-dag-runs-by-dag-id";
+import getDagRunTaskInstances from "../actions/get-dag-run-task-instances";
 
 // 4. Componentes locales de la vista
 import DagTable from "./components/dag-table";
@@ -16,9 +17,6 @@ import ProcessControl from "./components/process-control";
 
 // 5. Tipos / Interfaces
 import { DagRun } from "../interfaces/dag-run-interface";
-import getAirflowToken from "../actions/get-airflow-token";
-import getDagExecutions from "../actions/get-dag-runs-by-dag-id";
-import getDagRunTaskInstances from "../actions/get-dag-run-task-instances";
 
 export default async function ViewWorkflowSection() {
     const token = await getAirflowToken();

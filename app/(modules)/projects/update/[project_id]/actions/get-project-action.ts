@@ -1,18 +1,18 @@
-import getCollection from "@/actions/mongo/get-collection";
-import { ProjectDocument } from "../../../models/project-document";
 import { ObjectId } from "bson";
+import { getDb } from "@/lib/get-db";
+import { ProjectDocument } from "../../../models/project-document";
 
-const getProjectAction = async (project_id: string) => {
+const getProjectAction = async (project_id: string): Promise<ProjectDocument> => {
 
-    const collection = await getCollection<ProjectDocument>("projects");
+    const db = await getDb();
 
-    const project = await collection.findOne({ _id: new ObjectId(project_id) })
+    const project = await db.projects.findOne({ _id: new ObjectId(project_id) })
 
     if (!project) {
         throw new Error("El proyecto solicitado no existe.");
     }
 
-    const serializedProject = {
+    const serializedProject: ProjectDocument = {
         ...project,
         _id: project._id.toString(),
     };

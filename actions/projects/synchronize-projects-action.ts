@@ -1,12 +1,16 @@
 'use server';
-
-import getCollection from "@/actions/mongo/get-collection";
-import { extractProjectsFromCSV } from "../../functions/extract-projects-from-csv";
-import { Project } from "../../models/project";
 import { revalidatePath } from "next/cache";
 
-import { uniqueProjectsBySadapId } from "../../functions/unique-projects-by-sadap-id";
-import { isClosedProject } from "../../functions/is-closed-project";
+// Lib
+import { getDb } from "@/lib/get-db";
+
+// Models
+import { Project } from "@/app/(modules)/projects/models/project";
+
+// Functions
+import { isClosedProject } from "@/app/(modules)/projects/functions/is-closed-project";
+import { extractProjectsFromCSV } from "@/app/(modules)/projects/functions/extract-projects-from-csv";
+import { uniqueProjectsBySadapId } from "@/app/(modules)/projects/functions/unique-projects-by-sadap-id";
 
 export async function synchronizeProjectsAction(values: File[]) {
     try {
@@ -26,9 +30,11 @@ export async function synchronizeProjectsAction(values: File[]) {
             .filter(Boolean);
 
         // 4. Obtener IDs existentes desde la BD
-        const collection = await getCollection<Project>("projects");
+        // const collection = await getCollection<Project>("projects");
 
-        const existingSadapIds = await collection.distinct("sadap_id", {
+        const db = await getDb();
+
+        const existingSadapIds = await db.projects.distinct("sadap_id", {
             sadap_id: { $in: incomingSadapIds }
         });
         const existingSadapIdSet = new Set(existingSadapIds.map(id => String(id).trim()));
@@ -44,7 +50,7 @@ export async function synchronizeProjectsAction(values: File[]) {
         let acknowledged = true;
 
         if (newProjects.length > 0) {
-            const result = await collection.insertMany(newProjects);
+            const result = await db.projects.insertMany(newProjects);
             insertedCount = result.insertedCount;
             insertedIds = Object.values(result.insertedIds).map(id => id.toString());
             acknowledged = result.acknowledged;

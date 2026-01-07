@@ -1,9 +1,9 @@
 'use server';
 
+import { getDb } from "@/lib/get-db";
 
 import ActionResponse from "@/interfaces/action/action-response";
-import { ProjectDocument } from "../../models/project-document";
-
+import { ProjectDocument } from "@/app/(modules)/projects/models/project-document";
 
 interface PaginationParams {
   page?: number;
@@ -41,20 +41,20 @@ export async function getPendingProjects(
       };
     }
 
-    const collection = await getCollection<ProjectDocument>("projects");
+    const db = await getDb();
     const skip = (page - 1) * limit;
 
     const { sortBy = 'sadap_id', sortOrder = 'desc' } = options;
     const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
     const [projectsFromDB, total] = await Promise.all([
-      collection
+      db.projects
         .find()
         .sort(sort)
         .skip(skip)
         .limit(limit)
         .toArray(),
-      collection.countDocuments(),
+      db.projects.countDocuments(),
     ]);
 
     const totalPages = Math.ceil(total / limit);
