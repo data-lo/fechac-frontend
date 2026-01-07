@@ -9,7 +9,7 @@ export default function ScheduleSettings() {
         <Modal
             dialogTitle="Programar"
             dialogDescription="Selecciona cada cuánto quieres que se ejecute la herramienta de integración digital."
-            dialogTrigger="Configurar Ejecución"
+            dialogTrigger="Configurar"
             iconName="Settings"
         >
             <ScheduleSettingsForm />

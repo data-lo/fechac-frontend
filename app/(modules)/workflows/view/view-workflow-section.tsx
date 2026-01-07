@@ -73,7 +73,7 @@ export default async function ViewWorkflowSection() {
 
             {lastDagRun && tasks && (
                 <Fragment>
-                    <h2 className="font-bold"> ÚLTIMA EJECUCIÓN</h2>
+                    <h2 className="font-bold">ÚLTIMA EJECUCIÓN</h2>
                     <TaskList tasks={tasks.task_instances} />
                 </Fragment>
             )}

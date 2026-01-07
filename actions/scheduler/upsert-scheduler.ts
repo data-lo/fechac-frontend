@@ -17,6 +17,7 @@ export default async function upsertScheduler(
 
     if (scheduledJobs === 0) {
         const document = {
+            isLastSchedule: true,
             enabled: true,
             lastRunAt: null,
             createdAt: new Date(),

@@ -1,7 +1,5 @@
 "use client"
 
-import { CircleSlash, FileStack, Target, User } from "lucide-react"
-
 import {
     Sidebar,
     SidebarContent,
@@ -21,9 +19,9 @@ export function AppSidebar() {
 
     const pathname = usePathname();
 
-    return( 
+    return (
         <Sidebar variant="sidebar">
-            <SidebarContent>
+            <SidebarContent className="bg-white">
                 <h3 className="px-4 mt-4 font-bold">Integración Digital</h3>
                 <SidebarGroup>
                     <SidebarGroupLabel>Menú</SidebarGroupLabel>

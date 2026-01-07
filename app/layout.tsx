@@ -10,9 +10,6 @@ import { ClerkProvider } from "@clerk/nextjs";
 // 4. Estilos globales
 import "./globals.css";
 
-// 5. Componentes globales
-import Sidebar from "@/components/sidebar/sidebar";
-
 // 6. Providers
 import ReactQueryProvider from "@/providers/query-client";
 import ToasterProvider from "@/providers/toast-provider";
@@ -51,7 +48,7 @@ export default function RootLayout({
                 <ToasterProvider />
                 <SidebarProvider>
                   <AppSidebar />
-                  <main>
+                  <main className="w-full">
                     <SidebarInset>
                       <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
                         <SidebarTrigger className="-ml-1" />
