@@ -7,7 +7,7 @@ export default async function getLatestScheduleExecution(): Promise<ScheduledJob
     const db = await getDatabase();
 
     return await db.scheduledJobs.findOne({
-        lastExecution: true,
+        isLastSchedule: true,
     });
 }
 

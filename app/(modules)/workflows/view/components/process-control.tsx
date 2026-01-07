@@ -39,10 +39,7 @@ export default function ProcessControls({ token, isRunning, dagRunId }: Props) {
     }
     return (
         <div className="flex flex-col sm:flex-row justify-end gap-4 w-full mt-4 px-2">
-            <ScheduleSettings />
-
-            <ActionButton
-            className="w-auto"
+            {/* <ActionButton
                 iconName="Play"
                 title="Iniciar Proceso"
                 onClick={handleStart}
@@ -50,12 +47,13 @@ export default function ProcessControls({ token, isRunning, dagRunId }: Props) {
             />
 
             <ActionButton
-                className="w-auto"
                 iconName="CircleStop"
                 title="Detener Proceso"
                 onClick={handleStop}
                 disabled={!isRunning}
-            />
+            /> */}
+
+            <ScheduleSettings />
         </div>
     );
 }

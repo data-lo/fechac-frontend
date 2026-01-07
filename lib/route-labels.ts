@@ -1,5 +1,5 @@
 const routeLabels = {
-  workflows: 'Historial de Ejecuciones',
+  workflows: 'HISTORIAL DE EJECUCIONES',
 }
 
 
