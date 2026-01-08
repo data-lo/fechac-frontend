@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { GetTokenInterface } from "../interfaces/get-token-response";
+
+import AirflowToken from "@/interfaces/workflows/airflow-token";
 
 export default async function getAirflowToken(): Promise<string> {
   try {
-    const response = await axios.post<GetTokenInterface>(
+    const response = await axios.post<AirflowToken>(
       `${process.env.AIRFLOW_API}/auth/token`,
       {
         username: process.env.AIRFLOW_USERNAME,

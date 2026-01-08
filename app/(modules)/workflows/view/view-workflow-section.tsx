@@ -16,7 +16,7 @@ import TaskList from "./components/task-list";
 import ProcessControl from "./components/process-control";
 
 // 5. Tipos / Interfaces
-import { DagRun } from "../interfaces/dag-run-interface";
+import DagRun from "@/interfaces/workflows/dag-run";
 
 export default async function ViewWorkflowSection() {
     const token = await getAirflowToken();

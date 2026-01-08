@@ -1,4 +1,4 @@
-export interface TaskInstances{
+export default interface TaskInstances{
   task_instances: TaskInstance[];
   total_entries: number;
 }

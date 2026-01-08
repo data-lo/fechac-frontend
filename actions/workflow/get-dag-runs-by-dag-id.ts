@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-import { DagRun } from "@/app/(modules)/workflows/interfaces/dag-run-interface";
+import DagRun from "@/interfaces/workflows/dag-run";
 
 export default async function getDagRunsByDagId(
   token: string,

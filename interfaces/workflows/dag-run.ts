@@ -1,4 +1,4 @@
-export interface DagRun {
+export default interface DagRun {
   dag_run_id: string;
   dag_id: string;
   logical_date: string;
