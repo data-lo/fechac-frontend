@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 
 // 2. Tipos/Modelos
-import { ProjectDocument } from "../../models/project-document";
+import { ProjectDocument } from "../../../../../models/projects/project-document";
 
 // 3. Utilidades/Funciones
 import { getStatusInfo, ProjectStatusEnum } from "../../functions/get-status-translation";

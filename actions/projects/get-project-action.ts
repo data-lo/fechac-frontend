@@ -1,6 +1,6 @@
 import { ObjectId } from "bson";
 import { getDb } from "@/infrastructure/persistence/mongo/get-db";
-import { ProjectDocument } from "../../../models/project-document";
+import { ProjectDocument } from "../../models/projects/project-document";
 
 const getProjectAction = async (project_id: string): Promise<ProjectDocument> => {
 

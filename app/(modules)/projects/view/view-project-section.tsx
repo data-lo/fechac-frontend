@@ -15,7 +15,7 @@ import ProjectTable from "./components/project-table";
 // 5. Actions/Servicios
 import Modal from "@/components/modal";
 import UploadFileForm from "./components/upload-file-form";
-import { getPendingProjects } from "@/actions/projects/get-pending-projects-action";
+import { getPendingProjects } from "@/actions/projects/get-pending-projects";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;

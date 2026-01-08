@@ -1,7 +1,7 @@
 'use client';
 import { useMutation } from "@tanstack/react-query";
 
-import getProjectBySadapId from "../update/[project_id]/actions/get-project-by-sadap-id";
+import getProjectBySadapId from "@/actions/projects/get-project-by-sadap-id";
 
 export default function useGetProjectBySadapId() {
     return useMutation({

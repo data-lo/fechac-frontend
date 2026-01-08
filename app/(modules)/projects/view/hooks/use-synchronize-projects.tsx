@@ -2,11 +2,11 @@
 
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
-import { synchronizeProjectsAction } from "@/actions/projects/synchronize-projects-action";
+import synchronizeProjects from "@/actions/projects/synchronize-projects";
 
 export function useSynchronizeProjects() {
     return useMutation({
-        mutationFn: synchronizeProjectsAction,
+        mutationFn: synchronizeProjects,
         onSuccess: (response) => {
             if (response.success) {
                 toast.success("¡El Archivo se ha subido con éxito!");

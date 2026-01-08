@@ -1,29 +1,37 @@
+// 1. React
 import { Fragment } from "react";
-import { CheckCircle2, FolderOpen, Workflow} from "lucide-react";
 
-import NavigationBreadcrumb from "@/components/breadcrumb";
-import { StatisticCard } from "@/components/statistic-card";
+// 2. External libraries / icons
+import { CheckCircle2, FolderOpen, Workflow } from "lucide-react";
+
+// 3. Shared / global components
 import EmptyMessage from "@/components/empty-message";
+import { StatisticCard } from "@/components/statistic-card";
 
-import { ProjectStatusEnum } from "@/enums/project-status";
+// 4. Domain enums / constants
+import { ProjectStatus } from "@/enums/project-status";
 
-import { DocumentEntity } from "@/app/(modules)/documents/models/file-document";
-import { ProjectDocument } from "../../models/project-document";
+// 5. Local module components
+import DocumentTable from "../../components/document-table";
 
+// 6. Models / entities
+import ProjectDocument from "@/models/projects/project-document";
+import FileDocument from "@/app/(modules)/documents/models/file-document";
+
+// 7. Functions
 import { getStatusTranslation } from "../../functions/get-status-translation";
 
-import DocumentTable from "../../components/document-table";
 
 interface Props {
     project: ProjectDocument;
-    documents: DocumentEntity[];
+    documents: FileDocument[];
 
 }
 export default async function UpdateProjectSection({
     project,
     documents
 }: Props) {
-    const status = getStatusTranslation(project.status as ProjectStatusEnum)
+    const status = getStatusTranslation(project.status as ProjectStatus)
 
 
     const summary = [
@@ -50,18 +58,6 @@ export default async function UpdateProjectSection({
         },
     ];
 
-
-    const breadcrumbRoutes = [
-        {
-            href: '/projects/view',
-            title: 'PROYECTOS'
-        },
-        {
-            href: '#',
-            title: `PROYECTO ${project.sadap_id}`
-        },
-    ];
-
     return (
         <Fragment>
 
@@ -77,7 +73,6 @@ export default async function UpdateProjectSection({
                     />
                 ))}
             </div>
-
 
             <div className="p-5 bg-white">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">

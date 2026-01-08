@@ -15,7 +15,7 @@ import "filepond/dist/filepond.min.css";
 import {
     FILE_PROJECT_FORM,
     FILE_PROJECT_SCHEMA,
-} from "../schema/file-project";
+} from "../schemas/file-project";
 
 // Hooks
 import { useSynchronizeProjects } from "../hooks/use-synchronize-projects";

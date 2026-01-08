@@ -5,14 +5,14 @@ import { revalidatePath } from "next/cache";
 import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
 // Models
-import { Project } from "@/app/(modules)/projects/models/project";
+import { Project } from "@/models/projects/project";
 
 // Functions
 import { isClosedProject } from "@/app/(modules)/projects/functions/is-closed-project";
 import { extractProjectsFromCSV } from "@/app/(modules)/projects/functions/extract-projects-from-csv";
 import { uniqueProjectsBySadapId } from "@/app/(modules)/projects/functions/unique-projects-by-sadap-id";
 
-export async function synchronizeProjectsAction(values: File[]) {
+export default async function synchronizeProjects(values: File[]) {
     try {
         // 1. Extraer proyectos desde CSV
         const projects = await extractProjectsFromCSV(values) as Project[];

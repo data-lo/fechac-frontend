@@ -4,7 +4,7 @@ import ActionResponse from "@/interfaces/action/action-response";
 
 import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
-import ProjectDocument from "@/app/(modules)/projects/models/project-document";
+import ProjectDocument from "@/models/projects/project-document";
 
 interface PaginationParams {
   page?: number;
@@ -13,7 +13,7 @@ interface PaginationParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-export async function getPendingProjects(
+export default async function getPendingProjects(
   page: number = 1,
   limit: number = 10,
   options: Omit<PaginationParams, 'page' | 'limit'> = {}

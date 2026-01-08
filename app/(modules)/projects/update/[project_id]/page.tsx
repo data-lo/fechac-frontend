@@ -1,6 +1,6 @@
-import getProject from "./actions/get-project-action";
+import getProject from "../../../../../actions/projects/get-project-action";
 import UpdateProjectSection from "./update-project-section";
-import getDocumentsByProject from "./actions/get-documents-by-project";
+import getDocumentsByProject from "../../../../../actions/projects/get-documents-by-project";
 
 interface Props {
     params: {

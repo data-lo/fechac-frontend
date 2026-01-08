@@ -8,7 +8,7 @@ import { getConnection } from "./get-connection";
 
 import FileDocument from "@/app/(modules)/documents/models/file-document";
 import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
-import ProjectDocument from "@/app/(modules)/projects/models/project-document";
+import ProjectDocument from "@/models/projects/project-document";
 import AbbreviationDocument from "@/app/(modules)/abbreviations/models/abbreviation-document";
 
 export interface ApplicationDatabase {

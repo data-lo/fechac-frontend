@@ -1,9 +1,10 @@
 'use client';
 
 import toast from "react-hot-toast";
-import { useMutation } from "@tanstack/react-query";
-import { getPendingProjects } from "@/actions/projects/get-pending-projects-action";
 
+import { useMutation } from "@tanstack/react-query";
+
+import getPendingProjects from "@/actions/projects/get-pending-projects";
 
 export function useGetPendingProjects() {
     return useMutation({
