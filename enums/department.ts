@@ -1,0 +1,5 @@
+export enum Department {
+    ACCOUNTING = "CONTABILIDAD",
+    MONITORING = "SEGUIMIENTO",
+    LIAISON = "VINCULACIÓN"
+}

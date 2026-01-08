@@ -1,0 +1,19 @@
+
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
+
+import FileDocument from "@/app/(modules)/documents/models/file-document";
+
+const getDocumentsByProject = async (sadapId: string): Promise<FileDocument[]> => {
+    const db = await getDb();
+
+    const cursor = db.files.find({ sadap_id: sadapId });
+
+    const documents = await cursor.toArray();
+
+    return documents.map(doc => ({
+        ...doc,
+        _id: doc._id.toString(),
+    }));
+};
+
+export default getDocumentsByProject;

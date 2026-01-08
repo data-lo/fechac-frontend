@@ -2,7 +2,7 @@
 
 import { CheckCircle, PlayCircle, XCircle, Clock, Loader2 } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { TaskInstance } from "../../interfaces/task-instance-response";
+import { TaskInstance } from "../../../../../interfaces/workflows/task-instances";
 import ActionButton from "@/components/action-button";
 import { JSX } from "react";
 

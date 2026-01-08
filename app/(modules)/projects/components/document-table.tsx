@@ -1,23 +1,33 @@
 'use client'
 
-import { useRouter } from "next/navigation"
+// 1. Next.js hooks
+import { useRouter } from "next/navigation";
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow
-} from "@/components/ui/table"
-import ActionButton from "@/components/action-button"
-import { DocumentEntity } from "../../documents/models/document-entity"
-import { DocumentStatusEnum, getStatusInfo } from "../../documents/functions/get-status-translation"
-
+// 2. External libraries / icons
 import { AlertTriangle } from "lucide-react";
 
+// 3. Shared / UI components
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import ActionButton from "@/components/action-button";
+
+// 4. Domain enums / helpers
+import {
+  DocumentStatusEnum,
+  getStatusInfo,
+} from "../../documents/functions/get-status-translation";
+
+// 5. Models / entities
+import FileDocument from "../../documents/models/file-document";
+
 interface Props {
-    data: DocumentEntity[];
+    data: FileDocument[];
 }
 
 const STATUS_REQUIERE_REVISION: DocumentStatusEnum[] = [

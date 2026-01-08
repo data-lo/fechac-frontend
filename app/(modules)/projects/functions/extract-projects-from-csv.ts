@@ -1,6 +1,6 @@
-import { Project } from "@/app/(modules)/projects/models/project";
 import { parse } from "csv-parse/sync";
-import { ProjectStatusEnum } from "./get-status-translation";
+import { Project } from "@/models/projects/project";
+import { ProjectStatus} from "./get-status-translation";
 
 export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
     const newObjects: Project[] = [];
@@ -32,7 +32,7 @@ export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
             authorized_contract_amount: row["Monto Aut-Conv"],
             percentage: row["%"],
             total_investment: row["Inversión Total"],
-            status: ProjectStatusEnum.UNPROCESSED,
+            status: ProjectStatus.UNPROCESSED,
         }));
 
         newObjects.push(...newRecord);

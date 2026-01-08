@@ -1,9 +1,9 @@
+import { Department } from "@/enums/department";
 import { Periodicity } from "@/enums/periodicity";
-import { DepartmentEnum } from "@/enums/department-enum";
-import { DestinationPathEnum } from "@/enums/destination-path-enum";
-import { TypeOfAbbreviationEnum } from "@/enums/type-of-abbreviation-enum";
+import { DestinationPath } from "@/enums/destination-path";
+import { TypeOfAbbreviation } from "@/enums/type-of-abbreviation";
 
-export const DestinationPathList = Object.values(DestinationPathEnum).map(value => ({
+export const DestinationPathList = Object.values(DestinationPath).map(value => ({
     value,
     label: value
 }));
@@ -13,12 +13,12 @@ export const PeriodicityList = Object.values(Periodicity).map(value => ({
     label: value
 }));
 
-export const DepartmentList = Object.values(DepartmentEnum).map(value => ({
+export const DepartmentList = Object.values(Department).map(value => ({
     value,
     label: value
 }));
 
-export const TypeOfAbbreviationList = Object.values(TypeOfAbbreviationEnum).map(value => ({
+export const TypeOfAbbreviationList = Object.values(TypeOfAbbreviation).map(value => ({
     value,
     label: value
 }));

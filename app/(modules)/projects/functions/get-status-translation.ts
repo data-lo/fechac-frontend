@@ -1,53 +1,53 @@
-// utils/statusHelper.ts
-import { ProjectStatusEnum } from "@/enums/project-status-enum";
+import { ProjectStatus } from "@/enums/project-status";
+
 import { XCircle, Clock, CheckCircle, HelpCircle } from "lucide-react";
 
-const getStatusTranslation = (status: ProjectStatusEnum): string => {
+const getStatusTranslation = (status: ProjectStatus): string => {
     switch (status) {
-        case ProjectStatusEnum.UNPROCESSED:
+        case ProjectStatus.UNPROCESSED:
             return 'NO PROCESADO';
-        case ProjectStatusEnum.SELECTED_FOR_TRANSFER:
+        case ProjectStatus.SELECTED_FOR_TRANSFER:
             return 'A TRANSFERIR';
-        case ProjectStatusEnum.NOT_SELECT_TO_TRANSFER:
+        case ProjectStatus.NOT_SELECT_TO_TRANSFER:
             return 'NO SELECCIONADO PARA TRANSFERIR';
-        case ProjectStatusEnum.TRANSFERRED:
+        case ProjectStatus.TRANSFERRED:
             return 'TRANSFERIDO';
         default:
             return 'ESTADO DESCONOCIDO';
     }
 };
 
-const getStatusStyle = (status: ProjectStatusEnum): string => {
+const getStatusStyle = (status: ProjectStatus): string => {
     switch (status) {
-        case ProjectStatusEnum.UNPROCESSED:
+        case ProjectStatus.UNPROCESSED:
             return 'bg-red-100 text-red-800';
-        case ProjectStatusEnum.SELECTED_FOR_TRANSFER:
+        case ProjectStatus.SELECTED_FOR_TRANSFER:
             return 'bg-yellow-100 text-yellow-800';
-        case ProjectStatusEnum.NOT_SELECT_TO_TRANSFER:
+        case ProjectStatus.NOT_SELECT_TO_TRANSFER:
             return 'bg-green-100 text-green-800';
-        case ProjectStatusEnum.TRANSFERRED:
+        case ProjectStatus.TRANSFERRED:
             return 'bg-green-100 text-green-800';
         default:
             return 'bg-gray-100 text-gray-800';
     }
 };
 
-const getStatusIcon = (status: ProjectStatusEnum) => {
+const getStatusIcon = (status: ProjectStatus) => {
     switch (status) {
-        case ProjectStatusEnum.UNPROCESSED:
+        case ProjectStatus.UNPROCESSED:
             return XCircle;
-        case ProjectStatusEnum.SELECTED_FOR_TRANSFER:
+        case ProjectStatus.SELECTED_FOR_TRANSFER:
             return Clock;
-        case ProjectStatusEnum.NOT_SELECT_TO_TRANSFER:
+        case ProjectStatus.NOT_SELECT_TO_TRANSFER:
             return CheckCircle;
-        case ProjectStatusEnum.TRANSFERRED:
+        case ProjectStatus.TRANSFERRED:
             return CheckCircle;
         default:
             return HelpCircle;
     }
 };
 
-const getStatusInfo = (status: ProjectStatusEnum) => {
+const getStatusInfo = (status: ProjectStatus) => {
     const Icon = getStatusIcon(status);
     return {
         text: getStatusTranslation(status),
@@ -57,7 +57,7 @@ const getStatusInfo = (status: ProjectStatusEnum) => {
 };
 
 export {
-    ProjectStatusEnum,
+    ProjectStatus,
     getStatusTranslation,
     getStatusStyle,
     getStatusIcon,

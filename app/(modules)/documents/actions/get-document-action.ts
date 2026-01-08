@@ -2,9 +2,9 @@
 import { ObjectId } from "mongodb";
 
 
-import { DocumentEntity } from "../models/document-entity";
+import { DocumentEntity } from "../models/file-document";
 import { ActionResponse } from "@/interfaces/action/action-response";
-import getCollection from "@/lib/connection";
+import getCollection from "@/infrastructure/persistence/mongo/get-connection";
 
 export default async function getDocumentAction(_id: string): Promise<ActionResponse<{ document: DocumentEntity; }>> {
     try {

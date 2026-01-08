@@ -4,7 +4,7 @@
 import abbreviationExist from "../../actions/abbreviation-exist";
 
 // 2. Librerías internas (acciones/helpers locales del módulo)
-import { getDatabase } from "@/lib/get-database";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
 
 // 3. Interfaces
@@ -26,7 +26,7 @@ export async function createAbbreviation(values: { name: string, abbreviation: s
             };
         }
 
-        const db = await getDatabase();
+        const db = await getDb();
 
         const response: InsertOne = await db.abbreviations.insertOne({
             name: values.name,

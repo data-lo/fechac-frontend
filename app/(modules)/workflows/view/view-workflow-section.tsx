@@ -4,10 +4,11 @@ import { Fragment } from "react";
 // 2. Componentes globales
 import EmptyState from "@/components/empty-state";
 import AlertMessage from "@/components/alert-message";
-import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 3. Actions / Servicios
-
+import getAirflowToken from "@/actions/workflow/get-airflow-token";
+import getDagRunsByDagId from "@/actions/workflow/get-dag-runs-by-dag-id";
+import getDagRunTaskInstances from "@/actions/workflow/get-dag-run-task-instances";
 
 // 4. Componentes locales de la vista
 import DagTable from "./components/dag-table";
@@ -15,16 +16,13 @@ import TaskList from "./components/task-list";
 import ProcessControl from "./components/process-control";
 
 // 5. Tipos / Interfaces
-import { DagRun } from "../interfaces/dag-run-interface";
-import getAirflowToken from "../actions/get-airflow-token";
-import getDagExecutions from "../actions/get-dag-runs-by-dag-id";
-import getDagRunTaskInstances from "../actions/get-dag-run-task-instances";
+import DagRun from "@/interfaces/workflows/dag-run";
 
 export default async function ViewWorkflowSection() {
     const token = await getAirflowToken();
 
     // 1. Obtener ejecuciones
-    const dagExecutions = await getDagExecutions(token);
+    const dagExecutions = await getDagRunsByDagId(token);
 
     // 2. Validar error en ejecuciones
     if (!dagExecutions) {

@@ -4,8 +4,8 @@ import { ObjectId } from "mongodb";
 
 
 
-import Document from "../models/document";
-import getCollection from "@/lib/connection";
+import Document from "../models/file";
+import getCollection from "@/infrastructure/persistence/mongo/get-connection";
 
 export async function updateDocumentAction(data: { _id: string; payload: Partial<Document> }) {
     const collection = await getCollection<Document>("documents");

@@ -13,9 +13,9 @@ import PaginationComponent from "../../../../components/pagination";
 import ProjectTable from "./components/project-table";
 
 // 5. Actions/Servicios
-import { getPendingProjects } from "./actions/get-pending-projects-action";
 import Modal from "@/components/modal";
 import UploadFileForm from "./components/upload-file-form";
+import { getPendingProjects } from "@/actions/projects/get-pending-projects";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -60,14 +60,15 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       href: '#',
       title: 'PROYECTOS'
     },
+    {
+
+      href: "#",
+      title: 'LINEKDIN'
+    }
   ];
 
   return (
     <Fragment>
-      {/* Navigation Bar - Fixed Height */}
-      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
-        <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
-      </nav>
 
       <div className="flex justify-end">
         <Modal

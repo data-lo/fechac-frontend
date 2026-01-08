@@ -1,6 +1,6 @@
 "use server"
 
-import { getDatabase } from "@/lib/get-database";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
 import { InsertOne } from "@/interfaces/mongo/insert-one";
 
@@ -10,7 +10,7 @@ export default async function insertScheduler(
     document: ScheduledJob
 ): Promise<InsertOne> {
 
-    const db = await getDatabase();
+    const db = await getDb();
 
     const result = await db.scheduledJobs.insertOne({
         ...document,

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import ActionButton from '@/components/action-button';
-import { handleMicrosoftAuthCallback } from '@/actions/auth';
+import { handleMicrosoftAuthCallback } from '@/actions/authorization/auth';
 
 interface Props {
     title?: string;
