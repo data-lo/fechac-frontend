@@ -1,4 +1,4 @@
-import { FechacStatusEnum } from "@/enums/project-lifecycle-status-code-enum";
+import { FechacStatus } from "@/enums/fechac-status";
 
 export function normalizeProjectStatus(status: string | null): string {
   if (status == null) return "";
@@ -14,5 +14,5 @@ export function normalizeProjectStatus(status: string | null): string {
 }
 
 export function isClosedProject(status: string | null): boolean {
-  return normalizeProjectStatus(status) === FechacStatusEnum.CLOSED;
+  return normalizeProjectStatus(status) === FechacStatus.CLOSED;
 }

@@ -1,5 +1,5 @@
 
-import { getDb } from "@/lib/get-db";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 import ActionResponse from "@/interfaces/action/action-response";
 import { AbbreviationDocument } from "../models/abbreviation-document";
 

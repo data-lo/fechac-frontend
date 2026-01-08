@@ -4,7 +4,7 @@
 import abbreviationExist from "../../actions/abbreviation-exist";
 
 // 2. Librerías internas (acciones/helpers locales del módulo)
-import { getDb } from "@/lib/get-db";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
 
 // 3. Interfaces

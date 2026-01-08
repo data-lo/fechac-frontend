@@ -1,9 +1,10 @@
 'use server';
 
-import { getDb } from "@/lib/get-db";
-
 import ActionResponse from "@/interfaces/action/action-response";
-import { ProjectDocument } from "@/app/(modules)/projects/models/project-document";
+
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
+
+import ProjectDocument from "@/app/(modules)/projects/models/project-document";
 
 interface PaginationParams {
   page?: number;

@@ -1,7 +1,7 @@
 'use server';
 
 
-import getCollection from "@/lib/connection";
+import getCollection from "@/infrastructure/persistence/mongo/get-connection";
 import { DocumentEntity } from "../models/file-document";
 import { ActionResponse } from "@/interfaces/action/action-response";
 

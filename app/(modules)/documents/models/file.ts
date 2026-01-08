@@ -1,4 +1,4 @@
-import { FileStatus } from "@/enums/document-status-enum";
+import { FileStatus } from "@/enums/file-status";
 
 interface Metadata {
     web_url: string;
@@ -35,7 +35,7 @@ export default interface File {
     sadap_id?: string | null;
     text_extracted?: string | null;
     weight?: number | null;
-    status: DocumentStatusEnum;
+    status: FileStatus;
     matches?: Similarity[] | null;
     selected_criterion_id?: string | null;
 }

@@ -2,7 +2,7 @@
 
 import { Filter } from "mongodb";
 
-import { getDb } from "@/lib/get-db";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
 import { UpdateOne } from "@/interfaces/mongo/update-one";
 

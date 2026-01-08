@@ -11,7 +11,7 @@ import {
     FileCog
 } from "lucide-react";
 
-import { DocumentStatusEnum } from "@/enums/document-status-enum";
+import { DocumentStatusEnum } from "@/enums/file-status";
 
 const getStatusTranslation = (status: DocumentStatusEnum): string => {
     switch (status) {

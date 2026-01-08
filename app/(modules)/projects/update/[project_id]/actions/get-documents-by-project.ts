@@ -1,11 +1,12 @@
 
-import { FileDocuments } from "@/app/(modules)/documents/models/file-document";
-import { getDb } from "@/lib/get-db";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
-const getDocumentsByProject = async (sadapId: string): Promise<DocumentEntity> => {
+import FileDocument from "@/app/(modules)/documents/models/file-document";
+
+const getDocumentsByProject = async (sadapId: string): Promise<FileDocument[]> => {
     const db = await getDb();
 
-    const cursor = db.documents.find({ sadap_id: sadapId });
+    const cursor = db.files.find({ sadap_id: sadapId });
 
     const documents = await cursor.toArray();
 

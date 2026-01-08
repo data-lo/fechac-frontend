@@ -1,4 +1,4 @@
-export enum ProjectStatusEnum {
+export enum ProjectStatus {
     UNPROCESSED = 'UNPROCESSED',
     SELECTED_FOR_TRANSFER = 'SELECTED_FOR_TRANSFER',
     NOT_SELECT_TO_TRANSFER = 'NOT_SELECT_TO_TRANSFER',

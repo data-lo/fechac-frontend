@@ -11,7 +11,7 @@ import { MicrosoftSessionObject } from "@/interfaces/microsoft-token-object";
 import { MicrosoftTokenResponse } from "@/interfaces/microsoft-token-response";
 
 // Conexiones / DB
-import getCollection from "@/lib/connection";
+import getCollection from "@/infrastructure/persistence/mongo/get-connection";
 
 // Constantes / Mensajes
 import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";

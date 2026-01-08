@@ -1,4 +1,4 @@
-export enum DepartmentEnum {
+export enum Department {
     ACCOUNTING = "CONTABILIDAD",
     MONITORING = "SEGUIMIENTO",
     LIAISON = "VINCULACIÓN"

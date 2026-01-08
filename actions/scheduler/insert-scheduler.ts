@@ -1,6 +1,6 @@
 "use server"
 
-import { getDb } from "@/lib/get-db";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
 import { InsertOne } from "@/interfaces/mongo/insert-one";
 

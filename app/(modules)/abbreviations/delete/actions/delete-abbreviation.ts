@@ -9,7 +9,7 @@ import { ObjectId } from "mongodb";
 
 // 4. Librerías
 import { revalidatePath } from "next/cache";
-import { getDb } from "@/lib/get-db";
+import { getDb } from "@/infrastructure/persistence/mongo/get-db";
 
 export async function deleteAbbreviation(_id: string | ObjectId): Promise<ActionResponse<DeleteOneResponse>> {
     try {

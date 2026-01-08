@@ -14,7 +14,7 @@ import ActionButton from "@/components/action-button";
 
 // Domain models and enums
 import { DocumentEntity } from "../../../models/file-document";
-import { DocumentStatusEnum } from "@/enums/document-status-enum";
+import { DocumentStatusEnum } from "@/enums/file-status";
 
 // Form configuration
 import {

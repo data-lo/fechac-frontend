@@ -5,7 +5,7 @@ import NavigationBreadcrumb from "@/components/breadcrumb";
 import { StatisticCard } from "@/components/statistic-card";
 import EmptyMessage from "@/components/empty-message";
 
-import { ProjectStatusEnum } from "@/enums/project-status-enum";
+import { ProjectStatusEnum } from "@/enums/project-status";
 
 import { DocumentEntity } from "@/app/(modules)/documents/models/file-document";
 import { ProjectDocument } from "../../models/project-document";
