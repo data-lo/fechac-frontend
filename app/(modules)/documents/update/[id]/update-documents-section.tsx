@@ -13,7 +13,7 @@ import DocumentUpdateForm from "./components/document-update-form";
 import DocumentLocationCard from "./components/document-loaction-card";
 
 // Domain models
-import { DocumentEntity } from "../../models/document-entity";
+import { DocumentEntity } from "../../models/file-document";
 import { CriterionEntity } from "@/app/(modules)/criteria/models/criterion-entity";
 
 // Icons

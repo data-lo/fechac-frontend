@@ -7,7 +7,7 @@ import EmptyMessage from "@/components/empty-message";
 
 import { ProjectStatusEnum } from "@/enums/project-status-enum";
 
-import { DocumentEntity } from "@/app/(modules)/documents/models/document-entity";
+import { DocumentEntity } from "@/app/(modules)/documents/models/file-document";
 import { ProjectDocument } from "../../models/project-document";
 
 import { getStatusTranslation } from "../../functions/get-status-translation";

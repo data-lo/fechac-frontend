@@ -1,4 +1,4 @@
-import { DocumentStatusEnum } from "@/enums/document-status-enum";
+import { FileStatus } from "@/enums/document-status-enum";
 
 interface Metadata {
     web_url: string;
@@ -17,7 +17,7 @@ interface Similarity {
     name: SimilarityDetail;
 }
 
-export default interface Document {
+export default interface File {
     uuid: string;
 
     one_drive_id: string;

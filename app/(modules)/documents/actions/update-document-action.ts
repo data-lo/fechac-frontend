@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 
 
 
-import Document from "../models/document";
+import Document from "../models/file";
 import getCollection from "@/lib/connection";
 
 export async function updateDocumentAction(data: { _id: string; payload: Partial<Document> }) {

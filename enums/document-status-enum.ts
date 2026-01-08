@@ -1,4 +1,4 @@
-export enum DocumentStatusEnum {
+export enum FileStatus {
     UNPROCESSED = "UNPROCESSED",
 
     SELECTED_FOR_TRANSFER = "SELECTED_FOR_TRANSFER",

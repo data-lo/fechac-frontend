@@ -2,7 +2,7 @@
 import { ObjectId } from "mongodb";
 
 
-import { DocumentEntity } from "../models/document-entity";
+import { DocumentEntity } from "../models/file-document";
 import { ActionResponse } from "@/interfaces/action/action-response";
 import getCollection from "@/lib/connection";
 

@@ -1,11 +1,11 @@
 
-import { DocumentEntity } from "@/app/(modules)/documents/models/document-entity";
+import { FileDocuments } from "@/app/(modules)/documents/models/file-document";
 import { getDb } from "@/lib/get-db";
 
-const getDocumentsByProject = async (sadapId: string) => {
+const getDocumentsByProject = async (sadapId: string): Promise<DocumentEntity> => {
     const db = await getDb();
 
-    const cursor = db.projects.find({ sadap_id: sadapId });
+    const cursor = db.documents.find({ sadap_id: sadapId });
 
     const documents = await cursor.toArray();
 

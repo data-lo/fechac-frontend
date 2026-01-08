@@ -13,7 +13,7 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // Domain models and enums
-import { DocumentEntity } from "../../../models/document-entity";
+import { DocumentEntity } from "../../../models/file-document";
 import { DocumentStatusEnum } from "@/enums/document-status-enum";
 
 // Form configuration
