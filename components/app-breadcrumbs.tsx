@@ -29,7 +29,7 @@ export function AppBreadcrumbs() {
           
           return (
             <BreadcrumbItem key={href}>
-              <BreadcrumbLink href={href}>
+              <BreadcrumbLink className='font-medium text-black text-base' href={href}>
                 {label}
               </BreadcrumbLink>
 

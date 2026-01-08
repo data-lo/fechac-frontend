@@ -13,7 +13,6 @@ import PaginationComponent from "../../../../components/pagination";
 import ProjectTable from "./components/project-table";
 
 // 5. Actions/Servicios
-
 import Modal from "@/components/modal";
 import UploadFileForm from "./components/upload-file-form";
 import { getPendingProjects } from "@/actions/projects/get-pending-projects-action";
@@ -61,6 +60,11 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       href: '#',
       title: 'PROYECTOS'
     },
+    {
+
+      href: "#",
+      title: 'LINEKDIN'
+    }
   ];
 
   return (
