@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import {
     Table,
     TableBody,
@@ -9,7 +10,8 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-import { DagRun } from "../../../../../interfaces/workflows/dag-run";
+import DagRun from "@/interfaces/workflows/dag-run";
+import { CircleArrowRight, CirclePlay, ListRestart } from "lucide-react";
 
 interface Props {
     data: DagRun[];
@@ -21,9 +23,8 @@ const formatDate = (dateString?: string | null) => {
     const date = new Date(dateString);
 
     return date.toLocaleString("es-MX", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
+        day: "numeric",
+        month: "long",
         hour: "2-digit",
         minute: "2-digit",
         hour12: true,
@@ -32,14 +33,14 @@ const formatDate = (dateString?: string | null) => {
 
 const translateStatus = (state: string) => {
     const map: Record<string, string> = {
-        success: "EXITOSO",
-        failed: "FALLIDO",
-        running: "EN EJECUCIÓN",
-        queued: "EN COLA",
-        up_for_retry: "PENDIENTE DE REINTENTO",
-        up_for_reschedule: "PENDIENTE DE REPROGRAMACIÓN",
-        skipped: "OMITIDO",
-        no_status: "SIN ESTADO",
+        success: "Exitoso",
+        failed: "Fallido",
+        running: "En Ejecución",
+        queued: "En Cola",
+        up_for_retry: "Pendiente de Reintento",
+        up_for_reschedule: "Pendiente de Repogramación",
+        skipped: "Omitido",
+        no_status: "Sin Estado",
     };
 
     return map[state] ?? state;
@@ -50,12 +51,11 @@ const DagTable = ({ data }: Props) => {
         <Table>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[40px] text-center">#</TableHead>
-                    <TableHead>LOTE</TableHead>
-                    <TableHead>INICIO</TableHead>
-                    <TableHead>FIN</TableHead>
-                    <TableHead>ESTATUS</TableHead>
-                    <TableHead>TIPO DE ACTIVACIÓN</TableHead>
+                    <TableHead className="w-[40px] text-center"></TableHead>
+                    <TableHead>Start Date</TableHead>
+                    <TableHead>End Date</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Type of Activation</TableHead>
                 </TableRow>
             </TableHeader>
 
@@ -66,30 +66,29 @@ const DagTable = ({ data }: Props) => {
                             {index + 1}
                         </TableCell>
 
-                        <TableCell className="max-w-[200px] truncate">
-                            {dag.dag_versions?.[0]?.version_number?.toString() ?? "—"}
-                        </TableCell>
+                        <TableCell className="text-xs">{formatDate(dag.start_date).toUpperCase()}</TableCell>
 
-                        <TableCell>{formatDate(dag.start_date)}</TableCell>
-
-                        <TableCell>{formatDate(dag.end_date)}</TableCell>
+                        <TableCell className="text-xs">{formatDate(dag.end_date).toUpperCase()}</TableCell>
 
                         <TableCell>
-                            <span
-                                className={`
-                                    px-2 py-1 rounded text-xs font-semibold
-                                    ${dag.state === "success" ? "bg-green-100 text-green-700" : ""}
-                                    ${dag.state === "failed" ? "bg-red-100 text-red-700" : ""}
-                                    ${dag.state === "running" ? "bg-blue-100 text-blue-700" : ""}
-                                    ${dag.state === "queued" ? "bg-yellow-100 text-yellow-700" : ""}
-                                `}
+
+                            <Badge
+                                variant="outline"
+                                className="gap-1"
                             >
+                                <CircleArrowRight className="w-3 h-3" />
                                 {translateStatus(dag.state)}
-                            </span>
+                            </Badge>
                         </TableCell>
 
                         <TableCell>
-                            {dag.run_type.toUpperCase()}
+                            <Badge
+                                variant="outline"
+                                className="gap-1"
+                            >
+                                <CirclePlay className="w-3 h-3" />
+                                {dag.run_type.charAt(0).toUpperCase() + dag.run_type.slice(1)}
+                            </Badge>
                         </TableCell>
                     </TableRow>
                 ))}
@@ -99,3 +98,4 @@ const DagTable = ({ data }: Props) => {
 };
 
 export default DagTable;
+
