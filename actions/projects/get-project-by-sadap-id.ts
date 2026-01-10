@@ -1,6 +1,6 @@
 "use server"
 
-import { getDb } from "@/infrastructure/persistence/mongo/get-db";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 import ProjectDocument from "@/models/projects/project-document";
 

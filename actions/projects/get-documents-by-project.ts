@@ -1,7 +1,6 @@
+import FileDocument from "@/models/files/file-document";
 
-import { getDb } from "@/infrastructure/persistence/mongo/get-db";
-
-import FileDocument from "@/app/(modules)/documents/models/file-document";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 const getDocumentsByProject = async (sadapId: string): Promise<FileDocument[]> => {
     const db = await getDb();

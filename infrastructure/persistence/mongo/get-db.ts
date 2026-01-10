@@ -6,7 +6,7 @@ import type { OptionalId } from "mongodb";
 
 import { getConnection } from "./get-connection";
 
-import FileDocument from "@/app/(modules)/documents/models/file-document";
+import FileDocument from "@/models/files/file-document";
 import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
 import ProjectDocument from "@/models/projects/project-document";
 import AbbreviationDocument from "@/app/(modules)/abbreviations/models/abbreviation-document";
@@ -20,7 +20,7 @@ export interface ApplicationDatabase {
 
 let cachedDb: ApplicationDatabase | null = null;
 
-export async function getDb(): Promise<ApplicationDatabase> {
+export default async function getDb(): Promise<ApplicationDatabase> {
     if (cachedDb) return cachedDb;
 
     const db: Db = await getConnection();

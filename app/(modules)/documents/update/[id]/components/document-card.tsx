@@ -4,8 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { Link2, Tag, Check, X } from "lucide-react";
 
-import { DocumentEntity } from "../../../models/file-document";
-import { Similarity } from "../../../models/file";
+import { DocumentEntity } from "../../../../../../models/files/file-document";
+import { Similarity } from "../../../../../../models/files/file";
 import { DocumentStatusEnum } from "@/enums/file-status";
 import { getStatusInfo } from "../../../functions/get-status-translation";
 

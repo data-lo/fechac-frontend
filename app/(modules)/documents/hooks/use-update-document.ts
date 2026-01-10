@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 
 import { useMutation } from "@tanstack/react-query";
 
-import { updateDocumentAction } from "../actions/update-document-action";
+import { updateDocumentAction } from "../../../../actions/files/update-document";
 
 const useUpdateDocument = () => {
     return useMutation({

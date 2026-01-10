@@ -19,21 +19,21 @@ import ActionButton from "@/components/action-button";
 
 // 4. Domain enums / helpers
 import {
-  DocumentStatusEnum,
+  FileStatus,
   getStatusInfo,
 } from "../../documents/functions/get-status-translation";
 
 // 5. Models / entities
-import FileDocument from "../../documents/models/file-document";
+import FileDocument from "@/models/files/file-document";
 
 interface Props {
     data: FileDocument[];
 }
 
-const STATUS_REQUIERE_REVISION: DocumentStatusEnum[] = [
-    DocumentStatusEnum.REQUIRES_HUMAN_REVIEW,
-    DocumentStatusEnum.NOT_CLASSIFIED,
-    DocumentStatusEnum.WEIGHT_BELOW_THRESHOLD,
+const STATUS_REQUIERE_REVISION: FileStatus[] = [
+    FileStatus.REQUIRES_HUMAN_REVIEW,
+    FileStatus.NOT_CLASSIFIED,
+    FileStatus.WEIGHT_BELOW_THRESHOLD,
 ];
 
 const DocumentsTable = ({ data }: Props) => {
@@ -59,11 +59,11 @@ const DocumentsTable = ({ data }: Props) => {
 
             <TableBody>
                 {data.map((document, index) => {
-                    const statusInfo = getStatusInfo(document.status as DocumentStatusEnum);
+                    const statusInfo = getStatusInfo(document.status as FileStatus);
                     const IconComponent = statusInfo.icon;
 
                     const requiereRevision =
-                        STATUS_REQUIERE_REVISION.includes(document.status as DocumentStatusEnum);
+                        STATUS_REQUIERE_REVISION.includes(document.status as FileStatus);
 
                     return (
                         <TableRow key={index}>

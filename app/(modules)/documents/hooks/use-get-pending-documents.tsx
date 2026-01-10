@@ -4,7 +4,7 @@ import toast from "react-hot-toast"
 
 import { useMutation } from "@tanstack/react-query";
 
-import { getPendingDocumentsAction } from "../actions/get-pending-documents-action";
+import { getPendingDocumentsAction } from "../../../../actions/files/get-pending-documents";
 
 export function useGetPendingDocuments() {
     return useMutation({

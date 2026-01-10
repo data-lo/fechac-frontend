@@ -15,7 +15,7 @@ import { AlertTriangle } from "lucide-react"
 
 import ActionButton from "@/components/action-button"
 
-import { DocumentEntity } from "../../models/file-document"
+import { DocumentEntity } from "../../../../../models/files/file-document"
 
 import { getStatusInfo, DocumentStatusEnum } from "../../functions/get-status-translation"
 

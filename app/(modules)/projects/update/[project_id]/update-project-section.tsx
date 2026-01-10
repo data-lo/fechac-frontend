@@ -16,7 +16,7 @@ import DocumentTable from "../../components/document-table";
 
 // 6. Models / entities
 import ProjectDocument from "@/models/projects/project-document";
-import FileDocument from "@/app/(modules)/documents/models/file-document";
+import FileDocument from "@/models/files/file-document";
 
 // 7. Functions
 import { getStatusTranslation } from "../../functions/get-status-translation";

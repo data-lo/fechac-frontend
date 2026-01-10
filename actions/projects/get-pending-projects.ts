@@ -1,8 +1,8 @@
 'use server';
 
-import ActionResponse from "@/interfaces/action/action-response";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-import { getDb } from "@/infrastructure/persistence/mongo/get-db";
+import ActionResponse from "@/interfaces/action/action-response";
 
 import ProjectDocument from "@/models/projects/project-document";
 

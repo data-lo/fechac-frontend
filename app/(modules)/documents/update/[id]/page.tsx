@@ -1,5 +1,5 @@
 import { getAllCriteriaAction } from "@/app/(modules)/criteria/actions/get-all-criteria-action";
-import getDocument from "../../actions/get-document-action";
+import getDocument from "../../../../../actions/files/get-document";
 
 import UpdateDocumentSection from "./update-documents-section";
 
