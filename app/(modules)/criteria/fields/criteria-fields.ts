@@ -2,7 +2,7 @@ import DynamicArrayField from "@/components/form/dynamic-array-field";
 import InputField from "@/components/form/input-field";
 import MultipleSelectComponent from "@/components/form/multiple-select-field";
 import SelectField from "@/components/form/select-field";
-import { DepartmentList, TYPE_OF_FILE_LIST } from "@/functions/transform-enums";
+import { DepartmentList, TypeOfFileList, } from "@/functions/transform-enums";
 import { TARGET_DRIVES_LIST } from "../utils/target-drives-list";
 import PROJECT_TYPE_LIST from "../utils/project-type-list";
 import PROJECT_FOCUS_LIST from "../utils/project-focus-list";
@@ -37,13 +37,13 @@ export const CRITERIA_IDENTIFICATION_FIELDS = [
             items: DepartmentList,
         },
     },
-     {
+    {
         component: MultipleSelectComponent,
         props: {
             name: "file_types",
             label: "Tipo de archivo",
             placeholder: "Seleccione un tipo",
-            items: TYPE_OF_FILE_LIST,
+            items: TypeOfFileList,
         },
     },
 ];

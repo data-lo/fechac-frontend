@@ -4,27 +4,28 @@
 import { useRouter } from "next/navigation";
 
 // 2. External libraries / icons
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, CircleArrowRight } from "lucide-react";
 
 // 3. Shared / UI components
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
 } from "@/components/ui/table";
 import ActionButton from "@/components/action-button";
 
 // 4. Domain enums / helpers
 import {
-  FileStatus,
-  getStatusInfo,
+    FileStatus,
+    getStatusInfo,
 } from "../../documents/functions/get-status-translation";
 
 // 5. Models / entities
 import FileDocument from "@/models/files/file-document";
+import { Badge } from "@/components/ui/badge";
 
 interface Props {
     data: FileDocument[];
@@ -50,7 +51,7 @@ const DocumentsTable = ({ data }: Props) => {
                 <TableRow className="font-bold">
                     <TableHead className="w-[50px] text-center"></TableHead>
                     <TableHead className="w-[40px] text-center"></TableHead>
-                    <TableHead className="max-w-[300px]">Name</TableHead>
+                    <TableHead className="max-w-[300px]">Document Name</TableHead>
                     <TableHead className="w-[200px]">Department</TableHead>
                     <TableHead className="w-[340px]">Status</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
@@ -93,17 +94,22 @@ const DocumentsTable = ({ data }: Props) => {
                                 </div>
                             </TableCell>
 
-                            <TableCell className="text-sm">
-                                {document.department}
+                            <TableCell>
+                                <Badge
+                                    variant="outline"
+                                >
+                                    {document.department}
+                                </Badge>
                             </TableCell>
 
                             <TableCell>
-                                <span
-                                    className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm text-xs font-medium ${statusInfo.className}`}
+                                <Badge
+                                    variant="outline"
+                                    className="gap-1"
                                 >
-                                    <IconComponent size={12} />
+                                    <statusInfo.icon className="w-3 h-3" />
                                     {statusInfo.text}
-                                </span>
+                                </Badge>
                             </TableCell>
 
                             <TableCell>

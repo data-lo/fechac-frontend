@@ -1,23 +1,20 @@
 'use server';
 
 import { ObjectId } from "mongodb";
-
-import getCollection from "@/actions/mongo/get-collection";
-
-import { CriterionEntity } from "../models/criterion-entity";
-
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one";
+import { UpdateOne } from "@/interfaces/mongo/update-one";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+import CriterionDocument from "@/models/criteria/criterion-document";
 
 export async function updateCriterion({
     _id,
     payload,
 }: {
     _id: string | ObjectId;
-    payload: Partial<CriterionEntity>;
+    payload: Partial<CriterionDocument>;
 }) {
-    const collection = await getCollection<CriterionEntity>("criteria");
+    const db = await getDb();
 
-    const result: UpdateOneResponse = await collection.updateOne(
+    const result: UpdateOne = await db.criteria.updateOne(
         { _id: new ObjectId(_id) },
         { $set: payload },
         { upsert: false }

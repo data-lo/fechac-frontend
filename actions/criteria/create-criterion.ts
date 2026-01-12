@@ -7,7 +7,7 @@ import getDb from "@/infrastructure/persistence/mongo/get-db";
 import { Criterion } from "@/models/criteria/criterion";
 import { InsertOne } from "@/interfaces/mongo/insert-one";
 
-export default async function createCriterionAction(criterion: Criterion) {
+export default async function createCriterion(criterion: Criterion) {
 
     const db = await getDb();
 

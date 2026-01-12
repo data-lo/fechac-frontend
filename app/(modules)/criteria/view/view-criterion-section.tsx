@@ -13,9 +13,10 @@ import NavigationBreadcrumb from "@/components/breadcrumb";
 // 4. Componentes locales del módulo
 
 import CreateCriterionButtonSection from "../components/create-criterion-button-section";
+import { getCriteria } from "@/actions/criteria/get-criteria";
 
 // 5. Actions/Servicios
-import { getCriteria } from "../actions/get-criteria-action";
+
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -66,10 +67,6 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
 
   return (
     <Fragment>
-      <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
-        <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
-      </nav>
-
       <CreateCriterionButtonSection />
 
       {criteria.length > 0 ? (

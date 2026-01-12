@@ -11,13 +11,14 @@ import {
     TableRow
 } from "@/components/ui/table"
 
-import { AlertTriangle } from "lucide-react"
+import { CircleAlert } from "lucide-react"
 
 import ActionButton from "@/components/action-button"
 
 import FileDocument from "@/models/files/file-document"
 
 import { getStatusInfo, FileStatus } from "../../functions/get-status-translation"
+import { Badge } from "@/components/ui/badge"
 
 interface Props {
     data: FileDocument[];
@@ -68,14 +69,23 @@ const DocumentsTable = ({ data, currentIndex }: Props) => {
                                 )}
 
                                 {!document.sadap_id && (
-                                    <AlertTriangle size={14} className="text-yellow-600" />
+                                    <Badge
+                                        variant="outline"
+                                        className="gap-1"
+                                    >
+                                        <CircleAlert className="w-3 h-3" />
+                                        PROYECTO NO IDENTIFICADO
+                                    </Badge>
                                 )}
                             </TableCell>
                             <TableCell>
-                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm font-medium ${statusInfo.className}`}>
-                                    <IconComponent size={12} />
+                                <Badge
+                                    variant="outline"
+                                    className="gap-1"
+                                >
+                                    <statusInfo.icon className="w-3 h-3" />
                                     {statusInfo.text}
-                                </span>
+                                </Badge>
                             </TableCell>
                             <TableCell>
                                 <ActionButton

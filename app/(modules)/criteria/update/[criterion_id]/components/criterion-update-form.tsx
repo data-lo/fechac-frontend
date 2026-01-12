@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // 3. Modelos
-import { CriterionEntity } from "../../../../../../models/criteria/criterion-document";
+
 
 // 4. Esquemas de validación
 import UPDATE_CRITERIA_SCHEMA from "../../../schema/update-criteria-schema";
@@ -19,11 +19,12 @@ import UPDATE_CRITERIA_SCHEMA from "../../../schema/update-criteria-schema";
 import { CRITERIA_IDENTIFICATION_FIELDS, CRITERIA_CLASSIFICATION_FIELDS, CRITERIA_PROJECT_FIELDS, CRITERIA_STORAGE_FIELDS } from "../../../fields/criteria-fields";
 
 // 6. Hooks
-import useUpdateCriterion from "../hooks/use-update-criterion";
+import useUpdateCriterion from "../../../hooks/use-update-criterion";
+import CriterionDocument from "@/models/criteria/criterion-document";
 
 interface Props {
     data: {
-        criterion: CriterionEntity
+        criterion: CriterionDocument
     }
 }
 
@@ -43,7 +44,7 @@ const CriterionUpdateForm = ({ data }: Props) => {
             primary_keywords: criterion.primary_keywords,
             secondary_keywords: criterion.secondary_keywords,
             project_area: criterion.project_area,
-            quality_system_code: criterion.quality_system_code,
+            quality_system_code: criterion.quality_system_code ?? "",
             project_focus: criterion.project_focus,
             project_type: criterion.project_type,
             target_drives: criterion.target_drives,
@@ -52,7 +53,7 @@ const CriterionUpdateForm = ({ data }: Props) => {
     });
 
     const onSubmit = (values: z.infer<typeof UPDATE_CRITERIA_SCHEMA>) => {
-        updateCriterion.mutate({_id: criterion._id, payload: values});
+        updateCriterion.mutate({ _id: criterion._id, payload: values });
     };
 
     return (

@@ -4,17 +4,16 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import { Link2, Tag, Check, X } from "lucide-react";
 
-import { DocumentEntity } from "../../../../../../models/files/file-document";
-import { Similarity } from "../../../../../../models/files/file";
-import { DocumentStatusEnum } from "@/enums/file-status";
-import { getStatusInfo } from "../../../functions/get-status-translation";
+
+import { FileStatus, getStatusInfo } from "../../../functions/get-status-translation";
+import FileDocument from "@/models/files/file-document";
 
 interface Props {
-  document: DocumentEntity;
+  document: FileDocument;
 }
 
 export default function DocumentCard({ document }: Props) {
-  const statusInfo = getStatusInfo(document.status as DocumentStatusEnum);
+  const statusInfo = getStatusInfo(document.status as FileStatus);
 
   return (
     <Card className="shadow-none rounded-none border-none">
@@ -79,7 +78,7 @@ export default function DocumentCard({ document }: Props) {
             <p className="text-gray-700 font-semibold mb-2">
               COINCIDENCIAS (Similarity)
             </p>
-
+            {/* 
             <ul className="space-y-3">
               {document.matches.map((match: Similarity) => (
                 <li
@@ -144,7 +143,7 @@ export default function DocumentCard({ document }: Props) {
                   </div>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
         )}
       </CardContent>

@@ -10,7 +10,7 @@ import { StatisticCard } from "@/components/statistic-card";
 
 // Page components
 import DocumentUpdateForm from "./components/document-update-form";
-import DocumentLocationCard from "./components/document-loaction-card";
+import DocumentLocationCard from "./components/document-location-card";
 
 // Domain models
 import FileDocument from "@/models/files/file-document"
@@ -32,27 +32,16 @@ const UpdateDocumentSection = ({ data }: Props) => {
             title: "ESTATUS",
             value: data.document.status,
             icon: CheckCircle2,
-            iconColor: "text-green-600",
-            iconBgColor: "bg-green-50",
+            iconColor: "text-black",
+            iconBgColor: "bg-gray-100",
         },
         {
             title: "DEPARTAMENTO",
             value: data.document.department,
             icon: Users,
-            iconColor: "text-purple-600",
-            iconBgColor: "bg-purple-50",
+            iconColor: "text-black",
+            iconBgColor: "bg-gray-100",
         },
-    ];
-
-    const breadcrumbRoutes = [
-        {
-            href: '/documents/view',
-            title: "DOCUMENTOS"
-        },
-        {
-            href: `#`,
-            title: `ACTUALIZAR DOCUMENTO: ${data.document.file_name.toUpperCase()}`
-        }
     ];
 
     const criteria = data.criteria.map(item => ({
@@ -62,11 +51,8 @@ const UpdateDocumentSection = ({ data }: Props) => {
 
     return (
         <Fragment>
-            <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
-                <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
-            </nav>
 
-            <h2 className="font-bold">INFORMACIÓN</h2>
+            {/* <h2 className="font-bold">DOCUMENTO: {data.document.file_name.toUpperCase()}</h2> */}
 
             <div className="flex gap-4 w-full">
                 {summary.map(item => (
@@ -88,7 +74,7 @@ const UpdateDocumentSection = ({ data }: Props) => {
 
             {!data.document.sadap_id && (
                 <Fragment>
-                    <h2 className="font-bold">FORMULARIO</h2>
+                    {/* <h2 className="font-bold">FORMULARIO</h2> */}
 
                     <AlertMessage
                         message="Este documento no está vinculado a ningún proyecto. Por favor, realiza la asignación manual. Una vez completada, no podrá modificarse."

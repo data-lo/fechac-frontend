@@ -1,8 +1,8 @@
 'use server';
 
-import getCollection from "@/actions/mongo/get-collection";
-import { CriterionEntity } from "../models/criterion-entity";
-import { ActionResponse } from "@/interfaces/action/action-response";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+import ActionResponse from "@/interfaces/action/action-response";
+import CriterionDocument from "@/models/criteria/criterion-document";
 
 interface PaginationParams {
   page?: number;
@@ -16,7 +16,7 @@ export async function getCriteria(
   limit: number = 10,
   options: Omit<PaginationParams, 'page' | 'limit'> = {}
 ): Promise<ActionResponse<{
-  criteria: CriterionEntity[];
+  criteria: CriterionDocument[];
   total: number;
   currentPage: number;
   totalPages: number;
@@ -40,16 +40,16 @@ export async function getCriteria(
       };
     }
 
-    const collection = await getCollection<CriterionEntity>("criteria");
+    const db = await getDb();
     const skip = (page - 1) * limit;
 
     const [criteriaFromDB, total] = await Promise.all([
-      collection
+      db.criteria
         .find()
         .skip(skip)
         .limit(limit)
         .toArray(),
-      collection.countDocuments(),
+      db.criteria.countDocuments(),
     ]);
 
     const totalPages = Math.ceil(total / limit);

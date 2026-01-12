@@ -17,10 +17,12 @@ import {
 import ActionButton from "@/components/action-button";
 
 // 4. Tipos/Modelos
-import { CriterionEntity } from "../../../../../models/criteria/criterion-document";
+import CriterionDocument from "@/models/criteria/criterion-document";
+import { Badge } from "@/components/ui/badge";
+import { CircleAlert } from "lucide-react";
 
 interface Props {
-    data: CriterionEntity[];
+    data: CriterionDocument[];
     currentIndex: number;
 }
 
@@ -36,10 +38,10 @@ const CriterionTable = ({ data, currentIndex }: Props) => {
         <Table className="table-fixed">
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[50px] text-center">#</TableHead>
-                    <TableHead className="max-w-[340px]">NOMBRE DEL ARCHIVO</TableHead>
-                    <TableHead className="w-[240px]">DEPARTAMENTO</TableHead>
-                    <TableHead className="w-[240px]">CÓDIGO</TableHead>
+                    <TableHead className="w-[50px] text-center"></TableHead>
+                    <TableHead className="max-w-[340px]">File Name</TableHead>
+                    <TableHead className="w-[240px]">Department</TableHead>
+                    <TableHead className="w-[240px]">Code</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>
@@ -56,11 +58,21 @@ const CriterionTable = ({ data, currentIndex }: Props) => {
                             </div>
                         </TableCell>
                         <TableCell className="text-sm whitespace-nowrap">
-                            {criterion.department}
+
+
+                            <Badge
+                                variant="outline"
+                            >
+                                {criterion.department}
+                            </Badge>
                         </TableCell>
-                        
+
                         <TableCell className="text-sm whitespace-nowrap overflow-hidden">
-                            {(criterion.quality_system_code ?? "SIN CÓDIGO").toUpperCase()}
+                            <Badge
+                                variant="outline"
+                            >
+                                {(criterion.quality_system_code ?? "SIN CÓDIGO").toUpperCase()}
+                            </Badge>
                         </TableCell>
 
                         <TableCell>

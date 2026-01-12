@@ -1,7 +1,13 @@
 import { Department } from "@/enums/department";
 import { Periodicity } from "@/enums/periodicity";
+import { TypeOfFile } from "@/enums/type-of-file";
 import { DestinationPath } from "@/enums/destination-path";
 import { TypeOfAbbreviation } from "@/enums/type-of-abbreviation";
+
+export const TypeOfFileList = Object.values(TypeOfFile).map(value => ({
+    value,
+    label: value
+}));
 
 export const DestinationPathList = Object.values(DestinationPath).map(value => ({
     value,

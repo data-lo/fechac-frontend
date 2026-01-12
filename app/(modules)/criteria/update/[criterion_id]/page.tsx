@@ -1,4 +1,4 @@
-import { getCriterion } from "@/actions/criteria/get-criterion-action";
+import { getCriterion } from "@/actions/criteria/get-criterion";
 
 import UpdateCriterionSection from "./update-criterion-section";
 
