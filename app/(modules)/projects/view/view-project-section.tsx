@@ -4,7 +4,6 @@ import { Fragment } from "react";
 // 2. Componentes globales
 import AlertMessage from "@/components/alert-message";
 import EmptyState from "@/components/empty-state";
-import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 3. Componentes compartidos
 import PaginationComponent from "../../../../components/pagination";
@@ -15,7 +14,7 @@ import ProjectTable from "./components/project-table";
 // 5. Actions/Servicios
 import Modal from "@/components/modal";
 import UploadFileForm from "./components/upload-file-form";
-import { getPendingProjects } from "@/actions/projects/get-pending-projects";
+import getPendingProjects from "@/actions/projects/get-pending-projects";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -54,18 +53,6 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       </Fragment>
     );
   }
-
-  const breadcrumbRoutes = [
-    {
-      href: '#',
-      title: 'PROYECTOS'
-    },
-    {
-
-      href: "#",
-      title: 'LINEKDIN'
-    }
-  ];
 
   return (
     <Fragment>

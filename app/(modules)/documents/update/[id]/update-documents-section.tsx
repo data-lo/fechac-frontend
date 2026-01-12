@@ -13,16 +13,16 @@ import DocumentUpdateForm from "./components/document-update-form";
 import DocumentLocationCard from "./components/document-loaction-card";
 
 // Domain models
-import { DocumentEntity } from "../../models/file-document";
-import { CriterionEntity } from "@/app/(modules)/criteria/models/criterion-entity";
+import FileDocument from "@/models/files/file-document"
 
 // Icons
 import { CheckCircle2, Users } from "lucide-react";
+import CriterionDocument from "@/models/criteria/criterion-document";
 
 interface Props {
     data: {
-        document: DocumentEntity,
-        criteria: CriterionEntity[],
+        document: FileDocument,
+        criteria: CriterionDocument[],
     }
 }
 

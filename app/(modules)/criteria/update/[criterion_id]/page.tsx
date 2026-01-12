@@ -1,4 +1,4 @@
-import { getCriterionAction } from "./actions/get-criterion-action";
+import { getCriterion } from "@/actions/criteria/get-criterion-action";
 
 import UpdateCriterionSection from "./update-criterion-section";
 
@@ -13,7 +13,7 @@ export default async function UpdateCriterionPage({
         console.error('[ERROR] Invalid or missing id parameter:', { params, criterion_id });
         return <div>Invalid criteria ID</div>;
     }
-    const criterion = await getCriterionAction(criterion_id);
+    const criterion = await getCriterion(criterion_id);
 
     if (!criterion) {
         return <div className="p-8 text-center">Criterio no encontrado</div>;

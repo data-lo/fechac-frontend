@@ -19,21 +19,21 @@ import ActionButton from "@/components/action-button";
 
 // 4. Domain enums / helpers
 import {
-  DocumentStatusEnum,
+  FileStatus,
   getStatusInfo,
 } from "../../documents/functions/get-status-translation";
 
 // 5. Models / entities
-import FileDocument from "../../documents/models/file-document";
+import FileDocument from "@/models/files/file-document";
 
 interface Props {
     data: FileDocument[];
 }
 
-const STATUS_REQUIERE_REVISION: DocumentStatusEnum[] = [
-    DocumentStatusEnum.REQUIRES_HUMAN_REVIEW,
-    DocumentStatusEnum.NOT_CLASSIFIED,
-    DocumentStatusEnum.WEIGHT_BELOW_THRESHOLD,
+const STATUS_REQUIERE_REVISION: FileStatus[] = [
+    FileStatus.REQUIRES_HUMAN_REVIEW,
+    FileStatus.NOT_CLASSIFIED,
+    FileStatus.WEIGHT_BELOW_THRESHOLD,
 ];
 
 const DocumentsTable = ({ data }: Props) => {
@@ -41,29 +41,29 @@ const DocumentsTable = ({ data }: Props) => {
 
     const handleEdit = (documentId: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        router.push(`/documents/${encodeURIComponent(documentId)}/update`)
+        router.push(`/documents/update/${encodeURIComponent(documentId)}`)
     }
 
     return (
         <Table>
             <TableHeader>
                 <TableRow className="font-bold">
-                    <TableHead className="w-[50px] text-center">#</TableHead>
+                    <TableHead className="w-[50px] text-center"></TableHead>
                     <TableHead className="w-[40px] text-center"></TableHead>
-                    <TableHead className="max-w-[300px]">NOMBRE</TableHead>
-                    <TableHead className="w-[200px]">DEPARTAMENTO</TableHead>
-                    <TableHead className="w-[340px]">ESTATUS</TableHead>
+                    <TableHead className="max-w-[300px]">Name</TableHead>
+                    <TableHead className="w-[200px]">Department</TableHead>
+                    <TableHead className="w-[340px]">Status</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>
 
             <TableBody>
                 {data.map((document, index) => {
-                    const statusInfo = getStatusInfo(document.status as DocumentStatusEnum);
+                    const statusInfo = getStatusInfo(document.status as FileStatus);
                     const IconComponent = statusInfo.icon;
 
                     const requiereRevision =
-                        STATUS_REQUIERE_REVISION.includes(document.status as DocumentStatusEnum);
+                        STATUS_REQUIERE_REVISION.includes(document.status as FileStatus);
 
                     return (
                         <TableRow key={index}>

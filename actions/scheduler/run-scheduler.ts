@@ -11,19 +11,20 @@ import { addDays } from "@/functions/add-days";
 import { getDaysByPeriodicity } from "@/functions/get-days-by-periodicity";
 
 // External services / Actions (Airflow)
-import startDagRun from "@/app/(modules)/workflows/actions/start-dag-run";
-import getAirflowToken from "@/app/(modules)/workflows/actions/get-airflow-token";
-import getDagRunsByDagId from "@/app/(modules)/workflows/actions/get-dag-runs-by-dag-id";
+import startDagRun from "../workflow/start-dag-run";
+import getAirflowToken from "../workflow/get-airflow-token";
+import getLatestScheduleExecution from "./get-latest-scheduler";
+import getDagRunsByDagId from "../workflow/get-dag-runs-by-dag-id";
 
 // Database / Repositories
 import updateScheduler from "./update-scheduler";
 import insertScheduler from "./insert-scheduler";
 import countScheduledJobs from "./count-schedules";
-import getLatestScheduleExecution from "./get-latest-scheduler";
 
 // Types / Interfaces
 import ActionResponse from "@/interfaces/action/action-response";
 import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
+
 
 export default async function runScheduler(): Promise<ActionResponse<Partial<ScheduledJobDocument>>> {
 
@@ -68,10 +69,14 @@ export default async function runScheduler(): Promise<ActionResponse<Partial<Sch
 
         let lastRunAt: Date | null = null;
 
+        let scheduleJobNumber: number = 0
+
         // Si existe un schedule previo y el DAG ya finalizó,
         // se actualiza el registro para marcarlo como inactivo
 
         if (lastSchedule && latestDagRun && latestDagRun.end_date) {
+
+            scheduleJobNumber = lastSchedule.scheduleJobNumber;
 
             periodicity = lastSchedule.periodicity;
 
@@ -80,7 +85,6 @@ export default async function runScheduler(): Promise<ActionResponse<Partial<Sch
             const filter = { _id: lastSchedule._id }
 
             const update = {
-                enabled: false,
                 updatedAt: new Date(),
                 lastRunAt: new Date(latestDagRun.end_date)
             }
@@ -100,14 +104,19 @@ export default async function runScheduler(): Promise<ActionResponse<Partial<Sch
             }
         }
 
+        //  Desactivar los schedules previos con estatus true
+
         const data = {
-            enabled: true,
             lastRunAt: lastRunAt,
             createdAt: new Date(),
             updatedAt: new Date(),
+            isLastSchedule: true,
             periodicity: periodicity,
+            scheduleJobNumber: scheduleJobNumber + 1,
             nextRunAt: addDays(getDaysByPeriodicity(periodicity)),
         }
+
+
 
         await insertScheduler(data)
 

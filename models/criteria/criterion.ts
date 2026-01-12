@@ -18,19 +18,4 @@ export interface Criterion {
   project_type: string[];
 
   is_active: boolean;
-
-  
 }
-
-export interface VisualLayout {
-  pages: number;
-  sections: number;
-  tables: number;
-  images: number;
-  forms: number;
-  charts?: number;
-  footnotes?: number;
-  headers?: number;
-  paragraphs?: number;
-}
-

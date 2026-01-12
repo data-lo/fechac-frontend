@@ -1,10 +1,9 @@
 "use client";
 
-import { CheckCircle, PlayCircle, XCircle, Clock, Loader2 } from "lucide-react";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { TaskInstance } from "../../../../../interfaces/workflows/task-instances";
-import ActionButton from "@/components/action-button";
 import { JSX } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { TaskInstance } from "@/interfaces/workflows/task-instances";
+import { CheckCircle, PlayCircle, XCircle, Clock } from "lucide-react";
 
 interface TaskListProps {
   tasks: TaskInstance[];
@@ -58,7 +57,7 @@ const statusStyles: Record<
 
 export default function TaskList({ tasks }: TaskListProps) {
   return (
-    <Card className="shadow-none rounded-none border-none">
+    <Card className="w-full">
       <CardContent>
         <ul className="w-full">
           {tasks.map((task, index) => {
@@ -72,8 +71,8 @@ export default function TaskList({ tasks }: TaskListProps) {
             return (
               <li
                 key={task.id}
-                className={`grid grid-cols-6 items-center gap-4 p-4 text-xs ${index !== tasks.length - 1 ? "border-b" : ""
-                  } hover:bg-gray-50`}
+                className={`grid grid-cols-6 rounded-md items-center gap-4 cursor-pointer p-4 text-xs ${index !== tasks.length - 1 ? "border-b" : ""
+                  }`}
               >
                 {/* COLS 1-2 → ICONO + NOMBRE (más espacio) */}
                 <div className="flex items-center gap-3 col-span-2 min-w-0">

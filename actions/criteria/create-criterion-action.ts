@@ -1,17 +1,17 @@
 'use server';
 
 // 1. Acciones internas / helpers
-import getCollection from "@/actions/mongo/get-collection";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 // 2. Interfaces
-import { Criterion } from "../models/criterion";
-import { InsertOneResponse } from "@/interfaces/mongo/insert-one";
+import { Criterion } from "@/models/criteria/criterion";
+import { InsertOne } from "@/interfaces/mongo/insert-one";
 
 export default async function createCriterionAction(criterion: Criterion) {
 
-    const collection = await getCollection<Criterion>("criteria");
+    const db = await getDb();
 
-    const result: InsertOneResponse = await collection.insertOne(criterion);
+    const result: InsertOne = await db.criteria.insertOne(criterion);
 
     if (!result.acknowledged) {
         throw new Error("La operación de inserción no fue confirmada por la base de datos.");

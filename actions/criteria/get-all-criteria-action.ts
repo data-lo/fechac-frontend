@@ -1,18 +1,15 @@
 'use server';
 
 import { cache } from "react";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+import ActionResponse from "@/interfaces/action/action-response";
+import CriterionDocument from "@/models/criteria/criterion-document";
 
-import getCollection from "@/actions/mongo/get-collection";
-
-import { CriterionEntity } from "../models/criterion-entity";
-
-import { ActionResponse } from "@/interfaces/action/action-response";
-
-export const getAllCriteriaAction = cache(async (): Promise<ActionResponse<{ criteria: CriterionEntity[] }>> => {
+const getAllCriteria = cache(async (): Promise<ActionResponse<{ criteria: CriterionDocument[] }>> => {
   try {
-    const collection = await getCollection<CriterionEntity>("criteria");
+    const db = await getDb();
 
-    const criteriaFromDB = await collection.find({ is_active: true }).toArray();
+    const criteriaFromDB = await db.criteria.find({ is_active: true }).toArray();
 
     const serialized = criteriaFromDB.map(item => ({
       ...item,
@@ -35,3 +32,5 @@ export const getAllCriteriaAction = cache(async (): Promise<ActionResponse<{ cri
     };
   }
 });
+
+export default getAllCriteria;

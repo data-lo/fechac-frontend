@@ -57,8 +57,6 @@ export default async function ViewWorkflowSection() {
 
     const isRunning = currentTaskState === "running";
 
-    const breadcrumbRoutes = [{ href: "#", title: "PROCESOS" }];
-
     return (
         <Fragment>
             {lastDagRun && (
@@ -71,14 +69,14 @@ export default async function ViewWorkflowSection() {
 
             {lastDagRun && tasks && (
                 <Fragment>
-                    <h2 className="font-bold">ÚLTIMA EJECUCIÓN</h2>
+                    <h2 className="font-semibold">Última de Ejecución</h2>
                     <TaskList tasks={tasks.task_instances} />
                 </Fragment>
             )}
 
             {dagRuns.length > 0 ? (
                 <Fragment>
-                    <h2 className="font-bold">TODAS LAS EJECUCIONES</h2>
+                    <h2 className="font-semibold">Historial de Ejecuciones</h2>
                     <DagTable data={dagRuns} />
                 </Fragment>
             ) : (

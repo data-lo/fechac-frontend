@@ -24,7 +24,7 @@ import {
     CRITERIA_STORAGE_FIELDS
 } from "../../fields/criteria-fields";
 
-import { Criterion } from "../../models/criterion";
+import { Criterion } from "../../../../../models/criteria/criterion";
 
 
 const CreateCriterionForm = () => {

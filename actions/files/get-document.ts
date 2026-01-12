@@ -1,14 +1,12 @@
 'use server';
 import { ObjectId } from "mongodb";
+import FileDocument from "../../models/files/file-document";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+import ActionResponse from "@/interfaces/action/action-response";
 
-
-import { DocumentEntity } from "../models/file-document";
-import { ActionResponse } from "@/interfaces/action/action-response";
-import getCollection from "@/infrastructure/persistence/mongo/get-connection";
-
-export default async function getDocumentAction(_id: string): Promise<ActionResponse<{ document: DocumentEntity; }>> {
+export default async function getDocument(_id: string): Promise<ActionResponse<{ document: FileDocument; }>> {
     try {
-        const collection = await getCollection<DocumentEntity>("documents");
+        const db = await getDb();
 
         if (!ObjectId.isValid(_id)) {
             return {
@@ -18,7 +16,7 @@ export default async function getDocumentAction(_id: string): Promise<ActionResp
             }
         }
 
-        const document = await collection.findOne({ _id: new ObjectId(_id) });
+        const document = await db.files.findOne({ _id: new ObjectId(_id) });
 
         if (!document) {
             return {

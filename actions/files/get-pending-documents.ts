@@ -1,9 +1,9 @@
 'use server';
 
+import FileDocument from "@/models/files/file-document";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+import ActionResponse from "@/interfaces/action/action-response";
 
-import getCollection from "@/infrastructure/persistence/mongo/get-connection";
-import { DocumentEntity } from "../models/file-document";
-import { ActionResponse } from "@/interfaces/action/action-response";
 
 interface PaginationParams {
     page?: number;
@@ -12,12 +12,12 @@ interface PaginationParams {
     sortOrder?: 'asc' | 'desc';
 }
 
-export async function getPendingDocumentsAction(
+export default async function getPendingDocuments(
     page: number = 1,
     limit: number = 10,
     options: Omit<PaginationParams, 'page' | 'limit'> = {}
 ): Promise<ActionResponse<{
-    files: DocumentEntity[];
+    files: FileDocument[];
     total: number;
     currentPage: number;
     totalPages: number;
@@ -41,7 +41,7 @@ export async function getPendingDocumentsAction(
             };
         }
 
-        const collection = await getCollection<DocumentEntity>("documents");
+        const db = await getDb();
 
         const skip = (page - 1) * limit;
 
@@ -52,24 +52,33 @@ export async function getPendingDocumentsAction(
         };
 
         const [filesFromDB, total] = await Promise.all([
-            collection
+            db.files
                 .find()
                 .collation({ locale: "en", numericOrdering: true })
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
                 .toArray(),
-            collection.countDocuments(),
+            db.files.countDocuments(),
         ]);
 
         const totalPages = Math.ceil(total / limit);
+
+        const newStructure = filesFromDB.map((file) => {
+            return (
+                {
+                    ...file,
+                    _id: file._id.toString(),
+                }
+            )
+        })
 
 
         return {
             success: true,
             error: null,
             data: {
-                files: filesFromDB,
+                files: newStructure,
                 total,
                 currentPage: page,
                 totalPages,

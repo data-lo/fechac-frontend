@@ -17,7 +17,7 @@ import {
 import ActionButton from "@/components/action-button";
 
 // 4. Tipos/Modelos
-import { CriterionEntity } from "../../models/criterion-entity";
+import { CriterionEntity } from "../../../../../models/criteria/criterion-document";
 
 interface Props {
     data: CriterionEntity[];

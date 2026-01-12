@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 // External libraries
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -13,14 +11,14 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // Domain models and enums
-import { DocumentEntity } from "../../../models/file-document";
-import { DocumentStatusEnum } from "@/enums/file-status";
+import { FileStatus } from "@/enums/file-status";
+import FileDocument from "@/models/files/file-document";
 
 // Form configuration
 import {
     FORM_IDENTIFICATION_FIELDS,
 } from "../../../fields/document-fields";
-import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-document-schema";
+import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-file-schema";
 
 // Hooks and actions
 import useUpdateDocument from "../../../hooks/use-update-document";
@@ -31,7 +29,7 @@ import applyFormOverrides from "@/functions/apply-form-overrides";
 
 interface Props {
     data: {
-        document: DocumentEntity
+        document: FileDocument
         criteriaItems: any
     }
 }
@@ -72,7 +70,7 @@ const DocumentUpdateForm = ({ data }: Props) => {
             selected_criterion_id: {
                 props: {
                     items: data.criteriaItems,
-                    hidden: data.document.status !== DocumentStatusEnum.REQUIRES_HUMAN_REVIEW
+                    hidden: data.document.status !== FileStatus.REQUIRES_HUMAN_REVIEW
                 },
 
             },

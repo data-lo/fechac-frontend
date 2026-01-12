@@ -7,9 +7,9 @@ const getStatusTranslation = (status: ProjectStatus): string => {
         case ProjectStatus.UNPROCESSED:
             return 'NO PROCESADO';
         case ProjectStatus.SELECTED_FOR_TRANSFER:
-            return 'A TRANSFERIR';
+            return 'EN TRANSFERENCIA';
         case ProjectStatus.NOT_SELECT_TO_TRANSFER:
-            return 'NO SELECCIONADO PARA TRANSFERIR';
+            return 'NO SELECCIONADO PARA TRANSFERENCIA';
         case ProjectStatus.TRANSFERRED:
             return 'TRANSFERIDO';
         default:

@@ -1,45 +1,52 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import routeLabels from '@/lib/route-labels'
+} from "@/components/ui/breadcrumb";
+import { breadcrumbRoutes } from "@/lib/breadcrumb-routes";
+import { Fragment } from "react";
 
 export function AppBreadcrumbs() {
-  const pathname = usePathname()
-  const segments = pathname.split('/').filter(Boolean)
+  const pathname = usePathname();
 
-  const visibleSegments = segments.slice(0, -1)
+  const visibleSegments = pathname
+    .split("/")
+    .filter(Boolean)
+    .filter(
+      (segment) =>
+        !/^[a-f\d]{24}$/i.test(segment) &&
+        breadcrumbRoutes[segment as keyof typeof breadcrumbRoutes]
+    );
 
-  if (visibleSegments.length === 0) return null
+  if (visibleSegments.length <= 1) return null;
 
   return (
     <Breadcrumb>
       <BreadcrumbList>
         {visibleSegments.map((segment, index) => {
-          const href =
-            '/' + visibleSegments.slice(0, index + 1).join('/')
+          const config =
+            breadcrumbRoutes[segment as keyof typeof breadcrumbRoutes];
 
-          const label = routeLabels[segment.replace(/-/g, ' ') as keyof typeof routeLabels]
-          
+          const isLast = index === visibleSegments.length - 1;
+
           return (
-            <BreadcrumbItem key={href}>
-              <BreadcrumbLink className='font-medium text-black text-base' href={href}>
-                {label}
-              </BreadcrumbLink>
-
-              {index < visibleSegments.length - 1 && (
-                <BreadcrumbSeparator />
+            <BreadcrumbItem key={segment}>
+              {config.href && !isLast ? (
+                <Fragment> {config.href && config.href !== pathname ? (<BreadcrumbLink href={config.href}> {config.label} </BreadcrumbLink>) : (<span className="font-medium">{config.label}</span>)} </Fragment>
+              ) : (
+                <span className="font-medium">{config.label}</span>
               )}
+
+              {!isLast && <BreadcrumbSeparator />}
             </BreadcrumbItem>
-          )
+          );
         })}
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }

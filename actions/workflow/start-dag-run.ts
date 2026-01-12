@@ -1,9 +1,10 @@
 "use server"
 
-import { ActivationSource } from "@/enums/activation-source";
 import axios from "axios";
 
 import { revalidatePath } from "next/cache";
+
+import { ActivationSource } from "@/enums/activation-source";
 
 export default async function startDagRun(token: string, activationSource: ActivationSource = ActivationSource.UI) {
   const dagId = process.env.AIRFLOW_MAIN_DAG;

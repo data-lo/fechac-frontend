@@ -1,6 +1,8 @@
-import getProject from "../../../../../actions/projects/get-project-action";
+
+import getProject from "@/actions/projects/get-project";
 import UpdateProjectSection from "./update-project-section";
-import getDocumentsByProject from "../../../../../actions/projects/get-documents-by-project";
+import getDocumentsByProject from "@/actions/projects/get-documents-by-project";
+
 
 interface Props {
     params: {
@@ -24,7 +26,6 @@ export default async function UpdateProjectPage({ params }: Props) {
     const documents = await getDocumentsByProject(project.sadap_id)
 
     // const countDocuments = await countDocumentsPerProject(project.sadap_id);
-
 
     return (
         <UpdateProjectSection

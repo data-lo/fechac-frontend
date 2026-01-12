@@ -1,7 +1,6 @@
 import { ObjectId } from "mongodb";
 import { Criterion } from "./criterion";
 
-export interface CriterionEntity extends Criterion {
+export default interface CriterionDocument extends Criterion {
     _id: string | ObjectId;
-    created_at: Date;
 }

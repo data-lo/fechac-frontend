@@ -1,7 +1,7 @@
-import { getAllCriteriaAction } from "@/app/(modules)/criteria/actions/get-all-criteria-action";
-import getDocument from "../../actions/get-document-action";
-
 import UpdateDocumentSection from "./update-documents-section";
+
+import getDocument from "@/actions/files/get-document";
+import getAllCriteria from "@/actions/criteria/get-all-criteria-action";
 
 export default async function UpdateDocumentPage({
     params,
@@ -21,7 +21,7 @@ export default async function UpdateDocumentPage({
     }
 
     const documentResponse = await getDocument(id);
-    const criteriaResponse = await getAllCriteriaAction();
+    const criteriaResponse = await getAllCriteria();
 
     // Validaciones de respuesta
     if (!documentResponse.success || !documentResponse.data) {

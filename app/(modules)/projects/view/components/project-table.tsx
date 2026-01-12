@@ -11,12 +11,14 @@ import {
 } from "@/components/ui/table";
 
 // 2. Tipos/Modelos
-import { ProjectDocument } from "../../../../../models/projects/project-document";
+import ProjectDocument from "@/models/projects/project-document";
+
 
 // 3. Utilidades/Funciones
-import { getStatusInfo, ProjectStatusEnum } from "../../functions/get-status-translation";
-import ActionButton from "@/components/action-button";
 import { useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import ActionButton from "@/components/action-button";
+import { getStatusInfo, ProjectStatus } from "../../functions/get-status-translation";
 
 interface Props {
     data: ProjectDocument[];
@@ -35,17 +37,18 @@ const ProjectTable = ({ data, currentIndex }: Props) => {
         <Table>
             <TableHeader>
                 <TableRow className="font-bold">
-                    <TableHead className="w-[50px] text-center">#</TableHead>
-                    <TableHead className="max-w-[380px]">NOMBRE</TableHead>
+                    <TableHead className="w-[50px] text-center"></TableHead>
+                    <TableHead className="max-w-[380px]">Name</TableHead>
                     <TableHead className="w-[100px]">ID</TableHead>
-                    <TableHead className="w-[340px]">ESTATUS</TableHead>
+                    <TableHead className="w-[340px]">Status</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>
 
             <TableBody>
                 {data.map((project, index) => {
-                    const statusInfo = getStatusInfo(project.status as ProjectStatusEnum);
+                    const statusInfo = getStatusInfo(project.status as ProjectStatus);
+
                     const IconComponent = statusInfo.icon;
 
                     return (
@@ -62,10 +65,13 @@ const ProjectTable = ({ data, currentIndex }: Props) => {
                                 {project.sadap_id}
                             </TableCell>
                             <TableCell>
-                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm font-medium ${statusInfo.className}`}>
-                                    <IconComponent size={12} />
-                                    {statusInfo.text}
-                                </span>
+                                <Badge
+                                    variant="outline"
+                                    className="gap-1"
+                                >
+                                    <IconComponent className="w-3 h-3" />
+                                    {statusInfo.text.charAt(0).toUpperCase() + statusInfo.text.slice(1)}
+                                </Badge>
                             </TableCell>
                             <TableCell>
                                 <ActionButton

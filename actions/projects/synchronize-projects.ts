@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 
 // Lib
-import { getDb } from "@/infrastructure/persistence/mongo/get-db";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 // Models
 import { Project } from "@/models/projects/project";

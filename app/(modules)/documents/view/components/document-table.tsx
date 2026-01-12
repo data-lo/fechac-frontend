@@ -15,12 +15,12 @@ import { AlertTriangle } from "lucide-react"
 
 import ActionButton from "@/components/action-button"
 
-import { DocumentEntity } from "../../models/file-document"
+import FileDocument from "@/models/files/file-document"
 
-import { getStatusInfo, DocumentStatusEnum } from "../../functions/get-status-translation"
+import { getStatusInfo, FileStatus } from "../../functions/get-status-translation"
 
 interface Props {
-    data: DocumentEntity[];
+    data: FileDocument[];
     currentIndex: number;
 }
 
@@ -37,17 +37,17 @@ const DocumentsTable = ({ data, currentIndex }: Props) => {
         <Table>
             <TableHeader>
                 <TableRow className="font-bold">
-                    <TableHead className="w-[50px] text-center">#</TableHead>
-                    <TableHead className="max-w-[380px]">NOMBRE</TableHead>
-                    <TableHead className="w-[100px]">PROYECTO</TableHead>
-                    <TableHead className="w-[340px]">ESTATUS</TableHead>
+                    <TableHead className="w-[50px] text-center"></TableHead>
+                    <TableHead className="max-w-[380px]">Name</TableHead>
+                    <TableHead className="w-[100px]">Project</TableHead>
+                    <TableHead className="w-[340px]">Status</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>
 
             <TableBody>
                 {data.map((document, index) => {
-                    const statusInfo = getStatusInfo(document.status as DocumentStatusEnum);
+                    const statusInfo = getStatusInfo(document.status as FileStatus);
 
                     const IconComponent = statusInfo.icon;
 

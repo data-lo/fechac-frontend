@@ -1,16 +1,13 @@
 'use server';
 
 import { ObjectId } from "mongodb";
+import Document from "../../models/files/file";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
+export async function updateDocument(data: { _id: string; payload: Partial<Document> }) {
+    const db = await getDb();
 
-
-import Document from "../models/file";
-import getCollection from "@/infrastructure/persistence/mongo/get-connection";
-
-export async function updateDocumentAction(data: { _id: string; payload: Partial<Document> }) {
-    const collection = await getCollection<Document>("documents");
-
-    const result = await collection.updateOne(
+    const result = await db.files.updateOne(
         { _id: new ObjectId(data._id) },
         { $set: data.payload }
     );
