@@ -6,15 +6,13 @@ import { revalidatePath } from "next/cache";
 import { getExpirationDate } from "@/functions/get-expiration-date";
 
 // Interfaces
-import { MicrosoftUserInfo } from "@/interfaces/microsoft-user-info";
-import { MicrosoftSessionObject } from "@/interfaces/microsoft-token-object";
-import { MicrosoftTokenResponse } from "@/interfaces/microsoft-token-response";
-
-// Conexiones / DB
-import getCollection from "@/infrastructure/persistence/mongo/get-connection";
+import { Microsoft } from "@/models/microsoft/microsoft";
+import { MicrosoftToken } from "@/interfaces/microsoft/microsoft-token";
+import { MicrosoftUserInformation } from "@/interfaces/microsoft/microsoft-user-information";
 
 // Constantes / Mensajes
 import { LOGIN_SUCCESS_MESSAGE } from "@/messages/success-message";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 export async function handleMicrosoftAuthCallback(params: { code: string }): Promise<GeneralResponse> {
     try {
@@ -34,7 +32,7 @@ export async function handleMicrosoftAuthCallback(params: { code: string }): Pro
     }
 }
 
-export async function exchangeAuthCodeForToken(code: string): Promise<MicrosoftSessionObject> {
+export async function exchangeAuthCodeForToken(code: string): Promise<Microsoft> {
     const params = new URLSearchParams({
         client_id: process.env.CLIENT_ID!,
         client_secret: process.env.CLIENT_SECRET_VALUE!,
@@ -61,17 +59,16 @@ export async function exchangeAuthCodeForToken(code: string): Promise<MicrosoftS
 
 
 
-    const responseInJSON: MicrosoftTokenResponse = await response.json();
+    const responseInJSON: MicrosoftToken = await response.json();
 
     return { code, ...responseInJSON, };
 }
 
-export async function saveMicrosoftToken(data: MicrosoftSessionObject): Promise<{ _id: string }> {
+export async function saveMicrosoftToken(data: Microsoft): Promise<{ _id: string }> {
     try {
+        const db = await getDb();
 
-        const sessionCollection = await getCollection<MicrosoftSessionObject>("microsoft_session");
-
-        const newDocument = await sessionCollection.insertOne({
+        const newDocument = await db.microsoft.insertOne({
             access_token: data.access_token,
             expires_in: data.expires_in,
             ext_expires_in: data.ext_expires_in,
@@ -97,11 +94,11 @@ export async function saveMicrosoftToken(data: MicrosoftSessionObject): Promise<
 }
 
 
-export async function getActiveMicrosoftSession(): Promise<MicrosoftSessionObject | null> {
+export async function getActiveMicrosoftSession(): Promise<Microsoft | null> {
     try {
-        const sessionCollection = await getCollection<MicrosoftSessionObject>("microsoft_session");
+        const db = await getDb();
 
-        const activeSession = await sessionCollection.findOne({ is_last_token_obtained: true });
+        const activeSession = await db.microsoft.findOne({ is_last_token_obtained: true });
 
         if (!activeSession) return null;
 
@@ -112,7 +109,7 @@ export async function getActiveMicrosoftSession(): Promise<MicrosoftSessionObjec
     }
 }
 
-export async function getUserInformation(): Promise<MicrosoftUserInfo | null> {
+export async function getUserInformation(): Promise<MicrosoftUserInformation | null> {
 
     const session = await getActiveMicrosoftSession();
 
@@ -132,7 +129,7 @@ export async function getUserInformation(): Promise<MicrosoftUserInfo | null> {
         return null
     }
 
-    const user: MicrosoftUserInfo = await response.json();
+    const user: MicrosoftUserInformation = await response.json();
 
     return user;
 }
@@ -150,7 +147,7 @@ export async function handleLogout(): Promise<GeneralResponse> {
 }
 
 
-export async function extendedDurationSession(refreshToken: string, access_id: string): Promise<MicrosoftSessionObject> {
+export async function extendedDurationSession(refreshToken: string, access_id: string): Promise<Microsoft> {
     const params = new URLSearchParams({
         client_id: process.env.CLIENT_ID!,
         client_secret: process.env.CLIENT_SECRET_VALUE!,
@@ -177,9 +174,10 @@ export async function extendedDurationSession(refreshToken: string, access_id: s
 }
 
 export async function deactivatePreviousSessions() {
-    const collection = await getCollection<MicrosoftSessionObject>('microsoft_session');
 
-    const result = await collection.updateMany(
+    const db = await getDb();
+
+    const result = await db.microsoft.updateMany(
         { is_last_token_obtained: true },
         { $set: { is_last_token_obtained: false } }
     );

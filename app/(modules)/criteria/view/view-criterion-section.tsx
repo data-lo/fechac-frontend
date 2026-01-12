@@ -8,7 +8,6 @@ import EmptySate from "@/components/empty-state";
 // 3. Componentes compartidos
 import PaginationComponent from "@/components/pagination";
 import CriterionTable from "./components/criterion-table";
-import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 4. Componentes locales del módulo
 
@@ -62,8 +61,6 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
       title: 'CRITERIOS'
     },
   ];
-
-  console.log(page, limit)
 
   return (
     <Fragment>

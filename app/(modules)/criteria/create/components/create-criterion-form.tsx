@@ -24,7 +24,7 @@ import {
     CRITERIA_STORAGE_FIELDS
 } from "../../fields/criteria-fields";
 
-import { Criterion } from "../../../../../models/criteria/criterion";
+import { Criterion } from "@/models/criteria/criterion";
 
 
 const CreateCriterionForm = () => {
@@ -55,7 +55,6 @@ const CreateCriterionForm = () => {
 
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
-        console.log(values)
         const normalized: Criterion = {
             ...values,
             primary_keywords: values.primary_keywords ?? null,

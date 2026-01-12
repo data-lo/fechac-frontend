@@ -11,7 +11,7 @@ import { handleLogout } from '@/actions/authorization/auth';
 import ButtonComponent from '@/components/action-button';
 
 // Types / Interfaces
-import { MicrosoftUserInfo } from '@/interfaces/microsoft-user-info';
+import { MicrosoftUserInfo } from '@/interfaces/microsoft/microsoft-user-information';
 
 interface Props {
     user: MicrosoftUserInfo;

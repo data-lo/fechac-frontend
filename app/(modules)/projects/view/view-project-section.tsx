@@ -60,7 +60,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       <div className="flex justify-end">
         <Modal
           dialogTitle={"Cargar Proyectos"}
-          dialogTrigger="Cargar Proyectos"
+          dialogTrigger="Cargar"
           iconName="FileUp"
           dialogSize="3xl"
         >

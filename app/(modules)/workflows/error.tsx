@@ -50,7 +50,7 @@ export default function Error({
             </CardContent>
             <CardFooter className="justify-end space-x-2">
                 <Button variant="outline" onClick={() => window.location.reload()}>
-                    Recargar página
+                    Recargar Página
                 </Button>
             </CardFooter>
         </Card>

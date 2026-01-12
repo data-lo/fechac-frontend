@@ -1,4 +1,4 @@
-export interface MicrosoftUserInfo {
+export interface MicrosoftUserInformation {
   '@odata.context': string;
   businessPhones: string[];
   displayName: string;

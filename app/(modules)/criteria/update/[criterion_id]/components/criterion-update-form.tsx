@@ -44,7 +44,7 @@ const CriterionUpdateForm = ({ data }: Props) => {
             primary_keywords: criterion.primary_keywords,
             secondary_keywords: criterion.secondary_keywords,
             project_area: criterion.project_area,
-            quality_system_code: criterion.quality_system_code ?? "",
+            quality_system_code: criterion.quality_system_code ?? "N/A",
             project_focus: criterion.project_focus,
             project_type: criterion.project_type,
             target_drives: criterion.target_drives,

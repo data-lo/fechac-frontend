@@ -12,8 +12,9 @@ const CreateCriterionButtonSection = () => {
     return (
         <div className="flex justify-end">
             <ActionButton
-                title="Crear Criterio"
-                iconName="Plus"
+                title="Nuevo"
+                iconName="CirclePlus"
+                className="w-auto"
                 onClick={handleCreateCriterion}
             />
         </div>

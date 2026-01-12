@@ -27,6 +27,8 @@ const AuthorizationCard = ({
       <ActionButton
         onClick={() => { window.location.href = microsoftAuthUrl }}
         title="Iniciar Sesión"
+        iconName="User"
+        className="w-auto"
       />
     </div>
   );
