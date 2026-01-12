@@ -2,7 +2,7 @@
 import { Fragment } from "react";
 
 // 2. External libraries / icons
-import { CheckCircle2, FolderOpen, Workflow } from "lucide-react";
+import { CheckCircle2, FolderOpen, Workflow, Building2, Target, MapPin, Layers } from "lucide-react";
 
 // 3. Shared / global components
 import EmptyMessage from "@/components/empty-message";
@@ -13,6 +13,7 @@ import { ProjectStatus } from "@/enums/project-status";
 
 // 5. Local module components
 import DocumentTable from "../../components/document-table";
+import DocumentCard from "../../components/document-card";
 
 // 6. Models / entities
 import FileDocument from "@/models/files/file-document";
@@ -33,8 +34,8 @@ export default async function UpdateProjectSection({
 }: Props) {
     const status = getStatusTranslation(project.status as ProjectStatus)
 
-
-    const summary = [
+    const stats = [
+        // Row 1
         {
             title: "ESTATUS",
             value: status,
@@ -56,15 +57,37 @@ export default async function UpdateProjectSection({
             iconColor: "text-blue-600",
             iconBgColor: "bg-blue-50",
         },
+        // Row 2 - Former Text Block
+        {
+            title: "CONSEJO",
+            value: project.municipality,
+            icon: Building2,
+            iconColor: "text-orange-600",
+            iconBgColor: "bg-orange-50",
+        },
+        {
+            title: "ENFOQUE",
+            value: project.area,
+            icon: Target,
+            iconColor: "text-red-600",
+            iconBgColor: "bg-red-50",
+        },
+        {
+            title: "ÁREA",
+            value: project.support_area,
+            icon: Layers,
+            iconColor: "text-indigo-600",
+            iconBgColor: "bg-indigo-50",
+        },
     ];
 
     return (
         <Fragment>
 
-            <div className="flex gap-4 w-full">
-                {summary.map(item => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+                {stats.map((item, i) => (
                     <StatisticCard
-                        key={item.title}
+                        key={item.title + i}
                         title={item.title}
                         value={item.value}
                         icon={item.icon}
@@ -74,33 +97,20 @@ export default async function UpdateProjectSection({
                 ))}
             </div>
 
-            <div className="p-5 bg-white shadow-md rounded-md ring-md">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
-                    <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-500">CONSEJO</p>
-                        <p className="text-base font-bold">{project.municipality}</p>
-                    </div>
+            <h2 className=" text-black font-semibold"> Documentos del Proyecto</h2>
 
-                    <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-500">ENFOQUE</p>
-                        <p className="text-base font-bold">{project.area}</p>
-                    </div>
+            <div className="mt-8">
+                {documents.length === 1 ? (
 
-                    <div className="space-y-1">
-                        <p className="text-sm font-medium text-gray-500">ÁREA</p>
-                        <p className="text-base font-bold">{project.support_area}</p>
-                    </div>
-                </div>
+                        <DocumentCard document={documents[0]} />
+
+                ) : documents.length > 1 ? (
+                    <DocumentTable data={documents} />
+                ) : (
+                    <EmptyMessage text="¡No hay documentos asociados a este proyecto!" />
+                )}
             </div>
 
-            {documents.length > 0 && (
-                <DocumentTable data={documents} />
-            )}
-
-            {documents.length === 0 && (
-                <EmptyMessage text="¡No hay documentos asociados a este proyecto!" />
-
-            )}
         </Fragment >
     );
 }

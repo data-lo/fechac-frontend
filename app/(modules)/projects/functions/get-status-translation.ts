@@ -5,15 +5,15 @@ import { XCircle, Clock, CheckCircle, HelpCircle } from "lucide-react";
 const getStatusTranslation = (status: ProjectStatus): string => {
     switch (status) {
         case ProjectStatus.UNPROCESSED:
-            return 'No Procesado';
+            return 'NO PROCESADO';
         case ProjectStatus.SELECTED_FOR_TRANSFER:
-            return 'En Transferencia';
+            return 'EN TRANSFERENCIA';
         case ProjectStatus.NOT_SELECT_TO_TRANSFER:
-            return 'No Seleccionado para Transferir';
+            return 'NO SELECCIONADO PARA TRANSFERENCIA';
         case ProjectStatus.TRANSFERRED:
-            return 'Transferido';
+            return 'TRANSFERIDO';
         default:
-            return 'Estado Desconocido';
+            return 'ESTADO DESCONOCIDO';
     }
 };
 

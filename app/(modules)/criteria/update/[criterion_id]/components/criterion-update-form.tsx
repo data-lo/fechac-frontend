@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
 // 3. Modelos
-import { CriterionEntity } from "../../../models/criterion-entity";
+import { CriterionEntity } from "../../../../../../models/criteria/criterion-document";
 
 // 4. Esquemas de validación
 import UPDATE_CRITERIA_SCHEMA from "../../../schema/update-criteria-schema";

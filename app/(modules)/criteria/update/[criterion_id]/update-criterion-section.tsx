@@ -2,14 +2,13 @@
 import { Fragment } from "react";
 
 import NavigationBreadcrumb from "@/components/breadcrumb";
-
-import { CriterionEntity } from "../../models/criterion-entity";
-
 import UpdateCriterionForm from "./components/criterion-update-form";
+
+import CriterionDocument from "@/models/criteria/criterion-document";
 
 interface Props {
     data: {
-        criterion: CriterionEntity
+        criterion: CriterionDocument
     }
 }
 
