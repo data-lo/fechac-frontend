@@ -41,18 +41,18 @@ const DocumentsTable = ({ data }: Props) => {
 
     const handleEdit = (documentId: string) => (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        router.push(`/documents/${encodeURIComponent(documentId)}/update`)
+        router.push(`/documents/update/${encodeURIComponent(documentId)}`)
     }
 
     return (
         <Table>
             <TableHeader>
                 <TableRow className="font-bold">
-                    <TableHead className="w-[50px] text-center">#</TableHead>
+                    <TableHead className="w-[50px] text-center"></TableHead>
                     <TableHead className="w-[40px] text-center"></TableHead>
-                    <TableHead className="max-w-[300px]">NOMBRE</TableHead>
-                    <TableHead className="w-[200px]">DEPARTAMENTO</TableHead>
-                    <TableHead className="w-[340px]">ESTATUS</TableHead>
+                    <TableHead className="max-w-[300px]">Name</TableHead>
+                    <TableHead className="w-[200px]">Department</TableHead>
+                    <TableHead className="w-[340px]">Status</TableHead>
                     <TableHead className="w-[80px]"></TableHead>
                 </TableRow>
             </TableHeader>

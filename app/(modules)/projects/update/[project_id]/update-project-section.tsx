@@ -15,8 +15,8 @@ import { ProjectStatus } from "@/enums/project-status";
 import DocumentTable from "../../components/document-table";
 
 // 6. Models / entities
-import ProjectDocument from "@/models/projects/project-document";
 import FileDocument from "@/models/files/file-document";
+import ProjectDocument from "@/models/projects/project-document";
 
 // 7. Functions
 import { getStatusTranslation } from "../../functions/get-status-translation";
@@ -74,7 +74,7 @@ export default async function UpdateProjectSection({
                 ))}
             </div>
 
-            <div className="p-5 bg-white">
+            <div className="p-5 bg-white shadow-md rounded-md ring-md">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-sm">
                     <div className="space-y-1">
                         <p className="text-sm font-medium text-gray-500">CONSEJO</p>

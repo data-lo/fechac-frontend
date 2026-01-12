@@ -3,7 +3,7 @@ import getDb from "@/infrastructure/persistence/mongo/get-db";
 import ProjectDocument from "@/models/projects/project-document";
 
 
-const getProjectAction = async (project_id: string): Promise<ProjectDocument> => {
+const getProject = async (project_id: string): Promise<ProjectDocument> => {
 
     const db = await getDb();
 
@@ -21,4 +21,4 @@ const getProjectAction = async (project_id: string): Promise<ProjectDocument> =>
     return serializedProject;
 }
 
-export default getProjectAction;
+export default getProject;

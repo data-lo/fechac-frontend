@@ -29,12 +29,12 @@ export function StatisticCard({
   trend
 }: Props) {
   return (
-    <Card className={`w-full h-28 overflow-hidden rounded-none shadow-none border-none transition-all duration-300 hover:border-gray-300 ${className}`}>
+    <Card className={`w-full h-28 overflow-hidden transition-all duration-300 hover:border-gray-300 ${className}`}>
       <CardContent className="p-6 h-full flex items-center">
         <div className="flex items-start justify-between w-full">
           <div className="flex-1">
             {title && (
-              <CardTitle className="text-sm font-medium text-gray-600 mb-3">
+              <CardTitle className="text-sm font-semibold text-valck mb-3">
                 {title}
               </CardTitle>
             )}
@@ -42,7 +42,7 @@ export function StatisticCard({
             {value !== undefined ? (
               <div className="space-y-2">
                 <p className="text-base font-bold text-gray-900 tracking-tight">
-                  {value}
+                  {value.toString().toUpperCase()}
                 </p>
                 {trend && (
                   <div className={`flex items-center gap-1 text-sm font-medium ${trend.isPositive ? 'text-green-600' : 'text-red-600'}`}>
