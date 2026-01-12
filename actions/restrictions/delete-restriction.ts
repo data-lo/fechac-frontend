@@ -3,20 +3,17 @@
 import { ObjectId } from "mongodb";
 
 // Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { DeleteOneResponse } from "@/interfaces/mongo/delete-one-response";
 
-// Acciones / Servicios
-import getCollection from "@/actions/mongo/get-collection";
+import { DeleteOne } from "@/interfaces/mongo/delete-one";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+import ActionResponse from "@/interfaces/action/action-response";
 
-// Modelos
-import { RestrictionDocument } from "../../models/restriction-document";
 
-export async function deleteRestriction(values: { _id: string }): Promise<ActionResponse<DeleteOneResponse>> {
+export async function deleteRestriction(values: { _id: string }): Promise<ActionResponse<DeleteOne>> {
     try {
-        const collection = await getCollection<RestrictionDocument>("restrictions");
+        const db = await getDb();
 
-        const response: DeleteOneResponse = await collection.deleteOne({ _id: new ObjectId(values._id) });
+        const response: DeleteOne = await db.restrictions.deleteOne({ _id: new ObjectId(values._id) });
 
         if (response.deletedCount === 0) {
             return {

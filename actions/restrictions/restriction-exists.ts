@@ -1,13 +1,15 @@
 'use server'
 
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 // 1. Librerías internas (acciones, helpers, etc.)
-import getCollection from "@/actions/mongo/get-collection";
+
 
 // 2. Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
+import ActionResponse from "@/interfaces/action/action-response";
+
 
 // 3. Modelos locales
-import { RestrictionDocument } from "../models/restriction-document";
+import { RestrictionDocument } from "@/models/restrictions/restriction-document";
 
 export async function restrictionExists(character: string): Promise<ActionResponse<RestrictionDocument>> {
     try {
@@ -15,9 +17,9 @@ export async function restrictionExists(character: string): Promise<ActionRespon
             throw new Error('El parámetro character es requerido y debe ser un string válido');
         }
 
-        const collection = await getCollection<RestrictionDocument>("restrictions");
+        const db = await getDb();
 
-        const response = await collection.findOne({ character: character });
+        const response = await db.restrictions.findOne({ character: character });
 
         return {
             success: true,

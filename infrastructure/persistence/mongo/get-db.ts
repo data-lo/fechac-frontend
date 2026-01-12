@@ -11,11 +11,13 @@ import ProjectDocument from "@/models/projects/project-document";
 import CriterionDocument from "@/models/criteria/criterion-document";
 import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
 import AbbreviationDocument from "@/app/(modules)/abbreviations/models/abbreviation-document";
+import { RestrictionDocument } from "@/models/restrictions/restriction-document";
 
 export interface ApplicationDatabase {
     files: Collection<OptionalId<FileDocument>>;
     projects: Collection<OptionalId<ProjectDocument>>;
     criteria: Collection<OptionalId<CriterionDocument>>;
+    restrictions: Collection<OptionalId<RestrictionDocument>>;
     scheduledJobs: Collection<OptionalId<ScheduledJobDocument>>;
     abbreviations: Collection<OptionalId<AbbreviationDocument>>;
 }
@@ -30,9 +32,10 @@ export default async function getDb(): Promise<ApplicationDatabase> {
     cachedDb = {
         files: db.collection<OptionalId<FileDocument>>("Files"),
         projects: db.collection<OptionalId<ProjectDocument>>("Projects"),
+        criteria: db.collection<OptionalId<CriterionDocument>>("Criteria"),
+        restrictions: db.collection<OptionalId<RestrictionDocument>>("Restrictions"),
         scheduledJobs: db.collection<OptionalId<ScheduledJobDocument>>("ScheduledJobs"),
         abbreviations: db.collection<OptionalId<AbbreviationDocument>>("Abbreviations"),
-        criteria: db.collection<OptionalId<CriterionDocument>>("Criteria"),
     };
 
     return cachedDb;

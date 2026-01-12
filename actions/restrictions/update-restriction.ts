@@ -3,19 +3,16 @@
 import { ObjectId } from "mongodb";
 
 // 2.- Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one";
+import { UpdateOne } from "@/interfaces/mongo/update-one";
 
 // 3.- Acciones / Servicios
-import getCollection from "@/actions/mongo/get-collection";
-import { restrictionExists } from "../../actions/restriction-exists";
+import { restrictionExists } from "./restriction-exists";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+import ActionResponse from "@/interfaces/action/action-response";
 
-// 4.- Modelos
-import { RestrictionDocument } from "../../models/restriction-document";
-
-export default async function updateRestriction(values: { _id: string, character: string }): Promise<ActionResponse<UpdateOneResponse>> {
+export default async function updateRestriction(values: { _id: string, character: string }): Promise<ActionResponse<UpdateOne>> {
     try {
-        const collection = await getCollection<RestrictionDocument>("restrictions");
+        const db = await getDb();
 
         const restrictionExist = await restrictionExists(values.character);
 
@@ -35,7 +32,7 @@ export default async function updateRestriction(values: { _id: string, character
             },
         };
 
-        const response: UpdateOneResponse = await collection.updateOne(filter, update);
+        const response: UpdateOne = await db.restrictions.updateOne(filter, update);
 
         console.log(response)
 

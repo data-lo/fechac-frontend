@@ -1,23 +1,17 @@
 'use server'
 
-// 1. Librerías externas
-
-// 2. Librerías internas (acciones/helpers locales del módulo)
-import getCollection from "@/actions/mongo/get-collection";
-
 // 3. Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { InsertOneResponse } from "@/interfaces/mongo/insert-one";
+import { InsertOne } from "@/interfaces/mongo/insert-one";
+import ActionResponse from "@/interfaces/action/action-response";
 
-// 4. Modelos locales
-import { Restriction } from "../../models/restriction";
 
 // 5. Acciones / Servicios
-import { restrictionExists } from "../../actions/restriction-exists";
+import { restrictionExists } from "./restriction-exists";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 
 
-export async function createRestriction(values: { character: string }): Promise<ActionResponse<InsertOneResponse>> {
+export async function createRestriction(values: { character: string }): Promise<ActionResponse<InsertOne>> {
     try {
         const restriction = await restrictionExists(values.character);
 
@@ -29,9 +23,9 @@ export async function createRestriction(values: { character: string }): Promise<
             };
         }
 
-        const collection = await getCollection<Restriction>("restrictions");
+        const db = await getDb();
 
-        const response: InsertOneResponse = await collection.insertOne({
+        const response: InsertOne = await db.restrictions.insertOne({
             character: values.character.trim(),
             status: true,
             createdAt: new Date(),

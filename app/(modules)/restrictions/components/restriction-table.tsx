@@ -16,10 +16,11 @@ import ContextMenu from "@/components/context-menu";
 
 
 // 4. Modelos locales
-import { RestrictionDocument } from "../models/restriction-document";
+
 import ToggleRestrictionStatus from "./toggle-restriction-status";
 import UpdateRestrictionForm from "../update/update-restriction-form";
 import DeleteRestrictionButton from "../delete/delete-restriction-button";
+import { RestrictionDocument } from "@/models/restrictions/restriction-document";
 
 
 interface Props {
@@ -32,21 +33,19 @@ const RestrictionTable = ({ restrictions }: Props) => {
         <Table className="table-fixed">
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-12 text-center">#</TableHead>
-                    <TableHead className="min-w-0 w-full" >CARÁCTER</TableHead>
-                    <TableHead className="w-24">ESTATUS</TableHead>
+                    <TableHead className="w-[50px] text-center"></TableHead>
+                    <TableHead className="min-w-0 w-full" >Character</TableHead>
+                    <TableHead className="w-24">Status</TableHead>
                     <TableHead className="w-24"></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {restrictions.map((restriction, index) => (
                     <TableRow key={restriction._id.toString()}>
-                        <TableCell>{index + 1}</TableCell>
+                        <TableCell className="text-center text-gray-500 font-medium">{index + 1}</TableCell>
 
                         <TableCell>
-                            <span className="bg-gray-200 font-bold w-10 py-1 inline-flex items-center justify-center rounded">
                                 {restriction.character}
-                            </span>
                         </TableCell>
 
                         <TableCell>
@@ -62,7 +61,6 @@ const RestrictionTable = ({ restrictions }: Props) => {
                                     dialogTitle="Actualizar Carácter"
                                     dialogTrigger={"Editar"}
                                     variant={'ghost'}
-                                    
                                 >
                                     <UpdateRestrictionForm data={restriction} />
                                 </ModalComponent>

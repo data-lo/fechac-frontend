@@ -1,6 +1,6 @@
 import { MongoResponse } from "./mongo-response";
 
-export interface DeleteOneResponse extends MongoResponse {
+export interface DeleteOne extends MongoResponse {
   acknowledged: boolean;
   deletedCount: number;
 }

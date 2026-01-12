@@ -1,11 +1,12 @@
 'use server';
 
+
 // 1. Acciones / Servicios
-import getCollection from "@/actions/mongo/get-collection";
 
 // 2. Modelos
-import { RestrictionDocument } from "../models/restriction-document";
-import { ActionResponse } from "@/interfaces/action/action-response";
+import { RestrictionDocument } from "@/models/restrictions/restriction-document";
+import ActionResponse from "@/interfaces/action/action-response";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 interface PaginationParams {
   page?: number;
@@ -43,20 +44,21 @@ export default async function getRestrictions(
       };
     }
 
-    const collection = await getCollection<RestrictionDocument>("restrictions");
+    const db = await getDb();
+
     const skip = (page - 1) * limit;
 
     const { sortBy = 'approval_date', sortOrder = 'desc' } = options;
     const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
     const [data, total] = await Promise.all([
-      collection
+      db.restrictions
         .find()
         .sort(sort)
         .skip(skip)
         .limit(limit)
         .toArray(),
-      collection.countDocuments(),
+      db.restrictions.countDocuments(),
     ]);
 
     const totalPages = Math.ceil(total / limit);

@@ -2,7 +2,7 @@
 
 // 2. Interfaces
 import ActionResponse from "@/interfaces/action/action-response";
-import { DeleteOneResponse } from "@/interfaces/mongo/delete-one-response";
+import { DeleteOneResponse } from "@/interfaces/mongo/delete-one";
 
 // 3. Modelos
 import { ObjectId } from "mongodb";

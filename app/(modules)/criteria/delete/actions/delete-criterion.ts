@@ -5,7 +5,7 @@ import getCollection from "@/actions/mongo/get-collection";
 
 // 2. Interfaces
 import { ActionResponse } from "@/interfaces/action/action-response";
-import { DeleteOneResponse } from "@/interfaces/mongo/delete-one-response";
+import { DeleteOneResponse } from "@/interfaces/mongo/delete-one";
 
 // 3. Modelos
 import { CriterionDocument } from "../../../../../models/criteria/criterion-document";

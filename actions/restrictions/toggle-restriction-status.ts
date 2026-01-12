@@ -1,10 +1,8 @@
 'use server'
 
 // 1. Acciones / Servicios
-import getCollection from "@/actions/mongo/get-collection";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-// 2. Modelos
-import { RestrictionDocument } from "../models/restriction-document";
 
 // 3. Librerías externas
 import { ObjectId } from "mongodb";
@@ -13,13 +11,13 @@ import { ObjectId } from "mongodb";
 import { revalidatePath } from "next/cache";
 
 // 5. Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one";
+import { UpdateOne } from "@/interfaces/mongo/update-one";
+import ActionResponse from "@/interfaces/action/action-response";
 
-export async function toggleRestrictionStatus(values: { _id: string, status: boolean }): Promise<ActionResponse<UpdateOneResponse>> {
+export async function toggleRestrictionStatus(values: { _id: string, status: boolean }): Promise<ActionResponse<UpdateOne>> {
     try {
 
-        const collection = await getCollection<RestrictionDocument>("restrictions");
+        const db = await getDb();
 
         const filter = { _id: new ObjectId(values._id) };
 
@@ -29,7 +27,7 @@ export async function toggleRestrictionStatus(values: { _id: string, status: boo
             },
         };
 
-        const response: UpdateOneResponse = await collection.updateOne(filter, update);
+        const response: UpdateOne = await db.restrictions.updateOne(filter, update);
 
         if (response.modifiedCount === 0) {
             return {

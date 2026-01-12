@@ -13,10 +13,10 @@ import ActionButton from "@/components/action-button";
 
 
 // 4. Campos y esquemas locales
+import useUpdateRestriction from "./hooks/use-update-restriction";
 import BASE_RESTRICTION_FIELDS from "../fields/base-restrictions-fields";
 import UPDATE_RESTRICTION_SCHEMA from "./schema/update-restriction-schema";
-import { RestrictionDocument } from "../models/restriction-document";
-import useUpdateRestriction from "./hooks/use-update-restriction";
+import { RestrictionDocument } from "@/models/restrictions/restriction-document";
 
 interface Props {
     data: RestrictionDocument

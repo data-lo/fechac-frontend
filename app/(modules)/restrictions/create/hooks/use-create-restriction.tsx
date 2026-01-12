@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { createRestriction } from "../actions/create-restriction";
+import { createRestriction } from "../../../../../actions/restrictions/create-restriction";
 
 function useCreateRestriction() {
     return useMutation({
