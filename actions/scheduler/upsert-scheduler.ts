@@ -7,6 +7,7 @@ import { Periodicity } from "@/enums/periodicity";
 import countScheduledJobs from "./count-schedules";
 import getLatestScheduleExecution from "./get-latest-scheduler";
 import { getDaysByPeriodicity } from "@/functions/get-days-by-periodicity";
+import { ObjectId } from "mongodb";
 
 
 export default async function upsertScheduler(
@@ -17,13 +18,15 @@ export default async function upsertScheduler(
 
     if (scheduledJobs === 0) {
         const document = {
-            isLastSchedule: true,
-            enabled: true,
-            lastRunAt: null,
-            createdAt: new Date(),
-            updatedAt: new Date(),
+            is_last_schedule: true,
+            schedule_job_number: 1,
+            last_run_at: null,
+            created_at: new Date(),
+            updated_at: new Date(),
             periodicity,
-            nextRunAt: addDays(getDaysByPeriodicity(periodicity)),
+            is_report_ready: false,
+            next_run_at: addDays(getDaysByPeriodicity(periodicity)),
+
         };
 
         await insertScheduler(document);
@@ -36,12 +39,12 @@ export default async function upsertScheduler(
         return;
     }
 
-    const filter = { _id: lastSchedule._id };
+    const filter = { _id: new ObjectId(lastSchedule._id) };
 
     const update = {
         periodicity,
-        updatedAt: new Date(),
-        nextRunAt: addDays(getDaysByPeriodicity(periodicity)),
+        updated_at: new Date(),
+        nextRun_at: addDays(getDaysByPeriodicity(periodicity)),
     };
 
     await updateScheduler(filter, update);

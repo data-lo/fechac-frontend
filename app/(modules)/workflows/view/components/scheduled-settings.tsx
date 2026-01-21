@@ -4,7 +4,15 @@ import Modal from "@/components/modal";
 
 import ScheduleSettingsForm from "./schedule-settings-form";
 
-export default function ScheduleSettings() {
+import { ScheduledJobDto } from "@/infrastructure/applications/schedules/dto/scheduled-job.dto";
+
+interface Props{
+    latestSchudale : ScheduledJobDto | null
+}
+
+export default function ScheduleSettings({
+    latestSchudale
+}: Props) {
     return (
         <Modal
             dialogTitle="Programar"
@@ -12,7 +20,7 @@ export default function ScheduleSettings() {
             dialogTrigger="Configurar"
             iconName="Settings"
         >
-            <ScheduleSettingsForm />
+            <ScheduleSettingsForm latestSchedule={latestSchudale} />
         </Modal>
 
     )

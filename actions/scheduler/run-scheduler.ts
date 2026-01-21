@@ -1,6 +1,5 @@
 'use server'
 
-'use server'
 
 // Enums
 import { Periodicity } from "@/enums/periodicity";
@@ -24,6 +23,7 @@ import countScheduledJobs from "./count-schedules";
 // Types / Interfaces
 import ActionResponse from "@/interfaces/action/action-response";
 import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
+import { ObjectId } from "mongodb";
 
 
 export default async function runScheduler(): Promise<ActionResponse<Partial<ScheduledJobDocument>>> {
@@ -76,17 +76,17 @@ export default async function runScheduler(): Promise<ActionResponse<Partial<Sch
 
         if (lastSchedule && latestDagRun && latestDagRun.end_date) {
 
-            scheduleJobNumber = lastSchedule.scheduleJobNumber;
+            scheduleJobNumber = lastSchedule.schedule_job_number;
 
             periodicity = lastSchedule.periodicity;
 
             lastRunAt = new Date(latestDagRun.end_date);
 
-            const filter = { _id: lastSchedule._id }
+            const filter = { _id: new ObjectId(lastSchedule._id) }
 
             const update = {
-                updatedAt: new Date(),
-                lastRunAt: new Date(latestDagRun.end_date)
+                updated_at: new Date(),
+                last_run_At: new Date(latestDagRun.end_date)
             }
 
             await updateScheduler(filter, update);
@@ -94,7 +94,7 @@ export default async function runScheduler(): Promise<ActionResponse<Partial<Sch
             // Si la fecha actual aún no alcanza la próxima ejecución,
             // se detiene el flujo y no se dispara el pipeline
 
-            if (currentDate <= lastSchedule.nextRunAt) {
+            if (currentDate <= lastSchedule.next_run_at) {
                 return {
                     success: true,
                     message: "Aún no corresponde ejecutar el pipeline según la programación.",
@@ -104,19 +104,16 @@ export default async function runScheduler(): Promise<ActionResponse<Partial<Sch
             }
         }
 
-        //  Desactivar los schedules previos con estatus true
-
         const data = {
-            lastRunAt: lastRunAt,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            isLastSchedule: true,
+            last_run_at: lastRunAt,
+            created_at: new Date(),
+            updated_at: new Date(),
+            is_last_schedule: true,
             periodicity: periodicity,
-            scheduleJobNumber: scheduleJobNumber + 1,
-            nextRunAt: addDays(getDaysByPeriodicity(periodicity)),
+            is_report_ready: false,
+            schedule_job_number: scheduleJobNumber + 1,
+            next_run_at: addDays(getDaysByPeriodicity(periodicity)),
         }
-
-
 
         await insertScheduler(data)
 

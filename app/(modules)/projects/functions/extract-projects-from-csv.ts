@@ -33,6 +33,7 @@ export async function extractProjectsFromCSV(data: File[]): Promise<Project[]> {
             percentage: row["%"],
             total_investment: row["Inversión Total"],
             status: ProjectStatus.UNPROCESSED,
+            scheduled_job_id: null
         }));
 
         newObjects.push(...newRecord);

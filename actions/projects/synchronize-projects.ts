@@ -30,8 +30,6 @@ export default async function synchronizeProjects(values: File[]) {
             .filter(Boolean);
 
         // 4. Obtener IDs existentes desde la BD
-        // const collection = await getCollection<Project>("projects");
-
         const db = await getDb();
 
         const existingSadapIds = await db.projects.distinct("sadap_id", {

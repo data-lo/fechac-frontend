@@ -17,9 +17,12 @@ import ProcessControl from "./components/process-control";
 
 // 5. Tipos / Interfaces
 import DagRun from "@/interfaces/workflows/dag-run";
+import getLatestScheduleExecution from "@/actions/scheduler/get-latest-scheduler";
 
 export default async function ViewWorkflowSection() {
     const token = await getAirflowToken();
+
+    const lastSchedule = await getLatestScheduleExecution();
 
     // 1. Obtener ejecuciones
     const dagExecutions = await getDagRunsByDagId(token);
@@ -34,8 +37,6 @@ export default async function ViewWorkflowSection() {
 
     // 4. Obtener el último dagRun
     let lastDagRun: DagRun | null | undefined = null;
-
-    console.log(dagRuns)
 
     if (dagRuns && dagRuns.length > 0) {
         lastDagRun = dagRuns.at(0);
@@ -63,7 +64,8 @@ export default async function ViewWorkflowSection() {
                 <ProcessControl
                     token={token}
                     dagRunId={lastDagRun.dag_run_id}
-                    isRunning={isRunning}
+                    isRunning={isRunning} 
+                    lastSchedule={lastSchedule}                
                 />
             )}
 

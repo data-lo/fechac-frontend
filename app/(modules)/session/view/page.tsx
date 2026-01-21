@@ -1,8 +1,8 @@
 
+import { Fragment } from "react";
 import { getUserInformation } from "@/actions/authorization/auth";
 import AuthorizationCard from "../components/authentication-card";
 import AuthenticatedUserCard from "../components/authentication-user-card";
-import { Fragment } from "react";
 
 const SessionPage = async () => {
 

@@ -68,6 +68,10 @@ export const BREADCRUMB_ROUTES: Record<string, { label: string; href: string | n
     label: "Panel",
     href: "/session/view",
   },
+  'session/authentication': {
+    label: "Panel",
+    href: "/session/view",
+  },
 
   // Restricciones
   'restrictions': {
@@ -79,5 +83,5 @@ export const BREADCRUMB_ROUTES: Record<string, { label: string; href: string | n
     label: "Listado",
     href: "/restrictions/view",
   },
- 
+
 }

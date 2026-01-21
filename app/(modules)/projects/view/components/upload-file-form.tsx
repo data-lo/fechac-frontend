@@ -76,13 +76,15 @@ const UploadFileForm = () => {
                     </div>
                 )}
             />
-            <ActionButton
-                type="submit"
-                className="w-full"
-                title="Sincronizar Proyectos"
-                iconName="RefreshCcw"
-                isPending={mutation.isPending}
-            />
+            <div className="flex justify-end">
+                <ActionButton
+                    type="submit"
+                    className="w-min"
+                    title="Sincronizar Proyectos"
+                    iconName="RefreshCcw"
+                    isPending={mutation.isPending}
+                />
+            </div>
         </form>
     );
 }
