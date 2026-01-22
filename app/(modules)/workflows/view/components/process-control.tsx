@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 import ScheduleSettings from "./scheduled-settings";
 
-import { ScheduledJobDto } from "@/infrastructure/applications/schedules/dto/scheduled-job.dto";
+import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
 
 interface Props {
     token: string,

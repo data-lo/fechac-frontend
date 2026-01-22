@@ -13,7 +13,7 @@ import toast from "react-hot-toast";
 import SCHEDULE_SCHEMA from "../../schemas/schedule-schema";
 import upsertScheduler from "@/actions/scheduler/upsert-scheduler";
 import { FORM_SHEDULE_FIELDS } from "../../fields/form-scheduled-field";
-import { ScheduledJobDto } from "@/infrastructure/applications/schedules/dto/scheduled-job.dto";
+import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
 import { useRouter } from "next/navigation";
 
 interface Props {

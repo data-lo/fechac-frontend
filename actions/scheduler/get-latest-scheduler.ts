@@ -1,6 +1,6 @@
 import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-import { ScheduledJobDto } from "@/infrastructure/applications/schedules/dto/scheduled-job.dto";
+import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
 
 export default async function getLatestScheduleExecution(): Promise<ScheduledJobDto | null> {
 

@@ -4,7 +4,7 @@ import Modal from "@/components/modal";
 
 import ScheduleSettingsForm from "./schedule-settings-form";
 
-import { ScheduledJobDto } from "@/infrastructure/applications/schedules/dto/scheduled-job.dto";
+import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
 
 interface Props{
     latestSchudale : ScheduledJobDto | null
