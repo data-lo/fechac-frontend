@@ -9,7 +9,7 @@ import {
 
 import { AbbreviationDocument } from "../models/abbreviation-document";
 import ContextMenu from "@/components/context-menu";
-import Modal from "@/components/modal";
+import Modal from "@/components/app-dialog";
 import UpdateAbbreviationForm from "../update/update-abbreviation-form";
 import DeleteAbbreviationButton from "../delete/components/delete-abbreviation-button";
 

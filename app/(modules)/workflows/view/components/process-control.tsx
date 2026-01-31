@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import ScheduleSettings from "./scheduled-settings";
 
 import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
+import ReportDownloads from "./report-downloads";
 
 interface Props {
     token: string,
@@ -17,7 +18,10 @@ export default function ProcessControls({ token, isRunning, dagRunId, lastSchedu
 
     return (
         <div className="flex flex-col sm:flex-row justify-end gap-4 w-full mt-4 px-2">
-            <ScheduleSettings latestSchudale={lastSchedule} />
+            <ScheduleSettings
+                latestSchudale={lastSchedule}
+            />
+            <ReportDownloads />
         </div>
     );
 }

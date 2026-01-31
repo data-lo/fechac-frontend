@@ -26,16 +26,6 @@ export const routes = [
         title: "Restricciones",
         url: "/restrictions/view"
     },
-     {
-        icon: FileDown,
-        title: "Reportes",
-        url: ""
-    },
-    // {
-    //     icon: WholeWord,
-    //     title: "Abreviaciones",
-    //     href: "/abbreviations/view"
-    // },
     {
         icon: Cloud,
         title: "One Drive",

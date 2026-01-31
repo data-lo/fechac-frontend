@@ -9,7 +9,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import ModalComponent from "@/components/modal";
+import ModalComponent from "@/components/app-dialog";
 import ContextMenu from "@/components/context-menu";
 
 // 3. Componentes locales del módulo

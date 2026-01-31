@@ -1,8 +1,13 @@
+"use server"
 
+// External dependencies
 import { ObjectId } from "mongodb";
-import getDb from "@/infrastructure/persistence/mongo/get-db";
-import getLatestScheduleExecution from "../scheduler/get-latest-scheduler";
 
+// Infrastructure / Persistence
+import getDb from "@/infrastructure/persistence/mongo/get-db";
+
+// Application / Scheduler
+import getLatestScheduleExecution from "../scheduler/get-latest-scheduler";
 export default async function getDocumentsProcessedByScheduleJob() {
 
     const db = await getDb();
@@ -15,30 +20,45 @@ export default async function getDocumentsProcessedByScheduleJob() {
 
     const scheduleJobId = new ObjectId(lastSchedule._id)
 
-    db.projects.aggregate([
+    const cursor = db.projects.aggregate([
         {
             $match: {
-                schedule_job_id: scheduleJobId
-            }
+                scheduled_job_id: scheduleJobId,
+            },
         },
-
-
         {
             $lookup: {
-                from: "Documents",
+                from: "Files",
                 let: { sadap_id: "$sadap_id" },
                 pipeline: [
                     {
                         $match: {
                             $expr: {
-                                $eq: ["$sadap_id", "$$sadapId"]
-                            }
-                        }
-                    }
+                                $eq: ["$sadap_id", "$$sadap_id"],
+                            },
+                        },
+                    },
+                    {
+                        $project: {
+                            _id: 0,
+                        },
+                    },
                 ],
-                as: "Documents"
-            }
-        }
-    ])
+                as: "files",
+            },
+        },
+        {
+            $project: {
+                _id: 0,
+                scheduled_job_id: 0
+            },
+        },
+    ]);
+
+    const data = await cursor.toArray();
+
+    console.log(data);
+
+    return data
 
 }

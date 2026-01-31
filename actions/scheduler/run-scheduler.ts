@@ -86,7 +86,7 @@ export default async function runScheduler(): Promise<ActionResponse<Partial<Sch
 
             const update = {
                 updated_at: new Date(),
-                last_run_At: new Date(latestDagRun.end_date)
+                last_run_at: new Date(latestDagRun.end_date)
             }
 
             await updateScheduler(filter, update);

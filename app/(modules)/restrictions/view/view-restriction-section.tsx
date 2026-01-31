@@ -2,7 +2,7 @@
 import { Fragment } from "react";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 import EmptyState from "@/components/empty-state";
-import ModalComponent from "@/components/modal";
+import ModalComponent from "@/components/app-dialog";
 
 // 2. Componentes compartidos
 import AlertMessage from "@/components/alert-message";

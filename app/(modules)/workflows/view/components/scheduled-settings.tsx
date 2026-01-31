@@ -1,6 +1,6 @@
 "use client"
 
-import Modal from "@/components/modal";
+import AppDialog from "@/components/app-dialog";
 
 import ScheduleSettingsForm from "./schedule-settings-form";
 
@@ -14,14 +14,14 @@ export default function ScheduleSettings({
     latestSchudale
 }: Props) {
     return (
-        <Modal
+        <AppDialog
             dialogTitle="Programar"
             dialogDescription="Selecciona cada cuánto quieres que se ejecute la herramienta de integración digital."
             dialogTrigger="Configurar"
             iconName="Settings"
         >
             <ScheduleSettingsForm latestSchedule={latestSchudale} />
-        </Modal>
+        </AppDialog>
 
     )
 }
