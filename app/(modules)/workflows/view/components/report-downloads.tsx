@@ -12,9 +12,11 @@ export default function ReportDownloads() {
 
     return (
         <ActionButton
+            className="w-min"
             title="Descargar Reporte"
             iconName="FileCog"
             onClick={onClick}
+            isLoading={hook.isPending}
         />
     )
 }

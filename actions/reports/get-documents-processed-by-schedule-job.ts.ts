@@ -8,7 +8,9 @@ import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 // Application / Scheduler
 import getLatestScheduleExecution from "../scheduler/get-latest-scheduler";
-export default async function getDocumentsProcessedByScheduleJob() {
+import ProjectReportDTO from "@/domain/projects/dto/project.dto";
+
+export default async function getDocumentsProcessedByScheduleJob(): Promise<ProjectReportDTO[]> {
 
     const db = await getDb();
 
@@ -20,7 +22,7 @@ export default async function getDocumentsProcessedByScheduleJob() {
 
     const scheduleJobId = new ObjectId(lastSchedule._id)
 
-    const cursor = db.projects.aggregate([
+    const cursor = db.projects.aggregate<ProjectReportDTO>([
         {
             $match: {
                 scheduled_job_id: scheduleJobId,
@@ -41,6 +43,9 @@ export default async function getDocumentsProcessedByScheduleJob() {
                     {
                         $project: {
                             _id: 0,
+                            file_name: 1,
+                            department: 1,
+                            path: 1
                         },
                     },
                 ],
@@ -50,15 +55,16 @@ export default async function getDocumentsProcessedByScheduleJob() {
         {
             $project: {
                 _id: 0,
-                scheduled_job_id: 0
+                sadap_id: 1,
+                project_name: 1,
+                area: 1,
+                support_area: 1,
+                files: 1,
             },
         },
     ]);
 
     const data = await cursor.toArray();
 
-    console.log(data);
-
     return data
-
 }
