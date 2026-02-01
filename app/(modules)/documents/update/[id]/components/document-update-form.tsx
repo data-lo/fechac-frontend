@@ -1,5 +1,7 @@
 'use client';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // External libraries
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -10,23 +12,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
-// Domain models and enums
+// Domain / Models and Enums
 import { FileStatus } from "@/enums/file-status";
 import FileDocument from "@/models/files/file-document";
 
 // Form configuration
 import {
-    FORM_IDENTIFICATION_FIELDS,
+  FORM_IDENTIFICATION_FIELDS,
 } from "../../../fields/document-fields";
 import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-file-schema";
 
 // Hooks and actions
 import useUpdateDocument from "../../../hooks/use-update-document";
 
-// Utilities
+// App utilities
 import applyFormOverrides from "@/functions/apply-form-overrides";
-
-
 interface Props {
     data: {
         document: FileDocument

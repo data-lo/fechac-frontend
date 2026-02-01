@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { deleteRestriction } from "../actions/delete-restriction";
+import { deleteRestriction } from "../../../../../actions/restrictions/delete-restriction";
 
 export const useDeleteRestriction = () => {
     return useMutation({

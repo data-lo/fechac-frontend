@@ -14,8 +14,8 @@ const Sidebar = () => {
                         <SidebarItem
                             key={index}
                             icon={route.icon}
-                            label={route.label}
-                            href={route.href}
+                            label={route.title}
+                            href={route.url}
                         />
                     ))}
                 </div>

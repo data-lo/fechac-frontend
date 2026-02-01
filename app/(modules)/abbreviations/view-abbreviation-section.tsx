@@ -11,7 +11,7 @@ import PaginationComponent from "../../../components/pagination";
 import NavigationBreadcrumb from "@/components/breadcrumb";
 
 // 4. Componentes locales del módulo
-import ModalComponent from "@/components/modal";
+import ModalComponent from "@/components/app-dialog";
 import AbbreviationTable from "./components/view-abbreviation-table";
 import CreateAbbreviationForm from "./create/create-abbreviaton-form";
 

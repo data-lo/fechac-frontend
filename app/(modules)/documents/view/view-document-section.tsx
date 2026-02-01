@@ -4,7 +4,6 @@ import EmptyState from "@/components/empty-state";
 import AlertMessage from "@/components/alert-message";
 import DocumentsTable from "./components/document-table";
 import PaginationComponent from "@/components/pagination";
-import NavigationBreadcrumb from "@/components/breadcrumb";
 import getPendingDocuments from "@/actions/files/get-pending-documents";
 
 
@@ -48,12 +47,6 @@ const ViewDocumentSection = async ({ searchParams }: Props) => {
     );
   }
 
-  const breadcrumbRoutes = [
-    {
-      href: '#',
-      title: 'DOCUMENTOS'
-    },
-  ];
 
   return (
     <Fragment >

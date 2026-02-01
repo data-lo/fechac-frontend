@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import { toggleRestrictionStatus } from "../actions/toggle-restriction-status";
+import { toggleRestrictionStatus } from "../../../../actions/restrictions/toggle-restriction-status";
 
 export function useToggleRestrictionStatus() {
     return useMutation({

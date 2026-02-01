@@ -1,7 +1,7 @@
 import UpdateDocumentSection from "./update-documents-section";
 
 import getDocument from "@/actions/files/get-document";
-import getAllCriteria from "@/actions/criteria/get-all-criteria-action";
+import getAllCriteria from "@/actions/criteria/get-all-criteria";
 
 export default async function UpdateDocumentPage({
     params,

@@ -7,9 +7,7 @@ interface Props {
 const ViewNomenclaturePage = ({ searchParams }: Props) => {
 
     return (
-        <div className="h-screen">
-            <ViewNomenclatureSection searchParams={searchParams}/>
-        </div>
+        <ViewNomenclatureSection searchParams={searchParams} />
     )
 }
 

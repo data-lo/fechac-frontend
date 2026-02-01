@@ -1,13 +1,22 @@
 import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-import ScheduledJobDocument from "@/models/schedules/scheduled-job-document";
+import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
 
-export default async function getLatestScheduleExecution(): Promise<ScheduledJobDocument | null> {
+export default async function getLatestScheduleExecution(): Promise<ScheduledJobDto | null> {
 
     const db = await getDb();
 
-    return await db.scheduledJobs.findOne({
-        isLastSchedule: true,
+    const schedule = await db.scheduledJobs.findOne({
+        is_last_schedule: true,
     });
+
+    if (schedule) {
+        return {
+            ...schedule,
+            _id: schedule._id.toString()
+        }
+    }
+
+    return schedule;
 }
 

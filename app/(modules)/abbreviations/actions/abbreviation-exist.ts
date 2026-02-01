@@ -1,7 +1,11 @@
+// Infrastructure / Persistence
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-import { getDb } from "@/infrastructure/persistence/mongo/get-db";
+// Application / Interfaces
 import ActionResponse from "@/interfaces/action/action-response";
-import { AbbreviationDocument } from "../models/abbreviation-document";
+
+// Domain / Models
+import AbbreviationDocument from "../models/abbreviation-document";
 
 export default async function abbreviationExist(abbreviation: string): Promise<ActionResponse<AbbreviationDocument>> {
     try {
@@ -9,7 +13,7 @@ export default async function abbreviationExist(abbreviation: string): Promise<A
             throw new Error('El parámetro abreviación es requerido y debe ser un string válido');
         }
 
-        const db = await getDb()
+        const db = await getDb();
 
         const response = await db.abbreviations.findOne({ abbreviation: abbreviation });
 

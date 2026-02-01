@@ -24,7 +24,7 @@ import {
     CRITERIA_STORAGE_FIELDS
 } from "../../fields/criteria-fields";
 
-import { Criterion } from "../../../../../models/criteria/criterion";
+import { Criterion } from "@/models/criteria/criterion";
 
 
 const CreateCriterionForm = () => {
@@ -32,8 +32,6 @@ const CreateCriterionForm = () => {
     const router = useRouter()
 
     const createCriterion = useCreateCriterion();
-
-    const schema = CRITERIA_SCHEMA
 
     const form = useForm<z.infer<typeof CRITERIA_SCHEMA>>({
         resolver: zodResolver(CRITERIA_SCHEMA),
@@ -54,8 +52,7 @@ const CreateCriterionForm = () => {
     });
 
 
-    const onSubmit = async (values: z.infer<typeof schema>) => {
-        console.log(values)
+    const onSubmit = async (values: z.infer<typeof CRITERIA_SCHEMA>) => {
         const normalized: Criterion = {
             ...values,
             primary_keywords: values.primary_keywords ?? null,

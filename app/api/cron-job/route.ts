@@ -1,6 +1,7 @@
+// Actions
 import runScheduler from "@/actions/scheduler/run-scheduler";
 
-export async function GET(request: Request) {
+export async function GET() {
 
   const result = await runScheduler()
 

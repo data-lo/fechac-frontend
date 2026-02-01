@@ -1,38 +1,34 @@
-
+// App actions
 import getProject from "@/actions/projects/get-project";
-import UpdateProjectSection from "./update-project-section";
 import getDocumentsByProject from "@/actions/projects/get-documents-by-project";
 
+// Local components
+import UpdateProjectSection from "./update-project-section";
 
-interface Props {
-    params: {
-        project_id: string;
-    };
+interface PageProps {
+  params: Promise<{ project_id: string }>
 }
 
-export default async function UpdateProjectPage({ params }: Props) {
-    const { project_id } = await params;
+export default async function Page({ params }: PageProps) {
 
-    const project = await getProject(project_id)
+  const { project_id } = await params;
 
-    if (!project) {
-        return (
-            <section className="p-4 text-center text-red-600">
-                El proyecto solicitado no existe.
-            </section>
-        );
-    }
+  const project = await getProject(project_id);
 
-    const documents = await getDocumentsByProject(project.sadap_id)
-
-    // const countDocuments = await countDocumentsPerProject(project.sadap_id);
-
+  if (!project) {
     return (
-        <UpdateProjectSection
-            project={project}
-            documents={documents}
-        />
+      <section className="p-4 text-center text-red-600">
+        El proyecto solicitado no existe.
+      </section>
     );
-};
+  }
 
+  const documents = await getDocumentsByProject(project.sadap_id);
 
+  return (
+    <UpdateProjectSection
+      project={project}
+      documents={documents}
+    />
+  );
+}

@@ -1,20 +1,18 @@
-// 1. Componentes globales
+// External libraries
 import { Fragment } from "react";
-import NavigationBreadcrumb from "@/components/breadcrumb";
+
+// App components
 import EmptyState from "@/components/empty-state";
-import ModalComponent from "@/components/modal";
-
-// 2. Componentes compartidos
+import ModalComponent from "@/components/app-dialog";
 import AlertMessage from "@/components/alert-message";
+import PaginationComponent from "@/components/pagination";
 
-// 3. Componentes locales del módulo
+// App actions
+import getRestrictions from "@/actions/restrictions/get-restrictions";
+
+// Local components
 import RestrictionTable from "../components/restriction-table";
 import CreateRestrictionForm from "../create/create-restriction-form";
-
-// 4. Actions/Servicios
-import getRestrictions from "../actions/get-restrictions";
-import PaginationComponent from "@/components/pagination";
-import LimitSelector from "@/components/limit-selector";
 
 interface Props {
     searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -56,28 +54,18 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
         );
     }
 
-    const breadcrumbRoutes = [
-        {
-            href: '#',
-            title: 'RESTRICIONES'
-        },
-    ];
-
     return (
-        <div className="px-6 py-4 flex flex-col h-full gap-6 relative overflow-auto pt-16">
-            <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
-                <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
-            </nav>
-
+        <Fragment>
+           
             <div className="flex flex-col sm:flex-row justify-start sm:justify-end gap-4">
                 <ModalComponent
                     dialogTitle={"Crear Restricción"}
                     dialogDescription={
                         "Aquí puedes crear los caracteres restrictivos. Al nombrar los archivos finales, se excluirán todos los caracteres que hayas creado y que estén activos."
                     }
-                    iconName={"Plus"}
-                    buttonSize="w-[338px]"
-                    dialogTrigger={"Crear Restricción"}
+                    iconName={"CirclePlus"}
+                    buttonSize="w-auto"
+                    dialogTrigger={"Nuevo"}
                     
                 >
                     <CreateRestrictionForm />
@@ -86,19 +74,12 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
 
             {restrictions.length > 0 ? (
                 <Fragment>
-                    <div className="flex items-center gap-2">
-                        <LimitSelector
-                            currentLimit={limit}
-                            route="/restrictions"
-                        />
-                    </div>
-
                     <RestrictionTable
                         restrictions={restrictions}
                     />
                 </ Fragment>
             ) : (
-                <EmptyState text={"No hay proyectos disponibles"} />
+                <EmptyState text={"No hay restricciones disponibles"} />
             )}
 
             <PaginationComponent
@@ -108,7 +89,7 @@ const ViewNomenclatureSection = async ({ searchParams }: Props) => {
                 baseUrl="/restrictions"
             />
 
-        </div>
+        </Fragment>
     )
 }
 

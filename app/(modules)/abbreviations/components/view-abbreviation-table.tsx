@@ -1,18 +1,21 @@
+// 1. UI components
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-
-import { AbbreviationDocument } from "../models/abbreviation-document";
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import ContextMenu from "@/components/context-menu";
-import Modal from "@/components/modal";
+import Modal from "@/components/app-dialog";
+
+// 2. Domain models / Documents
+import AbbreviationDocument from "../models/abbreviation-document";
+
+// 3. Local module components
 import UpdateAbbreviationForm from "../update/update-abbreviation-form";
 import DeleteAbbreviationButton from "../delete/components/delete-abbreviation-button";
-
 
 interface Props {
     data: AbbreviationDocument[]

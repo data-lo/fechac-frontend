@@ -1,24 +1,28 @@
-'use client'
+'use client';
 
-import { useRouter } from "next/navigation"
+// External libraries
+import { useRouter } from "next/navigation";
+import { CircleAlert } from "lucide-react";
 
+// UI components
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow
-} from "@/components/ui/table"
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
-import { AlertTriangle } from "lucide-react"
+// App components
+import ActionButton from "@/components/action-button";
 
-import ActionButton from "@/components/action-button"
+// Domain / Models
+import FileDocument from "@/models/files/file-document";
 
-import FileDocument from "@/models/files/file-document"
-
-import { getStatusInfo, FileStatus } from "../../functions/get-status-translation"
-
+// App utilities
+import { getStatusInfo, FileStatus } from "../../functions/get-status-translation";
 interface Props {
     data: FileDocument[];
     currentIndex: number;
@@ -49,8 +53,6 @@ const DocumentsTable = ({ data, currentIndex }: Props) => {
                 {data.map((document, index) => {
                     const statusInfo = getStatusInfo(document.status as FileStatus);
 
-                    const IconComponent = statusInfo.icon;
-
                     return (
                         <TableRow key={document.uuid} className="text-xs">
 
@@ -68,14 +70,23 @@ const DocumentsTable = ({ data, currentIndex }: Props) => {
                                 )}
 
                                 {!document.sadap_id && (
-                                    <AlertTriangle size={14} className="text-yellow-600" />
+                                    <Badge
+                                        variant="outline"
+                                        className="gap-1"
+                                    >
+                                        <CircleAlert className="w-3 h-3" />
+                                        PROYECTO NO IDENTIFICADO
+                                    </Badge>
                                 )}
                             </TableCell>
                             <TableCell>
-                                <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm font-medium ${statusInfo.className}`}>
-                                    <IconComponent size={12} />
+                                <Badge
+                                    variant="outline"
+                                    className="gap-1"
+                                >
+                                    <statusInfo.icon className="w-3 h-3" />
                                     {statusInfo.text}
-                                </span>
+                                </Badge>
                             </TableCell>
                             <TableCell>
                                 <ActionButton

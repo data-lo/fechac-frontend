@@ -3,19 +3,19 @@
 import { ObjectId } from "mongodb";
 
 // 2.- Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { UpdateOneResponse } from "@/interfaces/mongo/update-one";
+import ActionResponse from "@/interfaces/action/action-response";
+import { UpdateOne } from "@/interfaces/mongo/update-one";
 
 // 3.- Acciones / Servicios
-import getCollection from "@/actions/mongo/get-collection";
+
 // import abbreviationExist from "../../actions/abbreviation-exist";
 
 // 4.- Modelos
-import { AbbreviationDocument } from "../../models/abbreviation-document";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-export default async function updateAbbreviation(values: { _id: string, abbreviation: string, name: string, type: string }): Promise<ActionResponse<UpdateOneResponse>> {
+export default async function updateAbbreviation(values: { _id: string, abbreviation: string, name: string, type: string }): Promise<ActionResponse<UpdateOne>> {
     try {
-        const collection = await getCollection<AbbreviationDocument>("abbreviations");
+        const db = await getDb();
 
         // const abbreviation = await abbreviationExist(values.abbreviation);
 
@@ -37,7 +37,7 @@ export default async function updateAbbreviation(values: { _id: string, abbrevia
             },
         };
 
-        const response: UpdateOneResponse = await collection.updateOne(filter, update);
+        const response: UpdateOne = await db.abbreviations.updateOne(filter, update);
 
 
         if (response.modifiedCount === 0) {

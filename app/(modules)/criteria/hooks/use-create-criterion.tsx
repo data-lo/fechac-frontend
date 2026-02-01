@@ -5,11 +5,11 @@ import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
 
 // 2. Acciones
-import createCriterionAction from "../actions/create-criterion-action";
+import createCriterion from "@/actions/criteria/create-criterion";
 
 export function useCreateCriterion() {
     return useMutation({
-        mutationFn: createCriterionAction,
+        mutationFn: createCriterion,
         onSuccess: (response) => {
             toast.success(response.message);
         },

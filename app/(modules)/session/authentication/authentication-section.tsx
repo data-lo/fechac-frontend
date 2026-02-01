@@ -15,7 +15,7 @@ interface Props {
 }
 
 const AuthenticationSection = ({
-    redirectPath = '/session',
+    redirectPath = '/session/view',
 }: Props) => {
     const router = useRouter();
 
@@ -23,6 +23,7 @@ const AuthenticationSection = ({
         const urlParams = new URLSearchParams(window.location.search);
 
         const code = urlParams.get('code');
+        
         if (code) {
             handleMicrosoftAuthCallback({ code }).catch((err) => {
                 console.error('Error autenticando:', err);
@@ -34,15 +35,13 @@ const AuthenticationSection = ({
 
     return (
         <section className="w-full h-full flex flex-col items-center justify-center gap-6 text-center">
-            <div className="space-y-6 max-w-md flex items-center flex-col">
+            <div className="space-y-6 max-w-lg flex items-center flex-col">
                 <h1 className="flex items-center justify-center gap-2 text-2xl font-semibold text-gray-800">
-                    🎉 ¡Inicio de sesión en Microsoft exitoso!
+                    ¡ Tu cuenta se ha vinculado correctamente!
                 </h1>
-                <p className="text-sm text-gray-600">
-                    Tu cuenta se ha vinculado correctamente. Ya puedes acceder a tus archivos y herramientas desde el panel.
-                </p>
                 <ActionButton
                     title='Regresar'
+                    className='w-min'
                     iconName={"RefreshCcw"}
                     onClick={() => router.push(redirectPath)}
                 />

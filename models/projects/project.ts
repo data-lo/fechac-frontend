@@ -1,4 +1,5 @@
-import { ProjectStatusEnum } from "@/enums/project-status";
+import { ProjectStatus } from "@/enums/project-status";
+
 
 export interface Project {
     sadap_id: string;
@@ -19,6 +20,7 @@ export interface Project {
     authorized_contract_amount: string;
     percentage: string;
     total_investment: string;
-    status: ProjectStatusEnum;
+    status: ProjectStatus;
+    scheduled_job_id: string | null;
 }
 

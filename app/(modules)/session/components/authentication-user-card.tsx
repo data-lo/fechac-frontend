@@ -11,10 +11,9 @@ import { handleLogout } from '@/actions/authorization/auth';
 import ButtonComponent from '@/components/action-button';
 
 // Types / Interfaces
-import { MicrosoftUserInfo } from '@/interfaces/microsoft-user-info';
-
+import { MicrosoftUserInformation } from '@/interfaces/microsoft/microsoft-user-information';
 interface Props {
-    user: MicrosoftUserInfo;
+    user: MicrosoftUserInformation;
 }
 
 const AuthenticatedUserCard = ({ user }: Props) => {
@@ -51,6 +50,7 @@ const AuthenticatedUserCard = ({ user }: Props) => {
             <ButtonComponent
                 onClick={handleClickLogout}
                 title="Cerrar Sesión"
+                className='w-min'
             />
         </div>
     );

@@ -1,10 +1,13 @@
 'use client'
+
+// External libraries
 import { Fragment } from "react";
 
-import NavigationBreadcrumb from "@/components/breadcrumb";
-import UpdateCriterionForm from "./components/criterion-update-form";
-
+// Domain / Models
 import CriterionDocument from "@/models/criteria/criterion-document";
+
+// Local components
+import UpdateCriterionForm from "./components/criterion-update-form";
 
 interface Props {
     data: {
@@ -14,23 +17,8 @@ interface Props {
 
 const UpdateCriterionSection = ({ data }: Props) => {
 
-    const breadcrumbRoutes = [
-        {
-            href: '/criteria/view',
-            title: 'CRITERIOS'
-        },
-        {
-            href: `#`,
-            title: `ACTUALIZAR CRITERIO: ${data.criterion.file_name}`
-        }
-    ];
-
     return (
         <Fragment>
-            <nav className="h-12 flex justify-between items-center fixed top-0 left-20 right-0 z-10 bg-white px-6 border-b border-gray-200">
-                <NavigationBreadcrumb breadcrumbRoutes={breadcrumbRoutes} />
-            </nav>
-
             <UpdateCriterionForm
                 data={{ criterion: data.criterion }}
             />

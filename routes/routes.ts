@@ -1,4 +1,4 @@
-import { Cloud, FileStack, Folder, Lock, SlidersHorizontal, WholeWord, Workflow, } from "lucide-react";
+import { Cloud, FileDown, FileStack, Folder, Lock, SlidersHorizontal, WholeWord, Workflow, } from "lucide-react";
 
 export const routes = [
     {
@@ -21,16 +21,10 @@ export const routes = [
         title: "Criterios",
         url: "/criteria/view"
     },
-
     {
         icon: Lock,
         title: "Restricciones",
         url: "/restrictions/view"
-    },
-    {
-        icon: WholeWord,
-        title: "Abreviaciones",
-        href: "/abbreviations/view"
     },
     {
         icon: Cloud,

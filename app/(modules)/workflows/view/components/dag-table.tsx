@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 
 import DagRun from "@/interfaces/workflows/dag-run";
-import { CircleArrowRight, CirclePlay, ListRestart } from "lucide-react";
+import { CircleArrowRight, CirclePlay } from "lucide-react";
 
 interface Props {
     data: DagRun[];
@@ -33,14 +33,14 @@ const formatDate = (dateString?: string | null) => {
 
 const translateStatus = (state: string) => {
     const map: Record<string, string> = {
-        success: "Exitoso",
-        failed: "Fallido",
-        running: "En Ejecución",
-        queued: "En Cola",
-        up_for_retry: "Pendiente de Reintento",
-        up_for_reschedule: "Pendiente de Repogramación",
-        skipped: "Omitido",
-        no_status: "Sin Estado",
+        success: "EXITOSO",
+        failed: "FALLIDO",
+        running: "EN EJECUCIÓN",
+        queued: "EN COLA",
+        up_for_retry: "PENDIENTE DE REINTENTO",
+        up_for_reschedule: "PENDIENTE DE REPROGRAMACIÓN",
+        skipped: "OMITIDO",
+        no_status: "SIN ESTADO",
     };
 
     return map[state] ?? state;
@@ -61,14 +61,14 @@ const DagTable = ({ data }: Props) => {
 
             <TableBody>
                 {data.map((dag, index) => (
-                    <TableRow key={dag.dag_run_id}>
+                    <TableRow className="text-xs" key={dag.dag_run_id}>
                         <TableCell className="text-center text-gray-500 font-medium">
                             {index + 1}
                         </TableCell>
 
-                        <TableCell className="text-xs">{formatDate(dag.start_date).toUpperCase()}</TableCell>
+                        <TableCell>{formatDate(dag.start_date)}</TableCell>
 
-                        <TableCell className="text-xs">{formatDate(dag.end_date).toUpperCase()}</TableCell>
+                        <TableCell>{formatDate(dag.end_date)}</TableCell>
 
                         <TableCell>
 
@@ -87,7 +87,7 @@ const DagTable = ({ data }: Props) => {
                                 className="gap-1"
                             >
                                 <CirclePlay className="w-3 h-3" />
-                                {dag.run_type.charAt(0).toUpperCase() + dag.run_type.slice(1)}
+                                {dag.run_type.toUpperCase()}
                             </Badge>
                         </TableCell>
                     </TableRow>

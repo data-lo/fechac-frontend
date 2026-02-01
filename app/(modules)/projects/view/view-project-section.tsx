@@ -12,7 +12,7 @@ import PaginationComponent from "../../../../components/pagination";
 import ProjectTable from "./components/project-table";
 
 // 5. Actions/Servicios
-import Modal from "@/components/modal";
+import Modal from "@/components/app-dialog";
 import UploadFileForm from "./components/upload-file-form";
 import getPendingProjects from "@/actions/projects/get-pending-projects";
 
@@ -60,7 +60,7 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
       <div className="flex justify-end">
         <Modal
           dialogTitle={"Cargar Proyectos"}
-          dialogTrigger="Cargar Proyectos"
+          dialogTrigger="Cargar"
           iconName="FileUp"
           dialogSize="3xl"
         >
