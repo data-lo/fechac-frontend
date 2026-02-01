@@ -1,22 +1,24 @@
-"use client"
-// 1. Librerías externas
+"use client";
+
+// 1. External libraries
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
-// 2. Componentes globales
+// 2. UI components (global)
 import { Form } from "@/components/ui/form";
 import ActionButton from "@/components/action-button";
 
-// 3. Hooks locales
-
-
-// 4. Campos y esquemas locales
+// 3. Local hooks
 import useUpdateRestriction from "./hooks/use-update-restriction";
+
+// 4. Local fields & schemas
 import BASE_RESTRICTION_FIELDS from "../fields/base-restrictions-fields";
 import UPDATE_RESTRICTION_SCHEMA from "./schema/update-restriction-schema";
-import { RestrictionDocument } from "@/models/restrictions/restriction-document";
+
+// 5. Domain models
+import RestrictionDocument from "@/models/restrictions/restriction-document";
 
 interface Props {
     data: RestrictionDocument
