@@ -66,5 +66,5 @@ export default async function getDocumentsProcessedByScheduleJob(): Promise<Proj
 
     const data = await cursor.toArray();
 
-    return data
+    return data;
 }

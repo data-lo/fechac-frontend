@@ -2,12 +2,13 @@
 
 import ActionButton from "@/components/action-button";
 import useDownloadReport from "../../hooks/useDownloadReport";
+import { downloadCSV } from "@/functions/reports/download-csv";
 
 export default function ReportDownloads() {
-    const hook = useDownloadReport();
+    const mutation = useDownloadReport();
 
     const onClick = () => {
-        hook.mutate()
+        mutation.mutate();
     }
 
     return (
@@ -16,7 +17,7 @@ export default function ReportDownloads() {
             title="Descargar Reporte"
             iconName="FileCog"
             onClick={onClick}
-            isLoading={hook.isPending}
+            isLoading={mutation.isPending}
         />
     )
 }

@@ -1,4 +1,4 @@
-export default function toCSV(
+export default function convertRowsToCSV(
   rows: Record<string, any>[]
 ): string {
 

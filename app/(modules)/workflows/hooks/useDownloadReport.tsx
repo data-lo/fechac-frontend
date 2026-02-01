@@ -1,16 +1,19 @@
-// Actions
-import getDocumentsProcessedByScheduleJob from "@/actions/reports/get-documents-processed-by-schedule-job.ts";
+
 
 // External libraries
 import toast from "react-hot-toast";
 import { useMutation } from "@tanstack/react-query";
+import generateReport from "@/actions/reports/generate-processed-projects-csv-report";
+import { downloadCSV } from "@/functions/reports/download-csv";
 
 const useDownloadReport = () => {
     return useMutation({
         mutationFn: async () => {
-            return await getDocumentsProcessedByScheduleJob()
+            return await generateReport();
         },
-        onSuccess: () => {
+        onSuccess: (csv: string) => {
+            console.log(csv)
+            downloadCSV(csv);
             toast.success("¡El reporte se descargó con éxito!");
         },
         onError(error) {
