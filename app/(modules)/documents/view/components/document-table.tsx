@@ -1,25 +1,28 @@
-'use client'
+'use client';
 
-import { useRouter } from "next/navigation"
+// External libraries
+import { useRouter } from "next/navigation";
+import { CircleAlert } from "lucide-react";
 
+// UI components
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow
-} from "@/components/ui/table"
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 
-import { CircleAlert } from "lucide-react"
+// App components
+import ActionButton from "@/components/action-button";
 
-import ActionButton from "@/components/action-button"
+// Domain / Models
+import FileDocument from "@/models/files/file-document";
 
-import FileDocument from "@/models/files/file-document"
-
-import { getStatusInfo, FileStatus } from "../../functions/get-status-translation"
-import { Badge } from "@/components/ui/badge"
-
+// App utilities
+import { getStatusInfo, FileStatus } from "../../functions/get-status-translation";
 interface Props {
     data: FileDocument[];
     currentIndex: number;
@@ -49,8 +52,6 @@ const DocumentsTable = ({ data, currentIndex }: Props) => {
             <TableBody>
                 {data.map((document, index) => {
                     const statusInfo = getStatusInfo(document.status as FileStatus);
-
-                    const IconComponent = statusInfo.icon;
 
                     return (
                         <TableRow key={document.uuid} className="text-xs">

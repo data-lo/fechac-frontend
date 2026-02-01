@@ -1,8 +1,9 @@
 "use client"
-
+// App components
 import ActionButton from "@/components/action-button";
+
+// Local hooks
 import useDownloadReport from "../../hooks/useDownloadReport";
-import { downloadCSV } from "@/functions/reports/download-csv";
 
 export default function ReportDownloads() {
     const mutation = useDownloadReport();

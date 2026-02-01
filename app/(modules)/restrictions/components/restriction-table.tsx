@@ -1,27 +1,25 @@
-// 1. Librerías externas
+// 1. External libraries
+// (none)
 
-// 2. Componentes globales
+// 2. UI components (global)
 import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from "@/components/ui/table";
 import ModalComponent from "@/components/app-dialog";
 import ContextMenu from "@/components/context-menu";
 
-// 3. Componentes locales del módulo
-
-
-// 4. Modelos locales
-
+// 3. Local module components
 import ToggleRestrictionStatus from "./toggle-restriction-status";
 import UpdateRestrictionForm from "../update/update-restriction-form";
 import DeleteRestrictionButton from "../delete/delete-restriction-button";
-import { RestrictionDocument } from "@/models/restrictions/restriction-document";
 
+// 4. Domain models
+import RestrictionDocument from "@/models/restrictions/restriction-document";
 
 interface Props {
     restrictions: RestrictionDocument[]

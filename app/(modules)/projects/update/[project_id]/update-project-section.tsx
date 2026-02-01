@@ -1,27 +1,30 @@
-// 1. React
+// External libraries
 import { Fragment } from "react";
+import {
+  CheckCircle2,
+  FolderOpen,
+  Workflow,
+  Building2,
+  Target,
+  Layers,
+} from "lucide-react";
 
-// 2. External libraries / icons
-import { CheckCircle2, FolderOpen, Workflow, Building2, Target, MapPin, Layers } from "lucide-react";
-
-// 3. Shared / global components
+// App components
 import EmptyMessage from "@/components/empty-message";
 import { StatisticCard } from "@/components/statistic-card";
 
-// 4. Domain enums / constants
+// Domain / Enums
 import { ProjectStatus } from "@/enums/project-status";
 
-// 5. Local module components
-import DocumentTable from "../../components/document-table";
-
-
-// 6. Models / entities
+// Domain / Models
 import FileDocument from "@/models/files/file-document";
 import ProjectDocument from "@/models/projects/project-document";
 
-// 7. Functions
-import { getStatusTranslation } from "../../functions/get-status-translation";
+// Local components
+import DocumentTable from "../../components/document-table";
 
+// App utilities
+import { getStatusTranslation } from "../../functions/get-status-translation";
 
 interface Props {
     project: ProjectDocument;

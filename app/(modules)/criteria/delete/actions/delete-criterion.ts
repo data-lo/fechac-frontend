@@ -1,25 +1,24 @@
-'use server';
+"use server";
 
-// 1. Acciones internas / helpers
-import getCollection from "@/actions/mongo/get-collection";
+// 1. Infrastructure / persistence
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 // 2. Interfaces
-import { ActionResponse } from "@/interfaces/action/action-response";
-import { DeleteOneResponse } from "@/interfaces/mongo/delete-one";
+import ActionResponse from "@/interfaces/action/action-response";
+import { DeleteOne } from "@/interfaces/mongo/delete-one";
 
-// 3. Modelos
-import { CriterionDocument } from "../../../../../models/criteria/criterion-document";
+// 3. Domain / database types
 import { ObjectId } from "mongodb";
 
-// 4. Librerías
+// 4. Framework / platform libraries
 import { revalidatePath } from "next/cache";
 
-export async function deleteCriterion(_id: string | ObjectId): Promise<ActionResponse<DeleteOneResponse>> {
+export async function deleteCriterion(_id: string | ObjectId): Promise<ActionResponse<DeleteOne>> {
     try {
 
-        const collection = await getCollection<CriterionDocument>("document_prompts");
+        const db = await getDb();
 
-        const response: DeleteOneResponse = await collection.deleteOne({ _id: new ObjectId(_id) });
+        const response: DeleteOne = await db.criteria.deleteOne({ _id: new ObjectId(_id) });
 
         if (!response.acknowledged || response.deletedCount === 0) {
             return {

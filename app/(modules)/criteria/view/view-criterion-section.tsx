@@ -10,12 +10,10 @@ import PaginationComponent from "@/components/pagination";
 import CriterionTable from "./components/criterion-table";
 
 // 4. Componentes locales del módulo
-
 import CreateCriterionButtonSection from "../components/create-criterion-button-section";
-import { getCriteria } from "@/actions/criteria/get-criteria";
 
 // 5. Actions/Servicios
-
+import { getCriteria } from "@/actions/criteria/get-criteria";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -55,12 +53,6 @@ const ViewCriterionSection = async ({ searchParams }: Props) => {
     );
   }
 
-  const breadcrumbRoutes = [
-    {
-      href: '#',
-      title: 'CRITERIOS'
-    },
-  ];
 
   return (
     <Fragment>

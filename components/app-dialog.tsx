@@ -65,7 +65,6 @@ const AppDialog = ({
   buttonDisabled = false,
   customTrigger,
   dialogSize = "lg",
-  buttonSize,
   className,
   open,
   onOpenChange,

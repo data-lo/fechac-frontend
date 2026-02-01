@@ -2,21 +2,21 @@
 
 // 2. Interfaces
 import ActionResponse from "@/interfaces/action/action-response";
-import { DeleteOneResponse } from "@/interfaces/mongo/delete-one";
+import { DeleteOne } from "@/interfaces/mongo/delete-one";
 
 // 3. Modelos
 import { ObjectId } from "mongodb";
 
 // 4. Librerías
 import { revalidatePath } from "next/cache";
-import { getDb } from "@/infrastructure/persistence/mongo/get-db";
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-export async function deleteAbbreviation(_id: string | ObjectId): Promise<ActionResponse<DeleteOneResponse>> {
+export async function deleteAbbreviation(_id: string | ObjectId): Promise<ActionResponse<DeleteOne>> {
     try {
 
         const db = await getDb();
 
-        const response: DeleteOneResponse = await db.abbreviations.deleteOne({ _id: new ObjectId(_id) });
+        const response: DeleteOne = await db.abbreviations.deleteOne({ _id: new ObjectId(_id) });
 
         if (!response.acknowledged || response.deletedCount === 0) {
             return {

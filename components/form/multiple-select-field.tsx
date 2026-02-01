@@ -1,6 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+// External libraries
 import { Control } from "react-hook-form";
-import { MultiSelect } from "../ui/multiple-select"
-import { FormField, FormItem, FormControl, FormMessage } from "../ui/form"
+
+// UI components
+import { MultiSelect } from "../ui/multiple-select";
+import {
+  FormField,
+  FormItem,
+  FormControl,
+  FormMessage,
+} from "../ui/form";
 
 interface Props {
     name: string

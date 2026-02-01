@@ -1,9 +1,9 @@
 
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { FileText, TrendingUp, Users, DollarSign } from "lucide-react";
+import { Card, CardTitle, CardContent } from "@/components/ui/card";
+import { TrendingUp } from "lucide-react";
 
-// Super Reusable Card Component
+
 export interface Props {
   title?: string;
   value?: string | number;

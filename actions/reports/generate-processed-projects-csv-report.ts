@@ -1,9 +1,11 @@
 "use server";
 
-
+// App utilities / Reports
 import convertRowsToCSV from "@/functions/reports/convert-rows-to-csv";
-import getDocumentsProcessedByScheduleJob from "./get-documents-processed-by-schedule-job";
 import mapProjectsToProjectFileCSVRows from "@/functions/reports/map-projects-to-project-file-csv-rows";
+
+// Local actions
+import getDocumentsProcessedByScheduleJob from "./get-documents-processed-by-schedule-job";
 
 export default async function generateProcessedProjectsCSVReport(): Promise<string> {
   try {

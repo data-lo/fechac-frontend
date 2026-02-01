@@ -1,20 +1,18 @@
-// 1. Componentes globales
+// External libraries
 import { Fragment } from "react";
-import NavigationBreadcrumb from "@/components/breadcrumb";
+
+// App components
 import EmptyState from "@/components/empty-state";
 import ModalComponent from "@/components/app-dialog";
-
-// 2. Componentes compartidos
 import AlertMessage from "@/components/alert-message";
+import PaginationComponent from "@/components/pagination";
 
-// 3. Componentes locales del módulo
+// App actions
+import getRestrictions from "@/actions/restrictions/get-restrictions";
+
+// Local components
 import RestrictionTable from "../components/restriction-table";
 import CreateRestrictionForm from "../create/create-restriction-form";
-
-// 4. Actions/Servicios
-import getRestrictions from "../../../../actions/restrictions/get-restrictions";
-import PaginationComponent from "@/components/pagination";
-import LimitSelector from "@/components/limit-selector";
 
 interface Props {
     searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;

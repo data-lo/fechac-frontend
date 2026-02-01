@@ -1,10 +1,13 @@
 'use client'
+
+// External libraries
 import { Fragment } from "react";
 
-import NavigationBreadcrumb from "@/components/breadcrumb";
-import UpdateCriterionForm from "./components/criterion-update-form";
-
+// Domain / Models
 import CriterionDocument from "@/models/criteria/criterion-document";
+
+// Local components
+import UpdateCriterionForm from "./components/criterion-update-form";
 
 interface Props {
     data: {

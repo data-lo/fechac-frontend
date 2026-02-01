@@ -1,15 +1,13 @@
 'use server'
 
+// 1. Infrastructure / Persistence
 import getDb from "@/infrastructure/persistence/mongo/get-db";
-// 1. Librerías internas (acciones, helpers, etc.)
-
 
 // 2. Interfaces
 import ActionResponse from "@/interfaces/action/action-response";
 
-
-// 3. Modelos locales
-import { RestrictionDocument } from "@/models/restrictions/restriction-document";
+// 3. Domain models / Documents
+import RestrictionDocument from "@/models/restrictions/restriction-document";
 
 export async function restrictionExists(character: string): Promise<ActionResponse<RestrictionDocument>> {
     try {

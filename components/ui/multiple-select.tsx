@@ -108,13 +108,11 @@ interface MultiSelectProps
    * If true, renders the multi-select component as a child of another component.
    * Optional, defaults to false.
    */
-  asChild?: boolean;
 
   /**
    * Additional class names to apply custom styles to the multi-select component.
    * Optional, can be used to add custom styles.
    */
-  className?: string;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -131,8 +129,6 @@ export const MultiSelect = React.forwardRef<
       animation = 0,
       maxCount = 3,
       modalPopover = false,
-      asChild = false,
-      className,
       ...props
     },
     ref

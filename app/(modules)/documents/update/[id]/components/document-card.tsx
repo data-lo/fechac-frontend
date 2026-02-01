@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 
-import { Link2, Tag, Check, X } from "lucide-react";
+import { Link2 } from "lucide-react";
 
 
 import { FileStatus, getStatusInfo } from "../../../functions/get-status-translation";

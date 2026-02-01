@@ -33,7 +33,7 @@ export default async function ViewWorkflowSection() {
     }
 
     // 3. Inicializar dagRuns
-    let dagRuns: DagRun[] = dagExecutions;
+    const dagRuns: DagRun[] = dagExecutions;
 
     // 4. Obtener el último dagRun
     let lastDagRun: DagRun | null | undefined = null;

@@ -5,7 +5,6 @@ import { Fragment } from "react";
 
 // UI components
 import AlertMessage from "@/components/alert-message";
-import NavigationBreadcrumb from "@/components/breadcrumb";
 import { StatisticCard } from "@/components/statistic-card";
 
 // Page components

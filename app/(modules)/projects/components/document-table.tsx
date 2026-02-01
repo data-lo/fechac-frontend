@@ -4,7 +4,7 @@
 import { useRouter } from "next/navigation";
 
 // 2. External libraries / icons
-import { AlertTriangle, CircleArrowRight } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 
 // 3. Shared / UI components
 import {
@@ -61,7 +61,6 @@ const DocumentsTable = ({ data }: Props) => {
             <TableBody>
                 {data.map((document, index) => {
                     const statusInfo = getStatusInfo(document.status as FileStatus);
-                    const IconComponent = statusInfo.icon;
 
                     const requiereRevision =
                         STATUS_REQUIERE_REVISION.includes(document.status as FileStatus);

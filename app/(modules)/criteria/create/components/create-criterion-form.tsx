@@ -33,8 +33,6 @@ const CreateCriterionForm = () => {
 
     const createCriterion = useCreateCriterion();
 
-    const schema = CRITERIA_SCHEMA
-
     const form = useForm<z.infer<typeof CRITERIA_SCHEMA>>({
         resolver: zodResolver(CRITERIA_SCHEMA),
         defaultValues: {
@@ -54,7 +52,7 @@ const CreateCriterionForm = () => {
     });
 
 
-    const onSubmit = async (values: z.infer<typeof schema>) => {
+    const onSubmit = async (values: z.infer<typeof CRITERIA_SCHEMA>) => {
         const normalized: Criterion = {
             ...values,
             primary_keywords: values.primary_keywords ?? null,

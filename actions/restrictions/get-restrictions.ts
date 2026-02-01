@@ -1,11 +1,12 @@
 'use server';
 
+// 1. Models / Documents
+import RestrictionDocument from "@/models/restrictions/restriction-document";
 
-// 1. Acciones / Servicios
-
-// 2. Modelos
-import { RestrictionDocument } from "@/models/restrictions/restriction-document";
+// 2. Interfaces / Types
 import ActionResponse from "@/interfaces/action/action-response";
+
+// 3. Infrastructure / Persistence
 import getDb from "@/infrastructure/persistence/mongo/get-db";
 
 interface PaginationParams {

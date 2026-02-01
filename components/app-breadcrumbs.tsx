@@ -1,6 +1,8 @@
 'use client'
-
+// External libraries
 import { usePathname } from "next/navigation";
+
+// UI components
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,8 +10,9 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+
+// App constants
 import { BREADCRUMB_ROUTES } from "@/lib/breadcrumb-routes";
-import { Fragment } from "react";
 
 export function AppBreadcrumbs() {
   const pathname = usePathname();

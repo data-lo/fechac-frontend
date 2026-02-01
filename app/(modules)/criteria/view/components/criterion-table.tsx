@@ -17,9 +17,8 @@ import {
 import ActionButton from "@/components/action-button";
 
 // 4. Tipos/Modelos
-import CriterionDocument from "@/models/criteria/criterion-document";
 import { Badge } from "@/components/ui/badge";
-import { CircleAlert } from "lucide-react";
+import CriterionDocument from "@/models/criteria/criterion-document";
 
 interface Props {
     data: CriterionDocument[];

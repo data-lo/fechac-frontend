@@ -1,11 +1,12 @@
 'use server';
-
-
-
+// 1. Interfaces
 import ActionResponse from "@/interfaces/action/action-response";
-import { AbbreviationDocument } from "../models/abbreviation-document";
 
+// 2. Infrastructure / Persistence
+import getDb from "@/infrastructure/persistence/mongo/get-db";
 
+// 3. Domain models / Documents
+import AbbreviationDocument from "../models/abbreviation-document";
 interface PaginationParams {
   page?: number;
   limit?: number;
@@ -42,7 +43,7 @@ export async function getAbbreviations(
       };
     }
 
-    const collection = await getCollection<AbbreviationDocument>("abbreviations");
+    const db = await getDb();
     
     const skip = (page - 1) * limit;
 
@@ -50,13 +51,13 @@ export async function getAbbreviations(
     const sort: Record<string, 1 | -1> = { [sortBy]: sortOrder === 'asc' ? 1 : -1 };
 
     const [criteriaFromDB, total] = await Promise.all([
-      collection
+      db.abbreviations
         .find()
         .sort(sort)
         .skip(skip)
         .limit(limit)
         .toArray(),
-      collection.countDocuments(),
+      db.abbreviations.countDocuments(),
     ]);
 
     const totalPages = Math.ceil(total / limit);

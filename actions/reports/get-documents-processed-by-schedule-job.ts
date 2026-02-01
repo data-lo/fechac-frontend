@@ -3,10 +3,10 @@
 // External dependencies
 import { ObjectId } from "mongodb";
 
-// Infrastructure / Persistence
+// Infrastructure
 import getDb from "@/infrastructure/persistence/mongo/get-db";
 
-// Application / Scheduler
+// Application
 import getLatestScheduleExecution from "../scheduler/get-latest-scheduler";
 import ProjectReportDTO from "@/domain/projects/dto/project.dto";
 
@@ -56,9 +56,6 @@ export default async function getDocumentsProcessedByScheduleJob(): Promise<Proj
             $project: {
                 _id: 0,
                 sadap_id: 1,
-                project_name: 1,
-                area: 1,
-                support_area: 1,
                 files: 1,
             },
         },
