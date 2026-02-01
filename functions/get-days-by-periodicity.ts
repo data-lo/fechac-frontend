@@ -10,6 +10,10 @@ export function getDaysByPeriodicity(periodicity: Periodicity): number {
       return 14;
     case Periodicity.MONTHLY:
       return 30;
+    case Periodicity.QUARTERLY:
+      return 90;
+    case Periodicity.SEMIANNUAL:
+      return 180;
     default:
       const _exhaustiveCheck: never = periodicity;
       return _exhaustiveCheck;

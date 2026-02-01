@@ -3,4 +3,6 @@ export enum Periodicity {
   WEEKLY = "SEMANAL",
   BIWEEKLY = "QUINCENAL",
   MONTHLY = "MENSUAL",
+  QUARTERLY = "TRIMESTRAL",
+  SEMIANNUAL = "SEMESTRAL",
 }
