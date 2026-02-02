@@ -1,15 +1,12 @@
 import { cn } from "@/lib/utils"
 import * as React from "react"
 
+
 const Table = React.forwardRef<
   HTMLTableElement,
   React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
-  <div className="
-  relative w-full overflow-auto
-  max-h-screen
-  ring-1 ring-gray-200 rounded-md
-">    <table
+   <div className="relative w-full overflow-auto max-h-screen ring-1 ring-gray-200 rounded-md"> <table
       ref={ref}
       className={cn("w-full caption-bottom text-sm bg-white", className)}
       {...props}
@@ -26,7 +23,7 @@ const TableHeader = React.forwardRef<
   return (
     <thead
       ref={ref}
-      className={cn(`bg-muted rounded-md top-0 hover:bg-gray-50 transition-colors`, className)}
+      className={cn(`bg-muted sticky rounded-md top-0 hover:bg-gray-50 transition-colors`, className)}
       {...props}
 
     />

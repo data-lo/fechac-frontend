@@ -13,7 +13,7 @@ import "./globals.css";
 // 6. Providers
 import ReactQueryProvider from "@/providers/query-client";
 import ToasterProvider from "@/providers/toast-provider";
-import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppBreadcrumbs } from "@/components/app-breadcrumbs";
 import { AppSidebar } from "@/components/app-sidebar";
 import { Separator } from "@radix-ui/react-select";
@@ -35,41 +35,37 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <ClerkProvider>
         <ReactQueryProvider>
           <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-            <div className="h-screen flex flex-col">
-              <div className="overflow-hidden">
-                <ToasterProvider />
-                <SidebarProvider>
-                  <AppSidebar />
-                  <main className="w-full">
-                    <SidebarInset>
-                      <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-                        <SidebarTrigger className="-ml-1" />
-                        <Separator
-                          className="mr-2 data-[orientation=vertical]:h-4"
-                        />
-                        <AppBreadcrumbs />
-                      </header>
-                    </SidebarInset>
-                    <div className="px-6 py-4 flex flex-col h-[calc(100vh-4rem)] gap-6 relative overflow-auto pt-4 bg-white">
+            <ToasterProvider />
+
+            {/* Root */}
+            <div className="h-screen flex overflow-hidden">
+              <SidebarProvider>
+                <AppSidebar />
+                <main className="flex flex-col flex-1 overflow-hidden min-h-0">
+                  <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+                    <SidebarTrigger className="-ml-1" />
+                    <Separator className="mr-2 data-[orientation=vertical]:h-4" />
+                    <AppBreadcrumbs />
+                  </header>
+                  <section className="flex-1 overflow-y-auto px-6 py-4">
+                    <div className="flex flex-col gap-6 min-h-full">
                       {children}
                     </div>
-
-                  </main>
-                </SidebarProvider>
-              </div>
+                  </section>
+                </main>
+              </SidebarProvider>
             </div>
           </body>
         </ReactQueryProvider>
       </ClerkProvider>
-    </html >
-
+    </html>
   );
 }

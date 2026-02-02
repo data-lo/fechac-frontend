@@ -15,7 +15,7 @@ export default async function getDagRunsByDagId(
     `${process.env.AIRFLOW_API}/api/v2/dags/${dagId}/dagRuns`,
     {
       params: {
-        limit: 50,
+        limit: 10,
         offset: 0,
         order_by: "-start_date"
       },
