@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 // 2. Componentes globales
 import { Form } from "@/components/ui/form";
-import ActionButton from "@/components/action-button";
+import CommandButton from "@/components/button/command-button";
 
 // 3. Hooks internos
 import { useCreateCriterion } from "../../hooks/use-create-criterion";
@@ -122,12 +122,13 @@ const CreateCriterionForm = () => {
                 </div>
 
                 <div className="flex justify-end">
-                    <ActionButton
-                        type="submit"
-                        title="Guardar Información"
-                        iconName="Save"
-                        isPending={createCriterion.isPending}
-                    />
+                    <CommandButton
+                        icon="Save"
+                        width="min"
+                        isLoading={createCriterion.isPending}
+                    >
+                        Guardar
+                    </CommandButton>
                 </div>
             </form>
         </Form>

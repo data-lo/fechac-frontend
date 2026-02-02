@@ -3,6 +3,7 @@
 import FileDocument from "@/models/files/file-document";
 import getDb from "@/infrastructure/persistence/mongo/get-db";
 import ActionResponse from "@/interfaces/action/action-response";
+import { FileStatus } from "@/enums/file-status";
 
 
 interface PaginationParams {
@@ -51,15 +52,22 @@ export default async function getPendingDocuments(
             [sortBy]: sortOrder === 'asc' ? 1 : -1
         };
 
+        const filter = {
+            $or: [
+                { sadap_id: null },
+                { status: { $in: [FileStatus.REQUIRES_HUMAN_REVIEW] } }
+            ]
+        };
+
         const [filesFromDB, total] = await Promise.all([
             db.files
-                .find()
+                .find(filter)
                 .collation({ locale: "en", numericOrdering: true })
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
                 .toArray(),
-            db.files.countDocuments(),
+            db.files.countDocuments(filter),
         ]);
 
         const totalPages = Math.ceil(total / limit);

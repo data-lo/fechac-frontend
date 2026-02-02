@@ -1,13 +1,13 @@
 'use client'
 
-// External libraries
+// 1. React
 import { Fragment } from "react";
 
-// Domain / Models
+// 2. Domain models
 import CriterionDocument from "@/models/criteria/criterion-document";
 
-// Local components
-import UpdateCriterionForm from "./components/criterion-update-form";
+// 3. Local components
+import UpdateCriterionForm from "./criterion-update-form";
 
 interface Props {
     data: {

@@ -20,7 +20,7 @@ export function AppSidebar() {
     const pathname = usePathname();
 
     return (
-        <Sidebar variant="sidebar">
+        <Sidebar >
             <SidebarContent className="bg-white">
                 <h3 className="px-4 mt-4 font-bold">Integración Digital</h3>
                 <SidebarGroup>

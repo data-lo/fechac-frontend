@@ -34,8 +34,6 @@ export default async function updateRestriction(values: { _id: string, character
 
         const response: UpdateOne = await db.restrictions.updateOne(filter, update);
 
-        console.log(response)
-
         if (response.modifiedCount === 0) {
             return {
                 success: false,

@@ -7,7 +7,7 @@ import ScheduleSettingsForm from "./schedule-settings-form";
 import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
 
 interface Props{
-    latestSchudale : ScheduledJobDto | null
+     latestSchudale : ScheduledJobDto | null
 }
 
 export default function ScheduleSettings({

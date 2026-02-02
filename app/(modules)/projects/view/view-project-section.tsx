@@ -15,6 +15,7 @@ import ProjectTable from "./components/project-table";
 import Modal from "@/components/app-dialog";
 import UploadFileForm from "./components/upload-file-form";
 import getPendingProjects from "@/actions/projects/get-pending-projects";
+import DescriptionText from "@/components/description-text";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -67,6 +68,10 @@ const ViewProjectSection = async ({ searchParams }: Props) => {
           <UploadFileForm />
         </Modal>
       </div>
+
+      <DescriptionText>
+        Aquí puedes ver los proyectos cargados y su estado de transferencia.
+      </DescriptionText>
 
       {projects.length > 0 ? (
         <Fragment>

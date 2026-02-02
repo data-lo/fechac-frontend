@@ -107,7 +107,7 @@ const AlertMessage = ({
                 {/* Content */}
                 <div className="flex-1 min-w-0">
                     {message && (
-                        <div className="leading-tight">
+                        <div className="leading-relaxed">
                             {message}
                         </div>
                     )}

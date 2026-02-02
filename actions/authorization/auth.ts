@@ -20,6 +20,8 @@ export async function handleMicrosoftAuthCallback(params: { code: string }): Pro
 
         const microsoftToken = await exchangeAuthCodeForToken(params.code);
 
+        console.log(microsoftToken);
+
         await saveMicrosoftToken(microsoftToken);
 
         return {
@@ -113,7 +115,11 @@ export async function getUserInformation(): Promise<MicrosoftUserInformation | n
 
     const session = await getActiveMicrosoftSession();
 
-    if (!session) return null;
+    console.log(session);
+
+    if (!session) {
+        return null;
+    }
 
     const response = await fetch(`https://graph.microsoft.com/v1.0/me`, {
         method: 'GET',
@@ -125,8 +131,8 @@ export async function getUserInformation(): Promise<MicrosoftUserInformation | n
 
     if (!response.ok) {
         const errorBody = await response.text();
-        console.error("❌ Error al obtener la información del usuario desde Microsoft Graph:", errorBody);
-        return null
+        console.error("Error al obtener la información del usuario desde Microsoft Graph:", errorBody);
+        return null;
     }
 
     const user: MicrosoftUserInformation = await response.json();
