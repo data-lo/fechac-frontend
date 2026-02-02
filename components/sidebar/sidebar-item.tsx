@@ -21,7 +21,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
 
     const isActive =
         pathname === href ||
-        pathname.startsWith(`${href}`);
+        pathname.startsWith(`${href}`) || pathname.includes(`${href}`);
 
     const onClick = () => {
         router.push(`${href}/view`);

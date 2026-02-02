@@ -1,5 +1,9 @@
+export const dynamic = "force-dynamic";
+
+// 1. Acciones / servicios
 import { getCriterion } from "@/actions/criteria/get-criterion";
 
+// 2. Componentes locales
 import UpdateCriterionSection from "./update-criterion-section";
 
 export default async function UpdateCriterionPage({

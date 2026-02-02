@@ -9,7 +9,7 @@ export const BREADCRUMB_ROUTES: Record<string, { label: string; href: string | n
     href: "/projects/view",
   },
   'projects/update': {
-    label: "Editar Proyecto",
+    label: "Actualizar Proyecto",
     href: null,
   },
 
@@ -23,23 +23,25 @@ export const BREADCRUMB_ROUTES: Record<string, { label: string; href: string | n
     href: "/workflows/view",
   },
   'workflows/update': {
-    label: "Editar Documento",
+    label: "Actualizar Flujo",
     href: null,
   },
 
-  // Workflows
+  // Documents
   'documents': {
     label: "Documentos",
     href: "/documents/view",
   },
   'documents/view': {
     label: "Listado",
-    href: "/workflows/view",
+    href: "/documents/view",
   },
   'documents/update': {
-    label: "Editar Documento",
-    href: null,
+    label: "Actualizar Documento",
+    href: "/documents/update",
   },
+
+  
   // Criterios
   'criteria': {
     label: "Criterios",
@@ -55,7 +57,7 @@ export const BREADCRUMB_ROUTES: Record<string, { label: string; href: string | n
     href: "/criteria/view",
   },
   'criteria/update': {
-    label: "Editar Criterio",
+    label: "Actualizar Criterio",
     href: null,
   },
 

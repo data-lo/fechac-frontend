@@ -7,19 +7,20 @@ import { useRouter } from "next/navigation";
 
 // 2. Componentes globales
 import { Form } from "@/components/ui/form";
-import ActionButton from "@/components/action-button";
+import CommandButton from "@/components/button/command-button";
 
 // 3. Hooks locales
 import useCreateRestriction from "./hooks/use-create-restriction";
 
 // 4. Campos y esquemas locales
 import BASE_RESTRICTION_FIELDS from "../fields/base-restrictions-fields";
-import BASE_RESTRICTION_SCHEMA  from "../schema/base-restriction-schema";
+import BASE_RESTRICTION_SCHEMA from "../schema/base-restriction-schema";
+
 
 const UpdateNomenclatureForm = () => {
     const router = useRouter();
 
-    const createMutation = useCreateRestriction();
+    const createRestriction = useCreateRestriction();
 
     const schema = BASE_RESTRICTION_SCHEMA;
 
@@ -31,7 +32,7 @@ const UpdateNomenclatureForm = () => {
     });
 
     const onSubmit = async (values: z.infer<typeof schema>) => {
-        createMutation.mutate(values, {
+        createRestriction.mutate(values, {
             onSuccess: (data) => {
                 if (data.success) {
                     form.reset()
@@ -53,13 +54,13 @@ const UpdateNomenclatureForm = () => {
                     ))}
 
                 <div className="flex justify-end">
-                    <ActionButton
-                        type="submit"
-                        className="w-full"
-                        iconName={"Save"}
-                        title="Guardar Información"
-                        isPending={createMutation.isPending}
-                    />
+                    <CommandButton
+                        icon="Save"
+                        width="min"
+                        isLoading={createRestriction.isPending}
+                    >
+                        Guardar
+                    </CommandButton>
                 </div>
             </form>
         </Form>

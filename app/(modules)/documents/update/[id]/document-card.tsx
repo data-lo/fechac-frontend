@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Link2 } from "lucide-react";
 
 
-import { FileStatus, getStatusInfo } from "../../../functions/get-status-translation";
+import { FileStatus, getStatusInfo, getStatusTranslation } from "../../functions/get-status-translation";
 import FileDocument from "@/models/files/file-document";
 
 interface Props {
@@ -23,7 +23,7 @@ export default function DocumentCard({ document }: Props) {
           <div>
             <p className="text-gray-500 font-medium mb-2">ESTATUS</p>
             <span className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-sm text-xs font-medium ${statusInfo.className}`}>
-              {statusInfo.text}
+              {getStatusTranslation(statusInfo.text as FileStatus)}
             </span>
           </div>
 

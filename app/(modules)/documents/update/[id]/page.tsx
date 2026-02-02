@@ -10,7 +10,6 @@ export default async function UpdateDocumentPage({
 }) {
     const { id } = await params;
 
-    // Validación del id
     if (!id || typeof id !== "string") {
         console.error("[ERROR] Invalid or missing id parameter:", { params, id });
         return (
@@ -22,8 +21,7 @@ export default async function UpdateDocumentPage({
 
     const documentResponse = await getDocument(id);
     const criteriaResponse = await getAllCriteria();
-
-    // Validaciones de respuesta
+    
     if (!documentResponse.success || !documentResponse.data) {
         return (
             <div className="p-8 text-center text-red-600">

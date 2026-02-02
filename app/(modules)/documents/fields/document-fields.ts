@@ -17,8 +17,8 @@ export const FORM_IDENTIFICATION_FIELDS = [
         component: SelectField,
         props: {
             name: "selected_criterion_id",
-            label: "CRITERIO",
-            placeholder: "Selecciona un criterio",
+            label: "Tipo de Documento",
+            placeholder: "Selecciona el documento correspondiente",
             items: []
         },
     },

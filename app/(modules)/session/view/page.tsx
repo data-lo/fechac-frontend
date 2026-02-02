@@ -1,6 +1,12 @@
+export const dynamic = "force-dynamic";
 
+// 1. React
 import { Fragment } from "react";
+
+// 2. App actions
 import { getUserInformation } from "@/actions/authorization/auth";
+
+// 3. Local components
 import AuthorizationCard from "../components/authentication-card";
 import AuthenticatedUserCard from "../components/authentication-user-card";
 

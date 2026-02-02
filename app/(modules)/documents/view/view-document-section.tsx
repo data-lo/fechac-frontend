@@ -1,12 +1,16 @@
 import { Fragment } from "react";
 
-import EmptyState from "@/components/empty-state";
-import AlertMessage from "@/components/alert-message";
-import DocumentsTable from "./components/document-table";
-import PaginationComponent from "@/components/pagination";
+// Actions
 import getPendingDocuments from "@/actions/files/get-pending-documents";
 
+// Shared components
+import EmptyState from "@/components/empty-state";
+import AlertMessage from "@/components/alert-message";
+import PaginationComponent from "@/components/pagination";
 
+// Local components
+import DocumentsTable from "./components/document-table";
+import DescriptionText from "@/components/description-text";
 
 interface Props {
   searchParams?: Promise<{ page?: string; limit?: string, query?: string }>;
@@ -50,6 +54,17 @@ const ViewDocumentSection = async ({ searchParams }: Props) => {
 
   return (
     <Fragment >
+      <DescriptionText>
+        Aquí se muestran los documentos para los cuales no fue posible{" "}
+        <span className="font-medium text-gray-700">
+          clasificar el documento automáticamente
+        </span>{" "}
+        ni{" "}
+        <span className="font-medium text-gray-700">
+          identificar el proyecto al que pertenecen
+        </span>.
+      </DescriptionText>
+
       {files.length > 0 ? (
         <Fragment>
 

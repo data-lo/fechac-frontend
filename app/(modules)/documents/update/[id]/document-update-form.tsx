@@ -18,12 +18,12 @@ import FileDocument from "@/models/files/file-document";
 
 // Form configuration
 import {
-  FORM_IDENTIFICATION_FIELDS,
-} from "../../../fields/document-fields";
-import UPDATE_DOCUMENT_SCHEMA from "../../../schemas/update-file-schema";
+    FORM_IDENTIFICATION_FIELDS,
+} from "../../fields/document-fields";
+import UPDATE_DOCUMENT_SCHEMA from "../../schemas/update-file-schema";
 
 // Hooks and actions
-import useUpdateDocument from "../../../hooks/use-update-document";
+import useUpdateDocument from "../../hooks/use-update-document";
 
 // App utilities
 import applyFormOverrides from "@/functions/apply-form-overrides";
@@ -73,6 +73,11 @@ const DocumentUpdateForm = ({ data }: Props) => {
                     hidden: data.document.status !== FileStatus.REQUIRES_HUMAN_REVIEW
                 },
 
+            },
+            sadap_id: {
+                props: {
+                    hidden: Boolean(data.document.sadap_id)
+                }
             },
         }
     );

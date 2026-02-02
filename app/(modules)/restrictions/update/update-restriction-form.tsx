@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 
 // 2. UI components (global)
 import { Form } from "@/components/ui/form";
-import ActionButton from "@/components/action-button";
+import CommandButton from "@/components/button/command-button";
 
 // 3. Local hooks
 import useUpdateRestriction from "./hooks/use-update-restriction";
@@ -29,20 +29,18 @@ const UpdateRestrictionForm = ({
 }: Props) => {
     const router = useRouter();
 
-    const udpateMutation = useUpdateRestriction();
+    const updateRestriction = useUpdateRestriction();
 
-    const schema = UPDATE_RESTRICTION_SCHEMA;
-
-    const form = useForm<z.infer<typeof schema>>({
-        resolver: zodResolver(schema),
+    const form = useForm<z.infer<typeof UPDATE_RESTRICTION_SCHEMA>>({
+        resolver: zodResolver(UPDATE_RESTRICTION_SCHEMA),
         defaultValues: {
             character: data.character,
             _id: data._id.toString()
         },
     });
 
-    const onSubmit = async (values: z.infer<typeof schema>) => {
-        udpateMutation.mutate({ _id: values._id.toString(), character: values.character }, {
+    const onSubmit = async (values: z.infer<typeof UPDATE_RESTRICTION_SCHEMA>) => {
+        updateRestriction.mutate({ _id: values._id.toString(), character: values.character }, {
             onSuccess: (data) => {
                 if (data.success) {
                     router.refresh()
@@ -63,13 +61,13 @@ const UpdateRestrictionForm = ({
                     ))}
 
                 <div className="flex justify-end">
-                    <ActionButton
-                        type="submit"
-                        className="w-full"
-                        iconName={"Save"}
-                        title="Actualizar Información"
-                        isPending={udpateMutation.isPending}
-                    />
+                    <CommandButton
+                        icon="Save"
+                        width="min"
+                        isLoading={updateRestriction.isPending}
+                    >
+                        Actualizar
+                    </CommandButton>
                 </div>
             </form>
         </Form>
