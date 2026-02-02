@@ -1,20 +1,23 @@
 'use client';
+
 // External libraries
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-// UI Components
+// UI components
 import { Form } from "@/components/ui/form";
-import ActionButton from "@/components/action-button";
+import CommandButton from "@/components/button/command-button";
 
-// Form configuration
-import toast from "react-hot-toast";
+// Hooks
+import useUpdatePeriodicity from "../../hooks/useUpdatePeriodicity";
+
+// Schemas & form configuration
 import SCHEDULE_SCHEMA from "../../schemas/schedule-schema";
-import upsertScheduler from "@/actions/scheduler/upsert-scheduler";
 import { FORM_SHEDULE_FIELDS } from "../../fields/form-scheduled-field";
+
+// DTOs / Types
 import { ScheduledJobDto } from "@/applications/schedules/dto/scheduled-job.dto";
-import { useRouter } from "next/navigation";
 
 interface Props {
     latestSchedule: ScheduledJobDto | null
@@ -23,28 +26,17 @@ interface Props {
 export default function ScheduleSettingsForm({
     latestSchedule
 }: Props) {
-    const schema = SCHEDULE_SCHEMA
+    const updatePeriodicity = useUpdatePeriodicity();
 
-    const router = useRouter();
-
-    const form = useForm<z.infer<typeof schema>>({
-        resolver: zodResolver(schema),
+    const form = useForm<z.infer<typeof SCHEDULE_SCHEMA>>({
+        resolver: zodResolver(SCHEDULE_SCHEMA),
         defaultValues: {
             periodicity: latestSchedule?.periodicity ?? undefined
         },
     });
 
-    const onSubmit = async (values: z.infer<typeof schema>) => {
-        try {
-            await upsertScheduler(values.periodicity);
-
-            router.refresh();
-
-            toast.success("La periodicidad del pipeline se configuró correctamente.");
-        } catch (error) {
-            toast.error("Ocurrió un error al configurar la periodicidad del pipeline.");
-            console.error("Error al configurar la periodicidad:", error);
-        }
+    const onSubmit = async (values: z.infer<typeof SCHEDULE_SCHEMA>) => {
+        updatePeriodicity.mutate(values.periodicity);
     };
 
     return (
@@ -62,12 +54,13 @@ export default function ScheduleSettingsForm({
                 </div>
 
                 <div className="flex justify-end">
-                    <ActionButton
-                        type="submit"
-                        title="Guardar"
-                        iconName="Save"
-                        className="w-min"
-                    />
+                    <CommandButton
+                        icon="Save"
+                        width="min"
+                        isLoading={updatePeriodicity.isPending}
+                    >
+                        Guardar
+                    </CommandButton>
                 </div>
             </form>
         </Form>
